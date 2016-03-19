@@ -14,14 +14,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         static let distanceLabelText = "Distance: %dm"
         static let headerFontSize: CGFloat = 30
         static let jumpInitialSpeed = CGVectorMake(0, 200)
-        static let heroSpeed = 1
+        static let heroSpeed = 5
     }
     
     var hero: PRGHero!
+    var platformFactory: PRGPlatformFactory!
     private var gameState: PRGGameState = .Ready
     private var background: SKSpriteNode?
     private var distanceLabel: SKLabelNode!
     private var distance = 0
+    private var platforms = [PRGPlatform]()
 
     override func didMoveToView(view: SKView) {
         setBackground("default-background")
@@ -43,8 +45,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         hero.node.physicsBody?.contactTestBitMask = PRGBitMaskCategory.scene |
                                                     PRGBitMaskCategory.collectable |
                                                     PRGBitMaskCategory.platform
-
+        hero.node.physicsBody?.collisionBitMask = PRGBitMaskCategory.platform | PRGBitMaskCategory.scene
         addChild(hero.node)
+        
+        platformFactory = PlatformFactoryStab()
+        let pf = platformFactory.nextPlatform()
+        pf.position.x = 0
+        pf.position.y = 0
+        platforms.append(pf)
+        addChild(pf)
         
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = CGVectorMake(0, -0.5)
@@ -64,7 +73,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(currentTime: CFTimeInterval) {
+        if (gameState == .Ready || gameState == .Over) {
+            return
+        }
+        
         updateDistance()
+        
+        let leftMostPlatform = platforms.first!
+        let rightMostPlatform = platforms.last!
+        let rightMostPlatformRightEnd = rightMostPlatform.position.x + rightMostPlatform.width + rightMostPlatform.followingGapWidth
+        
+        print(rightMostPlatformRightEnd)
+        
+        if rightMostPlatformRightEnd < UIScreen.mainScreen().bounds.width {
+            let pf = platformFactory.nextPlatform()
+            pf.position.x = rightMostPlatformRightEnd
+            pf.position.y = 0
+            platforms.append(pf)
+            addChild(pf)
+        }
+        
+        if leftMostPlatform.position.x + rightMostPlatform.width + leftMostPlatform.followingGapWidth < 0 {
+            platforms.removeFirst()
+            leftMostPlatform.removeFromParent()
+        }
+        
+        for platform in platforms {
+            platform.position.x -= CGFloat(hero.speed)
+        }
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
@@ -72,11 +108,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         
-        if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == (physicsBody?.categoryBitMask)! | (hero.node.physicsBody?.categoryBitMask)! {
+        if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == PRGBitMaskCategory.hero | PRGBitMaskCategory.scene {
             gameOver()
+        } else if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == PRGBitMaskCategory.hero | PRGBitMaskCategory.platform {
+            if hero.state == .Jumping {
+                hero.state = .Running
+            }
         }
         // todo
-        // else if hero collide with platform, jumping -> running
         // else if hero collide with collectable, ...
     }
     

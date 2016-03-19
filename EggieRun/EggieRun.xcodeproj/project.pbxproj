@@ -24,10 +24,12 @@
 		CD09406E1C9CF41C00CF4905 /* PRGHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD09406D1C9CF41C00CF4905 /* PRGHero.swift */; };
 		CD0940721C9CF5B500CF4905 /* HeroStab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0940711C9CF5B500CF4905 /* HeroStab.swift */; };
 		CD0940741C9CFBBB00CF4905 /* PRGHeroState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0940731C9CFBBB00CF4905 /* PRGHeroState.swift */; };
-		CD0940771C9CFE0800CF4905 /* PRGBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0940761C9CFE0800CF4905 /* PRGBackground.swift */; };
 		CD0940791C9D2F0800CF4905 /* PRGGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0940781C9D2F0800CF4905 /* PRGGameState.swift */; };
 		CDD1065D1C9D482500959FFD /* PRGBitMaskCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD1065C1C9D482500959FFD /* PRGBitMaskCategory.swift */; };
 		CDD1065F1C9DC12500959FFD /* run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = CDD1065E1C9DC12500959FFD /* run.atlas */; };
+		CDD106611C9DD15600959FFD /* PRGPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD106601C9DD15600959FFD /* PRGPlatform.swift */; };
+		CDD106631C9DD57200959FFD /* PRGPlatformFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD106621C9DD57200959FFD /* PRGPlatformFactory.swift */; };
+		CDD106651C9DD62600959FFD /* PlatformFactoryStab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD106641C9DD62600959FFD /* PlatformFactoryStab.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,10 +73,12 @@
 		CD09406D1C9CF41C00CF4905 /* PRGHero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRGHero.swift; sourceTree = "<group>"; };
 		CD0940711C9CF5B500CF4905 /* HeroStab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroStab.swift; sourceTree = "<group>"; };
 		CD0940731C9CFBBB00CF4905 /* PRGHeroState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRGHeroState.swift; sourceTree = "<group>"; };
-		CD0940761C9CFE0800CF4905 /* PRGBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRGBackground.swift; sourceTree = "<group>"; };
 		CD0940781C9D2F0800CF4905 /* PRGGameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRGGameState.swift; sourceTree = "<group>"; };
 		CDD1065C1C9D482500959FFD /* PRGBitMaskCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRGBitMaskCategory.swift; sourceTree = "<group>"; };
 		CDD1065E1C9DC12500959FFD /* run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = run.atlas; path = ../../../../../Desktop/run.atlas; sourceTree = "<group>"; };
+		CDD106601C9DD15600959FFD /* PRGPlatform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRGPlatform.swift; sourceTree = "<group>"; };
+		CDD106621C9DD57200959FFD /* PRGPlatformFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRGPlatformFactory.swift; sourceTree = "<group>"; };
+		CDD106641C9DD62600959FFD /* PlatformFactoryStab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformFactoryStab.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				CD09406D1C9CF41C00CF4905 /* PRGHero.swift */,
+				CDD106621C9DD57200959FFD /* PRGPlatformFactory.swift */,
 			);
 			name = Delegates;
 			sourceTree = "<group>";
@@ -175,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				CD0940711C9CF5B500CF4905 /* HeroStab.swift */,
+				CDD106641C9DD62600959FFD /* PlatformFactoryStab.swift */,
 			);
 			name = Stabs;
 			sourceTree = "<group>";
@@ -184,9 +190,9 @@
 			children = (
 				CD0940731C9CFBBB00CF4905 /* PRGHeroState.swift */,
 				CD0940781C9D2F0800CF4905 /* PRGGameState.swift */,
-				CD0940761C9CFE0800CF4905 /* PRGBackground.swift */,
-				CD09406F1C9CF43400CF4905 /* Delegates */,
 				CDD1065C1C9D482500959FFD /* PRGBitMaskCategory.swift */,
+				CDD106601C9DD15600959FFD /* PRGPlatform.swift */,
+				CD09406F1C9CF43400CF4905 /* Delegates */,
 			);
 			name = "Platform Running Game";
 			sourceTree = "<group>";
@@ -331,16 +337,18 @@
 			files = (
 				6C5CDD4C1C9DBEEF005BB83C /* DexScene.swift in Sources */,
 				CD0940721C9CF5B500CF4905 /* HeroStab.swift in Sources */,
+				CDD106611C9DD15600959FFD /* PRGPlatform.swift in Sources */,
 				CD09406C1C9CEEC200CF4905 /* GlobalConstants.swift in Sources */,
 				6CA727331C9BE60700CBD165 /* GameScene.swift in Sources */,
-				CD0940771C9CFE0800CF4905 /* PRGBackground.swift in Sources */,
 				6C1C64A21C9C47390091AE8B /* MenuScene.swift in Sources */,
+				CDD106631C9DD57200959FFD /* PRGPlatformFactory.swift in Sources */,
 				6CA727351C9BE60700CBD165 /* GameViewController.swift in Sources */,
 				CD0940741C9CFBBB00CF4905 /* PRGHeroState.swift in Sources */,
 				CDD1065D1C9D482500959FFD /* PRGBitMaskCategory.swift in Sources */,
 				CD0940791C9D2F0800CF4905 /* PRGGameState.swift in Sources */,
 				6CA7272F1C9BE60700CBD165 /* AppDelegate.swift in Sources */,
 				CD09406E1C9CF41C00CF4905 /* PRGHero.swift in Sources */,
+				CDD106651C9DD62600959FFD /* PlatformFactoryStab.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
