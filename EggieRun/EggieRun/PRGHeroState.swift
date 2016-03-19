@@ -9,5 +9,5 @@
 import Foundation
 
 enum PRGHeroState {
-    case Standing, Running, Jumping, Collecting, Dying
+    case Standing, Running, Jumping, Dying
 }

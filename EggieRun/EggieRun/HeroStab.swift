@@ -11,9 +11,11 @@ import SpriteKit
 class HeroStab: PRGHero {
     var node = SKSpriteNode(imageNamed: "egg")
     var innerState: PRGHeroState
+    var speed: Int
     
     init(state: PRGHeroState) {
         self.innerState = state
+        speed = 0
     }
     
     var state: PRGHeroState {

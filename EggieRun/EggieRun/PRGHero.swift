@@ -11,4 +11,5 @@ import SpriteKit
 protocol PRGHero {
     var node: SKSpriteNode { get }
     var state: PRGHeroState { get set }
+    var speed: Int { get set }
 }

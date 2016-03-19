@@ -54,13 +54,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if gameState == .Ready {
-            gameState = .Playing
-            hero.state = .Running
-        }
-        
-        if hero.state == .Running {
-            hero.state = .Jumping
-            hero.node.physicsBody!.velocity = constants.jumpInitialSpeed
+            gameStart()
+        } else if gameState == .Playing && hero.state == .Running {
+            heroJump()
         }
     }
     
@@ -74,10 +70,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == (physicsBody?.categoryBitMask)! | (hero.node.physicsBody?.categoryBitMask)! {
-            hero.state = .Dying
-            gameState = .Over
+            gameOver()
         }
-        
+        // todo
+        // else if hero collide with platform, jumping -> running
+        // else if hero collide with collectable, ...
     }
     
     func setBackground(imageName: String) {
@@ -94,9 +91,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func updateDistance() {
-        if gameState == .Playing {
-            distance += constants.heroSpeed
-            distanceLabel.text = String(format: constants.distanceLabelText, distance)
-        }
+        distance += hero.speed
+        distanceLabel.text = String(format: constants.distanceLabelText, distance)
+    }
+    
+    private func gameStart() {
+        hero.state = .Running
+        hero.speed = constants.heroSpeed
+        gameState = .Playing
+    }
+    
+    private func gameOver() {
+        hero.state = .Dying
+        hero.speed = 0
+        gameState = .Over
+    }
+    
+    private func heroJump() {
+        hero.state = .Jumping
+        hero.node.physicsBody!.velocity = constants.jumpInitialSpeed
     }
 }
