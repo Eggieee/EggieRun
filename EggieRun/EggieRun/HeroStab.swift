@@ -10,14 +10,19 @@ import SpriteKit
 
 class HeroStab: PRGHero {
     var node = SKSpriteNode(imageNamed: "egg")
-    var state: PRGHeroState
+    var innerState: PRGHeroState
     
     init(state: PRGHeroState) {
-        self.state = state
+        self.innerState = state
     }
     
-    func setState(state: PRGHeroState) {
-        self.state = state
-        print("state changed to" + String(state))
+    var state: PRGHeroState {
+        get {
+            return innerState
+        }
+        set(newState) {
+            innerState = newState
+            print("state changed to " + String(innerState))
+        }
     }
 }
