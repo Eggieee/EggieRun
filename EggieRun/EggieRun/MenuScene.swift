@@ -46,7 +46,7 @@ class MenuScene: SKScene {
         let touchLocation = touch.locationInNode(self)
         
         if buttonPlay.containsPoint(touchLocation) {
-            let gameScene = GameScene(size: self.size)
+            let gameScene = GameScene(fileNamed: "GameScene")!
             let transition = SKTransition.doorsOpenVerticalWithDuration(0.5)
             self.view?.presentScene(gameScene, transition: transition)
         }
