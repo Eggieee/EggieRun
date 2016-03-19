@@ -10,6 +10,8 @@ import SpriteKit
 
 class MenuScene: SKScene {
     
+    static let singleton = MenuScene(fileNamed: "MenuScene")
+    
     private var buttonPlay: SKSpriteNode!
     private var buttonDex: SKSpriteNode!
     
