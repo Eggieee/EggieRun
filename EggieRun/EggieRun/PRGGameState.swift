@@ -8,6 +8,6 @@
 
 import Foundation
 
-enum GameState {
+enum PRGGameState {
     case Ready, Playing, Over
 }

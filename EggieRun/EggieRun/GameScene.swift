@@ -18,7 +18,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     var hero: PRGHero!
-    private var gameState: GameState = .Ready
+    private var gameState: PRGGameState = .Ready
     private var background: SKSpriteNode?
     private var distanceLabel: SKLabelNode!
     private var distance = 0
@@ -39,17 +39,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         hero.node.position = CGPoint(x: CGRectGetWidth(distanceLabel.frame) + 100,
             y: CGRectGetMidY(self.frame))
         hero.node.zPosition = 1
-        hero.node.physicsBody?.categoryBitMask = BitMaskCategory.hero
-        hero.node.physicsBody?.contactTestBitMask = BitMaskCategory.scene | BitMaskCategory.collectable
-            | BitMaskCategory.platform
+        hero.node.physicsBody?.categoryBitMask = PRGBitMaskCategory.hero
+        hero.node.physicsBody?.contactTestBitMask = PRGBitMaskCategory.scene |
+                                                    PRGBitMaskCategory.collectable |
+                                                    PRGBitMaskCategory.platform
 
         addChild(hero.node)
         
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = CGVectorMake(0, -0.5)
         physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
-        physicsBody?.categoryBitMask = BitMaskCategory.scene
-        physicsBody?.contactTestBitMask = BitMaskCategory.hero
+        physicsBody?.categoryBitMask = PRGBitMaskCategory.scene
+        physicsBody?.contactTestBitMask = PRGBitMaskCategory.hero
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -57,6 +58,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameStart()
         } else if gameState == .Playing && hero.state == .Running {
             heroJump()
+        } else if gameState == .Over {
+            gameReady()
         }
     }
     
@@ -93,6 +96,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func updateDistance() {
         distance += hero.speed
         distanceLabel.text = String(format: constants.distanceLabelText, distance)
+    }
+    
+    private func gameReady() {
+        hero.node.position = CGPoint(x: CGRectGetWidth(distanceLabel.frame) + 100,
+            y: CGRectGetMidY(self.frame))
+        gameState = .Ready
     }
     
     private func gameStart() {
