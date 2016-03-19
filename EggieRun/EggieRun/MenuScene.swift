@@ -49,6 +49,10 @@ class MenuScene: SKScene {
             let gameScene = GameScene(fileNamed: "GameScene")!
             let transition = SKTransition.doorsOpenVerticalWithDuration(0.5)
             self.view?.presentScene(gameScene, transition: transition)
+        } else if buttonDex.containsPoint(touchLocation) {
+            let dexScene = DexScene(size: self.size)
+            let transition = SKTransition.doorsOpenVerticalWithDuration(0.5)
+            self.view?.presentScene(dexScene, transition: transition)
         }
     }
     
