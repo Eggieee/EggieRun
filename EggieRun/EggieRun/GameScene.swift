@@ -14,7 +14,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         static let distanceLabelText = "Distance: %dm"
         static let headerFontSize: CGFloat = 30
         static let jumpInitialSpeed = CGVectorMake(0, 200)
-        static let heroSpeed = 5
+        static let heroSpeed = 10
     }
     
     var hero: PRGHero!
@@ -82,8 +82,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let leftMostPlatform = platforms.first!
         let rightMostPlatform = platforms.last!
         let rightMostPlatformRightEnd = rightMostPlatform.position.x + rightMostPlatform.width + rightMostPlatform.followingGapWidth
-        
-        print(rightMostPlatformRightEnd)
         
         if rightMostPlatformRightEnd < UIScreen.mainScreen().bounds.width {
             let pf = platformFactory.nextPlatform()
