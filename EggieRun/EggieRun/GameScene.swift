@@ -11,21 +11,24 @@ import SpriteKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private struct constants {
-        static let distanceLabelText = "Distance: "
+        static let distanceLabelText = "Distance: %dm"
         static let headerFontSize: CGFloat = 30
         static let jumpInitialSpeed = CGVectorMake(0, 200)
+        static let heroSpeed = 1
     }
     
     var hero: PRGHero!
     private var gameState: GameState = .Ready
     private var background: SKSpriteNode?
+    private var distanceLabel: SKLabelNode!
+    private var distance = 0
 
     override func didMoveToView(view: SKView) {
         setBackground("default-background")
         
-        let distanceLabel = SKLabelNode(fontNamed: GlobalConstants.fontName)
-        distanceLabel.text = constants.distanceLabelText
+        distanceLabel = SKLabelNode(fontNamed: GlobalConstants.fontName)
         distanceLabel.fontSize = constants.headerFontSize
+        distanceLabel.text = String(format: constants.distanceLabelText, distance)
         distanceLabel.position = CGPoint(x: CGRectGetWidth(distanceLabel.frame),
             y: CGRectGetHeight(self.frame) - CGRectGetHeight(distanceLabel.frame))
         distanceLabel.zPosition = 2
@@ -38,6 +41,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         hero.node.zPosition = 1
         hero.node.physicsBody?.categoryBitMask = BitMaskCategory.hero
         hero.node.physicsBody?.contactTestBitMask = BitMaskCategory.scene | BitMaskCategory.collectable
+            | BitMaskCategory.platform
 
         addChild(hero.node)
         
@@ -49,8 +53,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        /* Called when a touch begins */
-        
         if gameState == .Ready {
             gameState = .Playing
             hero.state = .Running
@@ -63,7 +65,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(currentTime: CFTimeInterval) {
-        
+        updateDistance()
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
@@ -89,5 +91,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         background!.size = UIScreen.mainScreen().bounds.size
         
         addChild(background!)
+    }
+    
+    private func updateDistance() {
+        if gameState == .Playing {
+            distance += constants.heroSpeed
+            distanceLabel.text = String(format: constants.distanceLabelText, distance)
+        }
     }
 }
