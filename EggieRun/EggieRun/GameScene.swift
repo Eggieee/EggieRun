@@ -20,13 +20,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var hero: PRGHero!
     var platformFactory: PRGPlatformFactory!
     private var gameState: PRGGameState = .Ready
-    private var background: SKSpriteNode?
     private var distanceLabel: SKLabelNode!
     private var distance = 0
     private var platforms = [PRGPlatform]()
 
     override func didMoveToView(view: SKView) {
-        setBackground("default-background")
+        changeBackground("default-background")
         
         distanceLabel = SKLabelNode(fontNamed: GlobalConstants.fontName)
         distanceLabel.fontSize = constants.headerFontSize
@@ -117,18 +116,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // else if hero collide with collectable, ...
     }
     
-    func setBackground(imageName: String) {
-        if background != nil {
-            background!.removeFromParent()
-        }
-        
-        background = SKSpriteNode(imageNamed: imageName)
-        background!.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
-        background!.zPosition = 0
-        background!.size = UIScreen.mainScreen().bounds.size
-        
-        addChild(background!)
-    }
     
     private func updateDistance() {
         distance += hero.speed
