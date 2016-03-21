@@ -27,7 +27,7 @@ extension SKScene {
         
         background = SKSpriteNode(imageNamed: imageName)
         background!.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
-        background!.zPosition = 0
+        background!.zPosition = -1
         background!.size = UIScreen.mainScreen().bounds.size
         
         addChild(background!)
