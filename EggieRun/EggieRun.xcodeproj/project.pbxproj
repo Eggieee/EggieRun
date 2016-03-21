@@ -21,6 +21,11 @@
 		6CA7273D1C9BE60700CBD165 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CA7273B1C9BE60700CBD165 /* LaunchScreen.storyboard */; };
 		6CA727481C9BE60700CBD165 /* EggieRunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA727471C9BE60700CBD165 /* EggieRunTests.swift */; };
 		6CA727531C9BE60700CBD165 /* EggieRunUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA727521C9BE60700CBD165 /* EggieRunUITests.swift */; };
+		6CE99C791CA0576D006F960B /* Condiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE99C781CA0576D006F960B /* Condiment.swift */; };
+		6CE99C7B1CA05798006F960B /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE99C7A1CA05798006F960B /* Ingredient.swift */; };
+		6CE99C7D1CA05842006F960B /* Cooker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE99C7C1CA05842006F960B /* Cooker.swift */; };
+		6CED38D41CA0062D00F4E2F0 /* DexStorageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CED38D31CA0062D00F4E2F0 /* DexStorageController.swift */; };
+		6CED38D91CA0073300F4E2F0 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CED38D81CA0073300F4E2F0 /* Dish.swift */; };
 		CD09406C1C9CEEC200CF4905 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD09406B1C9CEEC200CF4905 /* GlobalConstants.swift */; };
 		CD09406E1C9CF41C00CF4905 /* PRGHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD09406D1C9CF41C00CF4905 /* PRGHero.swift */; };
 		CD0940721C9CF5B500CF4905 /* HeroStab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0940711C9CF5B500CF4905 /* HeroStab.swift */; };
@@ -71,6 +76,11 @@
 		6CA7274E1C9BE60700CBD165 /* EggieRunUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EggieRunUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CA727521C9BE60700CBD165 /* EggieRunUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EggieRunUITests.swift; sourceTree = "<group>"; };
 		6CA727541C9BE60700CBD165 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6CE99C781CA0576D006F960B /* Condiment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Condiment.swift; sourceTree = "<group>"; };
+		6CE99C7A1CA05798006F960B /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		6CE99C7C1CA05842006F960B /* Cooker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cooker.swift; sourceTree = "<group>"; };
+		6CED38D31CA0062D00F4E2F0 /* DexStorageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DexStorageController.swift; sourceTree = "<group>"; };
+		6CED38D81CA0073300F4E2F0 /* Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
 		CD09406B1C9CEEC200CF4905 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		CD09406D1C9CF41C00CF4905 /* PRGHero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRGHero.swift; sourceTree = "<group>"; };
 		CD0940711C9CF5B500CF4905 /* HeroStab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroStab.swift; sourceTree = "<group>"; };
@@ -144,6 +154,8 @@
 				6C5CDD4D1C9DBF3D005BB83C /* DexScene.sks */,
 				6C5CDD4B1C9DBEEF005BB83C /* DexScene.swift */,
 				6CA727341C9BE60700CBD165 /* GameViewController.swift */,
+				6CE99C771CA05747006F960B /* Models */,
+				6CED38D31CA0062D00F4E2F0 /* DexStorageController.swift */,
 				6CA727361C9BE60700CBD165 /* Main.storyboard */,
 				6CA727391C9BE60700CBD165 /* Assets.xcassets */,
 				6CA7273B1C9BE60700CBD165 /* LaunchScreen.storyboard */,
@@ -168,6 +180,17 @@
 				6CA727541C9BE60700CBD165 /* Info.plist */,
 			);
 			path = EggieRunUITests;
+			sourceTree = "<group>";
+		};
+		6CE99C771CA05747006F960B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6CED38D81CA0073300F4E2F0 /* Dish.swift */,
+				6CE99C781CA0576D006F960B /* Condiment.swift */,
+				6CE99C7A1CA05798006F960B /* Ingredient.swift */,
+				6CE99C7C1CA05842006F960B /* Cooker.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		CD09406F1C9CF43400CF4905 /* Delegates */ = {
@@ -338,12 +361,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CE99C7D1CA05842006F960B /* Cooker.swift in Sources */,
 				6C5CDD4C1C9DBEEF005BB83C /* DexScene.swift in Sources */,
+				6CED38D91CA0073300F4E2F0 /* Dish.swift in Sources */,
+				6CE99C7B1CA05798006F960B /* Ingredient.swift in Sources */,
 				CD0940721C9CF5B500CF4905 /* HeroStab.swift in Sources */,
 				CDD106611C9DD15600959FFD /* PRGPlatform.swift in Sources */,
 				CD09406C1C9CEEC200CF4905 /* GlobalConstants.swift in Sources */,
+				6CED38D41CA0062D00F4E2F0 /* DexStorageController.swift in Sources */,
 				6CA727331C9BE60700CBD165 /* GameScene.swift in Sources */,
 				6C1C64A21C9C47390091AE8B /* MenuScene.swift in Sources */,
+				6CE99C791CA0576D006F960B /* Condiment.swift in Sources */,
 				CDD106631C9DD57200959FFD /* PRGPlatformFactory.swift in Sources */,
 				6CA727351C9BE60700CBD165 /* GameViewController.swift in Sources */,
 				CD0940741C9CFBBB00CF4905 /* PRGHeroState.swift in Sources */,
