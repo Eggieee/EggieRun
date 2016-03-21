@@ -16,6 +16,8 @@ class MenuScene: SKScene {
     private var buttonDex: SKSpriteNode!
     
     override func didMoveToView(view: SKView) {
+        changeBackground("menu-background")
+        
         let myLabel = SKLabelNode(fontNamed:"Chalkduster")
         myLabel.text = "Eggie Run"
         myLabel.fontSize = 45
@@ -34,12 +36,12 @@ class MenuScene: SKScene {
         label_temp.position = CGPoint(x:CGRectGetMidX(self.frame), y:20)
         self.addChild(label_temp)
         
-        buttonPlay = SKSpriteNode(color: UIColor.redColor(), size: CGSize(width: 160, height: 80))
-        buttonPlay.position = CGPoint(x: CGRectGetMidX(self.frame) - 120, y: 260)
+        buttonPlay = SKSpriteNode(imageNamed: "button-play")
+        buttonPlay.position = CGPoint(x: CGRectGetMidX(self.frame) - 140, y: 220)
         self.addChild(buttonPlay)
         
-        buttonDex = SKSpriteNode(color: UIColor.greenColor(), size: CGSize(width: 160, height: 80))
-        buttonDex.position = CGPoint(x: CGRectGetMidX(self.frame) + 120, y: 260)
+        buttonDex = SKSpriteNode(imageNamed: "button-eggdex")
+        buttonDex.position = CGPoint(x: CGRectGetMidX(self.frame) + 140, y: 220)
         self.addChild(buttonDex)
     }
     
