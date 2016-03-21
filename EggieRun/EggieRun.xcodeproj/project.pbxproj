@@ -26,10 +26,10 @@
 		CD0940741C9CFBBB00CF4905 /* PRGHeroState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0940731C9CFBBB00CF4905 /* PRGHeroState.swift */; };
 		CD0940791C9D2F0800CF4905 /* PRGGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0940781C9D2F0800CF4905 /* PRGGameState.swift */; };
 		CDD1065D1C9D482500959FFD /* PRGBitMaskCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD1065C1C9D482500959FFD /* PRGBitMaskCategory.swift */; };
-		CDD1065F1C9DC12500959FFD /* run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = CDD1065E1C9DC12500959FFD /* run.atlas */; };
 		CDD106611C9DD15600959FFD /* PRGPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD106601C9DD15600959FFD /* PRGPlatform.swift */; };
 		CDD106631C9DD57200959FFD /* PRGPlatformFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD106621C9DD57200959FFD /* PRGPlatformFactory.swift */; };
 		CDD106651C9DD62600959FFD /* PlatformFactoryStab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD106641C9DD62600959FFD /* PlatformFactoryStab.swift */; };
+		CDD106671CA002E100959FFD /* run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = CDD106661CA002E100959FFD /* run.atlas */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,10 +75,10 @@
 		CD0940731C9CFBBB00CF4905 /* PRGHeroState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRGHeroState.swift; sourceTree = "<group>"; };
 		CD0940781C9D2F0800CF4905 /* PRGGameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRGGameState.swift; sourceTree = "<group>"; };
 		CDD1065C1C9D482500959FFD /* PRGBitMaskCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRGBitMaskCategory.swift; sourceTree = "<group>"; };
-		CDD1065E1C9DC12500959FFD /* run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = run.atlas; path = ../../../../../Desktop/run.atlas; sourceTree = "<group>"; };
 		CDD106601C9DD15600959FFD /* PRGPlatform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRGPlatform.swift; sourceTree = "<group>"; };
 		CDD106621C9DD57200959FFD /* PRGPlatformFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRGPlatformFactory.swift; sourceTree = "<group>"; };
 		CDD106641C9DD62600959FFD /* PlatformFactoryStab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformFactoryStab.swift; sourceTree = "<group>"; };
+		CDD106661CA002E100959FFD /* run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = run.atlas; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,7 +129,7 @@
 		6CA7272D1C9BE60600CBD165 /* EggieRun */ = {
 			isa = PBXGroup;
 			children = (
-				CDD1065E1C9DC12500959FFD /* run.atlas */,
+				CDD106661CA002E100959FFD /* run.atlas */,
 				CD0940751C9CFCD000CF4905 /* Platform Running Game */,
 				CD09406B1C9CEEC200CF4905 /* GlobalConstants.swift */,
 				CD0940701C9CF58D00CF4905 /* Stabs */,
@@ -308,9 +308,9 @@
 				6CA7273D1C9BE60700CBD165 /* LaunchScreen.storyboard in Resources */,
 				6C5CDD4E1C9DBF3D005BB83C /* DexScene.sks in Resources */,
 				6CA7273A1C9BE60700CBD165 /* Assets.xcassets in Resources */,
-				CDD1065F1C9DC12500959FFD /* run.atlas in Resources */,
 				6C1C64A41C9C49410091AE8B /* MenuScene.sks in Resources */,
 				6CA727381C9BE60700CBD165 /* Main.storyboard in Resources */,
+				CDD106671CA002E100959FFD /* run.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

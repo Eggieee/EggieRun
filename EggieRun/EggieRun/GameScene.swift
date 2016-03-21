@@ -13,8 +13,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private struct constants {
         static let distanceLabelText = "Distance: %dm"
         static let headerFontSize: CGFloat = 30
-        static let jumpInitialSpeed = CGVectorMake(0, 200)
-        static let heroSpeed = 10
+        static let jumpInitialSpeed = CGVectorMake(0, 600)
+        static let heroSpeed = 50
     }
     
     var hero: PRGHero!
@@ -56,7 +56,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(pf)
         
         physicsWorld.contactDelegate = self
-        physicsWorld.gravity = CGVectorMake(0, -0.5)
+        physicsWorld.gravity = CGVectorMake(0, -9.8)
         physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         physicsBody?.categoryBitMask = PRGBitMaskCategory.scene
         physicsBody?.contactTestBitMask = PRGBitMaskCategory.hero
