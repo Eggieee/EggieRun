@@ -15,7 +15,14 @@ class MenuScene: SKScene {
     private var buttonPlay: SKSpriteNode!
     private var buttonDex: SKSpriteNode!
     
+    private var initialized = false
+    
     override func didMoveToView(view: SKView) {
+        if initialized {
+            return
+        }
+        initialized = true
+        
         changeBackground("menu-background")
         
         let myLabel = SKLabelNode(fontNamed:"Chalkduster")
