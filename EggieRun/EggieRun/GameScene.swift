@@ -10,31 +10,28 @@ import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     // Constants
+    private let backgroundImageName = "default-background"
     private let distanceLabelText = "Distance: %dm"
     private let headerFontSize: CGFloat = 30
     private let jumpInitialSpeed = CGVectorMake(0, 600)
-    private let heroSpeed = 50
+    private let eggieRunningSpeed = 50
     private let eggieXPosition: CGFloat = 200
     
-    var eggie: Eggie!
-    var platformFactory: PRGPlatformFactory!
+    private var eggie: Eggie!
+    private var platformFactory: PRGPlatformFactory!
     private var gameState: PRGGameState = .Ready
     private var distanceLabel: SKLabelNode!
     private var distance = 0
     private var platforms = [PRGPlatform]()
 
     override func didMoveToView(view: SKView) {
-        changeBackground("default-background")
+        changeBackground(backgroundImageName)
         
-        distanceLabel = SKLabelNode(fontNamed: GlobalConstants.fontName)
-        distanceLabel.fontSize = headerFontSize
-        distanceLabel.text = String(format: distanceLabelText, distance)
-        distanceLabel.position = CGPoint(x: CGRectGetWidth(distanceLabel.frame),
-            y: CGRectGetHeight(self.frame) - CGRectGetHeight(distanceLabel.frame))
-        addChild(distanceLabel)
-        
-//        self.eggie = Eggie(position: CGPoint(x: self.eggieXPosition, y: self.frame.height - 1))
-//        self.addChild(self.eggie)
+        self.distanceLabel = SKLabelNode(fontNamed: GlobalConstants.fontName)
+        self.distanceLabel.fontSize = self.headerFontSize
+        self.distanceLabel.text = String(format: self.distanceLabelText, self.distance)
+        self.distanceLabel.position = CGPoint(x: CGRectGetWidth(self.distanceLabel.frame), y: CGRectGetHeight(self.frame) - CGRectGetHeight(self.distanceLabel.frame))
+        self.addChild(self.distanceLabel)
         
         platformFactory = PlatformFactoryStab()
         let pf = platformFactory.nextPlatform()
@@ -54,21 +51,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if self.gameState == .Ready {
-            gameStart()
-        } else if gameState == .Playing && eggie.state == .Running {
-            eggieJump()
-        } else if gameState == .Over {
-            gameReady()
+            self.gameStart()
+        } else if self.gameState == .Playing && self.eggie.state == .Running {
+            self.eggieJump()
+        } else if self.gameState == .Over {
+            self.gameReady()
         }
     }
     
     override func update(currentTime: CFTimeInterval) {
-        if (gameState == .Ready || gameState == .Over) {
+        if (self.gameState == .Ready || self.gameState == .Over) {
             return
         }
         
-        updateDistance()
-        eggie.balance()
+        self.updateDistance()
+        self.eggie.balance()
         
         let leftMostPlatform = platforms.first!
         let rightMostPlatform = platforms.last!
@@ -93,15 +90,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
-        if (gameState == .Over) {
+        if (self.gameState == .Over) {
             return
         }
         
         if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == PRGBitMaskCategory.hero | PRGBitMaskCategory.scene {
-            gameOver()
+            self.gameOver()
         } else if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == PRGBitMaskCategory.hero | PRGBitMaskCategory.platform {
-            if eggie.state == .Jumping {
-                eggie.state = .Running
+            if self.eggie.state == .Jumping {
+                self.eggie.state = .Running
             }
         }
         // todo
@@ -109,8 +106,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func updateDistance() {
-        distance += eggie.runningSpeed
-        distanceLabel.text = String(format: distanceLabelText, distance)
+        self.distance += eggie.runningSpeed
+        self.distanceLabel.text = String(format: distanceLabelText, distance)
     }
     
     private func gameReady() {
@@ -124,19 +121,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func gameStart() {
-        eggie.state = .Running
-        eggie.runningSpeed = heroSpeed
-        gameState = .Playing
+        self.eggie.state = .Running
+        self.eggie.runningSpeed = self.eggieRunningSpeed
+        self.gameState = .Playing
     }
     
     private func gameOver() {
-        eggie.state = .Dying
-        eggie.runningSpeed = 0
-        gameState = .Over
+        self.eggie.state = .Dying
+        self.eggie.runningSpeed = 0
+        self.gameState = .Over
     }
     
     private func eggieJump() {
-        eggie.state = .Jumping
-        eggie.physicsBody!.velocity = jumpInitialSpeed
+        self.eggie.state = .Jumping
+        self.eggie.physicsBody!.velocity = jumpInitialSpeed
     }
 }

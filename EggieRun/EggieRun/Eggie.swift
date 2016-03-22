@@ -36,11 +36,13 @@ class Eggie: SKSpriteNode {
         self.actions[.Dying] = SKAction.setTexture(standingTexture)
         
         self.runAction(self.actions[.Standing]!)
+        
         self.physicsBody = SKPhysicsBody(rectangleOfSize: standingTexture.size())
         self.physicsBody!.categoryBitMask = PRGBitMaskCategory.hero
         self.physicsBody!.contactTestBitMask = PRGBitMaskCategory.scene | PRGBitMaskCategory.collectable | PRGBitMaskCategory.platform
         self.physicsBody!.collisionBitMask = PRGBitMaskCategory.platform | PRGBitMaskCategory.scene
-        
+        self.physicsBody!.allowsRotation = false
+
         self.position = position
     }
 
