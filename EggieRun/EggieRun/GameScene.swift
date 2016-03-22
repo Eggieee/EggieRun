@@ -13,8 +13,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private let backgroundImageName = "default-background"
     private let distanceLabelText = "Distance: %dm"
     private let headerFontSize: CGFloat = 30
-    private let jumpInitialSpeed = CGVectorMake(0, 600)
-    private let eggieRunningSpeed = 50
     private let eggieXPosition: CGFloat = 200
     
     private var eggie: Eggie!
@@ -53,7 +51,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if self.gameState == .Ready {
             self.gameStart()
         } else if self.gameState == .Playing && self.eggie.state == .Running {
-            self.eggieJump()
+            self.eggie.state = .Jumping
         } else if self.gameState == .Over {
             self.gameReady()
         }
@@ -85,7 +83,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         for platform in platforms {
-            platform.position.x -= CGFloat(eggie.runningSpeed)
+            platform.position.x -= CGFloat(eggie.currentSpeed)
         }
     }
     
@@ -106,7 +104,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func updateDistance() {
-        self.distance += eggie.runningSpeed
+        self.distance += eggie.currentSpeed
         self.distanceLabel.text = String(format: distanceLabelText, distance)
     }
     
@@ -122,18 +120,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func gameStart() {
         self.eggie.state = .Running
-        self.eggie.runningSpeed = self.eggieRunningSpeed
         self.gameState = .Playing
     }
     
     private func gameOver() {
         self.eggie.state = .Dying
-        self.eggie.runningSpeed = 0
         self.gameState = .Over
-    }
-    
-    private func eggieJump() {
-        self.eggie.state = .Jumping
-        self.eggie.physicsBody!.velocity = jumpInitialSpeed
     }
 }

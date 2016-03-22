@@ -9,8 +9,13 @@
 import SpriteKit
 
 class Eggie: SKSpriteNode {
-    var innerState: EggieState
-    var runningSpeed = 0
+    // Constants
+    private let staticSpeed = 0
+    private let runningSpeed = 50
+    private let jumpingAcceleration = CGVectorMake(0, 600)
+    
+    private var innerCurrentSpeed: Int
+    private var innerState: EggieState
     private var runAtlas = SKTextureAtlas(named: "run.atlas")
     private var jumpAtlas = SKTextureAtlas(named: "jump.atlas")
     private var actions: [EggieState: SKAction] = [EggieState: SKAction]()
@@ -25,6 +30,7 @@ class Eggie: SKSpriteNode {
         
         self.innerState = .Standing
         self.balancedXPosition = position.x
+        self.innerCurrentSpeed = self.staticSpeed
         super.init(texture: standingTexture, color: UIColor.clearColor(), size: standingTexture.size())
 
         runTextures = sortedRunTextureNames.map({ self.runAtlas.textureNamed($0) })
@@ -63,7 +69,20 @@ class Eggie: SKSpriteNode {
             self.innerState = newState
             self.removeAllActions()
             self.runAction(self.actions[newState]!)
+            
+            switch newState {
+            case .Standing, .Dying:
+                self.innerCurrentSpeed = self.staticSpeed
+            case .Running:
+                self.innerCurrentSpeed = self.runningSpeed
+            case .Jumping:
+                self.physicsBody!.velocity = self.jumpingAcceleration
+            }
         }
+    }
+    
+    var currentSpeed: Int {
+        return innerCurrentSpeed
     }
     
     func balance() {
