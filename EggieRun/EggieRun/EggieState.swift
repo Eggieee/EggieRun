@@ -8,10 +8,6 @@
 
 import Foundation
 
-enum PRGHeroState {
-    case Standing, Running, Jumping, Dying
-}
-
 enum EggieState {
     case Standing, Running, Jumping, Dying
 }

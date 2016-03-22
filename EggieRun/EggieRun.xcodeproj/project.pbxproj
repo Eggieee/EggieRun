@@ -27,9 +27,7 @@
 		6CED38D91CA0073300F4E2F0 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CED38D81CA0073300F4E2F0 /* Dish.swift */; };
 		93B45D061CA159A8002A75AA /* jump.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 93B45D051CA159A8002A75AA /* jump.atlas */; };
 		CD09406C1C9CEEC200CF4905 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD09406B1C9CEEC200CF4905 /* GlobalConstants.swift */; };
-		CD09406E1C9CF41C00CF4905 /* PRGHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD09406D1C9CF41C00CF4905 /* PRGHero.swift */; };
-		CD0940721C9CF5B500CF4905 /* HeroStab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0940711C9CF5B500CF4905 /* HeroStab.swift */; };
-		CD0940741C9CFBBB00CF4905 /* PRGHeroState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0940731C9CFBBB00CF4905 /* PRGHeroState.swift */; };
+		CD0940741C9CFBBB00CF4905 /* EggieState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0940731C9CFBBB00CF4905 /* EggieState.swift */; };
 		CD0940791C9D2F0800CF4905 /* PRGGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0940781C9D2F0800CF4905 /* PRGGameState.swift */; };
 		CDD1065D1C9D482500959FFD /* PRGBitMaskCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD1065C1C9D482500959FFD /* PRGBitMaskCategory.swift */; };
 		CDD106611C9DD15600959FFD /* PRGPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD106601C9DD15600959FFD /* PRGPlatform.swift */; };
@@ -85,9 +83,7 @@
 		6CED38D81CA0073300F4E2F0 /* Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
 		93B45D051CA159A8002A75AA /* jump.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = jump.atlas; sourceTree = "<group>"; };
 		CD09406B1C9CEEC200CF4905 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
-		CD09406D1C9CF41C00CF4905 /* PRGHero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRGHero.swift; sourceTree = "<group>"; };
-		CD0940711C9CF5B500CF4905 /* HeroStab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroStab.swift; sourceTree = "<group>"; };
-		CD0940731C9CFBBB00CF4905 /* PRGHeroState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRGHeroState.swift; sourceTree = "<group>"; };
+		CD0940731C9CFBBB00CF4905 /* EggieState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EggieState.swift; sourceTree = "<group>"; };
 		CD0940781C9D2F0800CF4905 /* PRGGameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRGGameState.swift; sourceTree = "<group>"; };
 		CDD1065C1C9D482500959FFD /* PRGBitMaskCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRGBitMaskCategory.swift; sourceTree = "<group>"; };
 		CDD106601C9DD15600959FFD /* PRGPlatform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRGPlatform.swift; sourceTree = "<group>"; };
@@ -153,7 +149,7 @@
 				CD09406B1C9CEEC200CF4905 /* GlobalConstants.swift */,
 				CD0940701C9CF58D00CF4905 /* Stabs */,
 				CDD1066C1CA1B18800959FFD /* Eggie.swift */,
-				CD0940731C9CFBBB00CF4905 /* PRGHeroState.swift */,
+				CD0940731C9CFBBB00CF4905 /* EggieState.swift */,
 				6CA7272E1C9BE60700CBD165 /* AppDelegate.swift */,
 				CDD1066E1CA1B80D00959FFD /* Assets.xcassets */,
 				6C1C64A31C9C49410091AE8B /* MenuScene.sks */,
@@ -206,7 +202,6 @@
 		CD09406F1C9CF43400CF4905 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
-				CD09406D1C9CF41C00CF4905 /* PRGHero.swift */,
 				CDD106621C9DD57200959FFD /* PRGPlatformFactory.swift */,
 			);
 			name = Delegates;
@@ -215,7 +210,6 @@
 		CD0940701C9CF58D00CF4905 /* Stabs */ = {
 			isa = PBXGroup;
 			children = (
-				CD0940711C9CF5B500CF4905 /* HeroStab.swift */,
 				CDD106641C9DD62600959FFD /* PlatformFactoryStab.swift */,
 			);
 			name = Stabs;
@@ -375,7 +369,6 @@
 				6C5CDD4C1C9DBEEF005BB83C /* DexScene.swift in Sources */,
 				6CED38D91CA0073300F4E2F0 /* Dish.swift in Sources */,
 				6CE99C7B1CA05798006F960B /* Ingredient.swift in Sources */,
-				CD0940721C9CF5B500CF4905 /* HeroStab.swift in Sources */,
 				CDD106611C9DD15600959FFD /* PRGPlatform.swift in Sources */,
 				CD09406C1C9CEEC200CF4905 /* GlobalConstants.swift in Sources */,
 				6CED38D41CA0062D00F4E2F0 /* DexStorageController.swift in Sources */,
@@ -386,12 +379,11 @@
 				CDD106631C9DD57200959FFD /* PRGPlatformFactory.swift in Sources */,
 				6CA727351C9BE60700CBD165 /* GameViewController.swift in Sources */,
 				CDD1066D1CA1B18800959FFD /* Eggie.swift in Sources */,
-				CD0940741C9CFBBB00CF4905 /* PRGHeroState.swift in Sources */,
+				CD0940741C9CFBBB00CF4905 /* EggieState.swift in Sources */,
 				CDD1065D1C9D482500959FFD /* PRGBitMaskCategory.swift in Sources */,
 				0B8DC3E81CA05D9C0055382D /* SKScene+Background.swift in Sources */,
 				CD0940791C9D2F0800CF4905 /* PRGGameState.swift in Sources */,
 				6CA7272F1C9BE60700CBD165 /* AppDelegate.swift in Sources */,
-				CD09406E1C9CF41C00CF4905 /* PRGHero.swift in Sources */,
 				CDD106651C9DD62600959FFD /* PlatformFactoryStab.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
