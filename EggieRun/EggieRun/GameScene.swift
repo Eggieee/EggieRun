@@ -17,7 +17,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         static let heroSpeed = 50
     }
     
-    var hero: PRGHero!
+//    var hero: PRGHero!
+    var eggie: Eggie!
     var platformFactory: PRGPlatformFactory!
     private var gameState: PRGGameState = .Ready
     private var distanceLabel: SKLabelNode!
@@ -35,17 +36,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         distanceLabel.zPosition = 2
         addChild(distanceLabel)
         
-        hero = HeroStab(state: .Standing)
-        hero.node.physicsBody = SKPhysicsBody(rectangleOfSize: hero.node.size)
-        hero.node.position = CGPoint(x: CGRectGetWidth(distanceLabel.frame) + 100,
-            y: CGRectGetMidY(self.frame))
-        hero.node.zPosition = 1
-        hero.node.physicsBody?.categoryBitMask = PRGBitMaskCategory.hero
-        hero.node.physicsBody?.contactTestBitMask = PRGBitMaskCategory.scene |
-                                                    PRGBitMaskCategory.collectable |
-                                                    PRGBitMaskCategory.platform
-        hero.node.physicsBody?.collisionBitMask = PRGBitMaskCategory.platform | PRGBitMaskCategory.scene
-        addChild(hero.node)
+        self.eggie = Eggie(position: CGPoint(x: CGRectGetWidth(distanceLabel.frame) + 100, y: CGRectGetMidY(self.frame)), zPosition: 10)
+        self.addChild(self.eggie)
         
         platformFactory = PlatformFactoryStab()
         let pf = platformFactory.nextPlatform()
@@ -64,7 +56,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if gameState == .Ready {
             gameStart()
-        } else if gameState == .Playing && hero.state == .Running {
+        } else if gameState == .Playing && eggie.state == .Running {
             heroJump()
         } else if gameState == .Over {
             gameReady()
@@ -96,7 +88,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         for platform in platforms {
-            platform.position.x -= CGFloat(hero.speed)
+            platform.position.x -= CGFloat(eggie.runningSpeed)
         }
     }
     
@@ -108,8 +100,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == PRGBitMaskCategory.hero | PRGBitMaskCategory.scene {
             gameOver()
         } else if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == PRGBitMaskCategory.hero | PRGBitMaskCategory.platform {
-            if hero.state == .Jumping {
-                hero.state = .Running
+            if eggie.state == .Jumping {
+                eggie.state = .Running
             }
         }
         // todo
@@ -118,30 +110,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     private func updateDistance() {
-        distance += hero.speed
+        distance += eggie.runningSpeed
         distanceLabel.text = String(format: constants.distanceLabelText, distance)
     }
     
     private func gameReady() {
-        hero.node.position = CGPoint(x: CGRectGetWidth(distanceLabel.frame) + 100,
+        eggie.position = CGPoint(x: CGRectGetWidth(distanceLabel.frame) + 100,
             y: CGRectGetMidY(self.frame))
         gameState = .Ready
     }
     
     private func gameStart() {
-        hero.state = .Running
-        hero.speed = constants.heroSpeed
+        eggie.state = .Running
+        eggie.runningSpeed = constants.heroSpeed
         gameState = .Playing
     }
     
     private func gameOver() {
-        hero.state = .Dying
-        hero.speed = 0
+        eggie.state = .Dying
+        eggie.runningSpeed = 0
         gameState = .Over
     }
     
     private func heroJump() {
-        hero.state = .Jumping
-        hero.node.physicsBody!.velocity = constants.jumpInitialSpeed
+        eggie.state = .Jumping
+        eggie.physicsBody!.velocity = constants.jumpInitialSpeed
     }
 }
