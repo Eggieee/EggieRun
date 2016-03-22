@@ -35,7 +35,6 @@
 		CDD106651C9DD62600959FFD /* PlatformFactoryStab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD106641C9DD62600959FFD /* PlatformFactoryStab.swift */; };
 		CDD1066D1CA1B18800959FFD /* Eggie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD1066C1CA1B18800959FFD /* Eggie.swift */; };
 		CDD1066F1CA1B80D00959FFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD1066E1CA1B80D00959FFD /* Assets.xcassets */; };
-		CDD106711CA1C74E00959FFD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD106701CA1C74E00959FFD /* Constants.swift */; };
 		CDD106731CA1CFD300959FFD /* run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = CDD106721CA1CFD300959FFD /* run.atlas */; };
 /* End PBXBuildFile section */
 
@@ -91,7 +90,6 @@
 		CDD106641C9DD62600959FFD /* PlatformFactoryStab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformFactoryStab.swift; sourceTree = "<group>"; };
 		CDD1066C1CA1B18800959FFD /* Eggie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eggie.swift; sourceTree = "<group>"; };
 		CDD1066E1CA1B80D00959FFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CDD106701CA1C74E00959FFD /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CDD106721CA1CFD300959FFD /* run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = run.atlas; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -165,7 +163,6 @@
 				6CA727361C9BE60700CBD165 /* Main.storyboard */,
 				6CA7273B1C9BE60700CBD165 /* LaunchScreen.storyboard */,
 				6CA7273E1C9BE60700CBD165 /* Info.plist */,
-				CDD106701CA1C74E00959FFD /* Constants.swift */,
 			);
 			path = EggieRun;
 			sourceTree = "<group>";
@@ -373,7 +370,6 @@
 				CD09406C1C9CEEC200CF4905 /* GlobalConstants.swift in Sources */,
 				6CED38D41CA0062D00F4E2F0 /* DexStorageController.swift in Sources */,
 				6CA727331C9BE60700CBD165 /* GameScene.swift in Sources */,
-				CDD106711CA1C74E00959FFD /* Constants.swift in Sources */,
 				6C1C64A21C9C47390091AE8B /* MenuScene.swift in Sources */,
 				6CE99C791CA0576D006F960B /* Condiment.swift in Sources */,
 				CDD106631C9DD57200959FFD /* PRGPlatformFactory.swift in Sources */,

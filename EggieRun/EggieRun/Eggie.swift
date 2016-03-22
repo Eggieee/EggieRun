@@ -37,8 +37,8 @@ class Eggie: SKSpriteNode {
         jumpTextures = sortedJumpTextureNames.map({ self.jumpAtlas.textureNamed($0) })
         
         self.actions[.Standing] = SKAction.setTexture(standingTexture)
-        self.actions[.Running] = SKAction.repeatActionForever(SKAction.animateWithTextures(runTextures, timePerFrame: Constants.timePerFrame))
-        self.actions[.Jumping] = SKAction.repeatActionForever(SKAction.animateWithTextures(jumpTextures, timePerFrame: Constants.timePerFrame))
+        self.actions[.Running] = SKAction.repeatActionForever(SKAction.animateWithTextures(runTextures, timePerFrame: GlobalConstants.timePerFrame))
+        self.actions[.Jumping] = SKAction.repeatActionForever(SKAction.animateWithTextures(jumpTextures, timePerFrame: GlobalConstants.timePerFrame))
         self.actions[.Dying] = SKAction.setTexture(standingTexture)
         
         self.runAction(self.actions[.Standing]!)

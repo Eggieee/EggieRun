@@ -21,6 +21,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var distanceLabel: SKLabelNode!
     private var distance = 0
     private var platforms = [PRGPlatform]()
+    private var lastUpdatedTime: CFTimeInterval!
 
     override func didMoveToView(view: SKView) {
         changeBackground(backgroundImageName)
@@ -58,6 +59,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(currentTime: CFTimeInterval) {
+        if self.lastUpdatedTime != nil && currentTime - self.lastUpdatedTime < GlobalConstants.timePerFrame {
+            return
+        }
+        
+        self.lastUpdatedTime = currentTime
+    
         if (self.gameState == .Ready || self.gameState == .Over) {
             return
         }

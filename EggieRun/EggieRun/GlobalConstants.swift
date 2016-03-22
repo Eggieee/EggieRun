@@ -9,5 +9,6 @@
 import UIKit
 
 struct GlobalConstants {
-  static let fontName = "Chalkduster"
+    static let fontName = "Chalkduster"
+    static let timePerFrame = 0.05
 }
