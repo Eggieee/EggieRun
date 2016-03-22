@@ -26,6 +26,8 @@
 		6CE99C7D1CA05842006F960B /* Cooker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE99C7C1CA05842006F960B /* Cooker.swift */; };
 		6CED38D41CA0062D00F4E2F0 /* DexStorageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CED38D31CA0062D00F4E2F0 /* DexStorageController.swift */; };
 		6CED38D91CA0073300F4E2F0 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CED38D81CA0073300F4E2F0 /* Dish.swift */; };
+		93B45D061CA159A8002A75AA /* jump.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 93B45D051CA159A8002A75AA /* jump.atlas */; };
+		93B45D081CA159CD002A75AA /* run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 93B45D071CA159CD002A75AA /* run.atlas */; };
 		CD09406C1C9CEEC200CF4905 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD09406B1C9CEEC200CF4905 /* GlobalConstants.swift */; };
 		CD09406E1C9CF41C00CF4905 /* PRGHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD09406D1C9CF41C00CF4905 /* PRGHero.swift */; };
 		CD0940721C9CF5B500CF4905 /* HeroStab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0940711C9CF5B500CF4905 /* HeroStab.swift */; };
@@ -35,7 +37,6 @@
 		CDD106611C9DD15600959FFD /* PRGPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD106601C9DD15600959FFD /* PRGPlatform.swift */; };
 		CDD106631C9DD57200959FFD /* PRGPlatformFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD106621C9DD57200959FFD /* PRGPlatformFactory.swift */; };
 		CDD106651C9DD62600959FFD /* PlatformFactoryStab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD106641C9DD62600959FFD /* PlatformFactoryStab.swift */; };
-		CDD106671CA002E100959FFD /* run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = CDD106661CA002E100959FFD /* run.atlas */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,8 @@
 		6CE99C7C1CA05842006F960B /* Cooker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cooker.swift; sourceTree = "<group>"; };
 		6CED38D31CA0062D00F4E2F0 /* DexStorageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DexStorageController.swift; sourceTree = "<group>"; };
 		6CED38D81CA0073300F4E2F0 /* Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
+		93B45D051CA159A8002A75AA /* jump.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = jump.atlas; sourceTree = "<group>"; };
+		93B45D071CA159CD002A75AA /* run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = run.atlas; sourceTree = "<group>"; };
 		CD09406B1C9CEEC200CF4905 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		CD09406D1C9CF41C00CF4905 /* PRGHero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRGHero.swift; sourceTree = "<group>"; };
 		CD0940711C9CF5B500CF4905 /* HeroStab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroStab.swift; sourceTree = "<group>"; };
@@ -90,7 +93,6 @@
 		CDD106601C9DD15600959FFD /* PRGPlatform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRGPlatform.swift; sourceTree = "<group>"; };
 		CDD106621C9DD57200959FFD /* PRGPlatformFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRGPlatformFactory.swift; sourceTree = "<group>"; };
 		CDD106641C9DD62600959FFD /* PlatformFactoryStab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformFactoryStab.swift; sourceTree = "<group>"; };
-		CDD106661CA002E100959FFD /* run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = run.atlas; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,7 +143,8 @@
 		6CA7272D1C9BE60600CBD165 /* EggieRun */ = {
 			isa = PBXGroup;
 			children = (
-				CDD106661CA002E100959FFD /* run.atlas */,
+				93B45D071CA159CD002A75AA /* run.atlas */,
+				93B45D051CA159A8002A75AA /* jump.atlas */,
 				CD0940751C9CFCD000CF4905 /* Platform Running Game */,
 				CD09406B1C9CEEC200CF4905 /* GlobalConstants.swift */,
 				CD0940701C9CF58D00CF4905 /* Stabs */,
@@ -331,12 +334,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CA727311C9BE60700CBD165 /* GameScene.sks in Resources */,
+				93B45D081CA159CD002A75AA /* run.atlas in Resources */,
+				93B45D061CA159A8002A75AA /* jump.atlas in Resources */,
 				6CA7273D1C9BE60700CBD165 /* LaunchScreen.storyboard in Resources */,
 				6C5CDD4E1C9DBF3D005BB83C /* DexScene.sks in Resources */,
 				6CA7273A1C9BE60700CBD165 /* Assets.xcassets in Resources */,
 				6C1C64A41C9C49410091AE8B /* MenuScene.sks in Resources */,
 				6CA727381C9BE60700CBD165 /* Main.storyboard in Resources */,
-				CDD106671CA002E100959FFD /* run.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
