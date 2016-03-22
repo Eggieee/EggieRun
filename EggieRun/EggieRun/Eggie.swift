@@ -14,8 +14,9 @@ class Eggie: SKSpriteNode {
     private var runAtlas = SKTextureAtlas(named: "run.atlas")
     private var jumpAtlas = SKTextureAtlas(named: "jump.atlas")
     private var actions: [EggieState: SKAction] = [EggieState: SKAction]()
+    private var balancedXPosition: CGFloat
     
-    init(position: CGPoint, zPosition: CGFloat) {
+    init(position: CGPoint) {
         let sortedRunTextureNames = self.runAtlas.textureNames.sort()
         let sortedJumpTextureNames = self.jumpAtlas.textureNames.sort()
         let standingTexture = self.runAtlas.textureNamed(sortedRunTextureNames[0])
@@ -23,6 +24,7 @@ class Eggie: SKSpriteNode {
         let jumpTextures: [SKTexture]
         
         self.innerState = .Standing
+        self.balancedXPosition = position.x
         super.init(texture: standingTexture, color: UIColor.clearColor(), size: standingTexture.size())
 
         runTextures = sortedRunTextureNames.map({ self.runAtlas.textureNamed($0) })
@@ -40,7 +42,6 @@ class Eggie: SKSpriteNode {
         self.physicsBody!.collisionBitMask = PRGBitMaskCategory.platform | PRGBitMaskCategory.scene
         
         self.position = position
-        self.zPosition = zPosition
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -60,6 +61,14 @@ class Eggie: SKSpriteNode {
             self.innerState = newState
             self.removeAllActions()
             self.runAction(self.actions[newState]!)
+        }
+    }
+    
+    func balance() {
+        if self.position.x < balancedXPosition {
+            self.position.x += 1
+        } else if self.position.x > balancedXPosition {
+            self.position.x -= 1
         }
     }
 }

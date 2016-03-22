@@ -9,15 +9,13 @@
 import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    // Constants
+    private let distanceLabelText = "Distance: %dm"
+    private let headerFontSize: CGFloat = 30
+    private let jumpInitialSpeed = CGVectorMake(0, 600)
+    private let heroSpeed = 50
+    private let eggieXPosition: CGFloat = 200
     
-    private struct constants {
-        static let distanceLabelText = "Distance: %dm"
-        static let headerFontSize: CGFloat = 30
-        static let jumpInitialSpeed = CGVectorMake(0, 600)
-        static let heroSpeed = 50
-    }
-    
-//    var hero: PRGHero!
     var eggie: Eggie!
     var platformFactory: PRGPlatformFactory!
     private var gameState: PRGGameState = .Ready
@@ -29,15 +27,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         changeBackground("default-background")
         
         distanceLabel = SKLabelNode(fontNamed: GlobalConstants.fontName)
-        distanceLabel.fontSize = constants.headerFontSize
-        distanceLabel.text = String(format: constants.distanceLabelText, distance)
+        distanceLabel.fontSize = headerFontSize
+        distanceLabel.text = String(format: distanceLabelText, distance)
         distanceLabel.position = CGPoint(x: CGRectGetWidth(distanceLabel.frame),
             y: CGRectGetHeight(self.frame) - CGRectGetHeight(distanceLabel.frame))
-        distanceLabel.zPosition = 2
         addChild(distanceLabel)
         
-        self.eggie = Eggie(position: CGPoint(x: CGRectGetWidth(distanceLabel.frame) + 100, y: CGRectGetMidY(self.frame)), zPosition: 10)
-        self.addChild(self.eggie)
+//        self.eggie = Eggie(position: CGPoint(x: self.eggieXPosition, y: self.frame.height - 1))
+//        self.addChild(self.eggie)
         
         platformFactory = PlatformFactoryStab()
         let pf = platformFactory.nextPlatform()
@@ -51,13 +48,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         physicsBody?.categoryBitMask = PRGBitMaskCategory.scene
         physicsBody?.contactTestBitMask = PRGBitMaskCategory.hero
+        
+        self.gameReady()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if gameState == .Ready {
+        if self.gameState == .Ready {
             gameStart()
         } else if gameState == .Playing && eggie.state == .Running {
-            heroJump()
+            eggieJump()
         } else if gameState == .Over {
             gameReady()
         }
@@ -69,6 +68,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         updateDistance()
+        eggie.balance()
         
         let leftMostPlatform = platforms.first!
         let rightMostPlatform = platforms.last!
@@ -108,21 +108,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // else if hero collide with collectable, ...
     }
     
-    
     private func updateDistance() {
         distance += eggie.runningSpeed
-        distanceLabel.text = String(format: constants.distanceLabelText, distance)
+        distanceLabel.text = String(format: distanceLabelText, distance)
     }
     
     private func gameReady() {
-        eggie.position = CGPoint(x: CGRectGetWidth(distanceLabel.frame) + 100,
-            y: CGRectGetMidY(self.frame))
-        gameState = .Ready
+        if self.eggie != nil {
+            self.eggie.removeFromParent()
+        }
+        
+        self.eggie = Eggie(position: CGPoint(x: self.eggieXPosition, y: CGRectGetMidY(self.frame)))
+        self.addChild(self.eggie)
+        self.gameState = .Ready
     }
     
     private func gameStart() {
         eggie.state = .Running
-        eggie.runningSpeed = constants.heroSpeed
+        eggie.runningSpeed = heroSpeed
         gameState = .Playing
     }
     
@@ -132,8 +135,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameState = .Over
     }
     
-    private func heroJump() {
+    private func eggieJump() {
         eggie.state = .Jumping
-        eggie.physicsBody!.velocity = constants.jumpInitialSpeed
+        eggie.physicsBody!.velocity = jumpInitialSpeed
     }
 }
