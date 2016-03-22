@@ -44,9 +44,9 @@ class Eggie: SKSpriteNode {
         self.runAction(self.actions[.Standing]!)
         
         self.physicsBody = SKPhysicsBody(rectangleOfSize: standingTexture.size())
-        self.physicsBody!.categoryBitMask = PRGBitMaskCategory.hero
-        self.physicsBody!.contactTestBitMask = PRGBitMaskCategory.scene | PRGBitMaskCategory.collectable | PRGBitMaskCategory.platform
-        self.physicsBody!.collisionBitMask = PRGBitMaskCategory.platform | PRGBitMaskCategory.scene
+        self.physicsBody!.categoryBitMask = BitMaskCategory.hero
+        self.physicsBody!.contactTestBitMask = BitMaskCategory.scene | BitMaskCategory.collectable | BitMaskCategory.platform
+        self.physicsBody!.collisionBitMask = BitMaskCategory.platform | BitMaskCategory.scene
         self.physicsBody!.allowsRotation = false
 
         self.position = position

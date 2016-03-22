@@ -15,9 +15,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private let headerFontSize: CGFloat = 30
     private let eggieXPosition: CGFloat = 200
     
+    private enum GameState {
+        case Ready, Playing, Over
+    }
+    
     private var eggie: Eggie!
     private var platformFactory: PRGPlatformFactory!
-    private var gameState: PRGGameState = .Ready
+    private var gameState: GameState = .Ready
     private var distanceLabel: SKLabelNode!
     private var distance = 0
     private var platforms = [PRGPlatform]()
@@ -42,8 +46,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = CGVectorMake(0, -9.8)
         physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
-        physicsBody?.categoryBitMask = PRGBitMaskCategory.scene
-        physicsBody?.contactTestBitMask = PRGBitMaskCategory.hero
+        physicsBody?.categoryBitMask = BitMaskCategory.scene
+        physicsBody?.contactTestBitMask = BitMaskCategory.hero
         
         self.gameReady()
     }
@@ -99,9 +103,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         
-        if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == PRGBitMaskCategory.hero | PRGBitMaskCategory.scene {
+        if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == BitMaskCategory.hero | BitMaskCategory.scene {
             self.gameOver()
-        } else if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == PRGBitMaskCategory.hero | PRGBitMaskCategory.platform {
+        } else if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == BitMaskCategory.hero | BitMaskCategory.platform {
             if self.eggie.state == .Jumping {
                 self.eggie.state = .Running
             }

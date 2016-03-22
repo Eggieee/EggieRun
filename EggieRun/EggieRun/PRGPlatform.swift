@@ -26,9 +26,9 @@ class PRGPlatform: SKNode {
         }
 
         physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: width, height: height), center: CGPoint(x: width/2, y: height/2))
-        physicsBody?.categoryBitMask = PRGBitMaskCategory.platform
-        physicsBody?.contactTestBitMask = PRGBitMaskCategory.hero
-        physicsBody?.collisionBitMask = PRGBitMaskCategory.hero
+        physicsBody?.categoryBitMask = BitMaskCategory.platform
+        physicsBody?.contactTestBitMask = BitMaskCategory.hero
+        physicsBody?.collisionBitMask = BitMaskCategory.hero
         physicsBody?.dynamic = false
     }
 

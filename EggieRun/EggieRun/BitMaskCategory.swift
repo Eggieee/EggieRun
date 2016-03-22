@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct PRGBitMaskCategory {
+struct BitMaskCategory {
     static let scene: UInt32 = 1 << 0
     static let hero: UInt32 = 1 << 1
     static let platform: UInt32 = 1 << 2
