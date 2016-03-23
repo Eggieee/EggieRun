@@ -10,46 +10,46 @@ import SpriteKit
 
 class Eggie: SKSpriteNode {
     // Constants
-    private let staticSpeed = 0
-    private let runningSpeed = 50
-    private let jumpingAcceleration = CGVectorMake(0, 600)
+    private static let SPEED_STATIC = 0
+    private static let SPEED_RUNNING = 50
+    private static let ACCELERATION_JUMPING = CGVectorMake(0, 600)
     
     private var innerCurrentSpeed: Int
     private var innerState: EggieState
-    private var runAtlas = SKTextureAtlas(named: "run.atlas")
-    private var jumpAtlas = SKTextureAtlas(named: "jump.atlas")
     private var actions: [EggieState: SKAction] = [EggieState: SKAction]()
     private var balancedXPosition: CGFloat
     
-    init(position: CGPoint) {
-        let sortedRunTextureNames = self.runAtlas.textureNames.sort()
-        let sortedJumpTextureNames = self.jumpAtlas.textureNames.sort()
-        let standingTexture = self.runAtlas.textureNamed(sortedRunTextureNames[0])
+    init(startPosition: CGPoint) {
+        let runAtlas = SKTextureAtlas(named: "run.atlas")
+        let jumpAtlas = SKTextureAtlas(named: "jump.atlas")
+        let sortedRunTextureNames = runAtlas.textureNames.sort()
+        let sortedJumpTextureNames = jumpAtlas.textureNames.sort()
+        let standingTexture = runAtlas.textureNamed(sortedRunTextureNames[0])
         let runTextures: [SKTexture]
         let jumpTextures: [SKTexture]
         
-        self.innerState = .Standing
-        self.balancedXPosition = position.x
-        self.innerCurrentSpeed = self.staticSpeed
+        innerState = .Standing
+        balancedXPosition = startPosition.x
+        innerCurrentSpeed = Eggie.SPEED_STATIC
         super.init(texture: standingTexture, color: UIColor.clearColor(), size: standingTexture.size())
 
-        runTextures = sortedRunTextureNames.map({ self.runAtlas.textureNamed($0) })
-        jumpTextures = sortedJumpTextureNames.map({ self.jumpAtlas.textureNamed($0) })
+        runTextures = sortedRunTextureNames.map({ runAtlas.textureNamed($0) })
+        jumpTextures = sortedJumpTextureNames.map({ jumpAtlas.textureNamed($0) })
         
-        self.actions[.Standing] = SKAction.setTexture(standingTexture)
-        self.actions[.Running] = SKAction.repeatActionForever(SKAction.animateWithTextures(runTextures, timePerFrame: GlobalConstants.timePerFrame))
-        self.actions[.Jumping] = SKAction.repeatActionForever(SKAction.animateWithTextures(jumpTextures, timePerFrame: GlobalConstants.timePerFrame))
-        self.actions[.Dying] = SKAction.setTexture(standingTexture)
+        actions[.Standing] = SKAction.setTexture(standingTexture)
+        actions[.Running] = SKAction.repeatActionForever(SKAction.animateWithTextures(runTextures, timePerFrame: GlobalConstants.timePerFrame))
+        actions[.Jumping] = SKAction.repeatActionForever(SKAction.animateWithTextures(jumpTextures, timePerFrame: GlobalConstants.timePerFrame))
+        actions[.Dying] = SKAction.setTexture(standingTexture)
         
-        self.runAction(self.actions[.Standing]!)
+        runAction(actions[.Standing]!)
         
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: standingTexture.size())
-        self.physicsBody!.categoryBitMask = BitMaskCategory.hero
-        self.physicsBody!.contactTestBitMask = BitMaskCategory.scene | BitMaskCategory.collectable | BitMaskCategory.platform
-        self.physicsBody!.collisionBitMask = BitMaskCategory.platform | BitMaskCategory.scene
-        self.physicsBody!.allowsRotation = false
+        physicsBody = SKPhysicsBody(rectangleOfSize: standingTexture.size())
+        physicsBody!.categoryBitMask = BitMaskCategory.hero
+        physicsBody!.contactTestBitMask = BitMaskCategory.scene | BitMaskCategory.collectable | BitMaskCategory.platform
+        physicsBody!.collisionBitMask = BitMaskCategory.platform | BitMaskCategory.scene
+        physicsBody!.allowsRotation = false
 
-        self.position = position
+        position = startPosition
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -58,25 +58,25 @@ class Eggie: SKSpriteNode {
     
     var state: EggieState {
         get {
-            return self.innerState
+            return innerState
         }
         
         set(newState) {
-            if newState == self.innerState {
+            if newState == innerState {
                 return
             }
             
-            self.innerState = newState
-            self.removeAllActions()
-            self.runAction(self.actions[newState]!)
+            innerState = newState
+            removeAllActions()
+            runAction(actions[newState]!)
             
             switch newState {
             case .Standing, .Dying:
-                self.innerCurrentSpeed = self.staticSpeed
+                innerCurrentSpeed = Eggie.SPEED_STATIC
             case .Running:
-                self.innerCurrentSpeed = self.runningSpeed
+                innerCurrentSpeed = Eggie.SPEED_RUNNING
             case .Jumping:
-                self.physicsBody!.velocity = self.jumpingAcceleration
+                physicsBody!.velocity = Eggie.ACCELERATION_JUMPING
             }
         }
     }
@@ -86,10 +86,10 @@ class Eggie: SKSpriteNode {
     }
     
     func balance() {
-        if self.position.x < balancedXPosition {
-            self.position.x += 1
-        } else if self.position.x > balancedXPosition {
-            self.position.x -= 1
+        if position.x < balancedXPosition {
+            position.x += 1
+        } else if position.x > balancedXPosition {
+            position.x -= 1
         }
     }
 }

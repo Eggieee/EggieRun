@@ -10,10 +10,10 @@ import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     // Constants
-    private let backgroundImageName = "default-background"
-    private let distanceLabelText = "Distance: %dm"
-    private let headerFontSize: CGFloat = 30
-    private let eggieXPosition: CGFloat = 200
+    private static let BACKGROUND_IMAGE_NAME = "default-background"
+    private static let DISTANCE_LABEL_TEXT = "Distance: %dm"
+    private static let HEADER_FONT_SIZE: CGFloat = 30
+    private static let EGGIE_X_POSITION: CGFloat = 200
     
     private enum GameState {
         case Ready, Playing, Over
@@ -28,53 +28,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var lastUpdatedTime: CFTimeInterval!
 
     override func didMoveToView(view: SKView) {
-        changeBackground(backgroundImageName)
+        changeBackground(GameScene.BACKGROUND_IMAGE_NAME)
         
-        self.distanceLabel = SKLabelNode(fontNamed: GlobalConstants.fontName)
-        self.distanceLabel.fontSize = self.headerFontSize
-        self.distanceLabel.text = String(format: self.distanceLabelText, self.distance)
-        self.distanceLabel.position = CGPoint(x: CGRectGetWidth(self.distanceLabel.frame), y: CGRectGetHeight(self.frame) - CGRectGetHeight(self.distanceLabel.frame))
-        self.addChild(self.distanceLabel)
+        initializePhysicsProperties()
+        initializeDistanceLabel()
+        initializePlatform()
         
-        platformFactory = PlatformFactoryStab()
-        let pf = platformFactory.nextPlatform()
-        pf.position.x = 0
-        pf.position.y = 0
-        platforms.append(pf)
-        addChild(pf)
-        
-        physicsWorld.contactDelegate = self
-        physicsWorld.gravity = CGVectorMake(0, -9.8)
-        physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
-        physicsBody?.categoryBitMask = BitMaskCategory.scene
-        physicsBody?.contactTestBitMask = BitMaskCategory.hero
-        
-        self.gameReady()
+        gameReady()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if self.gameState == .Ready {
-            self.gameStart()
-        } else if self.gameState == .Playing && self.eggie.state == .Running {
-            self.eggie.state = .Jumping
-        } else if self.gameState == .Over {
-            self.gameReady()
+        if gameState == .Ready {
+            gameStart()
+        } else if gameState == .Playing && eggie.state == .Running {
+            eggie.state = .Jumping
+        } else if gameState == .Over {
+            gameReady()
         }
     }
     
     override func update(currentTime: CFTimeInterval) {
-        if self.lastUpdatedTime != nil && currentTime - self.lastUpdatedTime < GlobalConstants.timePerFrame {
+        if lastUpdatedTime != nil && currentTime - lastUpdatedTime < GlobalConstants.timePerFrame {
             return
         }
         
-        self.lastUpdatedTime = currentTime
+        lastUpdatedTime = currentTime
     
-        if (self.gameState == .Ready || self.gameState == .Over) {
+        if (gameState == .Ready || gameState == .Over) {
             return
         }
         
-        self.updateDistance()
-        self.eggie.balance()
+        updateDistance()
+        eggie.balance()
         
         let leftMostPlatform = platforms.first!
         let rightMostPlatform = platforms.last!
@@ -99,43 +84,69 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
-        if (self.gameState == .Over) {
+        if (gameState == .Over) {
             return
         }
         
         if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == BitMaskCategory.hero | BitMaskCategory.scene {
-            self.gameOver()
+            gameOver()
         } else if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == BitMaskCategory.hero | BitMaskCategory.platform {
-            if self.eggie.state == .Jumping {
-                self.eggie.state = .Running
+            if eggie.state == .Jumping {
+                eggie.state = .Running
             }
         }
         // todo
         // else if hero collide with collectable, ...
     }
     
+    private func initializePhysicsProperties() {
+        physicsWorld.contactDelegate = self
+        physicsWorld.gravity = CGVectorMake(0, -9.8)
+        
+        physicsBody = SKPhysicsBody(edgeLoopFromRect: frame)
+        physicsBody!.categoryBitMask = BitMaskCategory.scene
+        physicsBody!.contactTestBitMask = BitMaskCategory.hero
+    }
+    
+    private func initializeDistanceLabel() {
+        distanceLabel = SKLabelNode(fontNamed: GlobalConstants.fontName)
+        distanceLabel.fontSize = GameScene.HEADER_FONT_SIZE
+        distanceLabel.text = String(format: GameScene.DISTANCE_LABEL_TEXT, distance)
+        distanceLabel.position = CGPoint(x: CGRectGetWidth(distanceLabel.frame), y: CGRectGetHeight(frame) - CGRectGetHeight(distanceLabel.frame))
+        addChild(distanceLabel)
+    }
+    
+    private func initializePlatform() {
+        platformFactory = PlatformFactoryStab()
+        let pf = platformFactory.nextPlatform()
+        pf.position.x = 0
+        pf.position.y = 0
+        platforms.append(pf)
+        addChild(pf)
+    }
+    
     private func updateDistance() {
-        self.distance += eggie.currentSpeed
-        self.distanceLabel.text = String(format: distanceLabelText, distance)
+        distance += eggie.currentSpeed
+        distanceLabel.text = String(format: GameScene.DISTANCE_LABEL_TEXT, distance)
     }
     
     private func gameReady() {
-        if self.eggie != nil {
-            self.eggie.removeFromParent()
+        if eggie != nil {
+            eggie.removeFromParent()
         }
         
-        self.eggie = Eggie(position: CGPoint(x: self.eggieXPosition, y: CGRectGetMidY(self.frame)))
-        self.addChild(self.eggie)
-        self.gameState = .Ready
+        eggie = Eggie(startPosition: CGPoint(x: GameScene.EGGIE_X_POSITION, y: CGRectGetMidY(frame)))
+        addChild(eggie)
+        gameState = .Ready
     }
     
     private func gameStart() {
-        self.eggie.state = .Running
-        self.gameState = .Playing
+        eggie.state = .Running
+        gameState = .Playing
     }
     
     private func gameOver() {
-        self.eggie.state = .Dying
-        self.gameState = .Over
+        eggie.state = .Dying
+        gameState = .Over
     }
 }
