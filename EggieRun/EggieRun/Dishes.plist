@@ -10,6 +10,8 @@
 		<string>Oops, smashed!</string>
 		<key>imageNamed</key>
 		<string>smashed-egg</string>
+		<key>canConstruct</key>
+		<string>function(cooker, condiments, ingredients) { return (cooker==0)?-1:0 }</string>
 	</dict>
 </dict>
 </plist>
