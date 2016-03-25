@@ -24,7 +24,7 @@ class Dish {
         self.name = data["name"] as! String
         self.description = data["description"] as! String
         self.imageNamed = data["imageNamed"] as! String
-        self.canConstructRawFunction = "var canConstruct = " + (data["canConstruct"] as! String)
+        self.canConstructRawFunction = "var canConstruct = function(cooker, condiments, ingredients) { " + (data["canConstruct"] as! String) + " };"
     }
     
     
