@@ -44,11 +44,11 @@ class DexStorageController {
     }
     
     func isDishActivated(dishToTest: Dish) -> Bool {
-        return activatedDishes.contains(dishToTest.rawValue)
+        return activatedDishes.contains(dishToTest.id.rawValue)
     }
     
     func addNewActivatedDish(dishToAdd: Dish) -> Bool {
-        activatedDishes.insert(dishToAdd.rawValue)
+        activatedDishes.insert(dishToAdd.id.rawValue)
         
         let data = NSMutableData()
         let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
