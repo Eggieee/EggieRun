@@ -43,18 +43,26 @@ class DexStorageController {
         }
     }
     
-    func isDishActivated(dishToTest: Dish) -> Bool {
-        return activatedDishes.contains(dishToTest.rawValue)
-    }
-    
-    func addNewActivatedDish(dishToAdd: Dish) -> Bool {
-        activatedDishes.insert(dishToAdd.rawValue)
-        
+    private func writeEggdex() -> Bool {
         let data = NSMutableData()
         let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
         archiver.encodeObject(Array(activatedDishes), forKey: DexStorageController.ACTIVATED_DISHES_KEY)
         archiver.finishEncoding()
         
         return data.writeToFile(pathForEggdex(), atomically: true)
+    }
+    
+    func isDishActivated(dishToTest: Dish) -> Bool {
+        return activatedDishes.contains(dishToTest.id.rawValue)
+    }
+    
+    func addNewActivatedDish(dishToAdd: Dish) -> Bool {
+        activatedDishes.insert(dishToAdd.id.rawValue)
+        return writeEggdex()
+    }
+    
+    func clearActivatedDish() -> Bool {
+        activatedDishes.removeAll()
+        return writeEggdex()
     }
 }
