@@ -14,5 +14,65 @@
 		<key>canConstruct</key>
 		<string>return (cooker==0)?-1:0;</string>
 	</dict>
+	<dict>
+		<key>id</key>
+		<integer>1</integer>
+		<key>name</key>
+		<string>Oyako Don</string>
+		<key>description</key>
+		<string></string>
+		<key>imageNamed</key>
+		<string>oyako-don</string>
+		<key>canConstruct</key>
+		<string>return (cooker==-1)?-1:0;</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>-1</integer>
+		<key>name</key>
+		<string>Plain Boiled Egg</string>
+		<key>description</key>
+		<string></string>
+		<key>imageNamed</key>
+		<string>plain-boiled-egg</string>
+		<key>canConstruct</key>
+		<string>return (cooker==3 &amp;&amp; condiments[0] == 0 &amp;&amp; condiments[1] == 0 &amp;&amp; condiments[2] == 0)?-2:0;</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>-2</integer>
+		<key>name</key>
+		<string>Amorphous Style Fried Egg</string>
+		<key>description</key>
+		<string></string>
+		<key>imageNamed</key>
+		<string>black-fried</string>
+		<key>canConstruct</key>
+		<string>return (cooker==1)?1:0;</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>-3</integer>
+		<key>name</key>
+		<string>Nameless Style Baked Egg</string>
+		<key>description</key>
+		<string></string>
+		<key>imageNamed</key>
+		<string>black-baked</string>
+		<key>canConstruct</key>
+		<string>return (cooker==2)?1:0;</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>-4</integer>
+		<key>name</key>
+		<string>Unspeakable Style Boiled Egg</string>
+		<key>description</key>
+		<string></string>
+		<key>imageNamed</key>
+		<string>black-boiled</string>
+		<key>canConstruct</key>
+		<string>return (cooker==3)?1:0;</string>
+	</dict>
 </array>
 </plist>
