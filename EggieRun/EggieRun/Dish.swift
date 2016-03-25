@@ -19,8 +19,8 @@ class Dish {
     let imageNamed: String
     let canConstructRawFunction: String
     
-    init(id: Int, data: NSDictionary) {
-        self.id = DishId(rawValue: id)!
+    init(data: NSDictionary) {
+        self.id = DishId(rawValue: data["id"] as! Int)!
         self.name = data["name"] as! String
         self.description = data["description"] as! String
         self.imageNamed = data["imageNamed"] as! String
@@ -55,11 +55,11 @@ class DishDataController {
     
     init() {
         if let url = NSBundle.mainBundle().URLForResource("Dishes", withExtension: "plist") {
-            let data = NSDictionary(contentsOfURL: url)!
+            let data = NSArray(contentsOfURL: url)!
             for element in data {
-                let dishId = Int(element.key as! String)!
-                let dishData = element.value as! NSDictionary
-                dishes[dishId] = Dish(id: dishId, data: dishData)
+                let dishData = element as! NSDictionary
+                let dish = Dish(data: dishData)
+                dishes[dish.id.rawValue] = dish
             }
         } else {
             fatalError()
