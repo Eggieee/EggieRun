@@ -91,6 +91,8 @@ class DishDataController {
         
         if forceAppearDish != nil {
             return forceAppearDish!
+        } else if randomPool.isEmpty {
+            fatalError()
         } else {
             let randomIndex = Int(arc4random_uniform(UInt32(randomPool.count)))
             return randomPool[randomIndex]
