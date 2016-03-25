@@ -7,6 +7,6 @@
 //
 
 import Foundation
-enum Cooker {
-    case Drop, DistanceForceDeath, Pan, Oven, Pot
+enum Cooker: Int {
+    case Drop = 0, DistanceForceDeath = -1, Pan = 1, Oven = 2, Pot = 3
 }

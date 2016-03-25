@@ -26,6 +26,14 @@ class EggieRunTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
+    func testGetResultDish() {
+        XCTAssertEqual(DishDataController.singleton.getResultDish(.Drop, condiments: [], ingredients: []).id, Dish.DishId.SmashedEgg)
+        
+        XCTAssertEqual(DishDataController.singleton.getResultDish(.Pot, condiments: [], ingredients: []).id, Dish.DishId.PlainBoiledEgg)
+        
+        XCTAssertEqual(DishDataController.singleton.getResultDish(.Pot, condiments: [.Salt], ingredients: []).id, Dish.DishId.BlackBoiled)
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measureBlock {

@@ -7,6 +7,6 @@
 //
 
 import Foundation
-enum Condiment {
-    case Salt, Sugar, Chili
+enum Condiment: Int {
+    case Salt = 0, Sugar = 1, Chili = 2
 }

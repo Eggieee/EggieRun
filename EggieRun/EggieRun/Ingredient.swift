@@ -7,6 +7,6 @@
 //
 
 import Foundation
-enum Ingredient {
-    case GreenOnion, Tomato, Cream, Milk, Rice, Bread, Bacon, Strawberry, Chocolate, Surstromming
+enum Ingredient: Int {
+    case GreenOnion = 0, Tomato = 1, Cream = 2, Milk = 3, Rice = 4, Bread = 5, Bacon = 6, Strawberry = 7, Chocolate = 8, Surstromming = -1
 }
