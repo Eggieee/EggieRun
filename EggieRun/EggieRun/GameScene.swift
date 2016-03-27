@@ -22,12 +22,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private var eggie: Eggie!
-    private var platformFactory: PRGPlatformFactory!
+    private var platformFactory: PlatformFactory!
     private var collectableFactory: CollectableFactory!
     private var gameState: GameState = .Ready
     private var distanceLabel: SKLabelNode!
     private var distance = 0
-    private var platforms: [PRGPlatform]!
+    private var platforms: [Platform]!
     private var collectables: [Collectable]!
     private var lastUpdatedTime: CFTimeInterval!
 
@@ -113,8 +113,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func initializePlatform() {
-        platformFactory = PlatformFactoryStab()
-        platforms = [PRGPlatform]()
+        platformFactory = PlatformFactory()
+        platforms = [Platform]()
         
         let pf = platformFactory.nextPlatform()
         pf.position.x = 0

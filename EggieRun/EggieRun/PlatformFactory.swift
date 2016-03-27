@@ -8,8 +8,8 @@
 
 import SpriteKit
 
-class PlatformFactoryStab: PRGPlatformFactory {
-    func nextPlatform() -> PRGPlatform {
+class PlatformFactory {
+    func nextPlatform() -> Platform {
         let numOfMid = 1
         let gapSize = 300
         var images = [String]()
@@ -19,6 +19,6 @@ class PlatformFactoryStab: PRGPlatformFactory {
         }
         images.append("closet-right")
         
-        return PRGPlatform(imageNames: images, positionY: 0, followingGapSize: CGFloat(gapSize))
+        return Platform(imageNames: images, positionY: 0, followingGapSize: CGFloat(gapSize))
     }
 }

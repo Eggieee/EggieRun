@@ -1,5 +1,5 @@
 //
-//  PRGPlatformFactory.swift
+//  PlatformFactory.swift
 //  EggieRun
 //
 //  Created by Liu Yang on 20/3/16.
@@ -8,6 +8,6 @@
 
 import SpriteKit
 
-protocol PRGPlatformFactory {
-    func nextPlatform() -> PRGPlatform
+protocol PlatformFactory {
+    func nextPlatform() -> Platform
 }

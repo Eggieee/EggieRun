@@ -1,5 +1,5 @@
 //
-//  PRGPlatform.swift
+//  Platform.swift
 //  EggieRun
 //
 //  Created by Liu Yang on 20/3/16.
@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class PRGPlatform: SKNode {
+class Platform: SKNode {
     var width: CGFloat = 0.0
     let followingGapWidth: CGFloat
     var height: CGFloat = 0
