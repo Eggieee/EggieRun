@@ -36,6 +36,9 @@
 		CDD1066D1CA1B18800959FFD /* Eggie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD1066C1CA1B18800959FFD /* Eggie.swift */; };
 		CDD1066F1CA1B80D00959FFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD1066E1CA1B80D00959FFD /* Assets.xcassets */; };
 		CDD106731CA1CFD300959FFD /* run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = CDD106721CA1CFD300959FFD /* run.atlas */; };
+		CDD106751CA8403700959FFD /* Collectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD106741CA8403700959FFD /* Collectable.swift */; };
+		CDD106771CA84AF300959FFD /* CollectableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD106761CA84AF300959FFD /* CollectableType.swift */; };
+		CDD106791CA84D7300959FFD /* CollectableFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD106781CA84D7300959FFD /* CollectableFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +94,9 @@
 		CDD1066C1CA1B18800959FFD /* Eggie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eggie.swift; sourceTree = "<group>"; };
 		CDD1066E1CA1B80D00959FFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDD106721CA1CFD300959FFD /* run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = run.atlas; sourceTree = "<group>"; };
+		CDD106741CA8403700959FFD /* Collectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collectable.swift; sourceTree = "<group>"; };
+		CDD106761CA84AF300959FFD /* CollectableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectableType.swift; sourceTree = "<group>"; };
+		CDD106781CA84D7300959FFD /* CollectableFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectableFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +161,9 @@
 				6C1C64A11C9C47390091AE8B /* MenuScene.swift */,
 				6CA727301C9BE60700CBD165 /* GameScene.sks */,
 				6CA727321C9BE60700CBD165 /* GameScene.swift */,
+				CDD106741CA8403700959FFD /* Collectable.swift */,
+				CDD106781CA84D7300959FFD /* CollectableFactory.swift */,
+				CDD106761CA84AF300959FFD /* CollectableType.swift */,
 				0B8DC3E71CA05D9C0055382D /* SKScene+Background.swift */,
 				6C5CDD4D1C9DBF3D005BB83C /* DexScene.sks */,
 				6C5CDD4B1C9DBEEF005BB83C /* DexScene.swift */,
@@ -363,6 +372,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDD106771CA84AF300959FFD /* CollectableType.swift in Sources */,
 				6CE99C7D1CA05842006F960B /* Cooker.swift in Sources */,
 				6C5CDD4C1C9DBEEF005BB83C /* DexScene.swift in Sources */,
 				6CED38D91CA0073300F4E2F0 /* Dish.swift in Sources */,
@@ -371,11 +381,13 @@
 				CD09406C1C9CEEC200CF4905 /* GlobalConstants.swift in Sources */,
 				6CED38D41CA0062D00F4E2F0 /* DexStorageController.swift in Sources */,
 				6CA727331C9BE60700CBD165 /* GameScene.swift in Sources */,
+				CDD106791CA84D7300959FFD /* CollectableFactory.swift in Sources */,
 				6C1C64A21C9C47390091AE8B /* MenuScene.swift in Sources */,
 				6CE99C791CA0576D006F960B /* Condiment.swift in Sources */,
 				CDD106631C9DD57200959FFD /* PRGPlatformFactory.swift in Sources */,
 				6CA727351C9BE60700CBD165 /* GameViewController.swift in Sources */,
 				CDD1066D1CA1B18800959FFD /* Eggie.swift in Sources */,
+				CDD106751CA8403700959FFD /* Collectable.swift in Sources */,
 				CD0940741C9CFBBB00CF4905 /* EggieState.swift in Sources */,
 				CDD1065D1C9D482500959FFD /* BitMaskCategory.swift in Sources */,
 				0B8DC3E81CA05D9C0055382D /* SKScene+Background.swift in Sources */,

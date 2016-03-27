@@ -14,6 +14,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let DISTANCE_LABEL_TEXT = "Distance: %dm"
     private static let HEADER_FONT_SIZE: CGFloat = 30
     private static let EGGIE_X_POSITION: CGFloat = 200
+    private static let FIRST_COLLECTABLE_POSITION_X: CGFloat = 400
+    private static let DISTANCE_PLATFORM_AND_COLLECTABLE: CGFloat = 200
     
     private enum GameState {
         case Ready, Playing, Over
@@ -21,19 +23,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var eggie: Eggie!
     private var platformFactory: PRGPlatformFactory!
+    private var collectableFactory: CollectableFactory!
     private var gameState: GameState = .Ready
     private var distanceLabel: SKLabelNode!
     private var distance = 0
-    private var platforms = [PRGPlatform]()
+    private var platforms: [PRGPlatform]!
+    private var collectables: [Collectable]!
     private var lastUpdatedTime: CFTimeInterval!
 
     override func didMoveToView(view: SKView) {
         changeBackground(GameScene.BACKGROUND_IMAGE_NAME)
-        
         initializePhysicsProperties()
-        initializeDistanceLabel()
-        initializePlatform()
-        
         gameReady()
     }
     
@@ -60,27 +60,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         updateDistance()
         eggie.balance()
-        
-        let leftMostPlatform = platforms.first!
-        let rightMostPlatform = platforms.last!
-        let rightMostPlatformRightEnd = rightMostPlatform.position.x + rightMostPlatform.width + rightMostPlatform.followingGapWidth
-        
-        if rightMostPlatformRightEnd < UIScreen.mainScreen().bounds.width {
-            let pf = platformFactory.nextPlatform()
-            pf.position.x = rightMostPlatformRightEnd
-            pf.position.y = 0
-            platforms.append(pf)
-            addChild(pf)
-        }
-        
-        if leftMostPlatform.position.x + rightMostPlatform.width + leftMostPlatform.followingGapWidth < 0 {
-            platforms.removeFirst()
-            leftMostPlatform.removeFromParent()
-        }
-        
-        for platform in platforms {
-            platform.position.x -= CGFloat(eggie.currentSpeed)
-        }
+        shiftPlatforms()
+        shiftCollectables()
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
@@ -94,9 +75,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if eggie.state == .Jumping {
                 eggie.state = .Running
             }
+        } else if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == BitMaskCategory.hero | BitMaskCategory.collectable {
+            let collectable: Collectable
+            if contact.bodyA.categoryBitMask == BitMaskCategory.collectable {
+                collectable = contact.bodyA.node as! Collectable
+            } else {
+                collectable = contact.bodyB.node as! Collectable
+            }
+            
+            collectable.hidden = true
+            
+            if collectable.type == .Ingredient {
+                print("eat ingredient " + String(Ingredient(rawValue: collectable.rawValue)))
+                // call items manager
+            } else {
+                print("eat condiment " + String(Condiment(rawValue: collectable.rawValue)))
+                // call items manager
+            }
         }
-        // todo
-        // else if hero collide with collectable, ...
     }
     
     private func initializePhysicsProperties() {
@@ -118,11 +114,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func initializePlatform() {
         platformFactory = PlatformFactoryStab()
+        platforms = [PRGPlatform]()
+        
         let pf = platformFactory.nextPlatform()
         pf.position.x = 0
         pf.position.y = 0
         platforms.append(pf)
         addChild(pf)
+    }
+    
+    private func initialzieCollectable() {
+        collectableFactory = CollectableFactory()
+        collectables = [Collectable]()
+        
+        let collectable = collectableFactory.nextColletable()
+        collectable.position.x = GameScene.FIRST_COLLECTABLE_POSITION_X
+        collectable.position.y = platforms.last!.height + collectable.frame.size.height / 2 + GameScene.DISTANCE_PLATFORM_AND_COLLECTABLE
+        collectables.append(collectable)
+        addChild(collectable)
+    }
+    
+    private func initializeEggie() {
+        eggie = Eggie(startPosition: CGPoint(x: GameScene.EGGIE_X_POSITION, y: CGRectGetMidY(frame)))
+        addChild(eggie)
     }
     
     private func updateDistance() {
@@ -131,12 +145,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func gameReady() {
-        if eggie != nil {
-            eggie.removeFromParent()
-        }
+        removeAllChildren()
         
-        eggie = Eggie(startPosition: CGPoint(x: GameScene.EGGIE_X_POSITION, y: CGRectGetMidY(frame)))
-        addChild(eggie)
+        initializeDistanceLabel()
+        initializePlatform()
+        initialzieCollectable()
+        initializeEggie()
         gameState = .Ready
     }
     
@@ -148,5 +162,51 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func gameOver() {
         eggie.state = .Dying
         gameState = .Over
+    }
+    
+    private func shiftPlatforms() {
+        let leftMostPlatform = platforms.first!
+        let rightMostPlatform = platforms.last!
+        let rightMostPlatformRightEnd = rightMostPlatform.position.x + rightMostPlatform.width + rightMostPlatform.followingGapWidth
+        
+        if rightMostPlatformRightEnd < UIScreen.mainScreen().bounds.width {
+            let pf = platformFactory.nextPlatform()
+            pf.position.x = rightMostPlatformRightEnd
+            pf.position.y = 0
+            platforms.append(pf)
+            addChild(pf)
+        }
+        
+        if leftMostPlatform.position.x + leftMostPlatform.width + leftMostPlatform.followingGapWidth < 0 {
+            platforms.removeFirst()
+            leftMostPlatform.removeFromParent()
+        }
+        
+        for platform in platforms {
+            platform.position.x -= CGFloat(eggie.currentSpeed)
+        }
+    }
+    
+    private func shiftCollectables() {
+        let leftMostCollectable = collectables.first!
+        let rightMostCollectable = collectables.last!
+        let rightMostCollectableRightEnd = rightMostCollectable.position.x + rightMostCollectable.frame.size.width / 2 + rightMostCollectable.followingGapSize
+        
+        if rightMostCollectableRightEnd < UIScreen.mainScreen().bounds.width {
+            let collectable = collectableFactory.nextColletable()
+            collectable.position.x = rightMostCollectableRightEnd + collectable.frame.size.width / 2
+            collectable.position.y = platforms.last!.height + collectable.frame.size.height / 2 + GameScene.DISTANCE_PLATFORM_AND_COLLECTABLE
+            collectables.append(collectable)
+            addChild(collectable)
+        }
+        
+        if leftMostCollectable.position.x + leftMostCollectable.size.width / 2 + leftMostCollectable.followingGapSize < 0 {
+            collectables.removeFirst()
+            leftMostCollectable.removeFromParent()
+        }
+        
+        for collectable in collectables {
+            collectable.position.x -= CGFloat(eggie.currentSpeed)
+        }
     }
 }
