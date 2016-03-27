@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0B8DC3E81CA05D9C0055382D /* SKScene+Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8DC3E71CA05D9C0055382D /* SKScene+Background.swift */; };
+		6C04AE681CA86C1E00AA6423 /* DishDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C04AE671CA86C1E00AA6423 /* DishDataController.swift */; };
 		6C1C64A21C9C47390091AE8B /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1C64A11C9C47390091AE8B /* MenuScene.swift */; };
 		6C1C64A41C9C49410091AE8B /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6C1C64A31C9C49410091AE8B /* MenuScene.sks */; };
 		6C224DE11CA534DD00BF35A2 /* Dishes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C224DE01CA534DD00BF35A2 /* Dishes.plist */; };
@@ -60,6 +61,7 @@
 
 /* Begin PBXFileReference section */
 		0B8DC3E71CA05D9C0055382D /* SKScene+Background.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKScene+Background.swift"; sourceTree = "<group>"; };
+		6C04AE671CA86C1E00AA6423 /* DishDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishDataController.swift; sourceTree = "<group>"; };
 		6C1C64A11C9C47390091AE8B /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		6C1C64A31C9C49410091AE8B /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		6C224DE01CA534DD00BF35A2 /* Dishes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Dishes.plist; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				6CE99C7C1CA05842006F960B /* Cooker.swift */,
 				6C224DE01CA534DD00BF35A2 /* Dishes.plist */,
 				6CC20FA11CA6D10E00B8CE30 /* RandomPool.swift */,
+				6C04AE671CA86C1E00AA6423 /* DishDataController.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				6CE99C791CA0576D006F960B /* Condiment.swift in Sources */,
 				CDD106631C9DD57200959FFD /* PRGPlatformFactory.swift in Sources */,
 				6CA727351C9BE60700CBD165 /* GameViewController.swift in Sources */,
+				6C04AE681CA86C1E00AA6423 /* DishDataController.swift in Sources */,
 				CDD1066D1CA1B18800959FFD /* Eggie.swift in Sources */,
 				CD0940741C9CFBBB00CF4905 /* EggieState.swift in Sources */,
 				CDD1065D1C9D482500959FFD /* BitMaskCategory.swift in Sources */,
