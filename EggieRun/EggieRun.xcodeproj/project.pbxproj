@@ -149,21 +149,14 @@
 			children = (
 				CDD106721CA1CFD300959FFD /* run.atlas */,
 				93B45D051CA159A8002A75AA /* jump.atlas */,
-				CD0940751C9CFCD000CF4905 /* Platform Running Game */,
-				CD0940701C9CF58D00CF4905 /* Stabs */,
-				CDD1066C1CA1B18800959FFD /* Eggie.swift */,
-				CD0940731C9CFBBB00CF4905 /* EggieState.swift */,
 				CD09406B1C9CEEC200CF4905 /* GlobalConstants.swift */,
-				CDD1065C1C9D482500959FFD /* BitMaskCategory.swift */,
 				6CA7272E1C9BE60700CBD165 /* AppDelegate.swift */,
 				CDD1066E1CA1B80D00959FFD /* Assets.xcassets */,
 				6C1C64A31C9C49410091AE8B /* MenuScene.sks */,
 				6C1C64A11C9C47390091AE8B /* MenuScene.swift */,
+				CDD1067A1CA867EE00959FFD /* Running Manager */,
 				6CA727301C9BE60700CBD165 /* GameScene.sks */,
 				6CA727321C9BE60700CBD165 /* GameScene.swift */,
-				CDD106741CA8403700959FFD /* Collectable.swift */,
-				CDD106781CA84D7300959FFD /* CollectableFactory.swift */,
-				CDD106761CA84AF300959FFD /* CollectableType.swift */,
 				0B8DC3E71CA05D9C0055382D /* SKScene+Background.swift */,
 				6C5CDD4D1C9DBF3D005BB83C /* DexScene.sks */,
 				6C5CDD4B1C9DBEEF005BB83C /* DexScene.swift */,
@@ -207,29 +200,20 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		CD09406F1C9CF43400CF4905 /* Delegates */ = {
+		CDD1067A1CA867EE00959FFD /* Running Manager */ = {
 			isa = PBXGroup;
 			children = (
+				CDD1065C1C9D482500959FFD /* BitMaskCategory.swift */,
+				CDD1066C1CA1B18800959FFD /* Eggie.swift */,
+				CD0940731C9CFBBB00CF4905 /* EggieState.swift */,
+				CDD106741CA8403700959FFD /* Collectable.swift */,
+				CDD106761CA84AF300959FFD /* CollectableType.swift */,
+				CDD106781CA84D7300959FFD /* CollectableFactory.swift */,
+				CDD106601C9DD15600959FFD /* PRGPlatform.swift */,
+				CDD106641C9DD62600959FFD /* PlatformFactoryStab.swift */,
 				CDD106621C9DD57200959FFD /* PRGPlatformFactory.swift */,
 			);
-			name = Delegates;
-			sourceTree = "<group>";
-		};
-		CD0940701C9CF58D00CF4905 /* Stabs */ = {
-			isa = PBXGroup;
-			children = (
-				CDD106641C9DD62600959FFD /* PlatformFactoryStab.swift */,
-			);
-			name = Stabs;
-			sourceTree = "<group>";
-		};
-		CD0940751C9CFCD000CF4905 /* Platform Running Game */ = {
-			isa = PBXGroup;
-			children = (
-				CDD106601C9DD15600959FFD /* PRGPlatform.swift */,
-				CD09406F1C9CF43400CF4905 /* Delegates */,
-			);
-			name = "Platform Running Game";
+			name = "Running Manager";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
