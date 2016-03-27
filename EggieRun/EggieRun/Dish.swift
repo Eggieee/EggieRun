@@ -71,7 +71,7 @@ class DishDataController {
     }
     
     func getResultDish(cooker: Cooker, condiments: [Condiment], ingredients: [Ingredient]) -> Dish {
-        var randomPool = [Dish]()
+        let randomPool = RandomPool<Dish>()
         
         var forceAppearDishPriority = 0
         var forceAppearDish: Dish?
@@ -83,19 +83,14 @@ class DishDataController {
                 forceAppearDishPriority = thisDishCanConstruct
                 forceAppearDish = element.1
             } else if thisDishCanConstruct > 0 {
-                for _ in 0..<thisDishCanConstruct {
-                    randomPool.append(element.1)
-                }
+                randomPool.addObject(element.1, weightage: thisDishCanConstruct)
             }
         }
         
         if forceAppearDish != nil {
             return forceAppearDish!
-        } else if randomPool.isEmpty {
-            fatalError()
         } else {
-            let randomIndex = Int(arc4random_uniform(UInt32(randomPool.count)))
-            return randomPool[randomIndex]
+            return randomPool.draw()
         }
     }
     
