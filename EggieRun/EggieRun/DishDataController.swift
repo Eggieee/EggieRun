@@ -13,23 +13,18 @@ import Foundation
 class DishDataController {
     static let singleton = DishDataController()
     
-    private(set) var dishes = [Int:Dish]()
+    private(set) var dishes = [Dish]()
     
     init() {
         if let url = NSBundle.mainBundle().URLForResource("Dishes", withExtension: "plist") {
             let data = NSArray(contentsOfURL: url)!
             for element in data {
                 let dishData = element as! NSDictionary
-                let dish = Dish(data: dishData)
-                dishes[dish.id.rawValue] = dish
+                dishes.append(Dish(data: dishData))
             }
         } else {
             fatalError()
         }
-    }
-    
-    func getDish(id: Dish.DishId) -> Dish? {
-        return dishes[id.rawValue]
     }
     
     func getResultDish(cooker: Cooker, condiments: [Condiment], ingredients: [Ingredient]) -> Dish {
@@ -38,14 +33,14 @@ class DishDataController {
         var forceAppearDishPriority = 0
         var forceAppearDish: Dish?
         
-        for element in dishes {
-            let thisDishCanConstruct = element.1.canConstruct(cooker, condiments: condiments, ingredients: ingredients)
+        for dish in dishes {
+            let thisDishCanConstruct = dish.canConstruct(cooker, condiments: condiments, ingredients: ingredients)
             
             if thisDishCanConstruct < forceAppearDishPriority {
                 forceAppearDishPriority = thisDishCanConstruct
-                forceAppearDish = element.1
+                forceAppearDish = dish
             } else if thisDishCanConstruct > 0 {
-                randomPool.addObject(element.1, weightage: thisDishCanConstruct)
+                randomPool.addObject(dish, weightage: thisDishCanConstruct)
             }
         }
         
