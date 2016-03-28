@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0B8DC3E81CA05D9C0055382D /* SKScene+Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8DC3E71CA05D9C0055382D /* SKScene+Background.swift */; };
+		6C04AE681CA86C1E00AA6423 /* DishDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C04AE671CA86C1E00AA6423 /* DishDataController.swift */; };
 		6C1C64A21C9C47390091AE8B /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1C64A11C9C47390091AE8B /* MenuScene.swift */; };
 		6C1C64A41C9C49410091AE8B /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6C1C64A31C9C49410091AE8B /* MenuScene.sks */; };
 		6C224DE11CA534DD00BF35A2 /* Dishes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C224DE01CA534DD00BF35A2 /* Dishes.plist */; };
@@ -21,6 +22,9 @@
 		6CA7273D1C9BE60700CBD165 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CA7273B1C9BE60700CBD165 /* LaunchScreen.storyboard */; };
 		6CA727481C9BE60700CBD165 /* EggieRunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA727471C9BE60700CBD165 /* EggieRunTests.swift */; };
 		6CA727531C9BE60700CBD165 /* EggieRunUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA727521C9BE60700CBD165 /* EggieRunUITests.swift */; };
+		6CC20FA21CA6D10E00B8CE30 /* RandomPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC20FA11CA6D10E00B8CE30 /* RandomPool.swift */; };
+		6CC20FA31CA6E53700B8CE30 /* RandomPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC20FA11CA6D10E00B8CE30 /* RandomPool.swift */; };
+		6CC20FA51CA6E56200B8CE30 /* RandomPoolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC20FA41CA6E56200B8CE30 /* RandomPoolTests.swift */; };
 		6CE99C791CA0576D006F960B /* Condiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE99C781CA0576D006F960B /* Condiment.swift */; };
 		6CE99C7B1CA05798006F960B /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE99C7A1CA05798006F960B /* Ingredient.swift */; };
 		6CE99C7D1CA05842006F960B /* Cooker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE99C7C1CA05842006F960B /* Cooker.swift */; };
@@ -59,6 +63,7 @@
 
 /* Begin PBXFileReference section */
 		0B8DC3E71CA05D9C0055382D /* SKScene+Background.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKScene+Background.swift"; sourceTree = "<group>"; };
+		6C04AE671CA86C1E00AA6423 /* DishDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishDataController.swift; sourceTree = "<group>"; };
 		6C1C64A11C9C47390091AE8B /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		6C1C64A31C9C49410091AE8B /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		6C224DE01CA534DD00BF35A2 /* Dishes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Dishes.plist; sourceTree = "<group>"; };
@@ -78,6 +83,8 @@
 		6CA7274E1C9BE60700CBD165 /* EggieRunUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EggieRunUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CA727521C9BE60700CBD165 /* EggieRunUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EggieRunUITests.swift; sourceTree = "<group>"; };
 		6CA727541C9BE60700CBD165 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6CC20FA11CA6D10E00B8CE30 /* RandomPool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomPool.swift; sourceTree = "<group>"; };
+		6CC20FA41CA6E56200B8CE30 /* RandomPoolTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomPoolTests.swift; sourceTree = "<group>"; };
 		6CE99C781CA0576D006F960B /* Condiment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Condiment.swift; sourceTree = "<group>"; };
 		6CE99C7A1CA05798006F960B /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		6CE99C7C1CA05842006F960B /* Cooker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cooker.swift; sourceTree = "<group>"; };
@@ -172,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				6CA727471C9BE60700CBD165 /* EggieRunTests.swift */,
+				6CC20FA41CA6E56200B8CE30 /* RandomPoolTests.swift */,
 				6CA727491C9BE60700CBD165 /* Info.plist */,
 			);
 			path = EggieRunTests;
@@ -194,6 +202,8 @@
 				6CE99C7A1CA05798006F960B /* Ingredient.swift */,
 				6CE99C7C1CA05842006F960B /* Cooker.swift */,
 				6C224DE01CA534DD00BF35A2 /* Dishes.plist */,
+				6CC20FA11CA6D10E00B8CE30 /* RandomPool.swift */,
+				6C04AE671CA86C1E00AA6423 /* DishDataController.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -364,6 +374,7 @@
 				CDD106771CA84AF300959FFD /* CollectableType.swift in Sources */,
 				6CE99C7D1CA05842006F960B /* Cooker.swift in Sources */,
 				6C5CDD4C1C9DBEEF005BB83C /* DexScene.swift in Sources */,
+				6CC20FA21CA6D10E00B8CE30 /* RandomPool.swift in Sources */,
 				6CED38D91CA0073300F4E2F0 /* Dish.swift in Sources */,
 				6CE99C7B1CA05798006F960B /* Ingredient.swift in Sources */,
 				CDD106611C9DD15600959FFD /* Platform.swift in Sources */,
@@ -374,6 +385,7 @@
 				6C1C64A21C9C47390091AE8B /* MenuScene.swift in Sources */,
 				6CE99C791CA0576D006F960B /* Condiment.swift in Sources */,
 				6CA727351C9BE60700CBD165 /* GameViewController.swift in Sources */,
+				6C04AE681CA86C1E00AA6423 /* DishDataController.swift in Sources */,
 				CDD1066D1CA1B18800959FFD /* Eggie.swift in Sources */,
 				CDD106751CA8403700959FFD /* Collectable.swift in Sources */,
 				CD0940741C9CFBBB00CF4905 /* EggieState.swift in Sources */,
@@ -388,6 +400,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CC20FA51CA6E56200B8CE30 /* RandomPoolTests.swift in Sources */,
+				6CC20FA31CA6E53700B8CE30 /* RandomPool.swift in Sources */,
 				6CA727481C9BE60700CBD165 /* EggieRunTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
