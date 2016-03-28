@@ -19,7 +19,7 @@ enum Condiment: Int {
     var imageNamed: String {
         switch self {
         default:
-            return "tomato"
+            return ""
         }
     }
 }

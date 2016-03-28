@@ -19,6 +19,12 @@ class RandomPool<T> {
         }
     }
     
+    init(objects: [T], weightages: [Int]) {
+        for i in 0..<objects.count {
+            addObject(objects[i], weightage: weightages[i])
+        }
+    }
+    
     init() {
         
     }
