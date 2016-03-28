@@ -10,8 +10,10 @@ import Foundation
 enum Condiment: Int {
     case Salt = 0, Sugar = 1, Chili = 2
     
+    static let randomPool = RandomPool<Condiment>(objects: [.Salt, .Sugar, .Chili])
+    
     static func next() -> Condiment {
-        return .Salt
+        return randomPool.draw()
     }
     
     var imageNamed: String {

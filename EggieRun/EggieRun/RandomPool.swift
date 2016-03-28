@@ -13,6 +13,16 @@ class RandomPool<T> {
     private var weightages = [Int]()
     private var totalWeightage = 0
     
+    init(objects: [T]) {
+        for object in objects {
+            addObject(object, weightage: 1)
+        }
+    }
+    
+    init() {
+        
+    }
+    
     func addObject(object: T, weightage: Int) {
         if weightage <= 0 {
             fatalError()
