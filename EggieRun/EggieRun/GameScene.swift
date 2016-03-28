@@ -32,7 +32,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var lastUpdatedTime: CFTimeInterval!
 
     override func didMoveToView(view: SKView) {
-        changeBackground(GameScene.BACKGROUND_IMAGE_NAME)
         initializePhysicsProperties()
         gameReady()
     }
@@ -146,7 +145,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func gameReady() {
         removeAllChildren()
-        
+        changeBackground(GameScene.BACKGROUND_IMAGE_NAME)
         initializeDistanceLabel()
         initializePlatform()
         initialzieCollectable()
