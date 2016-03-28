@@ -18,7 +18,7 @@ class Collectable: SKSpriteNode {
         followingGapSize = gapSize
         rawValue = collectableRawValue
         let texture = SKTexture(imageNamed: "tomato")
-        let size = CGSizeMake(100, 100)
+        let size = texture.size()
         super.init(texture: texture, color: UIColor.clearColor(), size: size)
         
         physicsBody = SKPhysicsBody(rectangleOfSize: size)
