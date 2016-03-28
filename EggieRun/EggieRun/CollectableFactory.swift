@@ -11,7 +11,8 @@ import UIKit
 class CollectableFactory {
     func nextColletable() -> Collectable {
         let gapSize: CGFloat = 400
-        
-        return Collectable(colletableType: .Ingredient, collectableRawValue: 0, gapSize: gapSize)
+        let random = arc4random() % 6
+
+        return random == 0 ? Collectable(condimentType: Condiment.next(), gapSize: gapSize) : Collectable(ingredientType: Ingredient.next(100), gapSize: gapSize)
     }
 }

@@ -10,22 +10,33 @@ import SpriteKit
 
 class Collectable: SKSpriteNode {
     let type: CollectableType
-    let rawValue: Int
+    let ingredient: Ingredient?
+    let condiment: Condiment?
     let followingGapSize: CGFloat
     
-    init(colletableType: CollectableType, collectableRawValue: Int, gapSize: CGFloat) {
-        type = colletableType
+    init(ingredientType: Ingredient, gapSize: CGFloat) {
+        ingredient = ingredientType
+        condiment = nil
+        type = .Ingredient
         followingGapSize = gapSize
-        rawValue = collectableRawValue
-        var texture: SKTexture?
+        let texture = SKTexture(imageNamed: ingredient!.fineImageNamed)
+        let size = CGSizeMake(80, 80)
+        super.init(texture: texture, color: UIColor.clearColor(), size: size)
         
-        if colletableType == .Ingredient {
-            texture = SKTexture(imageNamed: (Ingredient(rawValue: collectableRawValue)!.fineImageNamed))
-        } else {
-            texture = SKTexture(imageNamed: (Condiment(rawValue: collectableRawValue)!.imageNamed))
-        }
-        
-        let size = texture!.size()
+        physicsBody = SKPhysicsBody(rectangleOfSize: size)
+        physicsBody?.categoryBitMask = BitMaskCategory.collectable
+        physicsBody?.contactTestBitMask = BitMaskCategory.hero
+        physicsBody?.dynamic = false
+        zPosition = 1
+    }
+    
+    init(condimentType: Condiment, gapSize: CGFloat) {
+        ingredient = nil
+        condiment = condimentType
+        type = .Condiment
+        followingGapSize = gapSize
+        let texture = SKTexture(imageNamed: condiment!.imageNamed)
+        let size = CGSizeMake(80, 80)
         super.init(texture: texture, color: UIColor.clearColor(), size: size)
         
         physicsBody = SKPhysicsBody(rectangleOfSize: size)

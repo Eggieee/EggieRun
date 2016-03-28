@@ -85,10 +85,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             collectable.hidden = true
             
             if collectable.type == .Ingredient {
-                print("eat ingredient " + String(Ingredient(rawValue: collectable.rawValue)))
+                print("eat ingredient " + String(collectable.ingredient))
                 // call items manager
             } else {
-                print("eat condiment " + String(Condiment(rawValue: collectable.rawValue)))
+                print("eat condiment " + String(collectable.condiment))
                 // call items manager
             }
         }
