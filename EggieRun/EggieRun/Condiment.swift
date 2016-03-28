@@ -10,7 +10,7 @@ import Foundation
 enum Condiment: Int {
     case Salt = 0, Sugar = 1, Chili = 2
     
-    var next: Condiment {
+    func next() -> Condiment {
         return .Salt
     }
     
