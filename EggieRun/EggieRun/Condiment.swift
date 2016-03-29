@@ -18,8 +18,12 @@ enum Condiment: Int {
     
     var imageNamed: String {
         switch self {
-        default:
-            return ""
+        case .Salt:
+            return "salt"
+        case .Sugar:
+            return "sugar"
+        case .Chili:
+            return "chili"
         }
     }
 }
