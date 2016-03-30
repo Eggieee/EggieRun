@@ -53,11 +53,11 @@ class DexStorageController {
     }
     
     func isDishActivated(dishToTest: Dish) -> Bool {
-        return activatedDishes.contains(dishToTest.id.rawValue)
+        return activatedDishes.contains(dishToTest.id)
     }
     
     func addNewActivatedDish(dishToAdd: Dish) -> Bool {
-        activatedDishes.insert(dishToAdd.id.rawValue)
+        activatedDishes.insert(dishToAdd.id)
         return writeEggdex()
     }
     

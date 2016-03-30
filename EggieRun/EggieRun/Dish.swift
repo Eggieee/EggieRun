@@ -9,18 +9,14 @@
 import JavaScriptCore
 
 class Dish {
-    enum DishId: Int {
-        case SmashedEgg = 0, OyakoDon = 1, SurstrommingEgg = 2, PlainBoiledEgg = -1, BlackFried = -2, BlackBaked = -3, BlackBoiled = -4
-    }
-    
-    let id: DishId
+    let id: Int
     let name: String
     let description: String
     let imageNamed: String
     let canConstructRawFunction: String
     
     init(data: NSDictionary) {
-        self.id = DishId(rawValue: data["id"] as! Int)!
+        self.id = data["id"] as! Int
         self.name = data["name"] as! String
         self.description = data["description"] as! String
         self.imageNamed = data["imageNamed"] as! String
