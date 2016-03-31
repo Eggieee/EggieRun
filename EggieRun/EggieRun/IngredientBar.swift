@@ -9,9 +9,17 @@
 import SpriteKit
 
 class IngredientBar: SKSpriteNode {
+    var ingredients = [Ingredient]()
+    var ingredientGrids = [IngredientGrid]()
+    
     init(position: CGPoint) {
-        let barSize = CGSize(width: 500, height: 90)
+        let barSize = CGSizeMake(500, 90)
         super.init(texture: nil, color: UIColor.clearColor(), size: barSize)
+    }
+    
+    // todo
+    func addIngredient(newIngredient: Ingredient) {
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

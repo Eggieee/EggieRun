@@ -9,5 +9,7 @@
 import SpriteKit
 
 class FlavourBar: SKSpriteNode {
-    
+    func addCondiment(newCondiment: Condiment) {
+        
+    }
 }
