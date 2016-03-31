@@ -50,6 +50,8 @@ class MenuScene: SKScene {
         buttonDex = SKSpriteNode(imageNamed: "button-eggdex")
         buttonDex.position = CGPoint(x: CGRectGetMidX(self.frame) + 140, y: 220)
         self.addChild(buttonDex)
+        
+        buttonPlay.runAction(SKAction.playSoundFileNamed("road-runner", waitForCompletion: true))
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
