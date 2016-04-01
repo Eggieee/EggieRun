@@ -27,11 +27,11 @@ class EggieRunTests: XCTestCase {
     }
     
     func testGetResultDish() {
-        XCTAssertEqual(DishDataController.singleton.getResultDish(.Drop, condiments: [], ingredients: []).id, Dish.DishId.SmashedEgg)
+        XCTAssertEqual(DishDataController.singleton.getResultDish(.Drop, condiments: [], ingredients: []).id, 0)
         
-        XCTAssertEqual(DishDataController.singleton.getResultDish(.Pot, condiments: [], ingredients: []).id, Dish.DishId.PlainBoiledEgg)
+        XCTAssertEqual(DishDataController.singleton.getResultDish(.Pot, condiments: [], ingredients: []).id, -1)
         
-        XCTAssertEqual(DishDataController.singleton.getResultDish(.Pot, condiments: [.Salt], ingredients: []).id, Dish.DishId.BlackBoiled)
+        XCTAssertEqual(DishDataController.singleton.getResultDish(.Pot, condiments: [.Salt], ingredients: []).id, -4)
     }
     
     func testPerformanceExample() {
