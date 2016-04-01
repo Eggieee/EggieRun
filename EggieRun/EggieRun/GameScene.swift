@@ -53,11 +53,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         let timeInterval = currentTime - lastUpdatedTime
-
-        if timeInterval < GlobalConstants.minTimePerFrame {
-            return
-        }
-        
         lastUpdatedTime = currentTime
     
         if (gameState == .Ready || gameState == .Over) {

@@ -13,6 +13,9 @@ class Eggie: SKSpriteNode {
     private static let SPEED_STATIC = 0
     private static let SPEED_RUNNING = 500
     private static let ACCELERATION_JUMPING = CGVectorMake(0, 600)
+    private static let ATLAS_TIME = 0.2
+    private static let ATLAS_COUNT = 5
+    private static let ATLAS_TIME_PER_FRAME = Eggie.ATLAS_TIME / Double(Eggie.ATLAS_COUNT)
     
     private var innerCurrentSpeed: Int
     private var innerState: EggieState
@@ -37,8 +40,8 @@ class Eggie: SKSpriteNode {
         jumpTextures = sortedJumpTextureNames.map({ jumpAtlas.textureNamed($0) })
         
         actions[.Standing] = SKAction.setTexture(standingTexture)
-        actions[.Running] = SKAction.repeatActionForever(SKAction.animateWithTextures(runTextures, timePerFrame: GlobalConstants.minTimePerFrame))
-        actions[.Jumping] = SKAction.repeatActionForever(SKAction.animateWithTextures(jumpTextures, timePerFrame: GlobalConstants.minTimePerFrame))
+        actions[.Running] = SKAction.repeatActionForever(SKAction.animateWithTextures(runTextures, timePerFrame: Eggie.ATLAS_TIME_PER_FRAME))
+        actions[.Jumping] = SKAction.repeatActionForever(SKAction.animateWithTextures(jumpTextures, timePerFrame: Eggie.ATLAS_TIME_PER_FRAME))
         actions[.Dying] = SKAction.setTexture(standingTexture)
         
         runAction(actions[.Standing]!)
