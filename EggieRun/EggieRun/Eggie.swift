@@ -11,7 +11,7 @@ import SpriteKit
 class Eggie: SKSpriteNode {
     // Constants
     private static let SPEED_STATIC = 0
-    private static let SPEED_RUNNING = 50
+    private static let SPEED_RUNNING = 500
     private static let ACCELERATION_JUMPING = CGVectorMake(0, 600)
     
     private var innerCurrentSpeed: Int
@@ -37,8 +37,8 @@ class Eggie: SKSpriteNode {
         jumpTextures = sortedJumpTextureNames.map({ jumpAtlas.textureNamed($0) })
         
         actions[.Standing] = SKAction.setTexture(standingTexture)
-        actions[.Running] = SKAction.repeatActionForever(SKAction.animateWithTextures(runTextures, timePerFrame: GlobalConstants.timePerFrame))
-        actions[.Jumping] = SKAction.repeatActionForever(SKAction.animateWithTextures(jumpTextures, timePerFrame: GlobalConstants.timePerFrame))
+        actions[.Running] = SKAction.repeatActionForever(SKAction.animateWithTextures(runTextures, timePerFrame: GlobalConstants.minTimePerFrame))
+        actions[.Jumping] = SKAction.repeatActionForever(SKAction.animateWithTextures(jumpTextures, timePerFrame: GlobalConstants.minTimePerFrame))
         actions[.Dying] = SKAction.setTexture(standingTexture)
         
         runAction(actions[.Standing]!)

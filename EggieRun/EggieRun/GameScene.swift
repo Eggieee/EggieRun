@@ -47,7 +47,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(currentTime: CFTimeInterval) {
-        if lastUpdatedTime != nil && currentTime - lastUpdatedTime < GlobalConstants.timePerFrame {
+        if lastUpdatedTime == nil {
+            lastUpdatedTime = currentTime
+            return
+        }
+        
+        let timeInterval = currentTime - lastUpdatedTime
+
+        if timeInterval < GlobalConstants.minTimePerFrame {
             return
         }
         
@@ -57,10 +64,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         
-        updateDistance()
+        let movedDistance = timeInterval * Double(eggie.currentSpeed)
+        updateDistance(movedDistance)
         eggie.balance()
-        shiftPlatforms()
-        shiftCollectables()
+        shiftPlatforms(movedDistance)
+        shiftCollectables(movedDistance)
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
@@ -138,8 +146,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(eggie)
     }
     
-    private func updateDistance() {
-        distance += eggie.currentSpeed
+    private func updateDistance(movedDistance: Double) {
+        distance += Int(movedDistance)
         distanceLabel.text = String(format: GameScene.DISTANCE_LABEL_TEXT, distance)
     }
     
@@ -163,7 +171,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameState = .Over
     }
     
-    private func shiftPlatforms() {
+    private func shiftPlatforms(distance: Double) {
         let leftMostPlatform = platforms.first!
         let rightMostPlatform = platforms.last!
         let rightMostPlatformRightEnd = rightMostPlatform.position.x + rightMostPlatform.width + rightMostPlatform.followingGapWidth
@@ -182,11 +190,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         for platform in platforms {
-            platform.position.x -= CGFloat(eggie.currentSpeed)
+            platform.position.x -= CGFloat(distance)
         }
     }
     
-    private func shiftCollectables() {
+    private func shiftCollectables(distance: Double) {
         let leftMostCollectable = collectables.first!
         let rightMostCollectable = collectables.last!
         let rightMostCollectableRightEnd = rightMostCollectable.position.x + rightMostCollectable.frame.size.width / 2 + rightMostCollectable.followingGapSize
@@ -205,7 +213,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         for collectable in collectables {
-            collectable.position.x -= CGFloat(eggie.currentSpeed)
+            collectable.position.x -= CGFloat(distance)
         }
     }
 }

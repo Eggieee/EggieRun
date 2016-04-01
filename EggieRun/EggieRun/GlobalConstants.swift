@@ -10,5 +10,5 @@ import UIKit
 
 struct GlobalConstants {
     static let fontName = "Chalkduster"
-    static let timePerFrame = 0.05
+    static let minTimePerFrame = 0.017
 }
