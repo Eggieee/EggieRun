@@ -211,7 +211,7 @@
 				6CC20FA11CA6D10E00B8CE30 /* RandomPool.swift */,
 				6C04AE671CA86C1E00AA6423 /* DishDataController.swift */,
 			);
-			name = Models;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		93D89A801CAD65490090CC58 /* Collection Status */ = {
