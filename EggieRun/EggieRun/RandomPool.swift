@@ -11,7 +11,6 @@ import Foundation
 class RandomPool<T> {
     private var objects = [T]()
     private var weightages = [Int]()
-    private var totalWeightage = 0
     
     init(objects: [T]) {
         for object in objects {
@@ -34,16 +33,15 @@ class RandomPool<T> {
             fatalError()
         }
         objects.append(object)
-        totalWeightage += weightage
-        weightages.append(totalWeightage)
+        weightages.append(weightages.last ?? 0 + weightage)
     }
     
     func draw() -> T {
         if objects.isEmpty {
             fatalError()
         }
-        let chosenIndex = Int(arc4random_uniform(UInt32(totalWeightage)))
-        for i in 0..<objects.count {
+        let chosenIndex = Int(arc4random_uniform(UInt32(weightages.last!)))
+        for i in 1..<objects.count {
             if chosenIndex < weightages[i] - 1 {
                 return objects[i-1]
             }
