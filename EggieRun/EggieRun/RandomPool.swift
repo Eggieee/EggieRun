@@ -19,6 +19,9 @@ class RandomPool<T> {
     }
     
     init(objects: [T], weightages: [Int]) {
+        if objects.count != weightages.count {
+            fatalError()
+        }
         for i in 0..<objects.count {
             addObject(objects[i], weightage: weightages[i])
         }
@@ -33,7 +36,7 @@ class RandomPool<T> {
             fatalError()
         }
         objects.append(object)
-        weightages.append(weightages.last ?? 0 + weightage)
+        weightages.append((weightages.last ?? 0) + weightage)
     }
     
     func draw() -> T {
@@ -41,11 +44,11 @@ class RandomPool<T> {
             fatalError()
         }
         let chosenIndex = Int(arc4random_uniform(UInt32(weightages.last!)))
-        for i in 1..<objects.count {
-            if chosenIndex < weightages[i] - 1 {
-                return objects[i-1]
+        for i in 0..<objects.count {
+            if chosenIndex < weightages[i] {
+                return objects[i]
             }
         }
-        return objects.last!
+        fatalError()
     }
 }

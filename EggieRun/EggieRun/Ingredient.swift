@@ -10,9 +10,13 @@ import Foundation
 enum Ingredient: Int {
     case GreenOnion = 0, Tomato = 1, Cream = 2, Milk = 3, Rice = 4, Bread = 5, Bacon = 6, Strawberry = 7, Chocolate = 8, Surstromming = -1
     
+    static let rarityTable: [[Ingredient]] = [[.Milk], [.GreenOnion, .Tomato, .Cream, .Rice, .Bacon, .Strawberry], [.Bread, .Chocolate], [.Surstromming]]
+    
+    static let rarityPools = rarityTable.map({RandomPool(objects: $0)})
+    
     static func next(distance: Int) -> Ingredient {
-        let randomPool = RandomPool<Ingredient>(objects: [.GreenOnion, .Tomato, .Cream, .Milk, .Rice, .Bread, .Bacon, .Strawberry, .Chocolate])
-        return randomPool.draw()
+        let randomPool = RandomPool(objects: rarityPools, weightages: [30, 100, 20, 1])
+        return randomPool.draw().draw()
     }
     
     private var imageNamed: String {
