@@ -75,7 +75,6 @@ class IngredientBar: SKSpriteNode {
         if (index != -1) {
             moveGridByOne(index)
         } else if (isFull) {
-            print("is full!")
             moveGridByOne(0)
         }
         print(firstEmptyIndex)
