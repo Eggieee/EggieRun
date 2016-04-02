@@ -24,6 +24,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var eggie: Eggie!
     private var platformFactory: PlatformFactory!
     private var collectableFactory: CollectableFactory!
+    private var ingredientBar: IngredientBar!
+    private var flavourBar: FlavourBar!
     private var gameState: GameState = .Ready
     private var distanceLabel: SKLabelNode!
     private var distance = 0
@@ -90,9 +92,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if collectable.type == .Ingredient {
                 print("eat ingredient " + String(collectable.ingredient))
                 // call items manager
+                ingredientBar.addIngredient(collectable.ingredient!)
             } else {
                 print("eat condiment " + String(collectable.condiment))
                 // call items manager
+                flavourBar.addCondiment(collectable.condiment!)
             }
         }
     }
@@ -141,6 +145,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(eggie)
     }
     
+    private func initializeCollectableBars() {
+        ingredientBar = IngredientBar()
+        ingredientBar.position = CGPointMake(45, self.frame.height-45)
+        addChild(ingredientBar)
+        
+        // to decide the position of flavour bar here
+        flavourBar = FlavourBar()
+        addChild(flavourBar)
+    }
+    
     private func updateDistance(movedDistance: Double) {
         distance += Int(movedDistance)
         distanceLabel.text = String(format: GameScene.DISTANCE_LABEL_TEXT, distance)
@@ -153,6 +167,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initializePlatform()
         initialzieCollectable()
         initializeEggie()
+        initializeCollectableBars()
         gameState = .Ready
     }
     

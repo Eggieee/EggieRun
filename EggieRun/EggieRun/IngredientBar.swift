@@ -25,22 +25,16 @@ class IngredientBar: SKSpriteNode {
         }
     }
     
-    init(position: CGPoint) {
+    init() {
         let barSize = CGSizeMake(500, 90)
         super.init(texture: nil, color: UIColor.clearColor(), size: barSize)
     }
     
     // todo
     func addIngredient(newIngredient: Ingredient) {
-        
-    }
-    
-    func updateArray(newIngredient: Ingredient, newGrid: IngredientGrid) {
-        if (isFull) {
-            moveGridByOne()
-        }
-        ingredients[firstEmptyIndex] = newIngredient
-        ingredientGrids[firstEmptyIndex] = newGrid
+        let newGrid = IngredientGrid(ingredientType: newIngredient)
+        updateBarLayout(newGrid)
+        updateArray(newIngredient, newGrid: newGrid)
     }
     
     // new grid is added into array alr
@@ -70,13 +64,22 @@ class IngredientBar: SKSpriteNode {
         addChild(newGrid)
     }
     
+    func updateArray(newIngredient: Ingredient, newGrid: IngredientGrid) {
+        if (isFull) {
+            moveGridByOne()
+        }
+        print(firstEmptyIndex)
+        ingredients.append(newIngredient)
+        ingredientGrids.append(newGrid)
+    }
+    
     func moveGridByOne() {
         for i in 0..<IngredientBar.MAX_GRID_NUMBER-1 {
             ingredients[i] = ingredients[i+1]
             ingredientGrids[i] = ingredientGrids[i+1]
         }
-        ingredients.removeLast()
-        ingredientGrids.removeLast()
+        ingredients.removeFirst()
+        ingredientGrids.removeFirst()
     }
     
     required init?(coder aDecoder: NSCoder) {
