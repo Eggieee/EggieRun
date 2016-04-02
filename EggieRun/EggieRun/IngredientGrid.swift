@@ -27,7 +27,7 @@ class IngredientGrid: SKSpriteNode {
     private func initializeIngredientNode() {
         let texture = SKTexture(imageNamed: ingredient!.flatImageNamed)
         ingredientNode = SKSpriteNode(texture: texture, color: UIColor.clearColor(), size: IngredientGrid.IMGSIZE)
-        ingredientNode!.position = CGPointMake(7.5/2, -7.5/2)
+        ingredientNode!.position = CGPointMake(0, 0)
         ingredientNode!.zPosition = zPosition + 1
         addChild(ingredientNode!)
     }

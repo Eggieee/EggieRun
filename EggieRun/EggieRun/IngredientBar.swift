@@ -16,11 +16,7 @@ class IngredientBar: SKSpriteNode {
     var ingredientGrids = [IngredientGrid]()
     var firstEmptyIndex: Int {
         get {
-            if (ingredients.count < IngredientBar.MAX_GRID_NUMBER) {
-                return ingredients.count
-            } else {
-                return IngredientBar.MAX_GRID_NUMBER - 1
-            }
+            return ingredients.count
         }
     }
     var isFull: Bool {
@@ -34,56 +30,62 @@ class IngredientBar: SKSpriteNode {
         super.init(texture: nil, color: UIColor.clearColor(), size: barSize)
     }
     
-    // todo
     func addIngredient(newIngredient: Ingredient) {
         let newGrid = IngredientGrid(ingredientType: newIngredient)
-        updateBarLayout(newGrid)
-        updateArray(newIngredient, newGrid: newGrid)
-    }
-    
-    // new grid is added into array alr
-    func updateBarLayout(newGrid: IngredientGrid) {
-        if (isFull) {
-            animateMovingGridByOne()
+        var index = -1
+        
+        if (ingredients.contains(newIngredient)) {
+            index = ingredients.indexOf(newIngredient)!
         }
-        animateAddingNewGrid(newGrid)
+        
+        updateBarLayout(newGrid, index: index)
+        updateArray(newIngredient, newGrid: newGrid, index: index)
     }
     
-    func animateMovingGridByOne() {
-        for i in 0..<ingredients.count {
+    func updateBarLayout(newGrid: IngredientGrid, index: Int) {
+        let isDuplicate = (index != -1)
+        if (isDuplicate) {
+            animateMovingGridByOne(index)
+        } else if (isFull) {
+            animateMovingGridByOne(0)
+        }
+        animateAddingNewGrid(newGrid, isDuplicate: isDuplicate)
+    }
+    
+    func animateMovingGridByOne(startIndex: Int) {
+        for i in startIndex..<ingredients.count {
             let grid = ingredientGrids[i]
             // moving animation goes here
-            grid.position.x -= IngredientBar.X_DISTANCE
-            
-            if (i==0) {
+            if (i==startIndex) {
                 grid.removeFromParent()
+            } else {
+                grid.position.x -= IngredientBar.X_DISTANCE
             }
         }
     }
     
-    func animateAddingNewGrid(newGrid: IngredientGrid) {
-        let position = CGPointMake(CGFloat(firstEmptyIndex) * IngredientBar.X_DISTANCE, 0)
+    func animateAddingNewGrid(newGrid: IngredientGrid, isDuplicate: Bool) {
+        let nextIndex = (isFull || isDuplicate) ? firstEmptyIndex-1 : firstEmptyIndex
+        let position = CGPointMake(CGFloat(nextIndex) * IngredientBar.X_DISTANCE, 0)
         newGrid.position = position
         addChild(newGrid)
     }
     
-    func updateArray(newIngredient: Ingredient, newGrid: IngredientGrid) {
-        if (isFull) {
+    func updateArray(newIngredient: Ingredient, newGrid: IngredientGrid, index: Int) {
+        if (index != -1) {
+            moveGridByOne(index)
+        } else if (isFull) {
             print("is full!")
-            moveGridByOne()
+            moveGridByOne(0)
         }
         print(firstEmptyIndex)
         ingredients.append(newIngredient)
         ingredientGrids.append(newGrid)
     }
     
-    func moveGridByOne() {
-        for i in 0..<IngredientBar.MAX_GRID_NUMBER-1 {
-            ingredients[i] = ingredients[i+1]
-            ingredientGrids[i] = ingredientGrids[i+1]
-        }
-        ingredients.removeLast()
-        ingredientGrids.removeLast()
+    func moveGridByOne(startIndex: Int) {
+        ingredients.removeAtIndex(startIndex)
+        ingredientGrids.removeAtIndex(startIndex)
     }
     
     required init?(coder aDecoder: NSCoder) {
