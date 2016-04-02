@@ -16,12 +16,16 @@ class IngredientBar: SKSpriteNode {
     var ingredientGrids = [IngredientGrid]()
     var firstEmptyIndex: Int {
         get {
-            return ingredients.count
+            if (ingredients.count < IngredientBar.MAX_GRID_NUMBER) {
+                return ingredients.count
+            } else {
+                return IngredientBar.MAX_GRID_NUMBER - 1
+            }
         }
     }
     var isFull: Bool {
         get {
-            return (firstEmptyIndex >= IngredientBar.MAX_GRID_NUMBER)
+            return (ingredients.count >= IngredientBar.MAX_GRID_NUMBER)
         }
     }
     
@@ -52,7 +56,6 @@ class IngredientBar: SKSpriteNode {
             grid.position.x -= IngredientBar.X_DISTANCE
             
             if (i==0) {
-                grid.hidden = true
                 grid.removeFromParent()
             }
         }
@@ -66,6 +69,7 @@ class IngredientBar: SKSpriteNode {
     
     func updateArray(newIngredient: Ingredient, newGrid: IngredientGrid) {
         if (isFull) {
+            print("is full!")
             moveGridByOne()
         }
         print(firstEmptyIndex)
@@ -78,8 +82,8 @@ class IngredientBar: SKSpriteNode {
             ingredients[i] = ingredients[i+1]
             ingredientGrids[i] = ingredientGrids[i+1]
         }
-        ingredients.removeFirst()
-        ingredientGrids.removeFirst()
+        ingredients.removeLast()
+        ingredientGrids.removeLast()
     }
     
     required init?(coder aDecoder: NSCoder) {
