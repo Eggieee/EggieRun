@@ -51,7 +51,8 @@ class MenuScene: SKScene {
         buttonDex.position = CGPoint(x: CGRectGetMidX(self.frame) + 140, y: 220)
         self.addChild(buttonDex)
         
-        self.runAction(SKAction.playSoundFileNamed("road-runner", waitForCompletion: true))
+        //对不起我先静音了
+        //self.runAction(SKAction.playSoundFileNamed("road-runner", waitForCompletion: true))
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
