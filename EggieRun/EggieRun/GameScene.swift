@@ -152,6 +152,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // to decide the position of flavour bar here
         flavourBar = FlavourBar()
+        flavourBar.position = CGPointMake(90, self.frame.height-90)
         addChild(flavourBar)
     }
     
