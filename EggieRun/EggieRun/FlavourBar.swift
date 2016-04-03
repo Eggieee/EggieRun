@@ -38,11 +38,11 @@ class FlavourBar: SKSpriteNode {
     func addCondiment(newCondiment: Condiment) {
         switch newCondiment {
         case .Salt:
-            salt++
+            salt += 1
         case .Sugar:
-            sugar++
+            sugar += 1
         case .Chili:
-            chili++
+            chili += 1
         }
         updateBar()
     }
