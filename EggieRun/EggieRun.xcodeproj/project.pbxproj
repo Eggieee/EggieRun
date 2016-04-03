@@ -165,6 +165,7 @@
 				CDD1066E1CA1B80D00959FFD /* Assets.xcassets */,
 				6C1C64A31C9C49410091AE8B /* MenuScene.sks */,
 				6C1C64A11C9C47390091AE8B /* MenuScene.swift */,
+				93D89A801CAD65490090CC58 /* Collectable Manager */,
 				CDD1067A1CA867EE00959FFD /* Running Manager */,
 				6CA727301C9BE60700CBD165 /* GameScene.sks */,
 				6CA727321C9BE60700CBD165 /* GameScene.swift */,
@@ -214,20 +215,19 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		93D89A801CAD65490090CC58 /* Collection Status */ = {
+		93D89A801CAD65490090CC58 /* Collectable Manager */ = {
 			isa = PBXGroup;
 			children = (
 				93D89A811CAD659F0090CC58 /* IngredientBar.swift */,
 				93D89A851CAD6C350090CC58 /* IngredientGrid.swift */,
 				93D89A831CAD65BD0090CC58 /* FlavourBar.swift */,
 			);
-			name = "Collection Status";
+			name = "Collectable Manager";
 			sourceTree = "<group>";
 		};
 		CDD1067A1CA867EE00959FFD /* Running Manager */ = {
 			isa = PBXGroup;
 			children = (
-				93D89A801CAD65490090CC58 /* Collection Status */,
 				CDD1067B1CA868A100959FFD /* Factories */,
 				CDD1065C1C9D482500959FFD /* BitMaskCategory.swift */,
 				CDD1066C1CA1B18800959FFD /* Eggie.swift */,
