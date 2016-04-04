@@ -41,7 +41,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if gameState == .Ready {
             gameStart()
-        } else if gameState == .Playing && eggie.state == .Running {
+        } else if gameState == .Playing && eggie.canJump {
             eggie.state = .Jumping
         } else if gameState == .Over {
             gameReady()
@@ -90,12 +90,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             collectable.hidden = true
             
             if collectable.type == .Ingredient {
-                print("eat ingredient " + String(collectable.ingredient))
-                // call items manager
                 ingredientBar.addIngredient(collectable.ingredient!)
             } else {
-                print("eat condiment " + String(collectable.condiment))
-                // call items manager
                 flavourBar.addCondiment(collectable.condiment!)
             }
         }

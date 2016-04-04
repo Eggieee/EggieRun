@@ -95,4 +95,19 @@ class Eggie: SKSpriteNode {
             position.x -= 1
         }
     }
+    
+    var canJump: Bool {
+        if innerState != .Running {
+            return false
+        }
+        
+        let contactingObjects = physicsBody!.allContactedBodies()
+        for object in contactingObjects {
+            if object.categoryBitMask == BitMaskCategory.platform {
+                return true
+            }
+        }
+        
+        return false
+    }
 }
