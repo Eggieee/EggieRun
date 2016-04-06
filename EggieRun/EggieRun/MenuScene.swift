@@ -25,12 +25,6 @@ class MenuScene: SKScene {
         
         changeBackground("menu-background")
         
-        let label_temp = SKLabelNode(fontNamed:"Courier")
-        label_temp.text = "left btn -> play, right btn -> éggdex"
-        label_temp.fontSize = 12
-        label_temp.position = CGPoint(x:CGRectGetMidX(self.frame), y:20)
-        self.addChild(label_temp)
-        
         buttonPlay = SKSpriteNode(imageNamed: "start-button")
         buttonPlay.position = CGPoint(x: 215, y: 420)
         self.addChild(buttonPlay)
