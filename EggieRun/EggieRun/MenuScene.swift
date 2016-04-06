@@ -25,30 +25,18 @@ class MenuScene: SKScene {
         
         changeBackground("menu-background")
         
-        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "Eggie Run"
-        myLabel.fontSize = 45
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
-        self.addChild(myLabel)
-        
-        let label_kakkokari = SKLabelNode(fontNamed:"Chalkduster")
-        label_kakkokari.text = "(name subject to change)"
-        label_kakkokari.fontSize = 12
-        label_kakkokari.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame)-45)
-        self.addChild(label_kakkokari)
-        
         let label_temp = SKLabelNode(fontNamed:"Courier")
         label_temp.text = "left btn -> play, right btn -> éggdex"
         label_temp.fontSize = 12
         label_temp.position = CGPoint(x:CGRectGetMidX(self.frame), y:20)
         self.addChild(label_temp)
         
-        buttonPlay = SKSpriteNode(imageNamed: "button-play")
-        buttonPlay.position = CGPoint(x: CGRectGetMidX(self.frame) - 140, y: 220)
+        buttonPlay = SKSpriteNode(imageNamed: "start-button")
+        buttonPlay.position = CGPoint(x: 215, y: 420)
         self.addChild(buttonPlay)
         
-        buttonDex = SKSpriteNode(imageNamed: "button-eggdex")
-        buttonDex.position = CGPoint(x: CGRectGetMidX(self.frame) + 140, y: 220)
+        buttonDex = SKSpriteNode(imageNamed: "eggdex-button")
+        buttonDex.position = CGPoint(x: 210, y: 270)
         self.addChild(buttonDex)
         
         //对不起我先静音了
