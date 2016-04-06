@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,17 +17,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eggie Run (name subject to change) is loading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lWx-Md-1Rd">
-                                <rect key="frame" x="335.5" y="374.5" width="353.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_screen" translatesAutoresizingMaskIntoConstraints="NO" id="xTe-14-2oa">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="lWx-Md-1Rd" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="8vw-st-pUw"/>
-                            <constraint firstItem="lWx-Md-1Rd" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="zzO-Py-ZlL"/>
+                            <constraint firstItem="xTe-14-2oa" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="3Td-qn-riQ"/>
+                            <constraint firstItem="xTe-14-2oa" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="BFp-DI-oDY"/>
+                            <constraint firstItem="xTe-14-2oa" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="LCL-7o-niy"/>
+                            <constraint firstItem="xTe-14-2oa" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="wcn-hI-r3v"/>
                         </constraints>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -38,4 +37,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="launch_screen" width="1024" height="768"/>
+    </resources>
 </document>
