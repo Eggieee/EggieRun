@@ -32,6 +32,7 @@
 		6CED38D91CA0073300F4E2F0 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CED38D81CA0073300F4E2F0 /* Dish.swift */; };
 		93B45D061CA159A8002A75AA /* jump.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 93B45D051CA159A8002A75AA /* jump.atlas */; };
 		93B9CEA51CB7605000E340F0 /* EndingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B9CEA41CB7605000E340F0 /* EndingLayer.swift */; };
+		93B9CEA71CB7A10600E340F0 /* beam.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 93B9CEA61CB7A10600E340F0 /* beam.atlas */; };
 		93D89A821CAD659F0090CC58 /* IngredientBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D89A811CAD659F0090CC58 /* IngredientBar.swift */; };
 		93D89A841CAD65BD0090CC58 /* FlavourBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D89A831CAD65BD0090CC58 /* FlavourBar.swift */; };
 		93D89A861CAD6C350090CC58 /* IngredientGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D89A851CAD6C350090CC58 /* IngredientGrid.swift */; };
@@ -96,6 +97,7 @@
 		6CED38D81CA0073300F4E2F0 /* Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
 		93B45D051CA159A8002A75AA /* jump.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = jump.atlas; sourceTree = "<group>"; };
 		93B9CEA41CB7605000E340F0 /* EndingLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndingLayer.swift; sourceTree = "<group>"; };
+		93B9CEA61CB7A10600E340F0 /* beam.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = beam.atlas; sourceTree = "<group>"; };
 		93D89A811CAD659F0090CC58 /* IngredientBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientBar.swift; sourceTree = "<group>"; };
 		93D89A831CAD65BD0090CC58 /* FlavourBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlavourBar.swift; sourceTree = "<group>"; };
 		93D89A851CAD6C350090CC58 /* IngredientGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientGrid.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 		6CA7272D1C9BE60600CBD165 /* EggieRun */ = {
 			isa = PBXGroup;
 			children = (
+				93B9CEA61CB7A10600E340F0 /* beam.atlas */,
 				CDD106721CA1CFD300959FFD /* run.atlas */,
 				93B45D051CA159A8002A75AA /* jump.atlas */,
 				CD09406B1C9CEEC200CF4905 /* GlobalConstants.swift */,
@@ -362,6 +365,7 @@
 				6C224DE11CA534DD00BF35A2 /* Dishes.plist in Resources */,
 				CDD106731CA1CFD300959FFD /* run.atlas in Resources */,
 				93B45D061CA159A8002A75AA /* jump.atlas in Resources */,
+				93B9CEA71CB7A10600E340F0 /* beam.atlas in Resources */,
 				6CA7273D1C9BE60700CBD165 /* LaunchScreen.storyboard in Resources */,
 				6C5CDD4E1C9DBF3D005BB83C /* DexScene.sks in Resources */,
 				6C1C64A41C9C49410091AE8B /* MenuScene.sks in Resources */,
