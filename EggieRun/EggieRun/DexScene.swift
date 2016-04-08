@@ -24,7 +24,9 @@ class DexScene: SKScene {
         buttonBack.position = CGPoint(x: 80, y: self.frame.height - 40)
         self.addChild(buttonBack)
         
-        makeLeftDex()
+        let leftDex = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width)
+        self.addChild(leftDex)
+        
         makeRightDex()
     }
     
@@ -39,14 +41,9 @@ class DexScene: SKScene {
         }
     }
     
-    func makeLeftDex(){
-        let leftDex = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width)
-        self.addChild(leftDex)
-    }
-    
     func makeRightDex(){
-        let rightPage = SKSpriteNode(color:UIColor.brownColor(),size:CGSize(width: 3*self.frame.width/7, height: self.frame.height-80))
-        rightPage.position = CGPoint(x: 11*self.frame.width/14, y:self.frame.height/2-40)
+        let rightPage = DexDetailNode(dish: DishDataController.singleton.dishes[0], sceneHeight:self.frame.height, sceneWidth:self.frame.width)
+        //rightPage.position = CGPoint(x: 11*self.frame.width/14, y:self.frame.height/2-40)
         self.addChild(rightPage)
     }
         
