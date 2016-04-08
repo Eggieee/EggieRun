@@ -26,6 +26,16 @@ class FlavourBar: SKSpriteNode {
         }
     }
     
+    var condimentDictionary: [Condiment: Int] {
+        get {
+            var dictionary = [Condiment: Int]()
+            dictionary[Condiment.Salt] = Int(salt)
+            dictionary[Condiment.Sugar] = Int(sugar)
+            dictionary[Condiment.Chili] = Int(chili)
+            return dictionary
+        }
+    }
+    
     init() {
         super.init(texture: nil, color: UIColor.grayColor(), size: CGSizeMake(FlavourBar.BAR_LENGTH, FlavourBar.BAR_HEIGHT))
         initializeBar()
@@ -98,14 +108,6 @@ class FlavourBar: SKSpriteNode {
         
         chiliBar.position.x = getSingleBarX(Condiment.Chili)
         chiliBar.size.width = getSingleFlavourLength(Condiment.Chili)
-        
-        
-        print(saltBar.position.x)
-        print(saltBar.size.width)
-        print(sugarBar.position.x)
-        print(sugarBar.size.width)
-        print(chiliBar.position.x)
-        print(chiliBar.size.width)
     }
 
 }

@@ -178,7 +178,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameState = .Over
         
         //dummy dish
-        let dish = DishDataController.singleton.getResultDish(Cooker.Drop, condiments: [Condiment: Int](), ingredients: ingredientBar.ingredients)
+        let dish = DishDataController.singleton.getResultDish(Cooker.Drop, condiments: flavourBar.condimentDictionary, ingredients: ingredientBar.ingredients)
         
         //show ending layer
         let endingLayer = EndingLayer(generatedDish: dish)
