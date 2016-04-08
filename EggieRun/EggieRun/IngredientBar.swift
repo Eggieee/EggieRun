@@ -13,7 +13,7 @@ class IngredientBar: SKSpriteNode {
     private static let MAX_GRID_NUMBER = 5
     
     var ingredients = [Ingredient]()
-    var ingredientGrids = [IngredientGrid]()
+    private var ingredientGrids = [IngredientGrid]()
     var firstEmptyIndex: Int {
         get {
             return ingredients.count

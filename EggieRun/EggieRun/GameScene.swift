@@ -176,6 +176,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func gameOver() {
         eggie.state = .Dying
         gameState = .Over
+        
+        //dummy dish
+        let dish = DishDataController.singleton.getResultDish(Cooker.Drop, condiments: [Condiment](), ingredients: ingredientBar.ingredients)
+        
+        //show ending layer
+        let endingLayer = EndingLayer(generatedDish: dish)
+        endingLayer.zPosition = 100
+        endingLayer.position = CGPointMake(UIScreen.mainScreen().bounds.width/2, UIScreen.mainScreen().bounds.height/2)
+        addChild(endingLayer)
     }
     
     private func shiftPlatforms(distance: Double) {
