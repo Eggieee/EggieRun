@@ -8,7 +8,7 @@
 
 import Foundation
 enum Ingredient: Int {
-    case GreenOnion = 0, Tomato = 1, Cream = 2, Milk = 3, Rice = 4, Bread = 5, Bacon = 6, Strawberry = 7, Chocolate = 8, Surstromming = -1
+    case GreenOnion = 100, Tomato = 101, Cream = 102, Milk = 103, Rice = 104, Bread = 105, Bacon = 106, Strawberry = 107, Chocolate = 108, Surstromming = 109
     
     static let rarityTable: [[Ingredient]] = [[.Milk], [.GreenOnion, .Tomato, .Cream, .Rice, .Bacon, .Strawberry], [.Bread, .Chocolate], [.Surstromming]]
     

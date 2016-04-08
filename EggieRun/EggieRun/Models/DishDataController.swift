@@ -13,41 +13,33 @@ import Foundation
 class DishDataController {
     static let singleton = DishDataController()
     
-    private(set) var dishes = [Dish]()
+    private let constructableEngine: ConstructableEngine<Dish>
+    
+    var dishes: [Dish] {
+        return constructableEngine.constructables
+    }
     
     init() {
         if let url = NSBundle.mainBundle().URLForResource("Dishes", withExtension: "plist") {
-            let data = NSArray(contentsOfURL: url)!
-            for element in data {
-                let dishData = element as! NSDictionary
-                dishes.append(Dish(data: dishData))
-            }
+            constructableEngine = ConstructableEngine<Dish>(url: url)
         } else {
             fatalError()
         }
     }
     
-    func getResultDish(cooker: Cooker, condiments: [Condiment], ingredients: [Ingredient]) -> Dish {
-        let randomPool = RandomPool<Dish>()
+    func getResultDish(cooker: Cooker, condiments: [Condiment: Int], ingredients: [Ingredient]) -> Dish {
+        var resources = [Int: Int]()
         
-        var forceAppearDishPriority = 0
-        var forceAppearDish: Dish?
+        resources[cooker.rawValue] = 1
         
-        for dish in dishes {
-            let thisDishCanConstruct = dish.canConstruct(cooker, condiments: condiments, ingredients: ingredients)
-            
-            if thisDishCanConstruct < forceAppearDishPriority {
-                forceAppearDishPriority = thisDishCanConstruct
-                forceAppearDish = dish
-            } else if thisDishCanConstruct > 0 {
-                randomPool.addObject(dish, weightage: thisDishCanConstruct)
-            }
+        for condiment in condiments {
+            resources[condiment.0.rawValue] = condiment.1
         }
         
-        if forceAppearDish != nil {
-            return forceAppearDish!
-        } else {
-            return randomPool.draw()
+        for ingredient in ingredients {
+            resources[ingredient.rawValue] = (resources[ingredient.rawValue] ?? 0) + 1
         }
+        
+        return constructableEngine.getConstructResult(resources)
     }
 }
