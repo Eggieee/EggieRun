@@ -19,12 +19,6 @@ class DexScene: SKScene {
         myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:self.frame.height-60)
         self.addChild(myLabel)
         
-        let label_temp = SKLabelNode(fontNamed:"Courier")
-        label_temp.text = "red button -> back"
-        label_temp.fontSize = 12
-        label_temp.position = CGPoint(x:CGRectGetMidX(self.frame), y:20)
-        self.addChild(label_temp)
-        
         buttonBack = SKSpriteNode(imageNamed: "button-return")
         buttonBack.size = CGSize(width: 80, height: 80)
         buttonBack.position = CGPoint(x: 80, y: self.frame.height - 40)
@@ -46,9 +40,8 @@ class DexScene: SKScene {
     }
     
     func makeLeftDex(){
-        let leftPage = SKSpriteNode(color:UIColor.grayColor(), size:CGSize(width: 4*self.frame.width/7, height:self.frame.height-80))
-        leftPage.position = CGPoint(x: 2*self.frame.width/7, y:self.frame.height/2-40)
-        self.addChild(leftPage)
+        let leftDex = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width)
+        self.addChild(leftDex)
     }
     
     func makeRightDex(){
