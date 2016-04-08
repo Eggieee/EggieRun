@@ -8,7 +8,7 @@
 
 import Foundation
 enum Condiment: Int {
-    case Salt = 0, Sugar = 1, Chili = 2
+    case Salt = 10, Sugar = 11, Chili = 12
     
     static let randomPool = RandomPool<Condiment>(objects: [.Salt, .Sugar, .Chili], weightages: [5, 4, 1])
     
@@ -25,5 +25,9 @@ enum Condiment: Int {
         case .Chili:
             return "chili"
         }
+    }
+    
+    var jsId: Int {
+        return self.rawValue - 10
     }
 }
