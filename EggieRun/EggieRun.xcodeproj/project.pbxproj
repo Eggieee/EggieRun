@@ -31,6 +31,7 @@
 		6CED38D41CA0062D00F4E2F0 /* DexStorageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CED38D31CA0062D00F4E2F0 /* DexStorageController.swift */; };
 		6CED38D91CA0073300F4E2F0 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CED38D81CA0073300F4E2F0 /* Dish.swift */; };
 		93B45D061CA159A8002A75AA /* jump.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 93B45D051CA159A8002A75AA /* jump.atlas */; };
+		93B9CEA51CB7605000E340F0 /* EndingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B9CEA41CB7605000E340F0 /* EndingLayer.swift */; };
 		93D89A821CAD659F0090CC58 /* IngredientBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D89A811CAD659F0090CC58 /* IngredientBar.swift */; };
 		93D89A841CAD65BD0090CC58 /* FlavourBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D89A831CAD65BD0090CC58 /* FlavourBar.swift */; };
 		93D89A861CAD6C350090CC58 /* IngredientGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D89A851CAD6C350090CC58 /* IngredientGrid.swift */; };
@@ -94,6 +95,7 @@
 		6CED38D31CA0062D00F4E2F0 /* DexStorageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DexStorageController.swift; sourceTree = "<group>"; };
 		6CED38D81CA0073300F4E2F0 /* Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
 		93B45D051CA159A8002A75AA /* jump.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = jump.atlas; sourceTree = "<group>"; };
+		93B9CEA41CB7605000E340F0 /* EndingLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndingLayer.swift; sourceTree = "<group>"; };
 		93D89A811CAD659F0090CC58 /* IngredientBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientBar.swift; sourceTree = "<group>"; };
 		93D89A831CAD65BD0090CC58 /* FlavourBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlavourBar.swift; sourceTree = "<group>"; };
 		93D89A851CAD6C350090CC58 /* IngredientGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientGrid.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				CDD1067A1CA867EE00959FFD /* Running Manager */,
 				6CA727301C9BE60700CBD165 /* GameScene.sks */,
 				6CA727321C9BE60700CBD165 /* GameScene.swift */,
+				93B9CEA41CB7605000E340F0 /* EndingLayer.swift */,
 				0B8DC3E71CA05D9C0055382D /* SKScene+Background.swift */,
 				6C5CDD4D1C9DBF3D005BB83C /* DexScene.sks */,
 				6C5CDD4B1C9DBEEF005BB83C /* DexScene.swift */,
@@ -394,6 +397,7 @@
 				6CE99C7D1CA05842006F960B /* Cooker.swift in Sources */,
 				6C5CDD4C1C9DBEEF005BB83C /* DexScene.swift in Sources */,
 				6CC20FA21CA6D10E00B8CE30 /* RandomPool.swift in Sources */,
+				93B9CEA51CB7605000E340F0 /* EndingLayer.swift in Sources */,
 				6CED38D91CA0073300F4E2F0 /* Dish.swift in Sources */,
 				6CE99C7B1CA05798006F960B /* Ingredient.swift in Sources */,
 				CDD106611C9DD15600959FFD /* Platform.swift in Sources */,
