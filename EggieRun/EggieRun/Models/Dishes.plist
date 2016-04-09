@@ -11,6 +11,8 @@
 		<string>Oops, smashed!</string>
 		<key>imageNamed</key>
 		<string>smashed-egg</string>
+		<key>rarity</key>
+		<integer>1</integer>
 		<key>canConstruct</key>
 		<string>return (cooker==0)?-1:0;</string>
 	</dict>
@@ -23,6 +25,8 @@
 		<string></string>
 		<key>imageNamed</key>
 		<string>oyako-don</string>
+		<key>rarity</key>
+		<integer>1</integer>
 		<key>canConstruct</key>
 		<string>return (cooker==-1)?-1:0;</string>
 	</dict>
@@ -35,6 +39,8 @@
 		<string></string>
 		<key>imageNamed</key>
 		<string>plain-boiled-egg</string>
+		<key>rarity</key>
+		<integer>1</integer>
 		<key>canConstruct</key>
 		<string>return (cooker==3 &amp;&amp; condiments[0] == 0 &amp;&amp; condiments[1] == 0 &amp;&amp; condiments[2] == 0)?-2:0;</string>
 	</dict>
@@ -47,6 +53,8 @@
 		<string></string>
 		<key>imageNamed</key>
 		<string>black-fried</string>
+		<key>rarity</key>
+		<integer>1</integer>
 		<key>canConstruct</key>
 		<string>return (cooker==1)?1:0;</string>
 	</dict>
@@ -59,6 +67,8 @@
 		<string></string>
 		<key>imageNamed</key>
 		<string>black-baked</string>
+		<key>rarity</key>
+		<integer>1</integer>
 		<key>canConstruct</key>
 		<string>return (cooker==2)?1:0;</string>
 	</dict>
@@ -71,6 +81,8 @@
 		<string></string>
 		<key>imageNamed</key>
 		<string>black-boiled</string>
+		<key>rarity</key>
+		<integer>1</integer>
 		<key>canConstruct</key>
 		<string>return (cooker==3)?1:0;</string>
 	</dict>
