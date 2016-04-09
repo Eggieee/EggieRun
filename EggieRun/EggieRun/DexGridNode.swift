@@ -12,6 +12,8 @@ class DexGridNode: SKSpriteNode {
     var width: CGFloat
     var height: CGFloat
     
+    var dishNodes = [DexItemNode]()
+    
     init(sceneHeight:CGFloat, sceneWidth:CGFloat){
         width = 4*sceneWidth/7
         height = sceneHeight - 80
@@ -20,11 +22,12 @@ class DexGridNode: SKSpriteNode {
         self.anchorPoint = CGPoint(x: 0, y: 0)
         
         for i in 0..<DishDataController.singleton.dishes.count {
-            let x = width/4*CGFloat((i)%4)
+            let x = width/4*CGFloat((i)%4) + 20
             let y = 4*height/5-height/5*CGFloat((i)/4)
-            let item = DexItemNode(item: DishDataController.singleton.dishes[i], xPosition: x, yPosition: y, width:width/4, height: height/5)
+            let item = DexItemNode(dish: DishDataController.singleton.dishes[i], xPosition: x, yPosition: y, width:width/6, height: width/6)
             item.zPosition = 1
             addChild(item)
+            dishNodes.append(item)
         }
     }
     

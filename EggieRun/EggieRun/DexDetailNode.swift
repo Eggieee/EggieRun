@@ -9,21 +9,42 @@
 import SpriteKit
 
 class DexDetailNode: SKSpriteNode {
+    var dishImageNode: SKSpriteNode
+    var dishNameNode: SKLabelNode
+    var dishDescriptionNode: SKLabelNode
     
-    init(dish:Dish, sceneHeight: CGFloat, sceneWidth:CGFloat) {
+    var dish: Dish? {
+        didSet {
+            if dish != nil {
+                dishImageNode.texture = SKTexture(imageNamed: dish!.imageNamed)
+                dishNameNode.text = dish!.name
+                dishDescriptionNode.text = dish!.description
+            } else {
+                
+            }
+        }
+    }
+    
+    init(sceneHeight: CGFloat, sceneWidth:CGFloat) {
+        dishImageNode = SKSpriteNode(texture: nil)
+        dishNameNode = SKLabelNode(text: "")
+        dishDescriptionNode = SKLabelNode(text: "")
+        
+        // background
         super.init(texture: nil, color: UIColor.brownColor(), size: CGSize(width: 3*sceneWidth/7, height: sceneHeight-80))
         self.anchorPoint = CGPoint(x: 0, y: 0)
         self.position = CGPoint(x:4*sceneWidth/7, y:0)
         
-        // add content of dish
-        let image = SKSpriteNode(imageNamed: dish.imageNamed)
-        let text = SKLabelNode(text: dish.description)
-        image.anchorPoint=CGPoint(x: 0, y: 0)
-        image.position = CGPoint(x: 30,y: 1*sceneHeight/3)
-        text.position = CGPoint(x: self.frame.width/2,y: sceneHeight/4)
-        addChild(image)
-        addChild(text)
+        dishImageNode.position = CGPoint(x: self.frame.width/2,y: 7*sceneHeight/12)
+        dishImageNode.size = CGSize(width: 2*self.frame.width/3, height: 2*self.frame.width/3)
+        dishDescriptionNode.position = CGPoint(x: self.frame.width/2,y: self.frame.height/5)
+        dishNameNode.position = CGPoint(x: self.frame.width/2,y: self.frame.height/4)
+        
+        addChild(dishImageNode)
+        addChild(dishNameNode)
+        addChild(dishDescriptionNode)
     }
+    
     
 
     
