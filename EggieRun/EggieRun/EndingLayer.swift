@@ -30,7 +30,7 @@ class EndingLayer: SKSpriteNode {
         fadeInButton()
         displayDish()
         displayTitle()
-        showStars(3)
+        showStars(generatedDish.rarity)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -73,7 +73,7 @@ class EndingLayer: SKSpriteNode {
     }
     
     private func displayDish() {
-        let dishImage = SKSpriteNode(imageNamed: "smashed-egg")
+        let dishImage = SKSpriteNode(imageNamed: dish.imageNamed)
         let scaleUpAction = SKAction.scaleTo(1, duration: 0.5)
         dishImage.setScale(0)
         dishImage.zPosition = 2
@@ -85,7 +85,7 @@ class EndingLayer: SKSpriteNode {
     }
     
     private func displayTitle() {
-        let dishTitle = SKSpriteNode(imageNamed: "smashed-egg-title")
+        let dishTitle = SKSpriteNode(imageNamed: dish.titleImageNamed)
         let scaleUpAction = SKAction.scaleTo(1, duration: 0.5)
         dishTitle.setScale(0)
         dishTitle.zPosition = 2
