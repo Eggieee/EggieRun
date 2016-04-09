@@ -9,6 +9,8 @@
 import SpriteKit
 
 class DexItemNode: SKNode {
+    static private let IMAGE_RATIO = CGFloat(1.5)
+    
     let dish: Dish
     var selected = false {
         didSet {
@@ -20,14 +22,22 @@ class DexItemNode: SKNode {
         }
     }
     
-    init(dish: Dish, xPosition: CGFloat, yPosition: CGFloat, width: CGFloat, height: CGFloat) {
+    init(dish: Dish, xPosition: CGFloat, yPosition: CGFloat, size: CGFloat) {
         self.dish = dish
         super.init()
         self.alpha = 0.5
+        
+        let backgroundNode = SKSpriteNode(imageNamed: "item-background")
+        backgroundNode.position = CGPoint(x: xPosition, y: yPosition)
+        backgroundNode.size = CGSize(width: size, height: size)
+        backgroundNode.zPosition = 1
+        
         let dishImageNode = SKSpriteNode(imageNamed: dish.imageNamed)
         dishImageNode.position = CGPoint(x: xPosition, y: yPosition)
-        dishImageNode.anchorPoint = CGPoint(x: 0, y: 0)
-        dishImageNode.size = CGSize(width: width, height: height)
+        dishImageNode.size = CGSize(width: size / DexItemNode.IMAGE_RATIO, height: size / DexItemNode.IMAGE_RATIO)
+        dishImageNode.zPosition = 2
+        
+        addChild(backgroundNode)
         addChild(dishImageNode)
     }
     

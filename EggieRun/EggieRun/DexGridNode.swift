@@ -9,23 +9,33 @@
 import SpriteKit
 
 class DexGridNode: SKSpriteNode {
+    static private let ITEMS_PER_ROW = 4
+    static private let PADDING = CGFloat(20)
+    
     var width: CGFloat
     var height: CGFloat
     
     var dishNodes = [DexItemNode]()
     
     init(sceneHeight:CGFloat, sceneWidth:CGFloat){
-        width = 4*sceneWidth/7
+        width = 4 * sceneWidth / 7
         height = sceneHeight - 80
+        
         super.init(texture: nil, color: UIColor.grayColor(), size: CGSize(width: width, height:height))
         self.position = CGPoint(x: 0,y: 0)
         self.anchorPoint = CGPoint(x: 0, y: 0)
         
+        let itemSize = (width - DexGridNode.PADDING * CGFloat(DexGridNode.ITEMS_PER_ROW + 1)) / CGFloat(DexGridNode.ITEMS_PER_ROW)
+        
         for i in 0..<DishDataController.singleton.dishes.count {
-            let x = width/4*CGFloat((i)%4) + 20
-            let y = 4*height/5-height/5*CGFloat((i)/4)
-            let item = DexItemNode(dish: DishDataController.singleton.dishes[i], xPosition: x, yPosition: y, width:width/6, height: width/6)
-            item.zPosition = 1
+            let row = i / DexGridNode.ITEMS_PER_ROW
+            let col = i % DexGridNode.ITEMS_PER_ROW
+            
+            let x = CGFloat(col + 1) * DexGridNode.PADDING + (CGFloat(col) + 0.5) * itemSize
+            let y = height - (CGFloat(row + 1) * DexGridNode.PADDING + (CGFloat(row) + 0.5) * itemSize) 
+            
+            let item = DexItemNode(dish: DishDataController.singleton.dishes[i], xPosition: x, yPosition: y, size: itemSize)
+            
             addChild(item)
             dishNodes.append(item)
         }
