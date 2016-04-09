@@ -31,7 +31,7 @@ class DexDetailNode: SKSpriteNode {
         dishDescriptionNode = SKLabelNode(text: "")
         
         // background
-        super.init(texture: nil, color: UIColor.brownColor(), size: CGSize(width: 3*sceneWidth/7, height: sceneHeight-80))
+        super.init(texture: SKTexture(imageNamed:"detail-texture"), color: UIColor.brownColor(), size: CGSize(width: 3*sceneWidth/7, height: sceneHeight-80))
         self.anchorPoint = CGPoint(x: 0, y: 0)
         self.position = CGPoint(x:4*sceneWidth/7, y:0)
         
@@ -39,6 +39,15 @@ class DexDetailNode: SKSpriteNode {
         dishImageNode.size = CGSize(width: 2*self.frame.width/3, height: 2*self.frame.width/3)
         dishDescriptionNode.position = CGPoint(x: self.frame.width/2,y: self.frame.height/5)
         dishNameNode.position = CGPoint(x: self.frame.width/2,y: self.frame.height/4)
+        dishNameNode.fontSize = 30
+        dishNameNode.fontName = "BradleyHandITCTT-Bold"
+        dishNameNode.fontColor = UIColor.blackColor()
+        dishDescriptionNode.fontSize = 20
+        dishDescriptionNode.fontColor = UIColor.blackColor()
+        
+        dishImageNode.zPosition = 1
+        dishDescriptionNode.zPosition = 1
+        dishNameNode.zPosition = 1
         
         addChild(dishImageNode)
         addChild(dishNameNode)
