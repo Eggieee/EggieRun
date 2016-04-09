@@ -17,7 +17,7 @@ class EndingLayer: SKSpriteNode {
     private var beam: SKSpriteNode!
     private var beamAction: SKAction
     
-    init(generatedDish: Dish) {
+    init(usedCooker: Cooker, generatedDish: Dish) {
         let beamAtlas = SKTextureAtlas(named: "beam.atlas")
         let sortedBeamTextureNames = beamAtlas.textureNames.sort()
         let beamTextures = sortedBeamTextureNames.map({ beamAtlas.textureNamed($0) })
@@ -127,7 +127,7 @@ class EndingLayer: SKSpriteNode {
         let scaleDownAction = SKAction.scaleTo(1, duration: 0.5)
         let fadeInAction = SKAction.fadeInWithDuration(0.5)
         addChild(star)
-        let waitAction = SKAction.waitForDuration(1.5)
+        let waitAction = SKAction.waitForDuration(2)
         
         let group = SKAction.group([scaleDownAction, fadeInAction])
         let sequence = SKAction.sequence([group, waitAction])

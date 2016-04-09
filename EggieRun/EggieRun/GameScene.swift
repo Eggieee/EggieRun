@@ -177,11 +177,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         eggie.state = .Dying
         gameState = .Over
         
-        //dummy dish
+        //dummy dish, you'll just need to pass Huang Yue the real cooker
         let dish = DishDataController.singleton.getResultDish(Cooker.Drop, condiments: flavourBar.condimentDictionary, ingredients: ingredientBar.ingredients)
         
-        //show ending layer
-        let endingLayer = EndingLayer(generatedDish: dish)
+        //show ending layer, you'll just need to pass me the real cooker
+        let endingLayer = EndingLayer(usedCooker: Cooker.Drop, generatedDish: dish)
         endingLayer.zPosition = 100
         endingLayer.position = CGPointMake(UIScreen.mainScreen().bounds.width/2, UIScreen.mainScreen().bounds.height/2)
         addChild(endingLayer)
