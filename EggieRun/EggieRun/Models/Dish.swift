@@ -13,13 +13,19 @@ class Dish: Constructable {
     let name: String
     let description: String
     let imageNamed: String
+    let rarity: Int
     let canConstructRawFunction: String
+    
+    var titleImageNamed: String {
+        return imageNamed + "-title"
+    }
     
     required init(data: NSDictionary) {
         self.id = data["id"] as! Int
         self.name = data["name"] as! String
         self.description = data["description"] as! String
         self.imageNamed = data["imageNamed"] as! String
+        self.rarity = data["rarity"] as! Int
         self.canConstructRawFunction = "var canConstruct = function(cooker, condiments, ingredients) { " + (data["canConstruct"] as! String) + " };"
     }
     
