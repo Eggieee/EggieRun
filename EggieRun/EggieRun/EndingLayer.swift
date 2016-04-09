@@ -30,6 +30,7 @@ class EndingLayer: SKSpriteNode {
         fadeInButton()
         displayDish()
         displayTitle()
+        showStars(3)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -99,5 +100,38 @@ class EndingLayer: SKSpriteNode {
         beam.zPosition = 1
         addChild(beam)
         beam.runAction(beamAction)
+    }
+    
+    private func showStars(count: Int) {
+        let distance = 80
+        let halfCount: Int = count / 2
+        let firstXPosition = (count % 2 == 0) ?  -(distance / 2 + (halfCount - 1) * distance) : -(halfCount * distance)
+        var starActions = [SKAction]()
+        for i in 0..<count {
+            let currentXPosition = CGFloat(firstXPosition + distance * i)
+            let currentStar = SKSpriteNode(imageNamed: "ending-star")
+            currentStar.position.x = currentXPosition
+            currentStar.position.y = -250
+            currentStar.zPosition = 2
+            starActions.append(SKAction.runBlock({ () -> Void in
+                self.animateStar(currentStar)
+            }))
+        }
+        
+        runAction(SKAction.sequence(starActions))
+    }
+    
+    private func animateStar(star: SKSpriteNode) {
+        star.setScale(5)
+        star.alpha = 0
+        let scaleDownAction = SKAction.scaleTo(1, duration: 0.5)
+        let fadeInAction = SKAction.fadeInWithDuration(0.5)
+        addChild(star)
+        let waitAction = SKAction.waitForDuration(1.5)
+        
+        let group = SKAction.group([scaleDownAction, fadeInAction])
+        let sequence = SKAction.sequence([group, waitAction])
+        
+        star.runAction(sequence)
     }
 }
