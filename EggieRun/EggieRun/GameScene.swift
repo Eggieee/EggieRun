@@ -17,7 +17,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let FIRST_COLLECTABLE_POSITION_X: CGFloat = 400
     private static let DISTANCE_PLATFORM_AND_COLLECTABLE: CGFloat = 200
     private static let OBSTACLE_RATE = 0.2
-    private static let BUFFER_DISTANCE = 300.0
+    private static let BUFFER_DISTANCE = 400.0
     
     private enum GameState {
         case Ready, Playing, Over
