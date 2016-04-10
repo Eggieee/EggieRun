@@ -42,6 +42,7 @@ class DexItemNode: SKNode {
         
         // initial effect before the dish is activated in game
         let effectNode = SKEffectNode()
+        effectNode.shouldRasterize = true
         effectNode.zPosition = DexItemNode.DISH_Z
         if !DishDataController.singleton.isDishActivated(dish) {
             effectNode.filter = DexItemNode.UNACTIVATED_FILTER
