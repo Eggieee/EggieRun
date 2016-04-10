@@ -15,7 +15,7 @@ class DexItemNode: SKNode {
     static private let UNSELECTED_ALPHA = CGFloat(0.5)
     static private let SELECTED_ALPHA = CGFloat(1.0)
     
-    static private let UNACTIVATED_FILTER = CIFilter(name: "CIColorClamp", withInputParameters: ["inputMaxComponents": CIVector(string: "[0 0 0 1]")])
+    static private let UNACTIVATED_FILTER = CIFilter(name: "CIColorControls", withInputParameters: ["inputBrightness": -1])
     
     let dish: Dish
     var selected = false {
