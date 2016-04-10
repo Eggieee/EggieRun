@@ -16,6 +16,7 @@ class MenuScene: SKScene {
     static private let DEX_BUTTON_POSITION = CGPoint(x: 210, y: 270)
     
     static private let TRANSITION = SKTransition.doorsOpenVerticalWithDuration(0.5)
+    static let BACK_TRANSITION = SKTransition.doorsCloseVerticalWithDuration(0.5)
     
     static let singleton = MenuScene(fileNamed: "MenuScene")
     

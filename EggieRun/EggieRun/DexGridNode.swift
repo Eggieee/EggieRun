@@ -11,8 +11,6 @@ import SpriteKit
 class DexGridNode: SKSpriteNode {
     static private let ITEMS_PER_ROW = 4
     static private let PADDING = CGFloat(20)
-    static private let TITLE_SPACE = CGFloat(80)
-    static private let GRID_RATIO = CGFloat(4.0 / 7)
     
     var width: CGFloat
     var height: CGFloat
@@ -20,8 +18,8 @@ class DexGridNode: SKSpriteNode {
     var dishNodes = [DexItemNode]()
     
     init(sceneHeight: CGFloat, sceneWidth: CGFloat) {
-        width = DexGridNode.GRID_RATIO * sceneWidth
-        height = sceneHeight - DexGridNode.TITLE_SPACE
+        width = DexScene.GRID_WIDTH * sceneWidth
+        height = sceneHeight - DexScene.TOP_BAR_HEIGHT
         
         super.init(texture: SKTexture(imageNamed: "grid-texture"), color: UIColor.grayColor(), size: CGSize(width: width, height: height))
         self.position = CGPoint(x: 0, y: 0)
