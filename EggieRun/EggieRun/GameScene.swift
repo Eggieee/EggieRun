@@ -118,12 +118,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func initializePlatform() {
         platformFactory = PlatformFactory()
         platforms = [Platform]()
-        
-        let pf = platformFactory.nextPlatform()
-        pf.position.x = 0
-        pf.position.y = 0
-        platforms.append(pf)
-        addChild(pf)
+        appendNewPlatform(0)
         // append other platforms if necessary
         shiftPlatforms(0)
     }
@@ -196,11 +191,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let rightMostPlatformRightEnd = rightMostPlatform.position.x + rightMostPlatform.width + rightMostPlatform.followingGapWidth
         
         if rightMostPlatformRightEnd < UIScreen.mainScreen().bounds.width {
-            let pf = platformFactory.nextPlatform()
-            pf.position.x = rightMostPlatformRightEnd
-            pf.position.y = 0
-            platforms.append(pf)
-            addChild(pf)
+            appendNewPlatform(rightMostPlatformRightEnd)
         }
         
         if leftMostPlatform.position.x + leftMostPlatform.width + leftMostPlatform.followingGapWidth < 0 {
@@ -234,5 +225,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for collectable in collectables {
             collectable.position.x -= CGFloat(distance)
         }
+    }
+    
+    private func appendNewPlatform(position: CGFloat) {
+        let pf = platformFactory.nextPlatform()
+        pf.position.x = position
+        pf.position.y = 0
+        platforms.append(pf)
+        addChild(pf)
+        let maxPossibleObstacle = floor(Double(pf.width) / Obstacle.WIDTH)
+        print(maxPossibleObstacle)
     }
 }

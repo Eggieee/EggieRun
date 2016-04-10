@@ -9,7 +9,7 @@
 import SpriteKit
 
 class Obstacle: SKNode {
-    private static let WIDTH = 150.0
+    static let WIDTH = 150.0
     
     init(cooker: Cooker) {
         super.init()
