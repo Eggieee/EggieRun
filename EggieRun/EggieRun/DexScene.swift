@@ -15,10 +15,10 @@ class DexScene: SKScene {
     var detailNode: DexDetailNode?
     
     override func didMoveToView(view: SKView) {
-        let titleLabel = SKLabelNode(fontNamed:"Chalkduster")
+        let titleLabel = SKLabelNode(fontNamed: "Chalkduster")
         titleLabel.text = "Éggdex"
         titleLabel.fontSize = 45
-        titleLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:self.frame.height-60)
+        titleLabel.position = CGPoint(x: CGRectGetMidX(self.frame), y: self.frame.height - 60)
         self.addChild(titleLabel)
         
         buttonBack = SKSpriteNode(imageNamed: "button-return")
@@ -45,7 +45,7 @@ class DexScene: SKScene {
         
         // click on some dishes
         for dishNode in gridNode!.dishNodes {
-            if dishNode.containsPoint(touchLocation) {
+            if dishNode.containsPoint(touchLocation) && dishNode.activated {
                 for otherDishNode in gridNode!.dishNodes {
                     otherDishNode.selected = false
                 }
@@ -54,17 +54,13 @@ class DexScene: SKScene {
                 break
             }
         }
-        
     }
     
     func createDetailNode() {
-        detailNode = DexDetailNode(sceneHeight:self.frame.height, sceneWidth:self.frame.width)
-        //rightPage.position = CGPoint(x: 11*self.frame.width/14, y:self.frame.height/2-40)
+        detailNode = DexDetailNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width)
         self.addChild(detailNode!)
-        // detailNode!.dish = DishDataController.singleton.dishes[0]
     }
-        
-
+    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
     }

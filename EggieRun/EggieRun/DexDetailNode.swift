@@ -20,28 +20,29 @@ class DexDetailNode: SKSpriteNode {
                 dishNameNode.text = dish!.name
                 dishDescriptionNode.text = dish!.description
             } else {
-                
             }
         }
     }
     
-    init(sceneHeight: CGFloat, sceneWidth:CGFloat) {
+    init(sceneHeight: CGFloat, sceneWidth: CGFloat) {
         dishImageNode = SKSpriteNode(texture: nil)
         dishNameNode = SKLabelNode(text: "")
         dishDescriptionNode = SKLabelNode(text: "")
         
         // background
-        super.init(texture: SKTexture(imageNamed:"detail-texture"), color: UIColor.brownColor(), size: CGSize(width: 3*sceneWidth/7, height: sceneHeight-80))
+        super.init(texture: SKTexture(imageNamed: "detail-texture"), color: UIColor.brownColor(), size: CGSize(width: 3 * sceneWidth / 7, height: sceneHeight - 80))
         self.anchorPoint = CGPoint(x: 0, y: 0)
-        self.position = CGPoint(x:4*sceneWidth/7, y:0)
+        self.position = CGPoint(x: 4 * sceneWidth / 7, y: 0)
         
-        dishImageNode.position = CGPoint(x: self.frame.width/2,y: 7*sceneHeight/12)
-        dishImageNode.size = CGSize(width: 2*self.frame.width/3, height: 2*self.frame.width/3)
-        dishDescriptionNode.position = CGPoint(x: self.frame.width/2,y: self.frame.height/5)
-        dishNameNode.position = CGPoint(x: self.frame.width/2,y: self.frame.height/4)
+        dishImageNode.position = CGPoint(x: self.frame.width / 2, y: 7 * sceneHeight / 12)
+        dishImageNode.size = CGSize(width: 2 * self.frame.width / 3, height: 2 * self.frame.width / 3)
+        
+        dishNameNode.position = CGPoint(x: self.frame.width / 2, y: self.frame.height / 4)
         dishNameNode.fontSize = 30
         dishNameNode.fontName = "BradleyHandITCTT-Bold"
         dishNameNode.fontColor = UIColor.blackColor()
+        
+        dishDescriptionNode.position = CGPoint(x: self.frame.width / 2, y: self.frame.height / 5)
         dishDescriptionNode.fontSize = 20
         dishDescriptionNode.fontColor = UIColor.blackColor()
         
@@ -54,10 +55,7 @@ class DexDetailNode: SKSpriteNode {
         addChild(dishDescriptionNode)
     }
     
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-
 }

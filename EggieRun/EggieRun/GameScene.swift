@@ -33,6 +33,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var platforms: [Platform]!
     private var collectables: [Collectable]!
     private var lastUpdatedTime: CFTimeInterval!
+    private var endingLayer: EndingLayer?
 
     override func didMoveToView(view: SKView) {
         initializePhysicsProperties()
@@ -44,8 +45,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameStart()
         } else if gameState == .Playing && eggie.canJump {
             eggie.state = .Jumping
-        } else if gameState == .Over {
-            gameReady()
+        } else if gameState == .Over && endingLayer != nil {
+            let touch = touches.first!
+            let touchLocation = touch.locationInNode(endingLayer!)
+            
+            if endingLayer!.eggdexButton.containsPoint(touchLocation) {
+                let dexScene = DexScene(size: self.size)
+                let transition = SKTransition.flipHorizontalWithDuration(0.5)
+                self.view?.presentScene(dexScene, transition: transition)
+            } else {
+                gameReady()
+            }
         }
     }
     
@@ -179,10 +189,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let dish = DishDataController.singleton.getResultDish(Cooker.Drop, condiments: flavourBar.condimentDictionary, ingredients: ingredientBar.ingredients)
         
         //show ending layer, you'll just need to pass me the real cooker
-        let endingLayer = EndingLayer(usedCooker: Cooker.Drop, generatedDish: dish)
-        endingLayer.zPosition = 100
-        endingLayer.position = CGPointMake(UIScreen.mainScreen().bounds.width/2, UIScreen.mainScreen().bounds.height/2)
-        addChild(endingLayer)
+        endingLayer = EndingLayer(usedCooker: Cooker.Drop, generatedDish: dish)
+        endingLayer!.zPosition = 100
+        endingLayer!.position = CGPointMake(UIScreen.mainScreen().bounds.width/2, UIScreen.mainScreen().bounds.height/2)
+        addChild(endingLayer!)
     }
     
     private func shiftPlatforms(distance: Double) {

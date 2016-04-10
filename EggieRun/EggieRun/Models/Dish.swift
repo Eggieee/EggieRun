@@ -29,7 +29,7 @@ class Dish: Constructable {
         self.canConstructRawFunction = "var canConstruct = function(cooker, condiments, ingredients) { " + (data["canConstruct"] as! String) + " };"
     }
     
-    func canConstruct(resources: [Int : Int]) -> Int {
+    func canConstruct(resources: [Int: Int]) -> Int {
         var cooker: Cooker?
         var condiments = [Condiment: Int]()
         var ingredients = [Ingredient]()
@@ -46,7 +46,7 @@ class Dish: Constructable {
             } else if let isCondiment = Condiment(rawValue: resourceId) {
                 condiments[isCondiment] = resourceCount
             } else if let isIngredient = Ingredient(rawValue: resourceId) {
-                for _ in 0..<resourceCount {
+                for _ in 0 ..< resourceCount {
                     ingredients.append(isIngredient)
                 }
             }
@@ -69,6 +69,6 @@ class Dish: Constructable {
             jsCondiments[condiment.0.jsId] = condiment.1
         }
         
-        return Int(jsFunction.callWithArguments([cooker.rawValue, jsCondiments, ingredients.map({$0.rawValue})]).toInt32())
+        return Int(jsFunction.callWithArguments([cooker.rawValue, jsCondiments, ingredients.map({ $0.rawValue })]).toInt32())
     }
 }

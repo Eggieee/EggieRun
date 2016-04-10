@@ -9,6 +9,11 @@
 import SpriteKit
 
 class MenuScene: SKScene {
+    static private let START_BUTTON_IMAGENAMED = "start-button"
+    static private let DEX_BUTTON_IMAGENAMED = "eggdex-button"
+    
+    static private let START_BUTTON_POSITION = CGPoint(x: 215, y: 420)
+    static private let DEX_BUTTON_POSITION = CGPoint(x: 210, y: 270)
     
     static let singleton = MenuScene(fileNamed: "MenuScene")
     
@@ -25,16 +30,16 @@ class MenuScene: SKScene {
         
         changeBackground("menu-background")
         
-        buttonPlay = SKSpriteNode(imageNamed: "start-button")
-        buttonPlay.position = CGPoint(x: 215, y: 420)
+        buttonPlay = SKSpriteNode(imageNamed: MenuScene.START_BUTTON_IMAGENAMED)
+        buttonPlay.position = MenuScene.START_BUTTON_POSITION
         self.addChild(buttonPlay)
         
-        buttonDex = SKSpriteNode(imageNamed: "eggdex-button")
-        buttonDex.position = CGPoint(x: 210, y: 270)
+        buttonDex = SKSpriteNode(imageNamed: MenuScene.DEX_BUTTON_IMAGENAMED)
+        buttonDex.position = MenuScene.DEX_BUTTON_POSITION
         self.addChild(buttonDex)
         
-        //对不起我先静音了
-        //self.runAction(SKAction.playSoundFileNamed("road-runner", waitForCompletion: true))
+        // 对不起我先静音了
+        // self.runAction(SKAction.playSoundFileNamed("road-runner", waitForCompletion: true))
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
