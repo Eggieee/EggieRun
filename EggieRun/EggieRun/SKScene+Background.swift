@@ -11,7 +11,7 @@ import SpriteKit
 private var backgroundAssociationKey: UInt8 = 0
 
 extension SKScene {
-    var background : SKSpriteNode? {
+    var background: SKSpriteNode? {
         get {
             return objc_getAssociatedObject(self, &backgroundAssociationKey) as? SKSpriteNode
         }

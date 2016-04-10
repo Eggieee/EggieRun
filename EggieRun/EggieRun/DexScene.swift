@@ -15,10 +15,10 @@ class DexScene: SKScene {
     var detailNode: DexDetailNode?
     
     override func didMoveToView(view: SKView) {
-        let titleLabel = SKLabelNode(fontNamed:"Chalkduster")
+        let titleLabel = SKLabelNode(fontNamed: "Chalkduster")
         titleLabel.text = "Éggdex"
         titleLabel.fontSize = 45
-        titleLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:self.frame.height-60)
+        titleLabel.position = CGPoint(x: CGRectGetMidX(self.frame), y: self.frame.height - 60)
         self.addChild(titleLabel)
         
         buttonBack = SKSpriteNode(imageNamed: "button-return")
@@ -54,15 +54,13 @@ class DexScene: SKScene {
                 break
             }
         }
-        
     }
     
     func createDetailNode() {
-        detailNode = DexDetailNode(sceneHeight:self.frame.height, sceneWidth:self.frame.width)
+        detailNode = DexDetailNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width)
         self.addChild(detailNode!)
     }
-        
-
+    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
     }
