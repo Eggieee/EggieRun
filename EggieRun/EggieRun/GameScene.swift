@@ -42,7 +42,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameReady()
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if gameState == .Ready {
             gameStart()
         } else if gameState == .Playing && eggie.canJump {
