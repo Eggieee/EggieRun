@@ -73,7 +73,7 @@ class EndingLayer: SKSpriteNode {
     }
     
     private func displayDish() {
-        let dishImage = SKSpriteNode(imageNamed: dish.imageNamed)
+        let dishImage = SKSpriteNode(texture: dish.texture)
         let scaleUpAction = SKAction.scaleTo(1, duration: 0.5)
         dishImage.setScale(0)
         dishImage.zPosition = 2

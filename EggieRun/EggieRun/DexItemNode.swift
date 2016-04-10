@@ -54,7 +54,7 @@ class DexItemNode: SKNode {
         }
         
         // add dish image node
-        let dishImageNode = SKSpriteNode(imageNamed: dish.imageNamed)
+        let dishImageNode = SKSpriteNode(texture: dish.texture)
         dishImageNode.position = CGPoint(x: xPosition, y: yPosition)
         dishImageNode.size = CGSize(width: size / DexItemNode.IMAGE_RATIO, height: size / DexItemNode.IMAGE_RATIO)
         effectNode.addChild(dishImageNode)

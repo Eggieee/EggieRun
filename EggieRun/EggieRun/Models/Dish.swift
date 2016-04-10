@@ -7,25 +7,26 @@
 //
 
 import JavaScriptCore
+import SpriteKit
 
 class Dish: Constructable {
     let id: Int
     let name: String
     let description: String
-    let imageNamed: String
+    let titleImageNamed: String
     let rarity: Int
+    let texture: SKTexture
     let canConstructJsFunction: JSValue
-    
-    var titleImageNamed: String {
-        return imageNamed + "-title"
-    }
     
     required init(data: NSDictionary) {
         self.id = data["id"] as! Int
         self.name = data["name"] as! String
         self.description = data["description"] as! String
-        self.imageNamed = data["imageNamed"] as! String
         self.rarity = data["rarity"] as! Int
+        
+        let imageNamed = data["imageNamed"] as! String
+        titleImageNamed = imageNamed + "-title"
+        texture = SKTexture(imageNamed: imageNamed)
         
         let jsFunction = "var canConstruct = function(cooker, cond, ingred) { " + (data["canConstruct"] as! String) + " };"
         let context = JSContext()

@@ -6,9 +6,15 @@
 //  Copyright © 2016 Eggieee. All rights reserved.
 //
 
-import Foundation
+import SpriteKit
+
 enum Ingredient: Int {
     case GreenOnion = 100, Tomato = 101, Cream = 102, Milk = 103, Rice = 104, Bread = 105, Bacon = 106, Strawberry = 107, Chocolate = 108, Surstromming = 109
+    
+    static let ALL_VALUES: [Ingredient] = [.GreenOnion, .Tomato, .Cream, .Milk, .Rice, .Bread, .Bacon, .Strawberry, .Chocolate, .Surstromming]
+    
+    static private let FLAT_TEXTURES: [Ingredient: SKTexture] = Dictionary(ALL_VALUES.map({ ($0, SKTexture(imageNamed: $0.flatImageNamed)) }))
+    static private let FINE_TEXTURES: [Ingredient: SKTexture] = Dictionary(ALL_VALUES.map({ ($0, SKTexture(imageNamed: $0.fineImageNamed)) }))
     
     static let rarityTable: [[Ingredient]] = [[.Milk], [.GreenOnion, .Tomato, .Cream, .Rice, .Bacon, .Strawberry], [.Bread, .Chocolate], [.Surstromming]]
     
@@ -44,11 +50,19 @@ enum Ingredient: Int {
         }
     }
     
-    var flatImageNamed: String {
+    private var flatImageNamed: String {
         return "flat-" + imageNamed
     }
     
-    var fineImageNamed: String {
+    private var fineImageNamed: String {
         return "fine-" + imageNamed
+    }
+    
+    var flatTexture: SKTexture {
+        return Ingredient.FLAT_TEXTURES[self]!
+    }
+    
+    var fineTexture: SKTexture {
+        return Ingredient.FINE_TEXTURES[self]!
     }
 }

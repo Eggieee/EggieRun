@@ -15,12 +15,9 @@ class DexDetailNode: SKSpriteNode {
     
     var dish: Dish? {
         didSet {
-            if dish != nil {
-                dishImageNode.texture = SKTexture(imageNamed: dish!.imageNamed)
-                dishNameNode.text = dish!.name
-                dishDescriptionNode.text = dish!.description
-            } else {
-            }
+            dishImageNode.texture = dish?.texture
+            dishNameNode.text = dish?.name
+            dishDescriptionNode.text = dish?.description
         }
     }
     

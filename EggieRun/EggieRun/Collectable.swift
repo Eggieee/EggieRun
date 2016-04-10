@@ -21,8 +21,7 @@ class Collectable: SKSpriteNode {
         condiment = nil
         type = .Ingredient
         followingGapSize = gapSize
-        let texture = SKTexture(imageNamed: ingredient!.fineImageNamed)
-        super.init(texture: texture, color: UIColor.clearColor(), size: Collectable.SIZE)
+        super.init(texture: ingredient?.fineTexture, color: UIColor.clearColor(), size: Collectable.SIZE)
         initializePhysicsProperty()
     }
     
@@ -31,8 +30,7 @@ class Collectable: SKSpriteNode {
         condiment = condimentType
         type = .Condiment
         followingGapSize = gapSize
-        let texture = SKTexture(imageNamed: condiment!.imageNamed)
-        super.init(texture: texture, color: UIColor.clearColor(), size: Collectable.SIZE)
+        super.init(texture: condiment?.texture, color: UIColor.clearColor(), size: Collectable.SIZE)
         initializePhysicsProperty()
     }
     

@@ -6,9 +6,14 @@
 //  Copyright © 2016 Eggieee. All rights reserved.
 //
 
-import Foundation
+import SpriteKit
+
 enum Condiment: Int {
     case Salt = 10, Sugar = 11, Chili = 12
+    
+    static let ALL_VALUES: [Condiment] = [.Salt, .Sugar, .Chili]
+    
+    static private let TEXTURES: [Condiment: SKTexture] = Dictionary(ALL_VALUES.map({ ($0, SKTexture(imageNamed: $0.imageNamed)) }))
     
     static let randomPool = RandomPool<Condiment>(objects: [.Salt, .Sugar, .Chili], weightages: [5, 4, 1])
     
@@ -16,7 +21,7 @@ enum Condiment: Int {
         return randomPool.draw()
     }
     
-    var imageNamed: String {
+    private var imageNamed: String {
         switch self {
         case .Salt:
             return "salt"
@@ -25,6 +30,10 @@ enum Condiment: Int {
         case .Chili:
             return "chili"
         }
+    }
+    
+    var texture: SKTexture {
+        return Condiment.TEXTURES[self]!
     }
     
     var jsId: Int {
