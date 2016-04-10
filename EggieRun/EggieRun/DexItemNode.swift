@@ -29,13 +29,17 @@ class DexItemNode: SKNode {
     }
     private(set) var activated = true
     
+    private static func ITEM_BACKGROUND_IMAGENAMED(rarity: Int) -> String {
+        return "item-background-" + String(rarity)
+    }
+    
     init(dish: Dish, xPosition: CGFloat, yPosition: CGFloat, size: CGFloat) {
         self.dish = dish
         super.init()
         self.alpha = DexItemNode.UNSELECTED_ALPHA
         
         // background node of dishes
-        let backgroundNode = SKSpriteNode(imageNamed: "item-background")
+        let backgroundNode = SKSpriteNode(imageNamed: DexItemNode.ITEM_BACKGROUND_IMAGENAMED(dish.rarity))
         backgroundNode.position = CGPoint(x: xPosition, y: yPosition)
         backgroundNode.size = CGSize(width: size, height: size)
         backgroundNode.zPosition = DexItemNode.BACKGROUND_Z
