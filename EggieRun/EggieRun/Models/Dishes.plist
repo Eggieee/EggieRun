@@ -42,7 +42,7 @@
 		<key>rarity</key>
 		<integer>5</integer>
 		<key>canConstruct</key>
-		<string>return (cooker!=0 &amp;&amp; ingred[109])?-2:0;</string>
+		<string>return (cooker!=0 &amp;&amp; ingred[109])?-3:0;</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -140,7 +140,7 @@
 		<key>rarity</key>
 		<integer>3</integer>
 		<key>canConstruct</key>
-		<string>return 0;</string>
+		<string>return (cooker==2 &amp;&amp; cond[1]&gt;=0.7 &amp;&amp; ingred[102] &amp;&amp; ingred[103] &amp;&amp; ingred[108])?10:0;</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -154,7 +154,7 @@
 		<key>rarity</key>
 		<integer>3</integer>
 		<key>canConstruct</key>
-		<string>return 0;</string>
+		<string>return (cooker==2 &amp;&amp; cond[1]&gt;=0.7 &amp;&amp; ingred[102] &amp;&amp; ingred[103] &amp;&amp; ingred[107])?10:0;</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -168,7 +168,7 @@
 		<key>rarity</key>
 		<integer>3</integer>
 		<key>canConstruct</key>
-		<string>return 0;</string>
+		<string>return (cooker==3 &amp;&amp; cond[1]&gt;=0.5 &amp;&amp; ingred[103] &amp;&amp; ingred[107])?10:0;</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -182,7 +182,7 @@
 		<key>rarity</key>
 		<integer>3</integer>
 		<key>canConstruct</key>
-		<string>return 0;</string>
+		<string>return (cooker==2 &amp;&amp; cond[0]&gt;=0.2 &amp;&amp; cond[1]&gt;=0.5 &amp;&amp; ingred[103])?10:0;</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -196,7 +196,7 @@
 		<key>rarity</key>
 		<integer>3</integer>
 		<key>canConstruct</key>
-		<string>return 0;</string>
+		<string>return (cooker==3 &amp;&amp; cond[1]&gt;=0.4 &amp;&amp; ingred[103])?10:0;</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -210,13 +210,13 @@
 		<key>rarity</key>
 		<integer>3</integer>
 		<key>canConstruct</key>
-		<string>return 0;</string>
+		<string>return (cooker==3 &amp;&amp; cond[0]&gt;=0.6)?10:0;</string>
 	</dict>
 	<dict>
 		<key>id</key>
 		<integer>15</integer>
 		<key>name</key>
-		<string>Guang Dong Style Scrambled Egg</string>
+		<string>Guangdong Style Scrambled Egg</string>
 		<key>description</key>
 		<string></string>
 		<key>imageNamed</key>
@@ -224,7 +224,7 @@
 		<key>rarity</key>
 		<integer>3</integer>
 		<key>canConstruct</key>
-		<string>return 0;</string>
+		<string>return (cooker==3 &amp;&amp; cond[0]&gt;=0.3)?10:0;</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -238,7 +238,7 @@
 		<key>rarity</key>
 		<integer>3</integer>
 		<key>canConstruct</key>
-		<string>return 0;</string>
+		<string>return (cooker==3 &amp;&amp; cond[0]&gt;0)?10:0;</string>
 	</dict>
 	<dict>
 		<key>id</key>
