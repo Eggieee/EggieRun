@@ -108,6 +108,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             } else {
                 flavourBar.addCondiment(collectable.condiment!)
             }
+        } else if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == BitMaskCategory.hero | BitMaskCategory.obstacle {
+            let obstacle: Obstacle
+            if contact.bodyA.categoryBitMask == BitMaskCategory.obstacle {
+                obstacle = contact.bodyA.node as! Obstacle
+            } else {
+                obstacle = contact.bodyB.node as! Obstacle
+            }
+            
+            if obstacle.isDeadPoint(contact.contactPoint) {
+                gameOver()
+            }
         }
     }
     

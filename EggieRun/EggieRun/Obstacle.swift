@@ -9,29 +9,36 @@
 import SpriteKit
 
 class Obstacle: SKNode {
-    static let WIDTH = 150.0
+    static let WIDTH = 200.0
     
     private let cookerType: Cooker
+    private let baseNode: SKSpriteNode
     
     init(cooker: Cooker) {
         cookerType = cooker
+        baseNode = SKSpriteNode(imageNamed: "oven-open")
         super.init()
-        let node = SKSpriteNode(imageNamed: "oven-open")
-        let aspectRatio = Double(node.size.height / node.size.width)
-        node.size = CGSize(width: Obstacle.WIDTH, height: Obstacle.WIDTH * aspectRatio)
-        node.position.x = node.size.width / 2
-        node.position.y = node.size.height / 2
-        addChild(node)
+        
+        let aspectRatio = Double(baseNode.size.height / baseNode.size.width)
+        baseNode.size = CGSize(width: Obstacle.WIDTH, height: Obstacle.WIDTH * aspectRatio)
+        baseNode.position.x = baseNode.size.width / 2
+        baseNode.position.y = baseNode.size.height / 2
+        addChild(baseNode)
         zPosition = 2
         
-        physicsBody = SKPhysicsBody(rectangleOfSize: node.size, center: CGPoint(x: node.size.width/2, y: node.size.height/2))
+        physicsBody = SKPhysicsBody(rectangleOfSize: baseNode.size, center: CGPoint(x: baseNode.size.width/2, y: baseNode.size.height/2))
         physicsBody?.categoryBitMask = BitMaskCategory.obstacle
         physicsBody?.contactTestBitMask = BitMaskCategory.hero
-        physicsBody?.collisionBitMask = BitMaskCategory.platform
+        physicsBody?.collisionBitMask = BitMaskCategory.platform | BitMaskCategory.hero
         physicsBody?.dynamic = false
+        
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func isDeadPoint(point: CGPoint) -> Bool {
+        return point.y < position.y + baseNode.size.height
     }
 }

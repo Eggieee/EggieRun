@@ -12,7 +12,7 @@ class Eggie: SKSpriteNode {
     // Constants
     private static let SPEED_STATIC = 0
     private static let SPEED_RUNNING = 500
-    private static let ACCELERATION_JUMPING = CGVectorMake(0, 600)
+    private static let ACCELERATION_JUMPING = CGVectorMake(0, 800)
     private static let ATLAS_TIME = 0.2
     private static let ATLAS_COUNT = 5
     private static let ATLAS_TIME_PER_FRAME = Eggie.ATLAS_TIME / Double(Eggie.ATLAS_COUNT)
@@ -48,8 +48,8 @@ class Eggie: SKSpriteNode {
         
         physicsBody = SKPhysicsBody(rectangleOfSize: standingTexture.size())
         physicsBody!.categoryBitMask = BitMaskCategory.hero
-        physicsBody!.contactTestBitMask = BitMaskCategory.scene | BitMaskCategory.collectable | BitMaskCategory.platform
-        physicsBody!.collisionBitMask = BitMaskCategory.platform | BitMaskCategory.scene
+        physicsBody!.contactTestBitMask = BitMaskCategory.scene | BitMaskCategory.collectable | BitMaskCategory.platform | BitMaskCategory.obstacle
+        physicsBody!.collisionBitMask = BitMaskCategory.platform | BitMaskCategory.scene | BitMaskCategory.obstacle
         physicsBody!.allowsRotation = false
 
         position = startPosition
