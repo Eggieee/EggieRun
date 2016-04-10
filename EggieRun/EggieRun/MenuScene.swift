@@ -41,6 +41,8 @@ class MenuScene: SKScene {
         buttonDex.position = MenuScene.DEX_BUTTON_POSITION
         self.addChild(buttonDex)
         
+        DishDataController.singleton
+        
         // 对不起我先静音了
         // self.runAction(SKAction.playSoundFileNamed("road-runner", waitForCompletion: true))
     }
