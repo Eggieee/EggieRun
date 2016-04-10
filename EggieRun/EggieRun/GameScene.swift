@@ -263,11 +263,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(pf)
         
         var position = CGFloat(Obstacle.WIDTH)
-        while position < pf.width {
+        while position < pf.width - CGFloat(Obstacle.WIDTH) {
             if Double(arc4random()) / Double(UINT32_MAX) <= GameScene.OBSTACLE_RATE {
                 let obstacle = obstacleFactory.nextObstacle()
                 obstacle.position.y = pf.height
-                obstacle.position.x = pf.position.y + position
+                obstacle.position.x = pf.position.x + position
                 obstacles.append(obstacle)
                 addChild(obstacle)
                 position += CGFloat(Obstacle.WIDTH * 2)
