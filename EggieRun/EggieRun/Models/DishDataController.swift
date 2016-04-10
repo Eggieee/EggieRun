@@ -43,7 +43,9 @@ class DishDataController {
             resources[ingredient.rawValue] = (resources[ingredient.rawValue] ?? 0) + 1
         }
         
-        return constructableEngine.getConstructResult(resources)
+        let result = constructableEngine.getConstructResult(resources)
+        NSLog("Constructed dish %@", result.name)
+        return result
     }
     
     func isDishActivated(dish: Dish) -> Bool {
