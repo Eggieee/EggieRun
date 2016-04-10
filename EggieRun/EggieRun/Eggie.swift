@@ -51,7 +51,6 @@ class Eggie: SKSpriteNode {
         physicsBody!.contactTestBitMask = BitMaskCategory.scene | BitMaskCategory.collectable | BitMaskCategory.platform | BitMaskCategory.obstacle
         physicsBody!.collisionBitMask = BitMaskCategory.platform | BitMaskCategory.scene | BitMaskCategory.obstacle
         physicsBody!.allowsRotation = false
-        physicsBody!.restitution = 0.0
 
         position = startPosition
     }
@@ -103,18 +102,12 @@ class Eggie: SKSpriteNode {
         }
         
         let contactingObjects = physicsBody!.allContactedBodies()
-        print(contactingObjects.count)
-        print(position.y)
         for object in contactingObjects {
-            print(object)
             if object.categoryBitMask == BitMaskCategory.platform {
-                print("on platform")
                 return true
             } else if object.categoryBitMask == BitMaskCategory.obstacle {
-                print("on obstacle")
                 return true
             } else {
-                print("hehe")
                 return false
             }
         }

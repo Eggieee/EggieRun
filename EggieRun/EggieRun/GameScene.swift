@@ -48,7 +48,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameStart()
         } else if gameState == .Playing && eggie.canJump {
             eggie.state = .Jumping
-            print("jumping")
         } else if gameState == .Over && endingLayer != nil {
             let touch = touches.first!
             let touchLocation = touch.locationInNode(endingLayer!)
@@ -111,15 +110,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 flavourBar.addCondiment(collectable.condiment!)
             }
         } else if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == BitMaskCategory.hero | BitMaskCategory.obstacle {
-            let obstacle: Obstacle
+            var obstacle: Obstacle
             if contact.bodyA.categoryBitMask == BitMaskCategory.obstacle {
-                obstacle = contact.bodyA.node as! Obstacle
+                obstacle = contact.bodyA.node!.parent as! Obstacle
             } else {
-                obstacle = contact.bodyB.node as! Obstacle
+                obstacle = contact.bodyB.node!.parent as! Obstacle
             }
             
-
-            if obstacle.isDeadly(contact.contactNormal) && !obstacle.isPassed {
+            if obstacle.isDeadly(contact.contactNormal, point: contact.contactPoint) {
                 gameOver(obstacle.cookerType)
             } else {
                 obstacle.isPassed = true

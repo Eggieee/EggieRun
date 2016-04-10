@@ -11,11 +11,14 @@ import SpriteKit
 class Obstacle: SKNode {
     static let WIDTH = 200.0
     private static let OVEN_PADDING: CGFloat = -27.0
+    private static let POT_PADDING: CGFloat = -20.0
+
     
     let cookerType: Cooker
     var isPassed = false
     var heightPadding: CGFloat = 0.0
     private let baseNode: SKSpriteNode
+    private var assistingNode: SKSpriteNode? = nil
     
     init(cooker: Cooker) {
         cookerType = cooker
@@ -28,26 +31,41 @@ class Obstacle: SKNode {
             baseNode = SKSpriteNode(imageNamed: "pan")
         case .Pot:
             baseNode = SKSpriteNode(imageNamed: "pot-body")
+            assistingNode = SKSpriteNode(imageNamed: "pot-lid")
+            heightPadding = Obstacle.POT_PADDING
         default:
             fatalError()
         }
         
         super.init()
-        
-        let aspectRatio = Double(baseNode.size.height / baseNode.size.width)
-        baseNode.size = CGSize(width: Obstacle.WIDTH, height: Obstacle.WIDTH * aspectRatio)
+        zPosition = 2
+
+        scaleNode(baseNode, width: Obstacle.WIDTH)
         baseNode.position.x = baseNode.size.width / 2
         baseNode.position.y = baseNode.size.height / 2
         addChild(baseNode)
-        zPosition = 2
+        
+        if cooker == .Pot {
+            scaleNode(assistingNode!, width: Obstacle.WIDTH)
+            
+            assistingNode!.position.x = assistingNode!.size.width / 2
+            assistingNode!.position.y = assistingNode!.size.height / 2 + 80
+            addChild(assistingNode!)
+            print(assistingNode!.parent)
+            
+            assistingNode!.physicsBody = SKPhysicsBody(rectangleOfSize: assistingNode!.size)
+            assistingNode!.physicsBody!.categoryBitMask = BitMaskCategory.obstacle
+            assistingNode!.physicsBody!.contactTestBitMask = BitMaskCategory.hero
+            assistingNode!.physicsBody!.collisionBitMask = BitMaskCategory.hero
+            assistingNode!.physicsBody!.dynamic = false
+        }
         
         if cooker != .Pan {
-            physicsBody = SKPhysicsBody(rectangleOfSize: baseNode.size, center: CGPoint(x: baseNode.size.width/2, y: baseNode.size.height/2))
-            physicsBody?.categoryBitMask = BitMaskCategory.obstacle
-            physicsBody?.contactTestBitMask = BitMaskCategory.hero
-            physicsBody?.collisionBitMask = BitMaskCategory.hero
-            physicsBody?.dynamic = false
-            physicsBody!.restitution = 0.0
+            baseNode.physicsBody = SKPhysicsBody(rectangleOfSize: baseNode.size)
+            baseNode.physicsBody!.categoryBitMask = BitMaskCategory.obstacle
+            baseNode.physicsBody!.contactTestBitMask = BitMaskCategory.hero
+            baseNode.physicsBody!.collisionBitMask = BitMaskCategory.hero
+            baseNode.physicsBody!.dynamic = false
         }
     }
 
@@ -55,11 +73,19 @@ class Obstacle: SKNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func isDeadly(vector: CGVector) -> Bool {
-        if cookerType == .Oven {
-            return vector.dx < 0
-        } else {
+    func isDeadly(vector: CGVector, point: CGPoint) -> Bool {
+        switch cookerType {
+        case .Oven:
+            return vector.dx > 0
+        case .Pan:
             return false
+        default:
+            return nodeAtPoint(point) == baseNode || vector.dx < 0
         }
+    }
+    
+    private func scaleNode(node: SKSpriteNode, width: Double) {
+        let aspectRatio = Double(node.size.height / node.size.width)
+        node.size = CGSize(width: width, height: width * aspectRatio)
     }
 }
