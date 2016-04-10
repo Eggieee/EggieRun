@@ -23,7 +23,8 @@ class DexGridNode: SKSpriteNode {
         width = DexGridNode.GRID_RATIO * sceneWidth
         height = sceneHeight - DexGridNode.TITLE_SPACE
         
-        super.init(texture: nil, color: UIColor.grayColor(), size: CGSize(width: width, height: height))
+        
+        super.init(texture: SKTexture(imageNamed: "grid-texture"), color: UIColor.grayColor(), size: CGSize(width: width, height: height))
         self.position = CGPoint(x: 0, y: 0)
         self.anchorPoint = CGPoint(x: 0, y: 0)
         
