@@ -18,6 +18,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let DISTANCE_PLATFORM_AND_COLLECTABLE: CGFloat = 200
     private static let OBSTACLE_RATE = 0.2
     private static let BUFFER_DISTANCE = 400.0
+    private static let FLAVOUR_BAR_OFFSET: CGFloat = 100
     
     private enum GameState {
         case Ready, Playing, Over
@@ -78,9 +79,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let movedDistance = timeInterval * Double(eggie.currentSpeed)
         updateDistance(movedDistance)
         eggie.balance()
+        flavourBarFollow()
         shiftPlatforms(movedDistance)
         shiftCollectables(movedDistance)
         shiftObstacles(movedDistance)
+    }
+    
+    private func flavourBarFollow() {
+        flavourBar.position = CGPoint(x: eggie.position.x, y: eggie.position.y + GameScene.FLAVOUR_BAR_OFFSET)
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
@@ -175,9 +181,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ingredientBar.position = CGPointMake(45, self.frame.height-45)
         addChild(ingredientBar)
         
-        // to decide the position of flavour bar here
         flavourBar = FlavourBar()
-        flavourBar.position = CGPointMake(90, self.frame.height-90)
+        flavourBarFollow()
         addChild(flavourBar)
     }
     
