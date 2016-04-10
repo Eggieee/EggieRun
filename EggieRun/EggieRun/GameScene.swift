@@ -88,7 +88,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == BitMaskCategory.hero | BitMaskCategory.scene {
-            gameOver()
+            gameOver(.Drop)
         } else if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == BitMaskCategory.hero | BitMaskCategory.platform {
             if eggie.state == .Jumping {
                 eggie.state = .Running
@@ -117,7 +117,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
             if obstacle.isDeadPoint(contact.contactPoint) {
-                gameOver()
+                gameOver(obstacle.cookerType)
             }
         }
     }
@@ -201,12 +201,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameState = .Playing
     }
     
-    private func gameOver() {
+    private func gameOver(wayOfDie: Cooker) {
         eggie.state = .Dying
         gameState = .Over
         
         //dummy dish, you'll just need to pass Huang Yue the real cooker
-        let dish = DishDataController.singleton.getResultDish(Cooker.Drop, condiments: flavourBar.condimentDictionary, ingredients: ingredientBar.ingredients)
+        let dish = DishDataController.singleton.getResultDish(wayOfDie, condiments: flavourBar.condimentDictionary, ingredients: ingredientBar.ingredients)
         
         //show ending layer, you'll just need to pass me the real cooker
         endingLayer = EndingLayer(usedCooker: Cooker.Drop, generatedDish: dish)

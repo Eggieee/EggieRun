@@ -11,7 +11,7 @@ import SpriteKit
 class Obstacle: SKNode {
     static let WIDTH = 200.0
     
-    private let cookerType: Cooker
+    let cookerType: Cooker
     private let baseNode: SKSpriteNode
     
     init(cooker: Cooker) {
