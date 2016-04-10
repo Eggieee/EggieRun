@@ -45,7 +45,7 @@ class DexScene: SKScene {
         
         // click on some dishes
         for dishNode in gridNode!.dishNodes {
-            if dishNode.containsPoint(touchLocation) {
+            if dishNode.containsPoint(touchLocation) && dishNode.activated {
                 for otherDishNode in gridNode!.dishNodes {
                     otherDishNode.selected = false
                 }
@@ -59,9 +59,7 @@ class DexScene: SKScene {
     
     func createDetailNode() {
         detailNode = DexDetailNode(sceneHeight:self.frame.height, sceneWidth:self.frame.width)
-        //rightPage.position = CGPoint(x: 11*self.frame.width/14, y:self.frame.height/2-40)
         self.addChild(detailNode!)
-        // detailNode!.dish = DishDataController.singleton.dishes[0]
     }
         
 
