@@ -15,6 +15,8 @@ class MenuScene: SKScene {
     static private let START_BUTTON_POSITION = CGPoint(x: 215, y: 420)
     static private let DEX_BUTTON_POSITION = CGPoint(x: 210, y: 270)
     
+    static private let TRANSITION = SKTransition.doorsOpenVerticalWithDuration(0.5)
+    
     static let singleton = MenuScene(fileNamed: "MenuScene")
     
     private var buttonPlay: SKSpriteNode!
@@ -48,12 +50,10 @@ class MenuScene: SKScene {
         
         if buttonPlay.containsPoint(touchLocation) {
             let gameScene = GameScene(fileNamed: "GameScene")!
-            let transition = SKTransition.doorsOpenVerticalWithDuration(0.5)
-            self.view?.presentScene(gameScene, transition: transition)
+            self.view?.presentScene(gameScene, transition: MenuScene.TRANSITION)
         } else if buttonDex.containsPoint(touchLocation) {
             let dexScene = DexScene(size: self.size)
-            let transition = SKTransition.doorsOpenVerticalWithDuration(0.5)
-            self.view?.presentScene(dexScene, transition: transition)
+            self.view?.presentScene(dexScene, transition: MenuScene.TRANSITION)
         }
     }
     
