@@ -101,7 +101,7 @@ class Eggie: SKSpriteNode {
             return false
         }
         
-        let contactingObjects = physicsBody!.allContactedBodies()
+        let contactingObjects = physicsBody!.allContactedBodies() as [AnyObject]
         for object in contactingObjects {
             if object.categoryBitMask == BitMaskCategory.platform {
                 return true
