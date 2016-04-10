@@ -12,7 +12,7 @@ enum Ingredient: Int {
     
     static let rarityTable: [[Ingredient]] = [[.Milk], [.GreenOnion, .Tomato, .Cream, .Rice, .Bacon, .Strawberry], [.Bread, .Chocolate], [.Surstromming]]
     
-    static let rarityPools = rarityTable.map({RandomPool(objects: $0)})
+    static let rarityPools = rarityTable.map({ RandomPool(objects: $0) })
     
     static func next(distance: Int) -> Ingredient {
         let randomPool = RandomPool(objects: rarityPools, weightages: [30, 100, 20, 1])

@@ -19,10 +19,9 @@ class DexGridNode: SKSpriteNode {
     
     var dishNodes = [DexItemNode]()
     
-    init(sceneHeight: CGFloat, sceneWidth: CGFloat){
+    init(sceneHeight: CGFloat, sceneWidth: CGFloat) {
         width = DexGridNode.GRID_RATIO * sceneWidth
         height = sceneHeight - DexGridNode.TITLE_SPACE
-        
         
         super.init(texture: SKTexture(imageNamed: "grid-texture"), color: UIColor.grayColor(), size: CGSize(width: width, height: height))
         self.position = CGPoint(x: 0, y: 0)
@@ -30,12 +29,12 @@ class DexGridNode: SKSpriteNode {
         
         let itemSize = (width - DexGridNode.PADDING * CGFloat(DexGridNode.ITEMS_PER_ROW + 1)) / CGFloat(DexGridNode.ITEMS_PER_ROW)
         
-        for i in 0..<DishDataController.singleton.dishes.count {
+        for i in 0 ..< DishDataController.singleton.dishes.count {
             let row = i / DexGridNode.ITEMS_PER_ROW
             let col = i % DexGridNode.ITEMS_PER_ROW
             
             let x = CGFloat(col + 1) * DexGridNode.PADDING + (CGFloat(col) + 0.5) * itemSize
-            let y = height - (CGFloat(row + 1) * DexGridNode.PADDING + (CGFloat(row) + 0.5) * itemSize) 
+            let y = height - (CGFloat(row + 1) * DexGridNode.PADDING + (CGFloat(row) + 0.5) * itemSize)
             
             let item = DexItemNode(dish: DishDataController.singleton.dishes[i], xPosition: x, yPosition: y, size: itemSize)
             
@@ -47,6 +46,4 @@ class DexGridNode: SKSpriteNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-
 }
