@@ -16,6 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let EGGIE_X_POSITION: CGFloat = 200
     private static let FIRST_COLLECTABLE_POSITION_X: CGFloat = 400
     private static let DISTANCE_PLATFORM_AND_COLLECTABLE: CGFloat = 200
+    private static let OBSTACLE_RATE = 0.2
     
     private enum GameState {
         case Ready, Playing, Over
@@ -32,6 +33,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var distance = 0
     private var platforms: [Platform]!
     private var collectables: [Collectable]!
+    private var obstacles: [Obstacle]!
     private var lastUpdatedTime: CFTimeInterval!
     private var endingLayer: EndingLayer?
 
@@ -77,6 +79,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         eggie.balance()
         shiftPlatforms(movedDistance)
         shiftCollectables(movedDistance)
+        shiftObstacles(movedDistance)
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
@@ -125,6 +128,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(distanceLabel)
     }
     
+    private func initializeObstacle() {
+        obstacleFactory = ObstacleFactory()
+        obstacles = [Obstacle]()
+    }
+    
     private func initializePlatform() {
         platformFactory = PlatformFactory()
         platforms = [Platform]()
@@ -169,6 +177,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         removeAllChildren()
         changeBackground(GameScene.BACKGROUND_IMAGE_NAME)
         initializeDistanceLabel()
+        initializeObstacle()
         initializePlatform()
         initialzieCollectable()
         initializeEggie()
@@ -237,13 +246,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    private func shiftObstacles(distance: Double) {
+        for obstacle in obstacles {
+            if obstacle.position.x + CGFloat(Obstacle.WIDTH) < 0 {
+                obstacle.removeFromParent()
+                obstacles.removeFirst()
+            } else {
+                obstacle.position.x -= CGFloat(distance)
+            }
+        }
+    }
+    
     private func appendNewPlatform(position: CGFloat) {
         let pf = platformFactory.nextPlatform()
         pf.position.x = position
         pf.position.y = 0
         platforms.append(pf)
         addChild(pf)
-        let maxPossibleObstacle = floor(Double(pf.width) / Obstacle.WIDTH)
-        print(maxPossibleObstacle)
+        
+        var position = CGFloat(Obstacle.WIDTH)
+        while position < pf.width {
+            if Double(arc4random()) / Double(UINT32_MAX) <= GameScene.OBSTACLE_RATE {
+                let obstacle = obstacleFactory.nextObstacle()
+                obstacle.position.y = pf.height
+                obstacle.position.x = pf.position.y + position
+                obstacles.append(obstacle)
+                addChild(obstacle)
+                position += CGFloat(Obstacle.WIDTH * 2)
+            } else {
+                position += CGFloat(Obstacle.WIDTH)
+            }
+        }
     }
 }

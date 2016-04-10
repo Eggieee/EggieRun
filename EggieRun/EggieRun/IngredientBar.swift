@@ -77,7 +77,7 @@ class IngredientBar: SKSpriteNode {
         } else if (isFull) {
             moveGridByOne(0)
         }
-        print(firstEmptyIndex)
+//        print(firstEmptyIndex)
         ingredients.append(newIngredient)
         ingredientGrids.append(newGrid)
     }
