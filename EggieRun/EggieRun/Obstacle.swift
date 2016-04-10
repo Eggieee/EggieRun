@@ -10,14 +10,28 @@ import SpriteKit
 
 class Obstacle: SKNode {
     static let WIDTH = 200.0
+    private static let OVEN_PADDING: CGFloat = -27.0
     
     let cookerType: Cooker
     var isPassed = false
+    var heightPadding: CGFloat = 0.0
     private let baseNode: SKSpriteNode
     
     init(cooker: Cooker) {
         cookerType = cooker
-        baseNode = SKSpriteNode(imageNamed: "oven-open")
+        
+        switch cooker {
+        case .Oven:
+            baseNode = SKSpriteNode(imageNamed: "oven-open")
+            heightPadding = Obstacle.OVEN_PADDING
+        case .Pan:
+            baseNode = SKSpriteNode(imageNamed: "pan")
+        case .Pot:
+            baseNode = SKSpriteNode(imageNamed: "pot-body")
+        default:
+            fatalError()
+        }
+        
         super.init()
         
         let aspectRatio = Double(baseNode.size.height / baseNode.size.width)
@@ -27,12 +41,14 @@ class Obstacle: SKNode {
         addChild(baseNode)
         zPosition = 2
         
-        physicsBody = SKPhysicsBody(rectangleOfSize: baseNode.size, center: CGPoint(x: baseNode.size.width/2, y: baseNode.size.height/2))
-        physicsBody?.categoryBitMask = BitMaskCategory.obstacle
-        physicsBody?.contactTestBitMask = BitMaskCategory.hero
-        physicsBody?.collisionBitMask = BitMaskCategory.hero
-        physicsBody?.dynamic = false
-        physicsBody!.restitution = 0.0
+        if cooker != .Pan {
+            physicsBody = SKPhysicsBody(rectangleOfSize: baseNode.size, center: CGPoint(x: baseNode.size.width/2, y: baseNode.size.height/2))
+            physicsBody?.categoryBitMask = BitMaskCategory.obstacle
+            physicsBody?.contactTestBitMask = BitMaskCategory.hero
+            physicsBody?.collisionBitMask = BitMaskCategory.hero
+            physicsBody?.dynamic = false
+            physicsBody!.restitution = 0.0
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -40,7 +56,10 @@ class Obstacle: SKNode {
     }
     
     func isDeadly(vector: CGVector) -> Bool {
-        print("vector:" + String(vector))
-        return vector.dx < 0
+        if cookerType == .Oven {
+            return vector.dx < 0
+        } else {
+            return false
+        }
     }
 }
