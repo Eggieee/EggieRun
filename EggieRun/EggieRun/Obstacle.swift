@@ -32,16 +32,15 @@ class Obstacle: SKNode {
         physicsBody?.contactTestBitMask = BitMaskCategory.hero
         physicsBody?.collisionBitMask = BitMaskCategory.platform | BitMaskCategory.hero
         physicsBody?.dynamic = false
-        
+        physicsBody!.restitution = 0.0
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func isDeadPoint(point: CGPoint) -> Bool {
-        print("point of contact " + String(point.y))
-        print("top edge " + String(baseNode.size.height + position.y))
-        return point.y < position.y + baseNode.size.height
+    func isDeadly(vector: CGVector) -> Bool {
+        print("vector:" + String(vector))
+        return vector.dx < 0
     }
 }
