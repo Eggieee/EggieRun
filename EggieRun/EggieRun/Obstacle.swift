@@ -51,12 +51,11 @@ class Obstacle: SKNode {
             assistingNode!.position.x = assistingNode!.size.width / 2
             assistingNode!.position.y = assistingNode!.size.height / 2 + 80
             addChild(assistingNode!)
-            print(assistingNode!.parent)
             
             assistingNode!.physicsBody = SKPhysicsBody(rectangleOfSize: assistingNode!.size)
             assistingNode!.physicsBody!.categoryBitMask = BitMaskCategory.obstacle
             assistingNode!.physicsBody!.contactTestBitMask = BitMaskCategory.hero
-            assistingNode!.physicsBody!.collisionBitMask = BitMaskCategory.hero
+            assistingNode!.physicsBody!.collisionBitMask = BitMaskCategory.hero | BitMaskCategory.obstacle
             assistingNode!.physicsBody!.dynamic = false
         }
         
@@ -64,7 +63,7 @@ class Obstacle: SKNode {
             baseNode.physicsBody = SKPhysicsBody(rectangleOfSize: baseNode.size)
             baseNode.physicsBody!.categoryBitMask = BitMaskCategory.obstacle
             baseNode.physicsBody!.contactTestBitMask = BitMaskCategory.hero
-            baseNode.physicsBody!.collisionBitMask = BitMaskCategory.hero
+            baseNode.physicsBody!.collisionBitMask = BitMaskCategory.hero | BitMaskCategory.obstacle
             baseNode.physicsBody!.dynamic = false
         }
     }
@@ -76,11 +75,11 @@ class Obstacle: SKNode {
     func isDeadly(vector: CGVector, point: CGPoint) -> Bool {
         switch cookerType {
         case .Oven:
-            return vector.dx > 0
+            return vector.dx != 0
         case .Pan:
             return false
         default:
-            return nodeAtPoint(point) == baseNode || vector.dx < 0
+            return nodeAtPoint(point) == baseNode || vector.dx != 0
         }
     }
     
@@ -89,6 +88,8 @@ class Obstacle: SKNode {
             let atlas = SKTextureAtlas(named: "oven-close.atlas")
             let textures = atlas.textureNames.sort().map({ atlas.textureNamed($0) })
             baseNode.runAction(SKAction.repeatActionForever(SKAction.animateWithTextures(textures, timePerFrame: Obstacle.ATLAS_TIME_PER_FRAME)))
+        } else if cookerType == .Pot {
+            assistingNode!.physicsBody!.dynamic = true
         }
     }
     
