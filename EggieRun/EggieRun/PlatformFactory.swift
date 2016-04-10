@@ -12,8 +12,17 @@ class PlatformFactory {
     private static let MAX_NUM_OF_MID_PIECE: UInt32 = 4
     private static let GAP_SIZE = 300
     
+    private var isFirst = true
+    
     func nextPlatform() -> Platform {
-        let numOfMid = arc4random() % (PlatformFactory.MAX_NUM_OF_MID_PIECE + 1)
+        let numOfMid: Int
+        
+        if isFirst {
+            numOfMid = 1
+            isFirst = false
+        } else {
+            numOfMid = Int(arc4random() % (PlatformFactory.MAX_NUM_OF_MID_PIECE + 1))
+        }
         
         var images = [String]()
         images.append("closet-left")

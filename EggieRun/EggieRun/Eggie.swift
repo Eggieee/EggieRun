@@ -51,6 +51,7 @@ class Eggie: SKSpriteNode {
         physicsBody!.contactTestBitMask = BitMaskCategory.scene | BitMaskCategory.collectable | BitMaskCategory.platform | BitMaskCategory.obstacle
         physicsBody!.collisionBitMask = BitMaskCategory.platform | BitMaskCategory.scene | BitMaskCategory.obstacle
         physicsBody!.allowsRotation = false
+        physicsBody!.
 
         position = startPosition
     }
