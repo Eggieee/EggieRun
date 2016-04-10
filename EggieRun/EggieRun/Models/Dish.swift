@@ -14,7 +14,7 @@ class Dish: Constructable {
     let description: String
     let imageNamed: String
     let rarity: Int
-    let canConstructRawFunction: String
+    let canConstructJsFunction: JSValue
     
     var titleImageNamed: String {
         return imageNamed + "-title"
@@ -26,7 +26,11 @@ class Dish: Constructable {
         self.description = data["description"] as! String
         self.imageNamed = data["imageNamed"] as! String
         self.rarity = data["rarity"] as! Int
-        self.canConstructRawFunction = "var canConstruct = function(cooker, cond, ingred) { " + (data["canConstruct"] as! String) + " };"
+        
+        let jsFunction = "var canConstruct = function(cooker, cond, ingred) { " + (data["canConstruct"] as! String) + " };"
+        let context = JSContext()
+        context.evaluateScript(jsFunction)
+        canConstructJsFunction = context.objectForKeyedSubscript("canConstruct")
     }
     
     func canConstruct(resources: [Int: Int]) -> Int {
@@ -60,10 +64,6 @@ class Dish: Constructable {
     // >0: randomly appear, the larger the number the higher the probability
     // func sign in js: function(int cooker, [double] cond, [func] ingred) -> int
     func canConstruct(cooker: Cooker, condiments: [Condiment: Int], ingredients: [Ingredient]) -> Int {
-        let context = JSContext()
-        context.evaluateScript(self.canConstructRawFunction)
-        let jsFunction = context.objectForKeyedSubscript("canConstruct")
-        
         var condimentsCount = [0, 0, 0]
         var totalCondiments = 0
         for condiment in condiments {
@@ -87,6 +87,6 @@ class Dish: Constructable {
             jsIngredients[ingredient.rawValue] = true
         }
         
-        return Int(jsFunction.callWithArguments([cooker.rawValue, jsCondiments!, jsIngredients]).toInt32())
+        return Int(canConstructJsFunction.callWithArguments([cooker.rawValue, jsCondiments!, jsIngredients]).toInt32())
     }
 }
