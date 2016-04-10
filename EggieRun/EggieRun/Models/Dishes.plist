@@ -26,9 +26,219 @@
 		<key>imageNamed</key>
 		<string>oyako-don</string>
 		<key>rarity</key>
-		<integer>1</integer>
+		<integer>5</integer>
 		<key>canConstruct</key>
 		<string>return (cooker==-1)?-1:0;</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>2</integer>
+		<key>name</key>
+		<string>Surströmming &amp; Egg</string>
+		<key>description</key>
+		<string></string>
+		<key>imageNamed</key>
+		<string>surstromming-egg</string>
+		<key>rarity</key>
+		<integer>5</integer>
+		<key>canConstruct</key>
+		<string>return 0;</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>3</integer>
+		<key>name</key>
+		<string>Fried Egg &amp; Bacon</string>
+		<key>description</key>
+		<string></string>
+		<key>imageNamed</key>
+		<string>fried-egg-bacon</string>
+		<key>rarity</key>
+		<integer>4</integer>
+		<key>canConstruct</key>
+		<string>return 0;</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>4</integer>
+		<key>name</key>
+		<string>Scramble Egg &amp; Tomato</string>
+		<key>description</key>
+		<string></string>
+		<key>imageNamed</key>
+		<string>scramble-egg-tomato</string>
+		<key>rarity</key>
+		<integer>4</integer>
+		<key>canConstruct</key>
+		<string>return 0;</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>5</integer>
+		<key>name</key>
+		<string>Genki Omurice</string>
+		<key>description</key>
+		<string></string>
+		<key>imageNamed</key>
+		<string>genki-omurice</string>
+		<key>rarity</key>
+		<integer>4</integer>
+		<key>canConstruct</key>
+		<string>return 0;</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>6</integer>
+		<key>name</key>
+		<string>Egg Sandwitch</string>
+		<key>description</key>
+		<string></string>
+		<key>imageNamed</key>
+		<string>egg-sandwich</string>
+		<key>rarity</key>
+		<integer>4</integer>
+		<key>canConstruct</key>
+		<string>return 0;</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>7</integer>
+		<key>name</key>
+		<string>Egg Pancake</string>
+		<key>description</key>
+		<string></string>
+		<key>imageNamed</key>
+		<string>egg-pancake</string>
+		<key>rarity</key>
+		<integer>4</integer>
+		<key>canConstruct</key>
+		<string>return 0;</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>8</integer>
+		<key>name</key>
+		<string> Sichuan Style Fried Rice with Egg</string>
+		<key>description</key>
+		<string></string>
+		<key>imageNamed</key>
+		<string>sichuan-style-fried-rice-with-egg</string>
+		<key>rarity</key>
+		<integer>4</integer>
+		<key>canConstruct</key>
+		<string>return 0;</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>9</integer>
+		<key>name</key>
+		<string>Chocolate Cake</string>
+		<key>description</key>
+		<string></string>
+		<key>imageNamed</key>
+		<string>chocolate-cake</string>
+		<key>rarity</key>
+		<integer>3</integer>
+		<key>canConstruct</key>
+		<string>return 0;</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>10</integer>
+		<key>name</key>
+		<string>Strawberry Cake</string>
+		<key>description</key>
+		<string></string>
+		<key>imageNamed</key>
+		<string>strawberry-cake</string>
+		<key>rarity</key>
+		<integer>3</integer>
+		<key>canConstruct</key>
+		<string>return 0;</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>11</integer>
+		<key>name</key>
+		<string>Strawberry Custard</string>
+		<key>description</key>
+		<string></string>
+		<key>imageNamed</key>
+		<string>strawberry-custard</string>
+		<key>rarity</key>
+		<integer>3</integer>
+		<key>canConstruct</key>
+		<string>return 0;</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>12</integer>
+		<key>name</key>
+		<string>Souffle</string>
+		<key>description</key>
+		<string></string>
+		<key>imageNamed</key>
+		<string>souffle</string>
+		<key>rarity</key>
+		<integer>3</integer>
+		<key>canConstruct</key>
+		<string>return 0;</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>13</integer>
+		<key>name</key>
+		<string>Steamed Eggs with Milk</string>
+		<key>description</key>
+		<string></string>
+		<key>imageNamed</key>
+		<string>streamed-egg-with-milk</string>
+		<key>rarity</key>
+		<integer>3</integer>
+		<key>canConstruct</key>
+		<string>return 0;</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>14</integer>
+		<key>name</key>
+		<string>Soy Egg / Tea Egg</string>
+		<key>description</key>
+		<string></string>
+		<key>imageNamed</key>
+		<string>soy-tea-egg</string>
+		<key>rarity</key>
+		<integer>3</integer>
+		<key>canConstruct</key>
+		<string>return 0;</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>15</integer>
+		<key>name</key>
+		<string>Guang Dong Style Scrambled Egg</string>
+		<key>description</key>
+		<string></string>
+		<key>imageNamed</key>
+		<string>guangdong-style-scrambled-egg</string>
+		<key>rarity</key>
+		<integer>3</integer>
+		<key>canConstruct</key>
+		<string>return 0;</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>16</integer>
+		<key>name</key>
+		<string>Chinese Steamed Eggs</string>
+		<key>description</key>
+		<string></string>
+		<key>imageNamed</key>
+		<string>chinese-steamed-eggs</string>
+		<key>rarity</key>
+		<integer>3</integer>
+		<key>canConstruct</key>
+		<string>return 0;</string>
 	</dict>
 	<dict>
 		<key>id</key>
