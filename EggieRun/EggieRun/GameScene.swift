@@ -17,6 +17,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let FIRST_COLLECTABLE_POSITION_X: CGFloat = 400
     private static let DISTANCE_PLATFORM_AND_COLLECTABLE: CGFloat = 200
     private static let OBSTACLE_RATE = 0.2
+    private static let BUFFER_DISTANCE = 300.0
     
     private enum GameState {
         case Ready, Playing, Over
@@ -47,6 +48,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameStart()
         } else if gameState == .Playing && eggie.canJump {
             eggie.state = .Jumping
+            print("jumping")
         } else if gameState == .Over && endingLayer != nil {
             let touch = touches.first!
             let touchLocation = touch.locationInNode(endingLayer!)
@@ -121,6 +123,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 gameOver(obstacle.cookerType)
             } else {
                 obstacle.isPassed = true
+                eggie.state = .Running
             }
         }
     }
@@ -151,8 +154,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         platformFactory = PlatformFactory()
         platforms = [Platform]()
         appendNewPlatform(0)
-        // append other platforms if necessary
-        shiftPlatforms(0)
     }
     
     private func initialzieCollectable() {
@@ -276,17 +277,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         platforms.append(pf)
         addChild(pf)
         
-        var position = CGFloat(Obstacle.WIDTH)
-        while position < pf.width - CGFloat(Obstacle.WIDTH) {
+        var position = CGFloat(GameScene.BUFFER_DISTANCE)
+        while position < pf.width - CGFloat(GameScene.BUFFER_DISTANCE) {
             if Double(arc4random()) / Double(UINT32_MAX) <= GameScene.OBSTACLE_RATE {
                 let obstacle = obstacleFactory.nextObstacle()
                 obstacle.position.y = pf.height
                 obstacle.position.x = pf.position.x + position
                 obstacles.append(obstacle)
                 addChild(obstacle)
-                position += CGFloat(Obstacle.WIDTH * 2)
+                position += CGFloat(Obstacle.WIDTH + GameScene.BUFFER_DISTANCE)
             } else {
-                position += CGFloat(Obstacle.WIDTH)
+                position += CGFloat(GameScene.BUFFER_DISTANCE)
             }
         }
     }

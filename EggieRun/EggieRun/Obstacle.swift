@@ -30,7 +30,7 @@ class Obstacle: SKNode {
         physicsBody = SKPhysicsBody(rectangleOfSize: baseNode.size, center: CGPoint(x: baseNode.size.width/2, y: baseNode.size.height/2))
         physicsBody?.categoryBitMask = BitMaskCategory.obstacle
         physicsBody?.contactTestBitMask = BitMaskCategory.hero
-        physicsBody?.collisionBitMask = BitMaskCategory.platform | BitMaskCategory.hero
+        physicsBody?.collisionBitMask = BitMaskCategory.hero
         physicsBody?.dynamic = false
         physicsBody!.restitution = 0.0
     }

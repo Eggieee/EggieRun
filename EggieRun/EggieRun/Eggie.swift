@@ -12,7 +12,7 @@ class Eggie: SKSpriteNode {
     // Constants
     private static let SPEED_STATIC = 0
     private static let SPEED_RUNNING = 500
-    private static let ACCELERATION_JUMPING = CGVectorMake(0, 800)
+    private static let ACCELERATION_JUMPING = CGVectorMake(0, 600)
     private static let ATLAS_TIME = 0.2
     private static let ATLAS_COUNT = 5
     private static let ATLAS_TIME_PER_FRAME = Eggie.ATLAS_TIME / Double(Eggie.ATLAS_COUNT)
@@ -103,9 +103,19 @@ class Eggie: SKSpriteNode {
         }
         
         let contactingObjects = physicsBody!.allContactedBodies()
+        print(contactingObjects.count)
+        print(position.y)
         for object in contactingObjects {
+            print(object)
             if object.categoryBitMask == BitMaskCategory.platform {
+                print("on platform")
                 return true
+            } else if object.categoryBitMask == BitMaskCategory.obstacle {
+                print("on obstacle")
+                return true
+            } else {
+                print("hehe")
+                return false
             }
         }
         
