@@ -24,6 +24,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var eggie: Eggie!
     private var platformFactory: PlatformFactory!
     private var collectableFactory: CollectableFactory!
+    private var obstacleFactory: ObstacleFactory!
     private var ingredientBar: IngredientBar!
     private var flavourBar: FlavourBar!
     private var gameState: GameState = .Ready
@@ -123,6 +124,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pf.position.y = 0
         platforms.append(pf)
         addChild(pf)
+        // append other platforms if necessary
+        shiftPlatforms(0)
     }
     
     private func initialzieCollectable() {
