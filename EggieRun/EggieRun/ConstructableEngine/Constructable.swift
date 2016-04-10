@@ -11,5 +11,7 @@ import Foundation
 protocol Constructable {
     init(data: NSDictionary)
     
+    var id: Int { get }
+    
     func canConstruct(resources: [Int: Int]) -> Int
 }

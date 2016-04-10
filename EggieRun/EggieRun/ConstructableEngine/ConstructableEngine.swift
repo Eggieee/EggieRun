@@ -11,13 +11,18 @@ import Foundation
 class ConstructableEngine<C: Constructable> {
     
     private(set) var constructables = [C]()
+    private let storage: ConstructableStorage<C>
     
-    init(url: NSURL) {
-        let data = NSArray(contentsOfURL: url)!
+    init(dataUrl: NSURL, storageFileName: String, storageKey: String) {
+        NSLog("Initializing ConstructableEngine from dataUrl %@", dataUrl)
+        
+        let data = NSArray(contentsOfURL: dataUrl)!
         for element in data {
             let itemData = element as! NSDictionary
             constructables.append(C(data: itemData))
         }
+        
+        storage = ConstructableStorage<C>(storageFileName: storageFileName, storageKey: storageKey)
     }
     
     func getConstructResult(resources: [Int: Int]) -> C {
@@ -37,10 +42,24 @@ class ConstructableEngine<C: Constructable> {
             }
         }
         
+        var constructResult: C?
+        
         if forceAppearConstructable != nil {
-            return forceAppearConstructable!
+            constructResult = forceAppearConstructable!
         } else {
-            return randomPool.draw()
+            constructResult = randomPool.draw()
         }
+        if !storage.activate(constructResult!) {
+            NSLog("ConstructableStorage save failed!")
+        }
+        return constructResult!
+    }
+    
+    func isConstructableActivated(item: C) -> Bool {
+        return storage.isActivated(item)
+    }
+    
+    func clearActivated() -> Bool {
+        return storage.clearActivated()
     }
 }

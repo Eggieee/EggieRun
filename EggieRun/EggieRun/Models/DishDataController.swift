@@ -15,13 +15,16 @@ class DishDataController {
     
     private let constructableEngine: ConstructableEngine<Dish>
     
+    private static let STORAGE_FILE_NAME = "eggdex.data"
+    private static let STORAGE_KEY = "eggdex"
+    
     var dishes: [Dish] {
         return constructableEngine.constructables
     }
     
     init() {
         if let url = NSBundle.mainBundle().URLForResource("Dishes", withExtension: "plist") {
-            constructableEngine = ConstructableEngine<Dish>(url: url)
+            constructableEngine = ConstructableEngine<Dish>(dataUrl: url, storageFileName: DishDataController.STORAGE_FILE_NAME, storageKey: DishDataController.STORAGE_KEY)
         } else {
             fatalError()
         }
@@ -41,5 +44,13 @@ class DishDataController {
         }
         
         return constructableEngine.getConstructResult(resources)
+    }
+    
+    func isDishActivated(dish: Dish) -> Bool {
+        return constructableEngine.isConstructableActivated(dish)
+    }
+    
+    func clearActivatedDishes() -> Bool {
+        return constructableEngine.clearActivated()
     }
 }
