@@ -109,7 +109,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func initializeDistanceLabel() {
         distanceLabel = SKLabelNode(fontNamed: GlobalConstants.fontName)
         distanceLabel.fontSize = GameScene.HEADER_FONT_SIZE
-        distanceLabel.text = String(format: GameScene.DISTANCE_LABEL_TEXT, distance)
+        distanceLabel.text = String(format: GameScene.DISTANCE_LABEL_TEXT, 0)
         distanceLabel.position = CGPoint(x: CGRectGetWidth(distanceLabel.frame), y: CGRectGetHeight(frame) - CGRectGetHeight(distanceLabel.frame))
         addChild(distanceLabel)
     }
