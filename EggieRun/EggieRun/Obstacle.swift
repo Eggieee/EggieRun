@@ -12,6 +12,7 @@ class Obstacle: SKNode {
     static let WIDTH = 200.0
     
     let cookerType: Cooker
+    var isPassed = false
     private let baseNode: SKSpriteNode
     
     init(cooker: Cooker) {
@@ -39,6 +40,8 @@ class Obstacle: SKNode {
     }
     
     func isDeadPoint(point: CGPoint) -> Bool {
+        print("point of contact " + String(point.y))
+        print("top edge " + String(baseNode.size.height + position.y))
         return point.y < position.y + baseNode.size.height
     }
 }

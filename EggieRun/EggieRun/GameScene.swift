@@ -116,8 +116,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 obstacle = contact.bodyB.node as! Obstacle
             }
             
-            if obstacle.isDeadPoint(contact.contactPoint) {
+            if obstacle.isDeadPoint(contact.contactPoint) && !obstacle.isPassed {
                 gameOver(obstacle.cookerType)
+            } else {
+                obstacle.isPassed = true
             }
         }
     }
