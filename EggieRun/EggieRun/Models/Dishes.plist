@@ -42,7 +42,7 @@
 		<key>rarity</key>
 		<integer>5</integer>
 		<key>canConstruct</key>
-		<string>return 0;</string>
+		<string>return (cooker!=0 &amp;&amp; ingred[109])?-2:0;</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -56,7 +56,7 @@
 		<key>rarity</key>
 		<integer>4</integer>
 		<key>canConstruct</key>
-		<string>return 0;</string>
+		<string>return (cooker==1 &amp;&amp; cond[0]&gt;=0.5 &amp;&amp; ingred[106])?10:0;</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -70,7 +70,7 @@
 		<key>rarity</key>
 		<integer>4</integer>
 		<key>canConstruct</key>
-		<string>return 0;</string>
+		<string>return (cooker==1 &amp;&amp; cond[0]&gt;=0.5 &amp;&amp; ingred[101])?10:0;</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -84,7 +84,7 @@
 		<key>rarity</key>
 		<integer>4</integer>
 		<key>canConstruct</key>
-		<string>return 0;</string>
+		<string>return (cooker==1 &amp;&amp; cond[0]&gt;=0.4 &amp;&amp; ingred[104])?10:0;</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -98,7 +98,7 @@
 		<key>rarity</key>
 		<integer>4</integer>
 		<key>canConstruct</key>
-		<string>return 0;</string>
+		<string>return (cooker==2 &amp;&amp; cond[0]&gt;=0.3 &amp;&amp; cond[2]&lt;=0.2 &amp;&amp; ingred[101] &amp;&amp; ingred[105] &amp;&amp; ingred[106])?10:0;</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -112,7 +112,7 @@
 		<key>rarity</key>
 		<integer>4</integer>
 		<key>canConstruct</key>
-		<string>return 0;</string>
+		<string>return (cooker==1 &amp;&amp; cond[0]&gt;=0.5 &amp;&amp; ingred[100])?10:0;</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -126,7 +126,7 @@
 		<key>rarity</key>
 		<integer>4</integer>
 		<key>canConstruct</key>
-		<string>return 0;</string>
+		<string>return (cooker==1 &amp;&amp; cond[0]&gt;=0.4 &amp;&amp; cond[2]&gt;=0.3 &amp;&amp; ingred[100] &amp;&amp; ingred[104])?10:0;</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -252,7 +252,7 @@
 		<key>rarity</key>
 		<integer>1</integer>
 		<key>canConstruct</key>
-		<string>return (cooker==3 &amp;&amp; condiments[0] == 0 &amp;&amp; condiments[1] == 0 &amp;&amp; condiments[2] == 0)?-2:0;</string>
+		<string>return (cooker==3 &amp;&amp; cond[0] == 0 &amp;&amp; cond[1] == 0 &amp;&amp; cond[2] == 0)?-2:0;</string>
 	</dict>
 	<dict>
 		<key>id</key>
