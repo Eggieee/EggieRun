@@ -17,6 +17,7 @@
 		6C224DE11CA534DD00BF35A2 /* Dishes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C224DE01CA534DD00BF35A2 /* Dishes.plist */; };
 		6C5CDD4C1C9DBEEF005BB83C /* DexScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5CDD4B1C9DBEEF005BB83C /* DexScene.swift */; };
 		6C5CDD4E1C9DBF3D005BB83C /* DexScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6C5CDD4D1C9DBF3D005BB83C /* DexScene.sks */; };
+		6C84EC441CBA209B00CB4A44 /* ConstructableStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C84EC431CBA209B00CB4A44 /* ConstructableStorage.swift */; };
 		6CA7272F1C9BE60700CBD165 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA7272E1C9BE60700CBD165 /* AppDelegate.swift */; };
 		6CA727311C9BE60700CBD165 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6CA727301C9BE60700CBD165 /* GameScene.sks */; };
 		6CA727331C9BE60700CBD165 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA727321C9BE60700CBD165 /* GameScene.swift */; };
@@ -31,7 +32,6 @@
 		6CE99C791CA0576D006F960B /* Condiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE99C781CA0576D006F960B /* Condiment.swift */; };
 		6CE99C7B1CA05798006F960B /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE99C7A1CA05798006F960B /* Ingredient.swift */; };
 		6CE99C7D1CA05842006F960B /* Cooker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE99C7C1CA05842006F960B /* Cooker.swift */; };
-		6CED38D41CA0062D00F4E2F0 /* DexStorageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CED38D31CA0062D00F4E2F0 /* DexStorageController.swift */; };
 		6CED38D91CA0073300F4E2F0 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CED38D81CA0073300F4E2F0 /* Dish.swift */; };
 		6CFF053B1CB79F59006A0DB8 /* ConstructableEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFF053A1CB79F59006A0DB8 /* ConstructableEngine.swift */; };
 		6CFF053F1CB7A018006A0DB8 /* Constructable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFF053E1CB7A018006A0DB8 /* Constructable.swift */; };
@@ -82,6 +82,7 @@
 		6C224DE01CA534DD00BF35A2 /* Dishes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Dishes.plist; sourceTree = "<group>"; };
 		6C5CDD4B1C9DBEEF005BB83C /* DexScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DexScene.swift; sourceTree = "<group>"; };
 		6C5CDD4D1C9DBF3D005BB83C /* DexScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DexScene.sks; sourceTree = "<group>"; };
+		6C84EC431CBA209B00CB4A44 /* ConstructableStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstructableStorage.swift; sourceTree = "<group>"; };
 		6CA7272B1C9BE60600CBD165 /* EggieRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EggieRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CA7272E1C9BE60700CBD165 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6CA727301C9BE60700CBD165 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -101,7 +102,6 @@
 		6CE99C781CA0576D006F960B /* Condiment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Condiment.swift; sourceTree = "<group>"; };
 		6CE99C7A1CA05798006F960B /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		6CE99C7C1CA05842006F960B /* Cooker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cooker.swift; sourceTree = "<group>"; };
-		6CED38D31CA0062D00F4E2F0 /* DexStorageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DexStorageController.swift; sourceTree = "<group>"; };
 		6CED38D81CA0073300F4E2F0 /* Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
 		6CFF053A1CB79F59006A0DB8 /* ConstructableEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstructableEngine.swift; sourceTree = "<group>"; };
 		6CFF053E1CB7A018006A0DB8 /* Constructable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constructable.swift; sourceTree = "<group>"; };
@@ -202,7 +202,6 @@
 				6CA727341C9BE60700CBD165 /* GameViewController.swift */,
 				6CFF05391CB79EF7006A0DB8 /* ConstructableEngine */,
 				6CE99C771CA05747006F960B /* Models */,
-				6CED38D31CA0062D00F4E2F0 /* DexStorageController.swift */,
 				6CA727361C9BE60700CBD165 /* Main.storyboard */,
 				6CA7273B1C9BE60700CBD165 /* LaunchScreen.storyboard */,
 				6CA7273E1C9BE60700CBD165 /* Info.plist */,
@@ -246,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				6CFF053A1CB79F59006A0DB8 /* ConstructableEngine.swift */,
+				6C84EC431CBA209B00CB4A44 /* ConstructableStorage.swift */,
 				6CFF053E1CB7A018006A0DB8 /* Constructable.swift */,
 				6CC20FA11CA6D10E00B8CE30 /* RandomPool.swift */,
 			);
@@ -440,7 +440,6 @@
 				6CE99C7B1CA05798006F960B /* Ingredient.swift in Sources */,
 				CDD106611C9DD15600959FFD /* Platform.swift in Sources */,
 				CD09406C1C9CEEC200CF4905 /* GlobalConstants.swift in Sources */,
-				6CED38D41CA0062D00F4E2F0 /* DexStorageController.swift in Sources */,
 				6CA727331C9BE60700CBD165 /* GameScene.swift in Sources */,
 				CDD106791CA84D7300959FFD /* CollectableFactory.swift in Sources */,
 				6C1C64A21C9C47390091AE8B /* MenuScene.swift in Sources */,
@@ -457,6 +456,7 @@
 				0B8DC3E81CA05D9C0055382D /* SKScene+Background.swift in Sources */,
 				6CA7272F1C9BE60700CBD165 /* AppDelegate.swift in Sources */,
 				CDD106651C9DD62600959FFD /* PlatformFactory.swift in Sources */,
+				6C84EC441CBA209B00CB4A44 /* ConstructableStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
