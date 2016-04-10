@@ -45,6 +45,7 @@
 		CD0940741C9CFBBB00CF4905 /* EggieState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0940731C9CFBBB00CF4905 /* EggieState.swift */; };
 		CD5FD5911CB9EA0300C0ACB0 /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5FD5901CB9EA0300C0ACB0 /* Obstacle.swift */; };
 		CD5FD5931CBA624100C0ACB0 /* ObstacleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5FD5921CBA624100C0ACB0 /* ObstacleFactory.swift */; };
+		CD5FD5951CBAF7A600C0ACB0 /* oven-close.atlas in Resources */ = {isa = PBXBuildFile; fileRef = CD5FD5941CBAF7A600C0ACB0 /* oven-close.atlas */; };
 		CDD1065D1C9D482500959FFD /* BitMaskCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD1065C1C9D482500959FFD /* BitMaskCategory.swift */; };
 		CDD106611C9DD15600959FFD /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD106601C9DD15600959FFD /* Platform.swift */; };
 		CDD106651C9DD62600959FFD /* PlatformFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD106641C9DD62600959FFD /* PlatformFactory.swift */; };
@@ -117,6 +118,7 @@
 		CD0940731C9CFBBB00CF4905 /* EggieState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EggieState.swift; sourceTree = "<group>"; };
 		CD5FD5901CB9EA0300C0ACB0 /* Obstacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Obstacle.swift; sourceTree = "<group>"; };
 		CD5FD5921CBA624100C0ACB0 /* ObstacleFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObstacleFactory.swift; sourceTree = "<group>"; };
+		CD5FD5941CBAF7A600C0ACB0 /* oven-close.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "oven-close.atlas"; sourceTree = "<group>"; };
 		CDD1065C1C9D482500959FFD /* BitMaskCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitMaskCategory.swift; sourceTree = "<group>"; };
 		CDD106601C9DD15600959FFD /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		CDD106641C9DD62600959FFD /* PlatformFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformFactory.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 		6CA7272D1C9BE60600CBD165 /* EggieRun */ = {
 			isa = PBXGroup;
 			children = (
+				CD5FD5941CBAF7A600C0ACB0 /* oven-close.atlas */,
 				93B9CEA61CB7A10600E340F0 /* beam.atlas */,
 				CDD106721CA1CFD300959FFD /* run.atlas */,
 				93B45D051CA159A8002A75AA /* jump.atlas */,
@@ -404,6 +407,7 @@
 				93B45D061CA159A8002A75AA /* jump.atlas in Resources */,
 				93B9CEA71CB7A10600E340F0 /* beam.atlas in Resources */,
 				6CA7273D1C9BE60700CBD165 /* LaunchScreen.storyboard in Resources */,
+				CD5FD5951CBAF7A600C0ACB0 /* oven-close.atlas in Resources */,
 				6C5CDD4E1C9DBF3D005BB83C /* DexScene.sks in Resources */,
 				6C1C64A41C9C49410091AE8B /* MenuScene.sks in Resources */,
 				CDD1066F1CA1B80D00959FFD /* Assets.xcassets in Resources */,

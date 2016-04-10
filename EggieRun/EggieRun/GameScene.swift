@@ -118,6 +118,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
             if obstacle.isDeadly(contact.contactNormal, point: contact.contactPoint) {
+                eggie.hidden = true
+                obstacle.animateClose()
                 gameOver(obstacle.cookerType)
             } else {
                 obstacle.isPassed = true

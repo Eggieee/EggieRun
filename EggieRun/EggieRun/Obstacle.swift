@@ -12,7 +12,7 @@ class Obstacle: SKNode {
     static let WIDTH = 200.0
     private static let OVEN_PADDING: CGFloat = -27.0
     private static let POT_PADDING: CGFloat = -20.0
-
+    private static let ATLAS_TIME_PER_FRAME = 0.05
     
     let cookerType: Cooker
     var isPassed = false
@@ -81,6 +81,14 @@ class Obstacle: SKNode {
             return false
         default:
             return nodeAtPoint(point) == baseNode || vector.dx < 0
+        }
+    }
+    
+    func animateClose() {
+        if cookerType == .Oven {
+            let atlas = SKTextureAtlas(named: "oven-close.atlas")
+            let textures = atlas.textureNames.sort().map({ atlas.textureNamed($0) })
+            baseNode.runAction(SKAction.repeatActionForever(SKAction.animateWithTextures(textures, timePerFrame: Obstacle.ATLAS_TIME_PER_FRAME)))
         }
     }
     
