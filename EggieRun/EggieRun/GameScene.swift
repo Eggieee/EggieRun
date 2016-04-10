@@ -205,7 +205,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func shiftPlatforms(distance: Double) {
-        let leftMostPlatform = platforms.first!
         let rightMostPlatform = platforms.last!
         let rightMostPlatformRightEnd = rightMostPlatform.position.x + rightMostPlatform.width + rightMostPlatform.followingGapWidth
         
@@ -213,18 +212,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             appendNewPlatform(rightMostPlatformRightEnd)
         }
         
-        if leftMostPlatform.position.x + leftMostPlatform.width + leftMostPlatform.followingGapWidth < 0 {
-            platforms.removeFirst()
-            leftMostPlatform.removeFromParent()
-        }
-        
         for platform in platforms {
-            platform.position.x -= CGFloat(distance)
+            if platform.position.x + platform.width + platform.followingGapWidth < 0 {
+                platforms.removeFirst()
+                platform.removeFromParent()
+            } else {
+                platform.position.x -= CGFloat(distance)
+            }
         }
     }
     
     private func shiftCollectables(distance: Double) {
-        let leftMostCollectable = collectables.first!
         let rightMostCollectable = collectables.last!
         let rightMostCollectableRightEnd = rightMostCollectable.position.x + rightMostCollectable.frame.size.width / 2 + rightMostCollectable.followingGapSize
         
@@ -235,14 +233,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             collectables.append(collectable)
             addChild(collectable)
         }
-        
-        if leftMostCollectable.position.x + leftMostCollectable.size.width / 2 + leftMostCollectable.followingGapSize < 0 {
-            collectables.removeFirst()
-            leftMostCollectable.removeFromParent()
-        }
-        
+
         for collectable in collectables {
-            collectable.position.x -= CGFloat(distance)
+            if collectable.position.x + collectable.size.width / 2 + collectable.followingGapSize < 0 {
+                collectables.removeFirst()
+                collectable.removeFromParent()
+            } else {
+                collectable.position.x -= CGFloat(distance)
+            }
         }
     }
     
