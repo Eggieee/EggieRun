@@ -13,7 +13,7 @@ class EndingLayer: SKSpriteNode {
     private var background: SKSpriteNode!
     private var bar: SKSpriteNode!
     private(set) var eggdexButton: SKSpriteNode!
-    private var playButton: SKSpriteNode!
+    private(set) var playButton: SKSpriteNode!
     private var beam: SKSpriteNode!
     private var beamAction: SKAction
     

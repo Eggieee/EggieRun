@@ -57,7 +57,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let dexScene = DexScene(size: self.size)
                 let transition = SKTransition.flipHorizontalWithDuration(0.5)
                 self.view?.presentScene(dexScene, transition: transition)
-            } else {
+            } else if endingLayer!.playButton.containsPoint(touchLocation) {
                 gameReady()
             }
         }
