@@ -19,6 +19,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let OBSTACLE_RATE = 0.2
     private static let BUFFER_DISTANCE = 400.0
     private static let FLAVOUR_BAR_OFFSET: CGFloat = 100
+    private static let LEFT_FRAME_OFFSET: CGFloat = 400
+    private static let TOP_FRAME_OFFSET: CGFloat = 400
     
     private enum GameState {
         case Ready, Playing, Over
@@ -138,7 +140,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = CGVectorMake(0, -9.8)
         
-        physicsBody = SKPhysicsBody(edgeLoopFromRect: frame)
+        physicsBody = SKPhysicsBody(edgeLoopFromRect: CGRect(x: frame.minX - GameScene.LEFT_FRAME_OFFSET, y: frame.minY, width: frame.width + GameScene.LEFT_FRAME_OFFSET, height: frame.height + GameScene.TOP_FRAME_OFFSET))
         physicsBody!.categoryBitMask = BitMaskCategory.scene
         physicsBody!.contactTestBitMask = BitMaskCategory.hero
     }
