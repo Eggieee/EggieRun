@@ -21,7 +21,7 @@ enum Ingredient: Int {
     static let rarityPools = rarityTable.map({ RandomPool(objects: $0) })
     
     static func next(distance: Int) -> Ingredient {
-        let randomPool = RandomPool(objects: rarityPools, weightages: [30, 100, 20, 1])
+        let randomPool = RandomPool(objects: rarityPools, weightages: [60, 200, 40, 1])
         return randomPool.draw().draw()
     }
     
@@ -46,7 +46,7 @@ enum Ingredient: Int {
         case .Chocolate:
             return "chocolate"
         case .Surstromming:
-            return ""
+            return "surstromming"
         }
     }
     
