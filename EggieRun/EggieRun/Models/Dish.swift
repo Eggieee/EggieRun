@@ -83,9 +83,9 @@ class Dish: Constructable {
             jsCondiments = [0, 0, 0]
         }
         
-        var jsIngredients = [Int: Bool]()
+        var jsIngredients = [String: Bool]()
         for ingredient in ingredients {
-            jsIngredients[ingredient.rawValue] = true
+            jsIngredients[String(ingredient.rawValue)] = true
         }
         
         return Int(canConstructJsFunction.callWithArguments([cooker.rawValue, jsCondiments!, jsIngredients]).toInt32())

@@ -19,6 +19,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let OBSTACLE_RATE = 0.2
     private static let BUFFER_DISTANCE = 400.0
     private static let FLAVOUR_BAR_OFFSET: CGFloat = 100
+    private static let LEFT_FRAME_OFFSET: CGFloat = 400
+    private static let TOP_FRAME_OFFSET: CGFloat = 400
+    private static let GRAVITY = CGVectorMake(0, -20)
     
     private enum GameState {
         case Ready, Playing, Over
@@ -57,7 +60,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let dexScene = DexScene(size: self.size)
                 let transition = SKTransition.flipHorizontalWithDuration(0.5)
                 self.view?.presentScene(dexScene, transition: transition)
-            } else {
+            } else if endingLayer!.playButton.containsPoint(touchLocation) {
                 gameReady()
             }
         }
@@ -136,9 +139,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func initializePhysicsProperties() {
         physicsWorld.contactDelegate = self
-        physicsWorld.gravity = CGVectorMake(0, -9.8)
+        physicsWorld.gravity = GameScene.GRAVITY
         
-        physicsBody = SKPhysicsBody(edgeLoopFromRect: frame)
+        physicsBody = SKPhysicsBody(edgeLoopFromRect: CGRect(x: frame.minX - GameScene.LEFT_FRAME_OFFSET, y: frame.minY, width: frame.width + GameScene.LEFT_FRAME_OFFSET, height: frame.height + GameScene.TOP_FRAME_OFFSET))
         physicsBody!.categoryBitMask = BitMaskCategory.scene
         physicsBody!.contactTestBitMask = BitMaskCategory.hero
     }
@@ -213,6 +216,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func gameOver(wayOfDie: Cooker) {
         eggie.state = .Dying
         gameState = .Over
+        
+        flavourBar.removeFromParent()
         
         //dummy dish, you'll just need to pass Huang Yue the real cooker
         let dish = DishDataController.singleton.getResultDish(wayOfDie, condiments: flavourBar.condimentDictionary, ingredients: ingredientBar.ingredients)
