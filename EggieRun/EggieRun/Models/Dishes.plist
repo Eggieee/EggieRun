@@ -208,7 +208,7 @@
 		<key>imageNamed</key>
 		<string>soy-tea-egg</string>
 		<key>rarity</key>
-		<integer>3</integer>
+		<integer>2</integer>
 		<key>canConstruct</key>
 		<string>return (cooker==3 &amp;&amp; cond[0]&gt;=0.6)?10:0;</string>
 	</dict>
@@ -222,7 +222,7 @@
 		<key>imageNamed</key>
 		<string>guangdong-style-scrambled-egg</string>
 		<key>rarity</key>
-		<integer>3</integer>
+		<integer>2</integer>
 		<key>canConstruct</key>
 		<string>return (cooker==3 &amp;&amp; cond[0]&gt;=0.3)?10:0;</string>
 	</dict>
@@ -236,7 +236,7 @@
 		<key>imageNamed</key>
 		<string>chinese-steamed-eggs</string>
 		<key>rarity</key>
-		<integer>3</integer>
+		<integer>2</integer>
 		<key>canConstruct</key>
 		<string>return (cooker==3 &amp;&amp; cond[0]&gt;0)?10:0;</string>
 	</dict>
