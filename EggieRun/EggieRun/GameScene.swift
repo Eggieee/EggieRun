@@ -217,6 +217,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         eggie.state = .Dying
         gameState = .Over
         
+        flavourBar.removeFromParent()
+        
         //dummy dish, you'll just need to pass Huang Yue the real cooker
         let dish = DishDataController.singleton.getResultDish(wayOfDie, condiments: flavourBar.condimentDictionary, ingredients: ingredientBar.ingredients)
         
