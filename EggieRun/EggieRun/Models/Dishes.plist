@@ -140,7 +140,7 @@
 		<key>rarity</key>
 		<integer>3</integer>
 		<key>canConstruct</key>
-		<string>return (cooker==2 &amp;&amp; cond[1]&gt;=0.7 &amp;&amp; ingred[102] &amp;&amp; ingred[103] &amp;&amp; ingred[108])?10:0;</string>
+		<string>return (cooker==2 &amp;&amp; cond[1]&gt;=0.6 &amp;&amp; ingred[102] &amp;&amp; ingred[103] &amp;&amp; ingred[108])?50:0;</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -154,7 +154,7 @@
 		<key>rarity</key>
 		<integer>3</integer>
 		<key>canConstruct</key>
-		<string>return (cooker==2 &amp;&amp; cond[1]&gt;=0.7 &amp;&amp; ingred[102] &amp;&amp; ingred[103] &amp;&amp; ingred[107])?10:0;</string>
+		<string>return (cooker==2 &amp;&amp; cond[1]&gt;=0.6 &amp;&amp; ingred[102] &amp;&amp; ingred[103] &amp;&amp; ingred[107])?40:0;</string>
 	</dict>
 	<dict>
 		<key>id</key>
