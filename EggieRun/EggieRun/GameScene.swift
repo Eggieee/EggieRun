@@ -211,6 +211,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initialzieCollectable()
         initializeEggie()
         initializeCollectableBars()
+        
+        if let particles = SKEmitterNode(fileNamed: "Snow.sks") {
+            particles.position = CGPointMake(self.frame.midX, self.frame.maxY)
+            particles.particlePositionRange.dx = self.frame.width
+            addChild(particles)
+        }
+        
         gameState = .Ready
     }
     
