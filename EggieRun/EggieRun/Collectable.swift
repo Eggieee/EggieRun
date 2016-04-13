@@ -16,6 +16,8 @@ class Collectable: SKSpriteNode {
     let condiment: Condiment?
     let followingGapSize: CGFloat
     
+    var emitter: SKEmitterNode?
+    
     init(ingredientType: Ingredient, gapSize: CGFloat) {
         ingredient = ingredientType
         condiment = nil
@@ -44,5 +46,10 @@ class Collectable: SKSpriteNode {
         physicsBody?.contactTestBitMask = BitMaskCategory.hero
         physicsBody?.dynamic = false
         zPosition = 1
+    }
+    
+    override func removeFromParent() {
+        emitter?.removeFromParent()
+        super.removeFromParent()
     }
 }

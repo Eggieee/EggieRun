@@ -118,6 +118,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             } else {
                 flavourBar.addCondiment(collectable.condiment!)
             }
+            
+            if let particles = SKEmitterNode(fileNamed: "Collection.sks") {
+                particles.position = contact.contactPoint
+                collectable.emitter = particles
+                addChild(particles)
+            }
         } else if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == BitMaskCategory.hero | BitMaskCategory.obstacle {
             var obstacle: Obstacle
             if contact.bodyA.categoryBitMask == BitMaskCategory.obstacle {
