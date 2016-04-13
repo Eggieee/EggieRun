@@ -216,9 +216,9 @@
 		<key>id</key>
 		<integer>15</integer>
 		<key>name</key>
-		<string>Guangdong Style Scrambled Egg</string>
+		<string>Cantoness Scrambled Egg</string>
 		<key>description</key>
-		<string>A GuangDong style scrambled egg but it is not originated in GuangDong. No one knows why its name is this.</string>
+		<string>A Cantoness scrambled egg but it is not originated in GuangDong. No one knows why its name is this.</string>
 		<key>imageNamed</key>
 		<string>guangdong-style-scrambled-egg</string>
 		<key>rarity</key>
