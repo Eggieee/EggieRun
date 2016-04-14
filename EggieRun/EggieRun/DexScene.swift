@@ -21,8 +21,8 @@ class DexScene: SKScene {
     static let DETAIL_WIDTH = CGFloat(3.0 / 7)
     
     private var buttonBack: SKSpriteNode!
-    var gridNode: DexGridNode?
-    var detailNode: DexDetailNode?
+    private var gridNode: DexGridNode!
+    private var detailNode: DexDetailNode!
     
     override func didMoveToView(view: SKView) {
         let titleLabel = SKLabelNode(fontNamed: DexScene.TITLE_FONT)
@@ -37,7 +37,7 @@ class DexScene: SKScene {
         self.addChild(buttonBack)
         
         gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width)
-        self.addChild(gridNode!)
+        self.addChild(gridNode)
         
         createDetailNode()
     }
@@ -52,15 +52,12 @@ class DexScene: SKScene {
             self.view?.presentScene(menuScene!, transition: MenuScene.BACK_TRANSITION)
         }
         
-        // click on some dishes
-        for dishNode in gridNode!.dishNodes {
-            if dishNode.containsPoint(touchLocation) {
+        let touchLocationInGrid = touch.locationInNode(gridNode)
+        for dishNode in gridNode.dishNodes {
+            if dishNode.containsPoint(touchLocationInGrid) {
                 if dishNode.activated {
-                    for otherDishNode in gridNode!.dishNodes {
-                        otherDishNode.selected = false
-                    }
-                    dishNode.selected = true
-                    detailNode!.dish = dishNode.dish
+                    gridNode.moveEmitter(dishNode)
+                    detailNode.dish = dishNode.dish
                 }
                 break
             }
@@ -69,7 +66,7 @@ class DexScene: SKScene {
     
     func createDetailNode() {
         detailNode = DexDetailNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width)
-        self.addChild(detailNode!)
+        self.addChild(detailNode)
     }
     
     override func update(currentTime: CFTimeInterval) {

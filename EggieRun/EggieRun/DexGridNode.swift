@@ -16,6 +16,7 @@ class DexGridNode: SKSpriteNode {
     var height: CGFloat
     
     var dishNodes = [DexItemNode]()
+    private var selectedEmitterNode: SKEmitterNode!
     
     init(sceneHeight: CGFloat, sceneWidth: CGFloat) {
         width = DexScene.GRID_WIDTH * sceneWidth
@@ -39,6 +40,19 @@ class DexGridNode: SKSpriteNode {
             addChild(item)
             dishNodes.append(item)
         }
+        
+        selectedEmitterNode = SKEmitterNode(fileNamed: "DexSelected.sks")
+        selectedEmitterNode.particlePositionRange.dx = itemSize
+        selectedEmitterNode.particlePosition.y = -itemSize / 2
+        selectedEmitterNode.hidden = true
+        selectedEmitterNode.zPosition = 3
+        addChild(selectedEmitterNode)
+    }
+    
+    func moveEmitter(item: DexItemNode) {
+        debugPrint(item.position)
+        selectedEmitterNode.position = item.position
+        selectedEmitterNode.hidden = false
     }
     
     required init?(coder aDecoder: NSCoder) {

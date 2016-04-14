@@ -21,6 +21,7 @@
 		6C890C7F1CBEBA450049CE4C /* Collection.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6C890C7D1CBEBA450049CE4C /* Collection.sks */; };
 		6C890C801CBEBA450049CE4C /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C890C7E1CBEBA450049CE4C /* spark.png */; };
 		6C890C821CBEC1470049CE4C /* Snow.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6C890C811CBEC1470049CE4C /* Snow.sks */; };
+		6C890C8C1CBEC93D0049CE4C /* DexSelected.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6C890C8B1CBEC93D0049CE4C /* DexSelected.sks */; };
 		6C8F14011CBB0CAE008D5678 /* Dictionary+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8F14001CBB0CAE008D5678 /* Dictionary+Map.swift */; };
 		6CA7272F1C9BE60700CBD165 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA7272E1C9BE60700CBD165 /* AppDelegate.swift */; };
 		6CA727311C9BE60700CBD165 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6CA727301C9BE60700CBD165 /* GameScene.sks */; };
@@ -93,6 +94,7 @@
 		6C890C7D1CBEBA450049CE4C /* Collection.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Collection.sks; sourceTree = "<group>"; };
 		6C890C7E1CBEBA450049CE4C /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		6C890C811CBEC1470049CE4C /* Snow.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Snow.sks; sourceTree = "<group>"; };
+		6C890C8B1CBEC93D0049CE4C /* DexSelected.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DexSelected.sks; sourceTree = "<group>"; };
 		6C8F14001CBB0CAE008D5678 /* Dictionary+Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Map.swift"; sourceTree = "<group>"; };
 		6CA7272B1C9BE60600CBD165 /* EggieRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EggieRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CA7272E1C9BE60700CBD165 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 		6C890C7C1CBEBA230049CE4C /* Particles */ = {
 			isa = PBXGroup;
 			children = (
+				6C890C8B1CBEC93D0049CE4C /* DexSelected.sks */,
 				6C890C7D1CBEBA450049CE4C /* Collection.sks */,
 				6C890C7E1CBEBA450049CE4C /* spark.png */,
 				6C890C811CBEC1470049CE4C /* Snow.sks */,
@@ -430,6 +433,7 @@
 				6C890C7F1CBEBA450049CE4C /* Collection.sks in Resources */,
 				6CA7273D1C9BE60700CBD165 /* LaunchScreen.storyboard in Resources */,
 				CD5FD5951CBAF7A600C0ACB0 /* oven-close.atlas in Resources */,
+				6C890C8C1CBEC93D0049CE4C /* DexSelected.sks in Resources */,
 				6C5CDD4E1C9DBF3D005BB83C /* DexScene.sks in Resources */,
 				6C1C64A41C9C49410091AE8B /* MenuScene.sks in Resources */,
 				CDD1066F1CA1B80D00959FFD /* Assets.xcassets in Resources */,
