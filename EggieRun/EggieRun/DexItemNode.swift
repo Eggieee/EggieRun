@@ -12,6 +12,8 @@ class DexItemNode: SKNode {
     static private let IMAGE_RATIO = CGFloat(1.5)
     static private let BACKGROUND_Z = CGFloat(1)
     static private let DISH_Z = CGFloat(2)
+    static private let QMARK_Z = CGFloat(3)
+    static private let QMARK_FONTSIZE = CGFloat(40)
     
     static private let UNACTIVATED_FILTER = CIFilter(name: "CIColorControls", withInputParameters: ["inputBrightness": -1])
     
@@ -38,6 +40,12 @@ class DexItemNode: SKNode {
         effectNode.zPosition = DexItemNode.DISH_Z
         if !DishDataController.singleton.isDishActivated(dish) {
             effectNode.filter = DexItemNode.UNACTIVATED_FILTER
+            let questionMarkNode = SKLabelNode(text: "?")
+            questionMarkNode.color = UIColor.whiteColor()
+            questionMarkNode.fontSize = DexItemNode.QMARK_FONTSIZE
+            questionMarkNode.verticalAlignmentMode = .Center
+            questionMarkNode.zPosition = DexItemNode.QMARK_Z
+            addChild(questionMarkNode)
             activated = false
         }
         
