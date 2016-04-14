@@ -22,6 +22,8 @@
 		6C890C801CBEBA450049CE4C /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C890C7E1CBEBA450049CE4C /* spark.png */; };
 		6C890C821CBEC1470049CE4C /* Snow.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6C890C811CBEC1470049CE4C /* Snow.sks */; };
 		6C890C8C1CBEC93D0049CE4C /* DexSelected.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6C890C8B1CBEC93D0049CE4C /* DexSelected.sks */; };
+		6C890C8F1CBFCDE70049CE4C /* road-runner.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6C890C8E1CBFCDE70049CE4C /* road-runner.mp3 */; };
+		6C890C911CBFCDFC0049CE4C /* BGMPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C890C901CBFCDFC0049CE4C /* BGMPlayer.swift */; };
 		6C8F14011CBB0CAE008D5678 /* Dictionary+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8F14001CBB0CAE008D5678 /* Dictionary+Map.swift */; };
 		6CA7272F1C9BE60700CBD165 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA7272E1C9BE60700CBD165 /* AppDelegate.swift */; };
 		6CA727311C9BE60700CBD165 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6CA727301C9BE60700CBD165 /* GameScene.sks */; };
@@ -95,6 +97,8 @@
 		6C890C7E1CBEBA450049CE4C /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		6C890C811CBEC1470049CE4C /* Snow.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Snow.sks; sourceTree = "<group>"; };
 		6C890C8B1CBEC93D0049CE4C /* DexSelected.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DexSelected.sks; sourceTree = "<group>"; };
+		6C890C8E1CBFCDE70049CE4C /* road-runner.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "road-runner.mp3"; sourceTree = "<group>"; };
+		6C890C901CBFCDFC0049CE4C /* BGMPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGMPlayer.swift; sourceTree = "<group>"; };
 		6C8F14001CBB0CAE008D5678 /* Dictionary+Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Map.swift"; sourceTree = "<group>"; };
 		6CA7272B1C9BE60600CBD165 /* EggieRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EggieRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CA7272E1C9BE60700CBD165 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -186,6 +190,15 @@
 			path = Particles;
 			sourceTree = "<group>";
 		};
+		6C890C8D1CBFCD9B0049CE4C /* BackgroundMusics */ = {
+			isa = PBXGroup;
+			children = (
+				6C890C8E1CBFCDE70049CE4C /* road-runner.mp3 */,
+			);
+			name = BackgroundMusics;
+			path = BGMs;
+			sourceTree = "<group>";
+		};
 		6CA727221C9BE60600CBD165 = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +248,8 @@
 				6CA727361C9BE60700CBD165 /* Main.storyboard */,
 				6CA7273B1C9BE60700CBD165 /* LaunchScreen.storyboard */,
 				6CA7273E1C9BE60700CBD165 /* Info.plist */,
+				6C890C901CBFCDFC0049CE4C /* BGMPlayer.swift */,
+				6C890C8D1CBFCD9B0049CE4C /* BackgroundMusics */,
 			);
 			path = EggieRun;
 			sourceTree = "<group>";
@@ -434,6 +449,7 @@
 				6CA7273D1C9BE60700CBD165 /* LaunchScreen.storyboard in Resources */,
 				CD5FD5951CBAF7A600C0ACB0 /* oven-close.atlas in Resources */,
 				6C890C8C1CBEC93D0049CE4C /* DexSelected.sks in Resources */,
+				6C890C8F1CBFCDE70049CE4C /* road-runner.mp3 in Resources */,
 				6C5CDD4E1C9DBF3D005BB83C /* DexScene.sks in Resources */,
 				6C1C64A41C9C49410091AE8B /* MenuScene.sks in Resources */,
 				CDD1066F1CA1B80D00959FFD /* Assets.xcassets in Resources */,
@@ -495,6 +511,7 @@
 				CDD1065D1C9D482500959FFD /* BitMaskCategory.swift in Sources */,
 				0B8DC3E81CA05D9C0055382D /* SKScene+Background.swift in Sources */,
 				6CA7272F1C9BE60700CBD165 /* AppDelegate.swift in Sources */,
+				6C890C911CBFCDFC0049CE4C /* BGMPlayer.swift in Sources */,
 				CDD106651C9DD62600959FFD /* PlatformFactory.swift in Sources */,
 				6C84EC441CBA209B00CB4A44 /* ConstructableStorage.swift in Sources */,
 			);

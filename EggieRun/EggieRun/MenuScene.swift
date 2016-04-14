@@ -26,6 +26,8 @@ class MenuScene: SKScene {
     private var initialized = false
     
     override func didMoveToView(view: SKView) {
+        BGMPlayer.singleton.moveToStatus(.Menu)
+        
         if initialized {
             return
         }
@@ -42,9 +44,6 @@ class MenuScene: SKScene {
         self.addChild(buttonDex)
         
         DishDataController.singleton
-        
-        // 对不起我先静音了
-        // self.runAction(SKAction.playSoundFileNamed("road-runner", waitForCompletion: true))
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -58,6 +57,10 @@ class MenuScene: SKScene {
             let dexScene = DexScene(size: self.size)
             self.view?.presentScene(dexScene, transition: MenuScene.TRANSITION)
         }
+    }
+    
+    override func willMoveFromView(view: SKView) {
+        BGMPlayer.singleton.moveToStatus(nil)
     }
     
     override func update(currentTime: CFTimeInterval) {
