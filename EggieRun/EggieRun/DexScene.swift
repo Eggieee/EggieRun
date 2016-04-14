@@ -15,14 +15,16 @@ class DexScene: SKScene {
     private static let TITLE_SIZE = CGFloat(40)
     private static let TITLE_TOP_PADDING = CGFloat(20)
     
-    static let BACK_BUTTON_SIZE = CGFloat(80)
+    private static let BACK_BUTTON_SIZE = CGFloat(80)
     static let TOP_BAR_HEIGHT = CGFloat(80)
     static let GRID_WIDTH = CGFloat(4.0 / 7)
     static let DETAIL_WIDTH = CGFloat(3.0 / 7)
     
+    static let UNACTIVATED_FILTER = CIFilter(name: "CIColorControls", withInputParameters: ["inputBrightness": -1])
+    
     private var buttonBack: SKSpriteNode!
-    var gridNode: DexGridNode?
-    var detailNode: DexDetailNode?
+    private var gridNode: DexGridNode!
+    private var detailNode: DexDetailNode!
     
     override func didMoveToView(view: SKView) {
         let titleLabel = SKLabelNode(fontNamed: DexScene.TITLE_FONT)
@@ -37,7 +39,7 @@ class DexScene: SKScene {
         self.addChild(buttonBack)
         
         gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width)
-        self.addChild(gridNode!)
+        self.addChild(gridNode)
         
         createDetailNode()
     }
@@ -52,16 +54,11 @@ class DexScene: SKScene {
             self.view?.presentScene(menuScene!, transition: MenuScene.BACK_TRANSITION)
         }
         
-        // click on some dishes
-        for dishNode in gridNode!.dishNodes {
-            if dishNode.containsPoint(touchLocation) {
-                if dishNode.activated {
-                    for otherDishNode in gridNode!.dishNodes {
-                        otherDishNode.selected = false
-                    }
-                    dishNode.selected = true
-                    detailNode!.dish = dishNode.dish
-                }
+        let touchLocationInGrid = touch.locationInNode(gridNode)
+        for dishNode in gridNode.dishNodes {
+            if dishNode.containsPoint(touchLocationInGrid) {
+                gridNode.moveEmitter(dishNode)
+                detailNode.setDish(dishNode.dish, activated: dishNode.activated)
                 break
             }
         }
@@ -69,7 +66,7 @@ class DexScene: SKScene {
     
     func createDetailNode() {
         detailNode = DexDetailNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width)
-        self.addChild(detailNode!)
+        self.addChild(detailNode)
     }
     
     override func update(currentTime: CFTimeInterval) {

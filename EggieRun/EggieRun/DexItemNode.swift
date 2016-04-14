@@ -12,21 +12,10 @@ class DexItemNode: SKNode {
     static private let IMAGE_RATIO = CGFloat(1.5)
     static private let BACKGROUND_Z = CGFloat(1)
     static private let DISH_Z = CGFloat(2)
-    static private let UNSELECTED_ALPHA = CGFloat(0.5)
-    static private let SELECTED_ALPHA = CGFloat(1.0)
-    
-    static private let UNACTIVATED_FILTER = CIFilter(name: "CIColorControls", withInputParameters: ["inputBrightness": -1])
+    static private let QMARK_Z = CGFloat(3)
+    static private let QMARK_FONTSIZE = CGFloat(40)
     
     let dish: Dish
-    var selected = false {
-        didSet {
-            if selected {
-                self.alpha = DexItemNode.SELECTED_ALPHA
-            } else {
-                self.alpha = DexItemNode.UNSELECTED_ALPHA
-            }
-        }
-    }
     private(set) var activated = true
     
     private static func ITEM_BACKGROUND_IMAGENAMED(rarity: Int) -> String {
@@ -36,11 +25,10 @@ class DexItemNode: SKNode {
     init(dish: Dish, xPosition: CGFloat, yPosition: CGFloat, size: CGFloat) {
         self.dish = dish
         super.init()
-        self.alpha = DexItemNode.UNSELECTED_ALPHA
+        self.position = CGPoint(x: xPosition, y: yPosition)
         
         // background node of dishes
         let backgroundNode = SKSpriteNode(imageNamed: DexItemNode.ITEM_BACKGROUND_IMAGENAMED(dish.rarity))
-        backgroundNode.position = CGPoint(x: xPosition, y: yPosition)
         backgroundNode.size = CGSize(width: size, height: size)
         backgroundNode.zPosition = DexItemNode.BACKGROUND_Z
         
@@ -49,13 +37,18 @@ class DexItemNode: SKNode {
         effectNode.shouldRasterize = true
         effectNode.zPosition = DexItemNode.DISH_Z
         if !DishDataController.singleton.isDishActivated(dish) {
-            effectNode.filter = DexItemNode.UNACTIVATED_FILTER
+            effectNode.filter = DexScene.UNACTIVATED_FILTER
+            let questionMarkNode = SKLabelNode(text: "?")
+            questionMarkNode.color = UIColor.whiteColor()
+            questionMarkNode.fontSize = DexItemNode.QMARK_FONTSIZE
+            questionMarkNode.verticalAlignmentMode = .Center
+            questionMarkNode.zPosition = DexItemNode.QMARK_Z
+            addChild(questionMarkNode)
             activated = false
         }
         
         // add dish image node
         let dishImageNode = SKSpriteNode(texture: dish.texture)
-        dishImageNode.position = CGPoint(x: xPosition, y: yPosition)
         dishImageNode.size = CGSize(width: size / DexItemNode.IMAGE_RATIO, height: size / DexItemNode.IMAGE_RATIO)
         effectNode.addChild(dishImageNode)
         

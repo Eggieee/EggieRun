@@ -9,15 +9,26 @@
 import SpriteKit
 
 class DexDetailNode: SKSpriteNode {
-    var dishImageNode: SKSpriteNode
-    var dishNameNode: SKLabelNode
-    var dishDescriptionNode: SKLabelNode
+    private static let QMARK_FONTSIZE = CGFloat(100)
     
-    var dish: Dish? {
-        didSet {
-            dishImageNode.texture = dish?.texture
-            dishNameNode.text = dish?.name
-            dishDescriptionNode.text = dish?.description
+    private var dishImageNode: SKSpriteNode
+    private var effectNode: SKEffectNode
+    private var dishNameNode: SKLabelNode
+    private var dishDescriptionNode: SKLabelNode
+    private var questionMarkNode: SKLabelNode
+    
+    func setDish(dish: Dish, activated: Bool) {
+        dishImageNode.texture = dish.texture
+        if activated {
+            effectNode.filter = nil
+            dishDescriptionNode.text = dish.description
+            dishNameNode.text = dish.name
+            questionMarkNode.hidden = true
+        } else {
+            effectNode.filter = DexScene.UNACTIVATED_FILTER
+            dishDescriptionNode.text = "???"
+            dishNameNode.text = "???"
+            questionMarkNode.hidden = false
         }
     }
     
@@ -25,6 +36,10 @@ class DexDetailNode: SKSpriteNode {
         dishImageNode = SKSpriteNode(texture: nil)
         dishNameNode = SKLabelNode(text: "")
         dishDescriptionNode = SKLabelNode(text: "")
+        questionMarkNode = SKLabelNode(text: "?")
+        
+        effectNode = SKEffectNode()
+        effectNode.shouldRasterize = true
         
         // background
         super.init(texture: SKTexture(imageNamed: "detail-texture"), color: UIColor.brownColor(), size: CGSize(width: sceneWidth * DexScene.DETAIL_WIDTH, height: sceneHeight - DexScene.TOP_BAR_HEIGHT))
@@ -43,13 +58,22 @@ class DexDetailNode: SKSpriteNode {
         dishDescriptionNode.fontSize = 20
         dishDescriptionNode.fontColor = UIColor.blackColor()
         
-        dishImageNode.zPosition = 1
+        questionMarkNode.color = UIColor.whiteColor()
+        questionMarkNode.position = dishImageNode.position
+        questionMarkNode.fontSize = DexDetailNode.QMARK_FONTSIZE
+        questionMarkNode.verticalAlignmentMode = .Center
+        questionMarkNode.zPosition = 2
+        questionMarkNode.hidden = true
+        
+        effectNode.zPosition = 1
         dishDescriptionNode.zPosition = 1
         dishNameNode.zPosition = 1
         
-        addChild(dishImageNode)
+        effectNode.addChild(dishImageNode)
+        addChild(effectNode)
         addChild(dishNameNode)
         addChild(dishDescriptionNode)
+        addChild(questionMarkNode)
     }
     
     required init?(coder aDecoder: NSCoder) {
