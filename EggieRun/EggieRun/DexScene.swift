@@ -20,6 +20,8 @@ class DexScene: SKScene {
     static let GRID_WIDTH = CGFloat(4.0 / 7)
     static let DETAIL_WIDTH = CGFloat(3.0 / 7)
     
+    static let UNACTIVATED_FILTER = CIFilter(name: "CIColorControls", withInputParameters: ["inputBrightness": -1])
+    
     private var buttonBack: SKSpriteNode!
     private var gridNode: DexGridNode!
     private var detailNode: DexDetailNode!
@@ -55,10 +57,8 @@ class DexScene: SKScene {
         let touchLocationInGrid = touch.locationInNode(gridNode)
         for dishNode in gridNode.dishNodes {
             if dishNode.containsPoint(touchLocationInGrid) {
-                if dishNode.activated {
-                    gridNode.moveEmitter(dishNode)
-                    detailNode.dish = dishNode.dish
-                }
+                gridNode.moveEmitter(dishNode)
+                detailNode.setDish(dishNode.dish, activated: dishNode.activated)
                 break
             }
         }

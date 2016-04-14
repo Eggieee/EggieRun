@@ -15,8 +15,6 @@ class DexItemNode: SKNode {
     static private let QMARK_Z = CGFloat(3)
     static private let QMARK_FONTSIZE = CGFloat(40)
     
-    static private let UNACTIVATED_FILTER = CIFilter(name: "CIColorControls", withInputParameters: ["inputBrightness": -1])
-    
     let dish: Dish
     private(set) var activated = true
     
@@ -39,7 +37,7 @@ class DexItemNode: SKNode {
         effectNode.shouldRasterize = true
         effectNode.zPosition = DexItemNode.DISH_Z
         if !DishDataController.singleton.isDishActivated(dish) {
-            effectNode.filter = DexItemNode.UNACTIVATED_FILTER
+            effectNode.filter = DexScene.UNACTIVATED_FILTER
             let questionMarkNode = SKLabelNode(text: "?")
             questionMarkNode.color = UIColor.whiteColor()
             questionMarkNode.fontSize = DexItemNode.QMARK_FONTSIZE

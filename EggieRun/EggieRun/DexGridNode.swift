@@ -50,7 +50,6 @@ class DexGridNode: SKSpriteNode {
     }
     
     func moveEmitter(item: DexItemNode) {
-        debugPrint(item.position)
         selectedEmitterNode.position = item.position
         selectedEmitterNode.hidden = false
     }
