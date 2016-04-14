@@ -50,6 +50,7 @@ class DexScene: SKScene {
         
         // back
         if buttonBack.containsPoint(touchLocation) {
+            gridNode.removeEmitter()
             let menuScene = MenuScene.singleton
             self.view?.presentScene(menuScene!, transition: MenuScene.BACK_TRANSITION)
         }
