@@ -23,6 +23,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let TOP_FRAME_OFFSET: CGFloat = 400
     private static let GRAVITY = CGVectorMake(0, -20)
     
+    private static let SE_COLLECT = "collect-sound"
+    private static let SE_JUMP = "jump-sound"
+    private static let SE_OBSTACLES: [Cooker: String] = [.Drop: "drop-sound", .Oven: "oven-sound", .Pot: "pot-sound"]
+    
     private enum GameState {
         case Ready, Playing, Over
     }
@@ -51,6 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if gameState == .Ready {
             gameStart()
         } else if gameState == .Playing && eggie.canJump {
+            self.runAction(SKAction.playSoundFileNamed(GameScene.SE_JUMP, waitForCompletion: true))
             eggie.state = .Jumping
         } else if gameState == .Over && endingLayer != nil {
             let touch = touches.first!
@@ -118,6 +123,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             } else {
                 flavourBar.addCondiment(collectable.condiment!)
             }
+            
+            self.runAction(SKAction.playSoundFileNamed(GameScene.SE_COLLECT, waitForCompletion: true))
             
             if let particles = SKEmitterNode(fileNamed: "Collection.sks") {
                 particles.position = contact.contactPoint
@@ -232,14 +239,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         flavourBar.removeFromParent()
         
-        //dummy dish, you'll just need to pass Huang Yue the real cooker
         let dish = DishDataController.singleton.getResultDish(wayOfDie, condiments: flavourBar.condimentDictionary, ingredients: ingredientBar.ingredients)
         
-        //show ending layer, you'll just need to pass me the real cooker
-        endingLayer = EndingLayer(usedCooker: Cooker.Drop, generatedDish: dish)
+        endingLayer = EndingLayer(usedCooker: wayOfDie, generatedDish: dish)
         endingLayer!.zPosition = 100
         endingLayer!.position = CGPointMake(UIScreen.mainScreen().bounds.width/2, UIScreen.mainScreen().bounds.height/2)
         addChild(endingLayer!)
+        
+        if let soundFileNamed = GameScene.SE_OBSTACLES[wayOfDie] {
+            self.runAction(SKAction.playSoundFileNamed(soundFileNamed, waitForCompletion: true))
+        }
     }
     
     private func shiftPlatforms(distance: Double) {
