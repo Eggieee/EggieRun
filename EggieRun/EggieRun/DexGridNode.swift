@@ -12,8 +12,8 @@ class DexGridNode: SKSpriteNode {
     static private let ITEMS_PER_ROW = 4
     static private let PADDING = CGFloat(20)
     
-    var width: CGFloat
-    var height: CGFloat
+    private var width: CGFloat
+    private var height: CGFloat
     
     var dishNodes = [DexItemNode]()
     private var selectedEmitterNode: SKEmitterNode!

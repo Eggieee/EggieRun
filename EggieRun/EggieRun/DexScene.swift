@@ -15,7 +15,7 @@ class DexScene: SKScene {
     private static let TITLE_SIZE = CGFloat(40)
     private static let TITLE_TOP_PADDING = CGFloat(20)
     
-    static let BACK_BUTTON_SIZE = CGFloat(80)
+    private static let BACK_BUTTON_SIZE = CGFloat(80)
     static let TOP_BAR_HEIGHT = CGFloat(80)
     static let GRID_WIDTH = CGFloat(4.0 / 7)
     static let DETAIL_WIDTH = CGFloat(3.0 / 7)

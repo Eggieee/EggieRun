@@ -11,11 +11,11 @@ import SpriteKit
 class DexDetailNode: SKSpriteNode {
     private static let QMARK_FONTSIZE = CGFloat(100)
     
-    var dishImageNode: SKSpriteNode
-    var effectNode: SKEffectNode
-    var dishNameNode: SKLabelNode
-    var dishDescriptionNode: SKLabelNode
-    var questionMarkNode: SKLabelNode
+    private var dishImageNode: SKSpriteNode
+    private var effectNode: SKEffectNode
+    private var dishNameNode: SKLabelNode
+    private var dishDescriptionNode: SKLabelNode
+    private var questionMarkNode: SKLabelNode
     
     func setDish(dish: Dish, activated: Bool) {
         dishImageNode.texture = dish.texture
