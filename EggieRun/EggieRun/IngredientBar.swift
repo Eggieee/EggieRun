@@ -11,9 +11,11 @@ import SpriteKit
 class IngredientBar: SKSpriteNode {
     private static let X_DISTANCE = CGFloat(100)
     private static let MAX_GRID_NUMBER = 5
+    private static let IS_NOT_CONTAINED_INDEX = -1
     
     var ingredients = [Ingredient]()
     private var ingredientGrids = [IngredientGrid]()
+    private var emptyGrids = [IngredientGrid]()
     var firstEmptyIndex: Int {
         get {
             return ingredients.count
@@ -28,22 +30,41 @@ class IngredientBar: SKSpriteNode {
     init() {
         let barSize = CGSizeMake(500, 90)
         super.init(texture: nil, color: UIColor.clearColor(), size: barSize)
+        initializeEmptyGrids()
+    }
+    
+    func initializeEmptyGrids() {
+        for i in 0..<IngredientBar.MAX_GRID_NUMBER {
+            let newEmptyGrid = IngredientGrid(ingredientType: nil)
+            let position = CGPointMake(CGFloat(i) * IngredientBar.X_DISTANCE, 0)
+            newEmptyGrid.position = position
+            addChild(newEmptyGrid)
+            emptyGrids.append(newEmptyGrid)
+        }
     }
     
     func addIngredient(newIngredient: Ingredient) {
         let newGrid = IngredientGrid(ingredientType: newIngredient)
-        var index = -1
+        var index = IngredientBar.IS_NOT_CONTAINED_INDEX
+        let isDuplicate = ingredients.contains(newIngredient)
         
-        if (ingredients.contains(newIngredient)) {
+        if (isDuplicate) {
             index = ingredients.indexOf(newIngredient)!
+        } else if (!isFull) {
+            updateEmptyGrids()
         }
         
         updateBarLayout(newGrid, index: index)
         updateArray(newIngredient, newGrid: newGrid, index: index)
     }
     
+    func updateEmptyGrids() {
+        emptyGrids[0].removeFromParent()
+        emptyGrids.removeFirst()
+    }
+    
     func updateBarLayout(newGrid: IngredientGrid, index: Int) {
-        let isDuplicate = (index != -1)
+        let isDuplicate = (index != IngredientBar.IS_NOT_CONTAINED_INDEX)
         if (isDuplicate) {
             animateMovingGridByOne(index)
         } else if (isFull) {
@@ -72,12 +93,11 @@ class IngredientBar: SKSpriteNode {
     }
     
     func updateArray(newIngredient: Ingredient, newGrid: IngredientGrid, index: Int) {
-        if (index != -1) {
+        if (index != IngredientBar.IS_NOT_CONTAINED_INDEX) {
             moveGridByOne(index)
         } else if (isFull) {
             moveGridByOne(0)
         }
-//        print(firstEmptyIndex)
         ingredients.append(newIngredient)
         ingredientGrids.append(newGrid)
     }

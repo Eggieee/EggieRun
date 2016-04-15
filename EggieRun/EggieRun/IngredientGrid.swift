@@ -17,7 +17,7 @@ class IngredientGrid: SKSpriteNode {
     var ingredientNode: SKSpriteNode? = nil
     //let texture = SKTexture(imageNamed: ingredient!.flatImageNamed)
     
-    init(ingredientType: Ingredient) {
+    init(ingredientType: Ingredient?) {
         ingredient = ingredientType
         let texture = SKTexture(imageNamed: IngredientGrid.GRID_IMG_NAME)
         super.init(texture: texture, color: UIColor.clearColor(), size: IngredientGrid.GRIDSIZE)
