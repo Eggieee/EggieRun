@@ -22,6 +22,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let LEFT_FRAME_OFFSET: CGFloat = 400
     private static let TOP_FRAME_OFFSET: CGFloat = 400
     private static let GRAVITY = CGVectorMake(0, -20)
+    private static let COLLECTABLE_SIZE = CGSizeMake(80, 80)
     
     private static let SE_COLLECT = "collect-sound"
     private static let SE_JUMP = "jump-sound"
@@ -119,7 +120,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             collectable.hidden = true
             
             if collectable.type == .Ingredient {
-                ingredientBar.addIngredient(collectable.ingredient!)
+                animateMovingIngredient(collectable.ingredient!, originalPosition: collectable.position)
+                //ingredientBar.addIngredient(collectable.ingredient!)
             } else {
                 flavourBar.addCondiment(collectable.condiment!)
             }
@@ -322,5 +324,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 position += CGFloat(GameScene.BUFFER_DISTANCE)
             }
         }
+    }
+    
+    func animateMovingIngredient(ingredient: Ingredient,originalPosition: CGPoint) {
+        let ingredientNode = SKSpriteNode(texture: ingredient.fineTexture, color: UIColor.clearColor(), size: GameScene.COLLECTABLE_SIZE)
+        ingredientNode.position = originalPosition
+        let moveAction = SKAction.moveByX(-200, y: 200, duration: 0.5)
+        let fadeOutAction = SKAction.fadeOutWithDuration(0.5)
+        let actions = [moveAction, fadeOutAction]
+        let actionGroup = SKAction.group(actions)
+        addChild(ingredientNode)
+        ingredientNode.runAction(actionGroup, completion: { () -> Void in
+            self.ingredientBar.addIngredient(ingredient)
+        })
     }
 }

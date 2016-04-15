@@ -63,6 +63,13 @@ class IngredientBar: SKSpriteNode {
         emptyGrids.removeFirst()
     }
     
+    /*
+    func getNextGridPosition() -> CGPoint {
+        let nextX = CGFloat(firstEmptyIndex) * IngredientBar.X_DISTANCE
+        return CGPointMake(nextX, <#T##y: CGFloat##CGFloat#>)
+    }
+*/
+    
     func updateBarLayout(newGrid: IngredientGrid, index: Int) {
         let isDuplicate = (index != IngredientBar.IS_NOT_CONTAINED_INDEX)
         if (isDuplicate) {
@@ -80,7 +87,9 @@ class IngredientBar: SKSpriteNode {
             if (i==startIndex) {
                 grid.removeFromParent()
             } else {
-                grid.position.x -= IngredientBar.X_DISTANCE
+                let movingAction = SKAction.moveByX(-IngredientBar.X_DISTANCE, y: 0, duration: 0.5)
+                //grid.position.x -= IngredientBar.X_DISTANCE
+                grid.runAction(movingAction)
             }
         }
     }
@@ -90,6 +99,10 @@ class IngredientBar: SKSpriteNode {
         let position = CGPointMake(CGFloat(nextIndex) * IngredientBar.X_DISTANCE, 0)
         newGrid.position = position
         addChild(newGrid)
+    }
+    
+    func animateMovingIngredient(ingredient: Ingredient,originalPosition: CGPoint, newPosition: CGPoint) {
+        
     }
     
     func updateArray(newIngredient: Ingredient, newGrid: IngredientGrid, index: Int) {
