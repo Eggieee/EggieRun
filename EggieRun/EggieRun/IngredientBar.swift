@@ -63,12 +63,9 @@ class IngredientBar: SKSpriteNode {
         emptyGrids.removeFirst()
     }
     
-    /*
-    func getNextGridPosition() -> CGPoint {
-        let nextX = CGFloat(firstEmptyIndex) * IngredientBar.X_DISTANCE
-        return CGPointMake(nextX, <#T##y: CGFloat##CGFloat#>)
+    func getNextGridX() -> CGFloat {
+        return CGFloat(firstEmptyIndex) * IngredientBar.X_DISTANCE
     }
-*/
     
     func updateBarLayout(newGrid: IngredientGrid, index: Int) {
         let isDuplicate = (index != IngredientBar.IS_NOT_CONTAINED_INDEX)
@@ -85,7 +82,10 @@ class IngredientBar: SKSpriteNode {
             let grid = ingredientGrids[i]
             // moving animation goes here
             if (i==startIndex) {
-                grid.removeFromParent()
+                let fadingOut = SKAction.fadeOutWithDuration(0.5)
+                grid.runAction(fadingOut, completion: { () -> Void in
+                    grid.removeFromParent()
+                })
             } else {
                 let movingAction = SKAction.moveByX(-IngredientBar.X_DISTANCE, y: 0, duration: 0.5)
                 //grid.position.x -= IngredientBar.X_DISTANCE
