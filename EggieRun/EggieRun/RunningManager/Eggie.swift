@@ -17,6 +17,8 @@ class Eggie: SKSpriteNode {
     private static let ATLAS_COUNT = 5
     private static let ATLAS_TIME_PER_FRAME = Eggie.ATLAS_TIME / Double(Eggie.ATLAS_COUNT)
     
+    static let ATLAS_ACTION_KEY = "atlas"
+    
     private var innerCurrentSpeed: Int
     private var innerState: EggieState
     private var actions: [EggieState: SKAction] = [EggieState: SKAction]()
@@ -71,7 +73,7 @@ class Eggie: SKSpriteNode {
             
             innerState = newState
             removeAllActions()
-            runAction(actions[newState]!)
+            runAction(actions[newState]!, withKey: Eggie.ATLAS_ACTION_KEY)
             
             switch newState {
             case .Standing, .Dying:
@@ -113,5 +115,17 @@ class Eggie: SKSpriteNode {
         }
         
         return false
+    }
+    
+    func pauseAtlas() {
+        if let action = actionForKey(Eggie.ATLAS_ACTION_KEY) {
+            action.speed = 0
+        }
+    }
+    
+    func unpauseAtlas() {
+        if let action = actionForKey(Eggie.ATLAS_ACTION_KEY) {
+            action.speed = 1
+        }
     }
 }

@@ -11,6 +11,10 @@ import SpriteKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     // Constants
     private static let BACKGROUND_IMAGE_NAME = "default-background"
+    private static let PAUSE_BUTTON_IMAGE_NAME = "button-pause"
+    private static let PAUSE_BUTTON_SIZE = CGSizeMake(100, 100)
+    private static let PAUSE_BUTTON_TOP_OFFSET: CGFloat = 50
+    private static let PAUSE_BUTTON_RIGHT_OFFSET: CGFloat = 50
     private static let DISTANCE_LABEL_TEXT = "Distance: %dm"
     private static let HEADER_FONT_SIZE: CGFloat = 30
     private static let EGGIE_X_POSITION: CGFloat = 200
@@ -26,13 +30,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let TOP_FRAME_OFFSET: CGFloat = 400
     private static let GRAVITY = CGVectorMake(0, -20)
     private static let COLLECTABLE_SIZE = CGSizeMake(80, 80)
+    private static let OVERLAY_Z_POSITION: CGFloat = 100
     
     private static let SE_COLLECT = SKAction.playSoundFileNamed("collect-sound.mp3", waitForCompletion: false)
     private static let SE_JUMP = SKAction.playSoundFileNamed("jump-sound.mp3", waitForCompletion: false)
     private static let SE_OBSTACLES: [Cooker: SKAction] = [.Drop: "drop-sound.mp3", .Oven: "oven-sound.mp3", .Pot: "pot-sound.mp3"].map({ SKAction.playSoundFileNamed($0, waitForCompletion: false) })
     
     private enum GameState {
-        case Ready, Playing, Over
+        case Ready, Playing, Over, Paused
     }
     
     private var eggie: Eggie!
@@ -50,6 +55,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var obstacles: [Obstacle]!
     private var lastUpdatedTime: CFTimeInterval!
     private var endingLayer: EndingLayer?
+    private var pauseButton: SKSpriteNode!
+    private var pausedLayer: PausedLayer?
 
     override func didMoveToView(view: SKView) {
         initializePhysicsProperties()
@@ -57,13 +64,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch = touches.first!
+        
         if gameState == .Ready {
             gameStart()
-        } else if gameState == .Playing && eggie.canJump {
-            self.runAction(GameScene.SE_JUMP)
-            eggie.state = .Jumping
+        } else if gameState == .Playing {
+            let touchLocation = touch.locationInNode(self)
+            
+            if pauseButton.containsPoint(touchLocation) {
+                pause()
+            } else if eggie.canJump {
+                self.runAction(GameScene.SE_JUMP)
+                eggie.state = .Jumping
+            }
         } else if gameState == .Over && endingLayer != nil {
-            let touch = touches.first!
             let touchLocation = touch.locationInNode(endingLayer!)
             
             if endingLayer!.eggdexButton.containsPoint(touchLocation) {
@@ -73,30 +87,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             } else if endingLayer!.playButton.containsPoint(touchLocation) {
                 gameReady()
             }
+        } else if gameState == .Paused && pausedLayer != nil {
+            let touchLocation = touch.locationInNode(pausedLayer!)
+            
+            if pausedLayer!.unpauseButton.containsPoint(touchLocation) {
+                unpause()
+            } else if pausedLayer!.backToMenuButton.containsPoint(touchLocation) {
+                let menuScene = MenuScene.singleton
+                self.view?.presentScene(menuScene!, transition: MenuScene.BACK_TRANSITION)
+            }
         }
     }
     
     override func update(currentTime: CFTimeInterval) {
-        if lastUpdatedTime == nil {
+        if (gameState == .Playing || gameState == .Ready) {
+            if lastUpdatedTime == nil {
+                lastUpdatedTime = currentTime
+                return
+            }
+            
+            let timeInterval = currentTime - lastUpdatedTime
             lastUpdatedTime = currentTime
-            return
+            
+            let movedDistance = timeInterval * Double(eggie.currentSpeed)
+            updateDistance(movedDistance)
+            runningProgressBar.updateDistance(movedDistance)
+            eggie.balance()
+            flavourBarFollow()
+            shiftPlatforms(movedDistance)
+            shiftCollectables(movedDistance)
+            shiftObstacles(movedDistance)
         }
-        
-        let timeInterval = currentTime - lastUpdatedTime
-        lastUpdatedTime = currentTime
-    
-        if (gameState == .Ready || gameState == .Over) {
-            return
-        }
-        
-        let movedDistance = timeInterval * Double(eggie.currentSpeed)
-        updateDistance(movedDistance)
-        runningProgressBar.updateDistance(movedDistance)
-        eggie.balance()
-        flavourBarFollow()
-        shiftPlatforms(movedDistance)
-        shiftCollectables(movedDistance)
-        shiftObstacles(movedDistance)
     }
     
     private func flavourBarFollow() {
@@ -104,7 +125,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
-        if (gameState == .Over) {
+        if gameState != .Playing {
             return
         }
         
@@ -216,6 +237,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         runningProgressBar.position = CGPointMake(GameScene.PROGRESS_BAR_X_OFFSET, self.frame.height - GameScene.PROGRESS_BAR_Y_OFFSET)
         addChild(runningProgressBar)
     }
+
+    private func initializePauseButton() {
+        pauseButton = SKSpriteNode(imageNamed: GameScene.PAUSE_BUTTON_IMAGE_NAME)
+        pauseButton.size = GameScene.PAUSE_BUTTON_SIZE
+        pauseButton.anchorPoint = CGPointMake(1, 1)
+        pauseButton.position = CGPointMake(scene!.frame.maxX - GameScene.PAUSE_BUTTON_RIGHT_OFFSET, scene!.frame.maxY - GameScene.PAUSE_BUTTON_TOP_OFFSET)
+        addChild(pauseButton)
+    }
     
     private func updateDistance(movedDistance: Double) {
         distance += Int(movedDistance)
@@ -232,6 +261,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initializeEggie()
         initializeCollectableBars()
         initializeRunningProgressBar()
+        initializePauseButton()
         
         if let particles = SKEmitterNode(fileNamed: "Snow.sks") {
             particles.position = CGPointMake(self.frame.midX, self.frame.maxY)
@@ -257,8 +287,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let dish = DishDataController.singleton.getResultDish(wayOfDie, condiments: flavourBar.condimentDictionary, ingredients: ingredientBar.ingredients)
         
         endingLayer = EndingLayer(usedCooker: wayOfDie, generatedDish: dish)
-        endingLayer!.zPosition = 100
-        endingLayer!.position = CGPointMake(UIScreen.mainScreen().bounds.width/2, UIScreen.mainScreen().bounds.height/2)
+        endingLayer!.zPosition = GameScene.OVERLAY_Z_POSITION
+        endingLayer!.position = CGPointMake(frame.midX, frame.midY)
         addChild(endingLayer!)
         
         if let action = GameScene.SE_OBSTACLES[wayOfDie] {
@@ -351,5 +381,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ingredientNode.runAction(actionGroup, completion: { () -> Void in
             self.ingredientBar.addIngredient(ingredient)
         })
+    }
+    
+    private func pause() {
+        if self.gameState == .Playing {
+            self.physicsWorld.speed = 0
+            self.gameState = .Paused
+            eggie.pauseAtlas()
+            pausedLayer = PausedLayer(frameSize: frame.size)
+            pausedLayer!.zPosition = GameScene.OVERLAY_Z_POSITION
+            pausedLayer!.position = CGPointMake(frame.midX, frame.midY)
+            addChild(pausedLayer!)
+        }
+    }
+    
+    private func unpause() {
+        if self.gameState == .Paused {
+            pausedLayer!.removeFromParent()
+            self.lastUpdatedTime = nil
+            self.gameState = .Playing
+            self.physicsWorld.speed = 1
+            eggie.unpauseAtlas()
+        }
     }
 }
