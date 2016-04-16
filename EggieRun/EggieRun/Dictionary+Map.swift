@@ -15,4 +15,8 @@ extension Dictionary {
             self[k] = v
         }
     }
+    
+    func map<OutValue>(@noescape transform: Value throws -> OutValue) rethrows -> [Key: OutValue] {
+        return Dictionary<Key, OutValue>(try map { (k, v) in (k, try transform(v)) })
+    }
 }

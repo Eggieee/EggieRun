@@ -25,9 +25,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let GRAVITY = CGVectorMake(0, -20)
     private static let COLLECTABLE_SIZE = CGSizeMake(80, 80)
     
-    private static let SE_COLLECT = "collect-sound.mp3"
-    private static let SE_JUMP = "jump-sound.mp3"
-    private static let SE_OBSTACLES: [Cooker: String] = [.Drop: "drop-sound.mp3", .Oven: "oven-sound.mp3", .Pot: "pot-sound.mp3"]
+    private static let SE_COLLECT = SKAction.playSoundFileNamed("collect-sound.mp3", waitForCompletion: false)
+    private static let SE_JUMP = SKAction.playSoundFileNamed("jump-sound.mp3", waitForCompletion: false)
+    private static let SE_OBSTACLES: [Cooker: SKAction] = [.Drop: "drop-sound.mp3", .Oven: "oven-sound.mp3", .Pot: "pot-sound.mp3"].map({ SKAction.playSoundFileNamed($0, waitForCompletion: false) })
     
     private enum GameState {
         case Ready, Playing, Over
@@ -57,7 +57,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if gameState == .Ready {
             gameStart()
         } else if gameState == .Playing && eggie.canJump {
-            self.runAction(SKAction.playSoundFileNamed(GameScene.SE_JUMP, waitForCompletion: true))
+            self.runAction(GameScene.SE_JUMP)
             eggie.state = .Jumping
         } else if gameState == .Over && endingLayer != nil {
             let touch = touches.first!
@@ -127,7 +127,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 flavourBar.addCondiment(collectable.condiment!)
             }
             
-            self.runAction(SKAction.playSoundFileNamed(GameScene.SE_COLLECT, waitForCompletion: true))
+            self.runAction(GameScene.SE_COLLECT)
             
             if let particles = SKEmitterNode(fileNamed: "Collection.sks") {
                 particles.position = contact.contactPoint
@@ -250,8 +250,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         endingLayer!.position = CGPointMake(UIScreen.mainScreen().bounds.width/2, UIScreen.mainScreen().bounds.height/2)
         addChild(endingLayer!)
         
-        if let soundFileNamed = GameScene.SE_OBSTACLES[wayOfDie] {
-            self.runAction(SKAction.playSoundFileNamed(soundFileNamed, waitForCompletion: true))
+        if let action = GameScene.SE_OBSTACLES[wayOfDie] {
+            self.runAction(action)
         }
     }
     
