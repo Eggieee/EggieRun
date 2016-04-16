@@ -19,6 +19,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let OBSTACLE_RATE = 0.2
     private static let BUFFER_DISTANCE = 400.0
     private static let INGREDIENT_BAR_OFFSET: CGFloat = 15
+    private static let PROGRESS_BAR_X_OFFSET: CGFloat = 15
+    private static let PROGRESS_BAR_Y_OFFSET: CGFloat = 2
     private static let FLAVOUR_BAR_OFFSET: CGFloat = 100
     private static let LEFT_FRAME_OFFSET: CGFloat = 400
     private static let TOP_FRAME_OFFSET: CGFloat = 400
@@ -211,7 +213,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func initializeRunningProgressBar() {
         runningProgressBar = RunningProgressBar()
-        runningProgressBar.position = CGPointMake(0, self.frame.height-ingredientBar.frame.height/2 - GameScene.INGREDIENT_BAR_OFFSET)
+        runningProgressBar.position = CGPointMake(GameScene.PROGRESS_BAR_X_OFFSET, self.frame.height - GameScene.PROGRESS_BAR_Y_OFFSET)
         addChild(runningProgressBar)
     }
     
