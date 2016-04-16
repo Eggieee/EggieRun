@@ -17,6 +17,11 @@
 		6C224DE11CA534DD00BF35A2 /* Dishes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C224DE01CA534DD00BF35A2 /* Dishes.plist */; };
 		6C5CDD4C1C9DBEEF005BB83C /* DexScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5CDD4B1C9DBEEF005BB83C /* DexScene.swift */; };
 		6C5CDD4E1C9DBF3D005BB83C /* DexScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6C5CDD4D1C9DBF3D005BB83C /* DexScene.sks */; };
+		6C81BC971CC21CAF0059BA8C /* jump-sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6C81BC961CC21CAF0059BA8C /* jump-sound.mp3 */; };
+		6C81BC991CC21D080059BA8C /* collect-sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6C81BC981CC21D080059BA8C /* collect-sound.mp3 */; };
+		6C81BC9B1CC21D2A0059BA8C /* drop-sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6C81BC9A1CC21D2A0059BA8C /* drop-sound.mp3 */; };
+		6C81BC9D1CC21D3B0059BA8C /* oven-sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6C81BC9C1CC21D3B0059BA8C /* oven-sound.mp3 */; };
+		6C81BC9F1CC21D450059BA8C /* pot-sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6C81BC9E1CC21D450059BA8C /* pot-sound.mp3 */; };
 		6C84EC441CBA209B00CB4A44 /* ConstructableStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C84EC431CBA209B00CB4A44 /* ConstructableStorage.swift */; };
 		6C890C7F1CBEBA450049CE4C /* Collection.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6C890C7D1CBEBA450049CE4C /* Collection.sks */; };
 		6C890C801CBEBA450049CE4C /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C890C7E1CBEBA450049CE4C /* spark.png */; };
@@ -92,6 +97,11 @@
 		6C224DE01CA534DD00BF35A2 /* Dishes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Dishes.plist; sourceTree = "<group>"; };
 		6C5CDD4B1C9DBEEF005BB83C /* DexScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DexScene.swift; sourceTree = "<group>"; };
 		6C5CDD4D1C9DBF3D005BB83C /* DexScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DexScene.sks; sourceTree = "<group>"; };
+		6C81BC961CC21CAF0059BA8C /* jump-sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "jump-sound.mp3"; sourceTree = "<group>"; };
+		6C81BC981CC21D080059BA8C /* collect-sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "collect-sound.mp3"; sourceTree = "<group>"; };
+		6C81BC9A1CC21D2A0059BA8C /* drop-sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "drop-sound.mp3"; sourceTree = "<group>"; };
+		6C81BC9C1CC21D3B0059BA8C /* oven-sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "oven-sound.mp3"; sourceTree = "<group>"; };
+		6C81BC9E1CC21D450059BA8C /* pot-sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "pot-sound.mp3"; sourceTree = "<group>"; };
 		6C84EC431CBA209B00CB4A44 /* ConstructableStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstructableStorage.swift; sourceTree = "<group>"; };
 		6C890C7D1CBEBA450049CE4C /* Collection.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Collection.sks; sourceTree = "<group>"; };
 		6C890C7E1CBEBA450049CE4C /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
@@ -179,6 +189,18 @@
 			name = DexManager;
 			sourceTree = "<group>";
 		};
+		6C81BC951CC21C7E0059BA8C /* SEs */ = {
+			isa = PBXGroup;
+			children = (
+				6C81BC961CC21CAF0059BA8C /* jump-sound.mp3 */,
+				6C81BC981CC21D080059BA8C /* collect-sound.mp3 */,
+				6C81BC9A1CC21D2A0059BA8C /* drop-sound.mp3 */,
+				6C81BC9C1CC21D3B0059BA8C /* oven-sound.mp3 */,
+				6C81BC9E1CC21D450059BA8C /* pot-sound.mp3 */,
+			);
+			path = SEs;
+			sourceTree = "<group>";
+		};
 		6C890C7C1CBEBA230049CE4C /* Particles */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,6 +271,7 @@
 				6CA7273B1C9BE60700CBD165 /* LaunchScreen.storyboard */,
 				6CA7273E1C9BE60700CBD165 /* Info.plist */,
 				6C890C901CBFCDFC0049CE4C /* BGMPlayer.swift */,
+				6C81BC951CC21C7E0059BA8C /* SEs */,
 				6C890C8D1CBFCD9B0049CE4C /* BackgroundMusics */,
 			);
 			path = EggieRun;
@@ -443,8 +466,10 @@
 				6C224DE11CA534DD00BF35A2 /* Dishes.plist in Resources */,
 				CDD106731CA1CFD300959FFD /* run.atlas in Resources */,
 				93B45D061CA159A8002A75AA /* jump.atlas in Resources */,
+				6C81BC9F1CC21D450059BA8C /* pot-sound.mp3 in Resources */,
 				93B9CEA71CB7A10600E340F0 /* beam.atlas in Resources */,
 				6C890C801CBEBA450049CE4C /* spark.png in Resources */,
+				6C81BC9D1CC21D3B0059BA8C /* oven-sound.mp3 in Resources */,
 				6C890C7F1CBEBA450049CE4C /* Collection.sks in Resources */,
 				6CA7273D1C9BE60700CBD165 /* LaunchScreen.storyboard in Resources */,
 				CD5FD5951CBAF7A600C0ACB0 /* oven-close.atlas in Resources */,
@@ -453,6 +478,9 @@
 				6C5CDD4E1C9DBF3D005BB83C /* DexScene.sks in Resources */,
 				6C1C64A41C9C49410091AE8B /* MenuScene.sks in Resources */,
 				CDD1066F1CA1B80D00959FFD /* Assets.xcassets in Resources */,
+				6C81BC991CC21D080059BA8C /* collect-sound.mp3 in Resources */,
+				6C81BC971CC21CAF0059BA8C /* jump-sound.mp3 in Resources */,
+				6C81BC9B1CC21D2A0059BA8C /* drop-sound.mp3 in Resources */,
 				6C890C821CBEC1470049CE4C /* Snow.sks in Resources */,
 				6CA727381C9BE60700CBD165 /* Main.storyboard in Resources */,
 			);

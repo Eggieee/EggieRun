@@ -24,9 +24,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let GRAVITY = CGVectorMake(0, -20)
     private static let COLLECTABLE_SIZE = CGSizeMake(80, 80)
     
-    private static let SE_COLLECT = "collect-sound"
-    private static let SE_JUMP = "jump-sound"
-    private static let SE_OBSTACLES: [Cooker: String] = [.Drop: "drop-sound", .Oven: "oven-sound", .Pot: "pot-sound"]
+    private static let SE_COLLECT = "collect-sound.mp3"
+    private static let SE_JUMP = "jump-sound.mp3"
+    private static let SE_OBSTACLES: [Cooker: String] = [.Drop: "drop-sound.mp3", .Oven: "oven-sound.mp3", .Pot: "pot-sound.mp3"]
     
     private enum GameState {
         case Ready, Playing, Over
