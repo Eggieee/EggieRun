@@ -10,6 +10,7 @@ import SpriteKit
 
 class IngredientBar: SKSpriteNode {
     private static let X_DISTANCE = CGFloat(100)
+    private static let X_OFFSET = CGFloat(45)
     private static let MAX_GRID_NUMBER = 5
     private static let IS_NOT_CONTAINED_INDEX = -1
     
@@ -36,7 +37,7 @@ class IngredientBar: SKSpriteNode {
     func initializeEmptyGrids() {
         for i in 0..<IngredientBar.MAX_GRID_NUMBER {
             let newEmptyGrid = IngredientGrid(ingredientType: nil)
-            let position = CGPointMake(CGFloat(i) * IngredientBar.X_DISTANCE, 0)
+            let position = CGPointMake(CGFloat(i) * IngredientBar.X_DISTANCE + IngredientBar.X_OFFSET, 0)
             newEmptyGrid.position = position
             addChild(newEmptyGrid)
             emptyGrids.append(newEmptyGrid)
@@ -64,7 +65,7 @@ class IngredientBar: SKSpriteNode {
     }
     
     func getNextGridX() -> CGFloat {
-        return CGFloat(firstEmptyIndex) * IngredientBar.X_DISTANCE
+        return CGFloat(firstEmptyIndex) * IngredientBar.X_DISTANCE + IngredientBar.X_OFFSET
     }
     
     func updateBarLayout(newGrid: IngredientGrid, index: Int) {
@@ -96,7 +97,7 @@ class IngredientBar: SKSpriteNode {
     
     func animateAddingNewGrid(newGrid: IngredientGrid, isDuplicate: Bool) {
         let nextIndex = (isFull || isDuplicate) ? firstEmptyIndex-1 : firstEmptyIndex
-        let position = CGPointMake(CGFloat(nextIndex) * IngredientBar.X_DISTANCE, 0)
+        let position = CGPointMake(CGFloat(nextIndex) * IngredientBar.X_DISTANCE + IngredientBar.X_OFFSET, 0)
         newGrid.position = position
         addChild(newGrid)
     }
