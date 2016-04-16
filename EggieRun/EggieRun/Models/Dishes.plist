@@ -76,7 +76,7 @@
 		<key>id</key>
 		<integer>16</integer>
 		<key>name</key>
-		<string>Chinese Steamed Eggs</string>
+		<string>Chinese Steamed Egg</string>
 		<key>description</key>
 		<string>This is a Steamed egg pretending itself to be a dessert.</string>
 		<key>imageNamed</key>
