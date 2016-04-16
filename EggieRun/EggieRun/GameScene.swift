@@ -67,6 +67,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let touch = touches.first!
         
         if gameState == .Ready {
+            pauseButton.hidden = false
             gameStart()
         } else if gameState == .Playing {
             let touchLocation = touch.locationInNode(self)
@@ -243,6 +244,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseButton.size = GameScene.PAUSE_BUTTON_SIZE
         pauseButton.anchorPoint = CGPointMake(1, 1)
         pauseButton.position = CGPointMake(scene!.frame.maxX - GameScene.PAUSE_BUTTON_RIGHT_OFFSET, scene!.frame.maxY - GameScene.PAUSE_BUTTON_TOP_OFFSET)
+        pauseButton.hidden = true
         addChild(pauseButton)
     }
     
