@@ -393,7 +393,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         GameScene.instance = nil
     }
     
-    private func pause() {
+    func pause() {
         if self.gameState == .Playing {
             self.physicsWorld.speed = 0
             self.gameState = .Paused
