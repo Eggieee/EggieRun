@@ -72,15 +72,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if gameState == .Ready {
             gameStart()
-        } else if gameState == .Playing {
-            let touchLocation = touch.locationInNode(self)
-            
-            if pauseButton.containsPoint(touchLocation) {
-                pause()
-            } else if eggie.canJump {
-                self.runAction(GameScene.SE_JUMP)
-                eggie.state = .Jumping
-            }
         } else if gameState == .Over && endingLayer != nil {
             let touchLocation = touch.locationInNode(endingLayer!)
             
@@ -99,6 +90,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             } else if pausedLayer!.backToMenuButton.containsPoint(touchLocation) {
                 let menuScene = MenuScene.singleton
                 self.view?.presentScene(menuScene!, transition: MenuScene.BACK_TRANSITION)
+            }
+        }
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if gameState == .Playing {
+            let touch = touches.first!
+            let touchLocation = touch.locationInNode(self)
+            
+            if pauseButton.containsPoint(touchLocation) {
+                pause()
+            } else if eggie.canJump {
+                eggie.state = .Jumping
+                self.runAction(GameScene.SE_JUMP)
             }
         }
     }
