@@ -14,13 +14,16 @@ class DexGridNode: SKSpriteNode {
     
     private var width: CGFloat
     private var height: CGFloat
-    
-    var dishNodes = [DexItemNode]()
+
+    var pageNumber: Int
+    private(set) var dishNodes = [DexItemNode]()
     private var selectedEmitterNode: SKEmitterNode!
     
-    init(sceneHeight: CGFloat, sceneWidth: CGFloat) {
-        width = DexScene.GRID_WIDTH * sceneWidth
+    
+    init(sceneHeight: CGFloat, sceneWidth: CGFloat, dishList:[Dish], pageNumber:Int) {
+        width = DexScene.GRID_WIDTH_RATIO * sceneWidth
         height = sceneHeight - DexScene.TOP_BAR_HEIGHT
+        self.pageNumber = pageNumber
         
         super.init(texture: SKTexture(imageNamed: "grid-texture"), color: UIColor.grayColor(), size: CGSize(width: width, height: height))
         self.position = CGPoint(x: 0, y: 0)
@@ -28,18 +31,19 @@ class DexGridNode: SKSpriteNode {
         
         let itemSize = (width - DexGridNode.PADDING * CGFloat(DexGridNode.ITEMS_PER_ROW + 1)) / CGFloat(DexGridNode.ITEMS_PER_ROW)
         
-        for i in 0 ..< DishDataController.singleton.dishes.count {
+        for i in 0 ..< dishList.count {
             let row = i / DexGridNode.ITEMS_PER_ROW
             let col = i % DexGridNode.ITEMS_PER_ROW
             
             let x = CGFloat(col + 1) * DexGridNode.PADDING + (CGFloat(col) + 0.5) * itemSize
             let y = height - (CGFloat(row + 1) * DexGridNode.PADDING + (CGFloat(row) + 0.5) * itemSize)
             
-            let item = DexItemNode(dish: DishDataController.singleton.dishes[i], xPosition: x, yPosition: y, size: itemSize)
+            let item = DexItemNode(dish: dishList[i], xPosition: x, yPosition: y, size: itemSize)
             
             addChild(item)
             dishNodes.append(item)
         }
+        
         
         selectedEmitterNode = SKEmitterNode(fileNamed: "DexSelected.sks")
         selectedEmitterNode.particlePositionRange.dx = itemSize

@@ -17,14 +17,17 @@ class DexScene: SKScene {
     
     private static let BACK_BUTTON_SIZE = CGFloat(80)
     static let TOP_BAR_HEIGHT = CGFloat(80)
-    static let GRID_WIDTH = CGFloat(4.0 / 7)
-    static let DETAIL_WIDTH = CGFloat(3.0 / 7)
+    static let GRID_WIDTH_RATIO = CGFloat(4.0 / 7)
+    static let DETAIL_WIDTH_RATIO = CGFloat(3.0 / 7)
     
     static let UNACTIVATED_FILTER = CIFilter(name: "CIColorControls", withInputParameters: ["inputBrightness": -1])
     
     private var buttonBack: SKSpriteNode!
     private var gridNode: DexGridNode!
     private var detailNode: DexDetailNode!
+    private var flipPageNode: SKSpriteNode!
+
+    
     
     override func didMoveToView(view: SKView) {
         let titleLabel = SKLabelNode(fontNamed: DexScene.TITLE_FONT)
@@ -38,10 +41,15 @@ class DexScene: SKScene {
         buttonBack.position = CGPoint(x: DexScene.BACK_BUTTON_SIZE, y: self.frame.height - DexScene.BACK_BUTTON_SIZE / 2)
         self.addChild(buttonBack)
         
-        gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width)
+        gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width, dishList: Array(DishDataController.singleton.dishes[0..<16]), pageNumber: 1)
         self.addChild(gridNode)
         
         createDetailNode()
+        
+        flipPageNode = SKSpriteNode(imageNamed: "next-page")
+        flipPageNode.position = CGPoint(x: self.frame.width/2, y: DexScene.TOP_BAR_HEIGHT)
+        flipPageNode.zPosition = 2
+        addChild(flipPageNode)
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -55,6 +63,21 @@ class DexScene: SKScene {
             self.view?.presentScene(menuScene!, transition: MenuScene.BACK_TRANSITION)
         }
         
+        // flipping page
+        if flipPageNode.containsPoint(touchLocation) {
+            if gridNode.pageNumber == 1 {
+                gridNode.removeFromParent()
+                gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width, dishList: Array(DishDataController.singleton.dishes[17..<21]),pageNumber:2)
+                self.addChild(gridNode)
+                flipPageNode.texture = SKTexture(imageNamed: "previous-page")
+            } else {
+                gridNode.removeFromParent()
+                gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width, dishList: Array(DishDataController.singleton.dishes[0..<16]),pageNumber:1)
+                self.addChild(gridNode)
+                flipPageNode.texture = SKTexture(imageNamed: "next-page")
+            }
+        }
+
         let touchLocationInGrid = touch.locationInNode(gridNode)
         for dishNode in gridNode.dishNodes {
             if dishNode.containsPoint(touchLocationInGrid) {

@@ -42,9 +42,9 @@ class DexDetailNode: SKSpriteNode {
         effectNode.shouldRasterize = true
         
         // background
-        super.init(texture: SKTexture(imageNamed: "detail-texture"), color: UIColor.brownColor(), size: CGSize(width: sceneWidth * DexScene.DETAIL_WIDTH, height: sceneHeight - DexScene.TOP_BAR_HEIGHT))
+        super.init(texture: SKTexture(imageNamed: "detail-texture"), color: UIColor.brownColor(), size: CGSize(width: sceneWidth * DexScene.DETAIL_WIDTH_RATIO, height: sceneHeight - DexScene.TOP_BAR_HEIGHT))
         self.anchorPoint = CGPoint(x: 0, y: 0)
-        self.position = CGPoint(x: sceneWidth * (1 - DexScene.DETAIL_WIDTH), y: 0)
+        self.position = CGPoint(x: sceneWidth * (1 - DexScene.DETAIL_WIDTH_RATIO), y: 0)
         
         dishImageNode.position = CGPoint(x: self.frame.width / 2, y: 7 * sceneHeight / 12)
         dishImageNode.size = CGSize(width: 2 * self.frame.width / 3, height: 2 * self.frame.width / 3)
