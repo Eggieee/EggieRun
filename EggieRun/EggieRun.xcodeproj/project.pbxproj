@@ -50,6 +50,7 @@
 		93B45D061CA159A8002A75AA /* jump.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 93B45D051CA159A8002A75AA /* jump.atlas */; };
 		93B9CEA51CB7605000E340F0 /* EndingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B9CEA41CB7605000E340F0 /* EndingLayer.swift */; };
 		93B9CEA71CB7A10600E340F0 /* beam.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 93B9CEA61CB7A10600E340F0 /* beam.atlas */; };
+		93C864111CC2607600C15E55 /* RunningProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C864101CC2607600C15E55 /* RunningProgressBar.swift */; };
 		93D89A821CAD659F0090CC58 /* IngredientBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D89A811CAD659F0090CC58 /* IngredientBar.swift */; };
 		93D89A841CAD65BD0090CC58 /* FlavourBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D89A831CAD65BD0090CC58 /* FlavourBar.swift */; };
 		93D89A861CAD6C350090CC58 /* IngredientGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D89A851CAD6C350090CC58 /* IngredientGrid.swift */; };
@@ -135,6 +136,7 @@
 		93B45D051CA159A8002A75AA /* jump.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = jump.atlas; sourceTree = "<group>"; };
 		93B9CEA41CB7605000E340F0 /* EndingLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndingLayer.swift; sourceTree = "<group>"; };
 		93B9CEA61CB7A10600E340F0 /* beam.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = beam.atlas; sourceTree = "<group>"; };
+		93C864101CC2607600C15E55 /* RunningProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningProgressBar.swift; sourceTree = "<group>"; };
 		93D89A811CAD659F0090CC58 /* IngredientBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientBar.swift; sourceTree = "<group>"; };
 		93D89A831CAD65BD0090CC58 /* FlavourBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlavourBar.swift; sourceTree = "<group>"; };
 		93D89A851CAD6C350090CC58 /* IngredientGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientGrid.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 				CDD1067A1CA867EE00959FFD /* Running Manager */,
 				6CA727301C9BE60700CBD165 /* GameScene.sks */,
 				6CA727321C9BE60700CBD165 /* GameScene.swift */,
+				93C864101CC2607600C15E55 /* RunningProgressBar.swift */,
 				93B9CEA41CB7605000E340F0 /* EndingLayer.swift */,
 				0B8DC3E71CA05D9C0055382D /* SKScene+Background.swift */,
 				6C8F14001CBB0CAE008D5678 /* Dictionary+Map.swift */,
@@ -535,6 +538,7 @@
 				0B0A120C1CB79DC9008BD52A /* DexGridNode.swift in Sources */,
 				6C04AE681CA86C1E00AA6423 /* DishDataController.swift in Sources */,
 				CDD1066D1CA1B18800959FFD /* Eggie.swift in Sources */,
+				93C864111CC2607600C15E55 /* RunningProgressBar.swift in Sources */,
 				CDD106751CA8403700959FFD /* Collectable.swift in Sources */,
 				CD0940741C9CFBBB00CF4905 /* EggieState.swift in Sources */,
 				0B0A12071CB79867008BD52A /* DexItemNode.swift in Sources */,

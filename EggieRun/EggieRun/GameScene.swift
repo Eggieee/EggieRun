@@ -39,6 +39,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var obstacleFactory: ObstacleFactory!
     private var ingredientBar: IngredientBar!
     private var flavourBar: FlavourBar!
+    private var runningProgressBar: RunningProgressBar!
     private var gameState: GameState = .Ready
     private var distanceLabel: SKLabelNode!
     private var distance = 0
@@ -88,6 +89,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let movedDistance = timeInterval * Double(eggie.currentSpeed)
         updateDistance(movedDistance)
+        runningProgressBar.updateDistance(movedDistance)
         eggie.balance()
         flavourBarFollow()
         shiftPlatforms(movedDistance)
@@ -207,6 +209,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(flavourBar)
     }
     
+    private func initializeRunningProgressBar() {
+        runningProgressBar = RunningProgressBar()
+        runningProgressBar.position = CGPointMake(0, self.frame.height-ingredientBar.frame.height/2 - GameScene.INGREDIENT_BAR_OFFSET)
+        addChild(runningProgressBar)
+    }
+    
     private func updateDistance(movedDistance: Double) {
         distance += Int(movedDistance)
         distanceLabel.text = String(format: GameScene.DISTANCE_LABEL_TEXT, distance)
@@ -221,6 +229,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initialzieCollectable()
         initializeEggie()
         initializeCollectableBars()
+        initializeRunningProgressBar()
         
         if let particles = SKEmitterNode(fileNamed: "Snow.sks") {
             particles.position = CGPointMake(self.frame.midX, self.frame.maxY)
