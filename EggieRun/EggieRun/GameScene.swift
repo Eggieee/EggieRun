@@ -227,6 +227,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addChild(particles)
         }
         
+        distance = 0
         gameState = .Ready
     }
     
