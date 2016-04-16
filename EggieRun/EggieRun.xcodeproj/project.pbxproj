@@ -186,7 +186,7 @@
 				0B0A12061CB79867008BD52A /* DexItemNode.swift */,
 				0B0A120B1CB79DC9008BD52A /* DexGridNode.swift */,
 			);
-			name = DexManager;
+			path = DexManager;
 			sourceTree = "<group>";
 		};
 		6C81BC951CC21C7E0059BA8C /* SEs */ = {
@@ -328,6 +328,7 @@
 				93D89A831CAD65BD0090CC58 /* FlavourBar.swift */,
 			);
 			name = "Collectable Manager";
+			path = CollectableManager;
 			sourceTree = "<group>";
 		};
 		CDD1067A1CA867EE00959FFD /* Running Manager */ = {
@@ -343,6 +344,7 @@
 				CD5FD5901CB9EA0300C0ACB0 /* Obstacle.swift */,
 			);
 			name = "Running Manager";
+			path = RunningManager;
 			sourceTree = "<group>";
 		};
 		CDD1067B1CA868A100959FFD /* Factories */ = {
@@ -352,7 +354,7 @@
 				CD5FD5921CBA624100C0ACB0 /* ObstacleFactory.swift */,
 				CDD106641C9DD62600959FFD /* PlatformFactory.swift */,
 			);
-			name = Factories;
+			path = Factories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
