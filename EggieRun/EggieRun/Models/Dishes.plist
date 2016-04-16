@@ -84,7 +84,7 @@
 		<key>rarity</key>
 		<integer>2</integer>
 		<key>canConstruct</key>
-		<string>return (cooker==3 &amp;&amp; cond[0]&gt;0)?10:0;</string>
+		<string>return (cooker==3 &amp;&amp; cond[0]&gt;0 &amp;&amp; ingred[100])?10:0;</string>
 	</dict>
 	<dict>
 		<key>id</key>
