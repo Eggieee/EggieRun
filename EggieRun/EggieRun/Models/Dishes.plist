@@ -118,11 +118,11 @@
 		<key>id</key>
 		<integer>13</integer>
 		<key>name</key>
-		<string>Steamed Eggs with Milk</string>
+		<string>Steamed Egg with Milk</string>
 		<key>description</key>
 		<string>Eggie jumped in milk to take a beauty SPA shower.</string>
 		<key>imageNamed</key>
-		<string>streamed-egg-with-milk</string>
+		<string>steamed-egg-with-milk</string>
 		<key>rarity</key>
 		<integer>3</integer>
 		<key>canConstruct</key>
