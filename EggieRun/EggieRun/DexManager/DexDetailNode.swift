@@ -11,10 +11,12 @@ import SpriteKit
 class DexDetailNode: SKSpriteNode {
     private static let QMARK_FONTSIZE = CGFloat(100)
     
+    private let WIDTH : CGFloat
+    private let HEIGHT: CGFloat
     private var dishImageNode: SKSpriteNode
     private var effectNode: SKEffectNode
     private var dishNameNode: SKLabelNode
-    private var dishDescriptionNode: SKLabelNode
+    private var dishDescriptionNode: MultilineLabelNode
     private var questionMarkNode: SKLabelNode
     
     func setDish(dish: Dish, activated: Bool) {
@@ -33,30 +35,29 @@ class DexDetailNode: SKSpriteNode {
     }
     
     init(sceneHeight: CGFloat, sceneWidth: CGFloat) {
+        WIDTH = sceneWidth * DexScene.DETAIL_WIDTH_RATIO
+        HEIGHT = sceneHeight - DexScene.TOP_BAR_HEIGHT
+        
         dishImageNode = SKSpriteNode(texture: nil)
         dishNameNode = SKLabelNode(text: "")
-        dishDescriptionNode = SKLabelNode(text: "")
+        dishDescriptionNode = MultilineLabelNode(text: "", labelWidth: Int(WIDTH * 2/3) , pos: CGPoint(x: WIDTH / 2, y: HEIGHT / 4), fontName: "ChalkboardSE-Regular",fontSize:20,fontColor: UIColor.blackColor(),leading: 20, alignment:.Center, shouldShowBorder:false)
         questionMarkNode = SKLabelNode(text: "?")
         
         effectNode = SKEffectNode()
         effectNode.shouldRasterize = true
         
         // background
-        super.init(texture: SKTexture(imageNamed: "detail-texture"), color: UIColor.brownColor(), size: CGSize(width: sceneWidth * DexScene.DETAIL_WIDTH_RATIO, height: sceneHeight - DexScene.TOP_BAR_HEIGHT))
+        super.init(texture: SKTexture(imageNamed: "detail-texture"), color: UIColor.brownColor(), size: CGSize(width: WIDTH, height: HEIGHT))
         self.anchorPoint = CGPoint(x: 0, y: 0)
         self.position = CGPoint(x: sceneWidth * (1 - DexScene.DETAIL_WIDTH_RATIO), y: 0)
         
-        dishImageNode.position = CGPoint(x: self.frame.width / 2, y: 7 * sceneHeight / 12)
-        dishImageNode.size = CGSize(width: 2 * self.frame.width / 3, height: 2 * self.frame.width / 3)
+        dishImageNode.position = CGPoint(x: WIDTH / 2, y: 7 * sceneHeight / 12)
+        dishImageNode.size = CGSize(width: 2 * WIDTH / 3, height: 2 * WIDTH / 3)
         
-        dishNameNode.position = CGPoint(x: self.frame.width / 2, y: self.frame.height / 4)
+        dishNameNode.position = CGPoint(x: WIDTH / 2, y: HEIGHT / 3)
         dishNameNode.fontSize = 30
         dishNameNode.fontName = "BradleyHandITCTT-Bold"
-        dishNameNode.fontColor = UIColor.blackColor()
-        
-        dishDescriptionNode.position = CGPoint(x: self.frame.width / 2, y: self.frame.height / 5)
-        dishDescriptionNode.fontSize = 20
-        dishDescriptionNode.fontColor = UIColor.blackColor()
+        dishNameNode.fontColor = UIColor.brownColor()
         
         questionMarkNode.color = UIColor.whiteColor()
         questionMarkNode.position = dishImageNode.position
