@@ -67,7 +67,7 @@ class DexScene: SKScene {
         if flipPageNode.containsPoint(touchLocation) {
             if gridNode.pageNumber == 1 {
                 gridNode.removeFromParent()
-                gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width, dishList: Array(DishDataController.singleton.dishes[17..<21]),pageNumber:2)
+                gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width, dishList: Array(DishDataController.singleton.dishes[16..<21]),pageNumber:2)
                 self.addChild(gridNode)
                 flipPageNode.texture = SKTexture(imageNamed: "previous-page")
             } else {
