@@ -16,6 +16,9 @@ class DexScene: SKScene {
     private static let TITLE_TOP_PADDING = CGFloat(20)
     
     private static let BACK_BUTTON_SIZE = CGFloat(80)
+    private static let FLIP_BUTTON_WIDTH = CGFloat(90)
+    private static let FLIP_BUTTON_HEIGHT = CGFloat(60)
+    
     static let TOP_BAR_HEIGHT = CGFloat(80)
     static let GRID_WIDTH_RATIO = CGFloat(4.0 / 7)
     static let DETAIL_WIDTH_RATIO = CGFloat(3.0 / 7)
@@ -27,7 +30,6 @@ class DexScene: SKScene {
     private var detailNode: DexDetailNode!
     private var flipPageNode: SKSpriteNode!
 
-    
     
     override func didMoveToView(view: SKView) {
         let titleLabel = SKLabelNode(fontNamed: DexScene.TITLE_FONT)
@@ -46,9 +48,10 @@ class DexScene: SKScene {
         
         createDetailNode()
         
-        flipPageNode = SKSpriteNode(imageNamed: "next-page")
+        flipPageNode = SKSpriteNode(imageNamed: "arrow-right")
         flipPageNode.position = CGPoint(x: self.frame.width/2, y: DexScene.TOP_BAR_HEIGHT)
         flipPageNode.zPosition = 2
+        flipPageNode.size = CGSize(width: DexScene.FLIP_BUTTON_WIDTH, height: DexScene.FLIP_BUTTON_HEIGHT)
         addChild(flipPageNode)
     }
     
@@ -69,12 +72,12 @@ class DexScene: SKScene {
                 gridNode.removeFromParent()
                 gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width, dishList: Array(DishDataController.singleton.dishes[12..<21]),pageNumber:2)
                 self.addChild(gridNode)
-                flipPageNode.texture = SKTexture(imageNamed: "previous-page")
+                flipPageNode.texture = SKTexture(imageNamed: "arrow-left")
             } else {
                 gridNode.removeFromParent()
                 gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width, dishList: Array(DishDataController.singleton.dishes[0..<12]),pageNumber:1)
                 self.addChild(gridNode)
-                flipPageNode.texture = SKTexture(imageNamed: "next-page")
+                flipPageNode.texture = SKTexture(imageNamed: "arrow-right")
             }
         }
 
