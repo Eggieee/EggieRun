@@ -16,8 +16,7 @@ class Eggie: SKSpriteNode {
     private static let ATLAS_TIME = 0.2
     private static let ATLAS_COUNT = 5
     private static let ATLAS_TIME_PER_FRAME = Eggie.ATLAS_TIME / Double(Eggie.ATLAS_COUNT)
-    
-    static let ATLAS_ACTION_KEY = "atlas"
+    private static let ATLAS_ACTION_KEY = "atlas"
     
     private var innerCurrentSpeed: Int
     private var innerState: EggieState

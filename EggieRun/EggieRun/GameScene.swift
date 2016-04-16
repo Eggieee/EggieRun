@@ -71,7 +71,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let touch = touches.first!
         
         if gameState == .Ready {
-            pauseButton.hidden = false
             gameStart()
         } else if gameState == .Playing {
             let touchLocation = touch.locationInNode(self)
@@ -280,6 +279,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func gameStart() {
+        pauseButton.hidden = false
         eggie.state = .Running
         gameState = .Playing
     }
