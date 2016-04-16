@@ -41,7 +41,7 @@ class DexScene: SKScene {
         buttonBack.position = CGPoint(x: DexScene.BACK_BUTTON_SIZE, y: self.frame.height - DexScene.BACK_BUTTON_SIZE / 2)
         self.addChild(buttonBack)
         
-        gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width, dishList: Array(DishDataController.singleton.dishes[0..<16]), pageNumber: 1)
+        gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width, dishList: Array(DishDataController.singleton.dishes[0..<12]), pageNumber: 1)
         self.addChild(gridNode)
         
         createDetailNode()
@@ -67,12 +67,12 @@ class DexScene: SKScene {
         if flipPageNode.containsPoint(touchLocation) {
             if gridNode.pageNumber == 1 {
                 gridNode.removeFromParent()
-                gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width, dishList: Array(DishDataController.singleton.dishes[16..<21]),pageNumber:2)
+                gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width, dishList: Array(DishDataController.singleton.dishes[12..<21]),pageNumber:2)
                 self.addChild(gridNode)
                 flipPageNode.texture = SKTexture(imageNamed: "previous-page")
             } else {
                 gridNode.removeFromParent()
-                gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width, dishList: Array(DishDataController.singleton.dishes[0..<16]),pageNumber:1)
+                gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width, dishList: Array(DishDataController.singleton.dishes[0..<12]),pageNumber:1)
                 self.addChild(gridNode)
                 flipPageNode.texture = SKTexture(imageNamed: "next-page")
             }

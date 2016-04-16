@@ -36,7 +36,7 @@ class DexGridNode: SKSpriteNode {
             let col = i % DexGridNode.ITEMS_PER_ROW
             
             let x = CGFloat(col + 1) * DexGridNode.PADDING + (CGFloat(col) + 0.5) * itemSize
-            let y = height - (CGFloat(row + 1) * DexGridNode.PADDING + (CGFloat(row) + 0.5) * itemSize)
+            let y = height - (CGFloat(row + 1) * DexGridNode.PADDING * 3 + (CGFloat(row) + 0.5) * itemSize)
             
             let item = DexItemNode(dish: dishList[i], xPosition: x, yPosition: y, size: itemSize)
             
