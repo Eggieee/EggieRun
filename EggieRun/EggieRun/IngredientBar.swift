@@ -64,8 +64,8 @@ class IngredientBar: SKSpriteNode {
         emptyGrids.removeFirst()
     }
     
-    func getNextGridX() -> CGFloat {
-        return CGFloat(firstEmptyIndex) * IngredientBar.X_DISTANCE + IngredientBar.X_OFFSET
+    func getNextGridX(newIngredient: Ingredient) -> CGFloat {
+        return CGFloat(min(firstEmptyIndex - (ingredients.contains(newIngredient) ? 1 : 0), 4)) * IngredientBar.X_DISTANCE + IngredientBar.X_OFFSET
     }
     
     func updateBarLayout(newGrid: IngredientGrid, index: Int) {
@@ -100,10 +100,6 @@ class IngredientBar: SKSpriteNode {
         let position = CGPointMake(CGFloat(nextIndex) * IngredientBar.X_DISTANCE + IngredientBar.X_OFFSET, 0)
         newGrid.position = position
         addChild(newGrid)
-    }
-    
-    func animateMovingIngredient(ingredient: Ingredient,originalPosition: CGPoint, newPosition: CGPoint) {
-        
     }
     
     func updateArray(newIngredient: Ingredient, newGrid: IngredientGrid, index: Int) {
