@@ -9,6 +9,10 @@
 import SpriteKit
 
 class FlavourBar: SKSpriteNode {
+    private static let BLUE_COLOUR = UIColor(red: 128.0/255, green: 227.0/255, blue: 250.0/255, alpha: 1)
+    private static let YELLOW_COLOUR = UIColor(red: 255.0/255, green: 235.0/255, blue: 153.0/255, alpha: 1)
+    private static let RED_COLOUR = UIColor(red: 254.0/255, green: 89.0/255, blue: 77.0/255, alpha: 1)
+    
     private static let BAR_LENGTH = CGFloat(100)
     private static let BAR_HEIGHT = CGFloat(20)
     
@@ -91,9 +95,9 @@ class FlavourBar: SKSpriteNode {
     }
     
     private func initializeBar() {
-        saltBar = SKSpriteNode(color: UIColor.blueColor(), size: CGSizeMake(getSingleFlavourLength(Condiment.Salt), FlavourBar.BAR_HEIGHT))
-        sugarBar = SKSpriteNode(color: UIColor.yellowColor(), size: CGSizeMake(getSingleFlavourLength(Condiment.Sugar), FlavourBar.BAR_HEIGHT))
-        chiliBar = SKSpriteNode(color: UIColor.redColor(), size: CGSizeMake(getSingleFlavourLength(Condiment.Chili), FlavourBar.BAR_HEIGHT))
+        saltBar = SKSpriteNode(color: FlavourBar.BLUE_COLOUR, size: CGSizeMake(getSingleFlavourLength(Condiment.Salt), FlavourBar.BAR_HEIGHT))
+        sugarBar = SKSpriteNode(color: FlavourBar.YELLOW_COLOUR, size: CGSizeMake(getSingleFlavourLength(Condiment.Sugar), FlavourBar.BAR_HEIGHT))
+        chiliBar = SKSpriteNode(color: FlavourBar.RED_COLOUR, size: CGSizeMake(getSingleFlavourLength(Condiment.Chili), FlavourBar.BAR_HEIGHT))
         addChild(saltBar)
         addChild(sugarBar)
         addChild(chiliBar)
