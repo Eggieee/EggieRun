@@ -9,6 +9,8 @@
 import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    static var instance: GameScene?
+    
     // Constants
     private static let BACKGROUND_IMAGE_NAME = "default-background"
     private static let PAUSE_BUTTON_IMAGE_NAME = "button-pause"
@@ -59,6 +61,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var pausedLayer: PausedLayer?
 
     override func didMoveToView(view: SKView) {
+        GameScene.instance = self
+        
         initializePhysicsProperties()
         gameReady()
     }
@@ -383,6 +387,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ingredientNode.runAction(actionGroup, completion: { () -> Void in
             self.ingredientBar.addIngredient(ingredient)
         })
+    }
+    
+    override func willMoveFromView(view: SKView) {
+        GameScene.instance = nil
     }
     
     private func pause() {

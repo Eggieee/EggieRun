@@ -51,7 +51,7 @@ class MenuScene: SKScene {
         let touchLocation = touch.locationInNode(self)
         
         if buttonPlay.containsPoint(touchLocation) {
-            let gameScene = GameScene(fileNamed: "GameScene")!
+            let gameScene = GameScene(size: self.size)
             self.view?.presentScene(gameScene, transition: MenuScene.TRANSITION)
         } else if buttonDex.containsPoint(touchLocation) {
             let dexScene = DexScene(size: self.size)
