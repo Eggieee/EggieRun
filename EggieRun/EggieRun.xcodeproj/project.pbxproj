@@ -432,7 +432,7 @@
 					};
 					6CA7274D1C9BE60700CBD165 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = MW3CFV3PNJ;
+						DevelopmentTeam = 3DR8Z46989;
 						TestTargetID = 6CA7272A1C9BE60600CBD165;
 					};
 				};
@@ -741,11 +741,14 @@
 		6CA7275E1C9BE60700CBD165 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				INFOPLIST_FILE = EggieRunUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.eggieee.EggieRunUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_TARGET_NAME = EggieRun;
 				USES_XCTRUNNER = YES;
 			};
@@ -754,10 +757,13 @@
 		6CA7275F1C9BE60700CBD165 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = EggieRunUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.eggieee.EggieRunUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_TARGET_NAME = EggieRun;
 				USES_XCTRUNNER = YES;
 			};
