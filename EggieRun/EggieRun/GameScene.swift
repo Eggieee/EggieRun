@@ -328,10 +328,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func animateMovingIngredient(ingredient: Ingredient,originalPosition: CGPoint) {
+    func animateMovingIngredient(ingredient: Ingredient, originalPosition: CGPoint) {
         let ingredientNode = SKSpriteNode(texture: ingredient.fineTexture, color: UIColor.clearColor(), size: GameScene.COLLECTABLE_SIZE)
         ingredientNode.position = originalPosition
-        let newPosition = CGPointMake(ingredientBar.getNextGridX() + GameScene.INGREDIENT_BAR_OFFSET, ingredientBar.position.y)
+        let newPosition = CGPointMake(ingredientBar.getNextGridX(ingredient) + GameScene.INGREDIENT_BAR_OFFSET, ingredientBar.position.y)
         let moveAction = SKAction.moveTo(newPosition, duration: 0.5)
         let fadeOutAction = SKAction.fadeOutWithDuration(0.5)
         let actions = [moveAction, fadeOutAction]
