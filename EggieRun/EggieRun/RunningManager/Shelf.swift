@@ -18,7 +18,7 @@ class Shelf: SKNode {
     
     var width: CGFloat = 0.0
     
-    init(numOfMidPiece: Int) {
+    init(numOfMidPiece: Int, gapSize: CGFloat) {
         super.init()
         
         var imageNames = [Shelf.LEFT_IMAGE_NAME]
