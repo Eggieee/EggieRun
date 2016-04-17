@@ -8,24 +8,36 @@
 
 import SpriteKit
 
-class Platform: SKNode {
+class Closet: SKNode {
+    static let GAP_SIZE: CGFloat = 300
+    static let BASELINE_HEIGHTS: CGFloat = 0
+    static let HEIGHT: CGFloat = 274
+
+    private static let LEFT_IMAGE_NAME = "closet-left"
+    private static let MIDDLE_IMAGE_NAMES = "closet-middle"
+    private static let RIGHT_IMAGE_NAMES = "closet-right"
+
     var width: CGFloat = 0.0
-    let followingGapWidth: CGFloat
-    var height: CGFloat = 0
     
-    init(imageNames: [String], positionY: CGFloat, followingGapSize: CGFloat) {
-        self.followingGapWidth = followingGapSize
+    init(numOfMidPiece: Int) {
         super.init()
+        
+        var imageNames = [Closet.LEFT_IMAGE_NAME]
+        
+        for _ in 0..<numOfMidPiece {
+            imageNames.append(Closet.MIDDLE_IMAGE_NAMES)
+        }
+        imageNames.append(Closet.RIGHT_IMAGE_NAMES)
+        
         for imageName in imageNames {
             let node = SKSpriteNode(imageNamed: imageName)
-            height = node.size.height
             node.position.x = width + node.size.width / 2
             node.position.y = node.size.height / 2
             width += node.size.width
             addChild(node)
         }
-
-        physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: width, height: height), center: CGPoint(x: width/2, y: height/2))
+        
+        physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: width, height: Closet.HEIGHT), center: CGPoint(x: width/2, y: Closet.HEIGHT/2))
         physicsBody?.categoryBitMask = BitMaskCategory.platform
         physicsBody?.contactTestBitMask = BitMaskCategory.hero
         physicsBody?.collisionBitMask = BitMaskCategory.hero
