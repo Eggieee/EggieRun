@@ -12,7 +12,15 @@ class ObstacleFactory {
     private static let COOKER_TYPE_COUNT = 3
 
     func nextObstacle() -> Obstacle {
-        return Obstacle(cooker: Cooker(rawValue: Int(arc4random()) % ObstacleFactory.COOKER_TYPE_COUNT + 1)!)
-//        return Obstacle(cooker: .Pot)
+        let type = Cooker(rawValue: Int(arc4random()) % ObstacleFactory.COOKER_TYPE_COUNT + 1)!
+        switch type {
+        case .Pot:
+            return Pot()
+        case .Oven:
+            return Oven()
+        default:
+            return Pan()
+        }
     }
 }
+ 
