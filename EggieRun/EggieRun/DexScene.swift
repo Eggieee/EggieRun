@@ -18,8 +18,10 @@ class DexScene: SKScene {
     private static let BACK_BUTTON_SIZE = CGFloat(80)
     private static let FLIP_BUTTON_WIDTH = CGFloat(90)
     private static let FLIP_BUTTON_HEIGHT = CGFloat(60)
-    private static let FLIP_BUTTON_X = CGFloat(500)
+    private static let NEXT_BUTTON_X = CGFloat(500)
+    private static let PREV_BUTTON_X = CGFloat(100)
     private static let FLIP_BUTTON_Y = CGFloat(80)
+
     
     private static let DISH_FIRST_PAGE = Array(DishDataController.singleton.dishes[0..<12])
     private static let DISH_SECOND_PAGE = Array(DishDataController.singleton.dishes[12..<21])
@@ -56,10 +58,17 @@ class DexScene: SKScene {
         createDetailNode()
         
         flipPageNode = SKSpriteNode(imageNamed: "arrow-right")
-        flipPageNode.position = CGPoint(x: DexScene.FLIP_BUTTON_X, y: DexScene.FLIP_BUTTON_Y)
+        flipPageNode.position = CGPoint(x: DexScene.NEXT_BUTTON_X, y: DexScene.FLIP_BUTTON_Y)
         flipPageNode.zPosition = 2
         flipPageNode.size = CGSize(width: DexScene.FLIP_BUTTON_WIDTH, height: DexScene.FLIP_BUTTON_HEIGHT)
         addChild(flipPageNode)
+        
+        
+        if let particles = SKEmitterNode(fileNamed: "Snow.sks") {
+            particles.position = CGPointMake(self.frame.midX, self.frame.maxY)
+            particles.particlePositionRange.dx = self.frame.width
+            addChild(particles)
+        }
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -79,11 +88,14 @@ class DexScene: SKScene {
                 gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width, dishList: DexScene.DISH_SECOND_PAGE, pageNumber:2)
                 self.addChild(gridNode)
                 flipPageNode.texture = SKTexture(imageNamed: "arrow-left")
+                flipPageNode.position = CGPoint(x: DexScene.PREV_BUTTON_X, y: DexScene.FLIP_BUTTON_Y)
             } else {
                 gridNode.removeFromParent()
                 gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width, dishList: DexScene.DISH_FIRST_PAGE, pageNumber:1)
                 self.addChild(gridNode)
                 flipPageNode.texture = SKTexture(imageNamed: "arrow-right")
+                flipPageNode.position = CGPoint(x: DexScene.NEXT_BUTTON_X, y: DexScene.FLIP_BUTTON_Y)
+
             }
         }
         

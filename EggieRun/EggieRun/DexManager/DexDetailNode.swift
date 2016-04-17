@@ -47,7 +47,7 @@ class DexDetailNode: SKSpriteNode {
         effectNode.shouldRasterize = true
         
         // background
-        super.init(texture: SKTexture(imageNamed: "detail-texture"), color: UIColor.brownColor(), size: CGSize(width: WIDTH, height: HEIGHT))
+        super.init(texture: SKTexture(imageNamed: "notebook"), color: UIColor.brownColor(), size: CGSize(width: WIDTH, height: HEIGHT))
         self.anchorPoint = CGPoint(x: 0, y: 0)
         self.position = CGPoint(x: sceneWidth * (1 - DexScene.DETAIL_WIDTH_RATIO), y: 0)
         
