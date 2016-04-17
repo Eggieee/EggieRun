@@ -43,7 +43,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private var eggie: Eggie!
-    private var platformFactory: PlatformFactory!
+    private var closetFactory: ClosetFactory!
     private var collectableFactory: CollectableFactory!
     private var obstacleFactory: ObstacleFactory!
     private var ingredientBar: IngredientBar!
@@ -52,7 +52,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var gameState: GameState = .Ready
     private var distanceLabel: SKLabelNode!
     private var distance = 0
-    private var platforms: [Platform]!
+    private var closets: [Closet]!
     private var collectables: [Collectable]!
     private var obstacles: [Obstacle]!
     private var lastUpdatedTime: CFTimeInterval!
@@ -124,7 +124,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             runningProgressBar.updateDistance(movedDistance)
             eggie.balance()
             flavourBarFollow()
-            shiftPlatforms(movedDistance)
+            shiftClosets(movedDistance)
             shiftCollectables(movedDistance)
             shiftObstacles(movedDistance)
         }
@@ -210,10 +210,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         obstacles = [Obstacle]()
     }
     
-    private func initializePlatform() {
-        platformFactory = PlatformFactory()
-        platforms = [Platform]()
-        appendNewPlatform(0)
+    private func initializeCloset() {
+        closetFactory = ClosetFactory()
+        closets = [Closet]()
+        appendNewCloset(0)
     }
     
     private func initialzieCollectable() {
@@ -222,7 +222,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let collectable = collectableFactory.nextColletable()
         collectable.position.x = GameScene.FIRST_COLLECTABLE_POSITION_X
-        collectable.position.y = platforms.last!.height + collectable.frame.size.height / 2 + GameScene.DISTANCE_PLATFORM_AND_COLLECTABLE
+        collectable.position.y = Closet.HEIGHT + collectable.frame.size.height / 2 + GameScene.DISTANCE_PLATFORM_AND_COLLECTABLE
         collectables.append(collectable)
         addChild(collectable)
     }
@@ -267,7 +267,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         changeBackground(GameScene.BACKGROUND_IMAGE_NAME)
         initializeDistanceLabel()
         initializeObstacle()
-        initializePlatform()
+        initializeCloset()
         initialzieCollectable()
         initializeEggie()
         initializeCollectableBars()
@@ -308,20 +308,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    private func shiftPlatforms(distance: Double) {
-        let rightMostPlatform = platforms.last!
-        let rightMostPlatformRightEnd = rightMostPlatform.position.x + rightMostPlatform.width + rightMostPlatform.followingGapWidth
+    private func shiftClosets(distance: Double) {
+        let rightMostCloset = closets.last!
+        let rightMostClosetRightEnd = rightMostCloset.position.x + rightMostCloset.width + Closet.GAP_SIZE
         
-        if rightMostPlatformRightEnd < UIScreen.mainScreen().bounds.width {
-            appendNewPlatform(rightMostPlatformRightEnd)
+        if rightMostClosetRightEnd < UIScreen.mainScreen().bounds.width {
+            appendNewCloset(rightMostClosetRightEnd)
         }
         
-        for platform in platforms {
-            if platform.position.x + platform.width + platform.followingGapWidth < 0 {
-                platforms.removeFirst()
-                platform.removeFromParent()
+        for closet in closets {
+            if closet.position.x + closet.width + Closet.GAP_SIZE < 0 {
+                closets.removeFirst()
+                closet.removeFromParent()
             } else {
-                platform.position.x -= CGFloat(distance)
+                closet.position.x -= CGFloat(distance)
             }
         }
     }
@@ -333,7 +333,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if rightMostCollectableRightEnd < UIScreen.mainScreen().bounds.width {
             let collectable = collectableFactory.nextColletable()
             collectable.position.x = rightMostCollectableRightEnd + collectable.frame.size.width / 2
-            collectable.position.y = platforms.last!.height + collectable.frame.size.height / 2 + GameScene.DISTANCE_PLATFORM_AND_COLLECTABLE
+            collectable.position.y = Closet.HEIGHT + collectable.frame.size.height / 2 + GameScene.DISTANCE_PLATFORM_AND_COLLECTABLE
             collectables.append(collectable)
             addChild(collectable)
         }
@@ -359,19 +359,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    private func appendNewPlatform(position: CGFloat) {
-        let pf = platformFactory.nextPlatform()
-        pf.position.x = position
-        pf.position.y = pf.baselineHeight
-        platforms.append(pf)
-        addChild(pf)
+    private func appendNewCloset(position: CGFloat) {
+        let closet = closetFactory.nextPlatform()
+        closet.position.x = position
+        closet.position.y = Closet.BASELINE_HEIGHTS
+        closets.append(closet)
+        addChild(closet)
         
         var position = CGFloat(GameScene.BUFFER_DISTANCE)
-        while position < pf.width - CGFloat(GameScene.BUFFER_DISTANCE) {
+        while position < closet.width - CGFloat(GameScene.BUFFER_DISTANCE) {
             if Double(arc4random()) / Double(UINT32_MAX) <= GameScene.OBSTACLE_RATE {
                 let obstacle = obstacleFactory.nextObstacle()
-                obstacle.position.y = pf.height + obstacle.heightPadding
-                obstacle.position.x = pf.position.x + position
+                obstacle.position.y = Closet.HEIGHT + obstacle.heightPadding
+                obstacle.position.x = closet.position.x + position
                 obstacles.append(obstacle)
                 addChild(obstacle)
                 position += CGFloat(Obstacle.WIDTH + GameScene.BUFFER_DISTANCE)

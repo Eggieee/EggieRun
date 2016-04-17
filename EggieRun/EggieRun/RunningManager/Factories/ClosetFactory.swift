@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class ShelfFactory {
+class ClosetFactory {
     private static let MAX_NUM_OF_MID_PIECE: UInt32 = 4
     
     private var isFirst = true
@@ -20,7 +20,7 @@ class ShelfFactory {
             numOfMid = 1
             isFirst = false
         } else {
-            numOfMid = Int(arc4random() % (ShelfFactory.MAX_NUM_OF_MID_PIECE + 1))
+            numOfMid = Int(arc4random() % (ClosetFactory.MAX_NUM_OF_MID_PIECE + 1))
         }
         
         return Closet(numOfMidPiece: numOfMid)
