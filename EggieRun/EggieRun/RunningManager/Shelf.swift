@@ -31,18 +31,19 @@ class Shelf: SKNode {
         imageNames.append(Shelf.RIGHT_IMAGE_NAMES)
         
         for imageName in imageNames {
-            let node = SKSpriteNode(imageNamed: imageName)
+            let texture = SKTexture(imageNamed: imageName)
+            let node = SKSpriteNode(texture: texture)
             node.position.x = width + node.size.width / 2
             node.position.y = Shelf.HEIGHT - node.size.height / 2
+            node.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: GlobalConstants.PHYSICS_BODY_ALPHA_THRESHOLD, size: texture.size())
+            node.physicsBody!.categoryBitMask = BitMaskCategory.platform
+            node.physicsBody!.contactTestBitMask = BitMaskCategory.hero
+            node.physicsBody!.collisionBitMask = BitMaskCategory.hero
+            node.physicsBody!.dynamic = false
+
             width += node.size.width
             addChild(node)
         }
-        
-        physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: width, height: Shelf.HEIGHT), center: CGPoint(x: width/2, y: Shelf.HEIGHT/2))
-        physicsBody!.categoryBitMask = BitMaskCategory.platform
-        physicsBody!.contactTestBitMask = BitMaskCategory.hero
-        physicsBody!.collisionBitMask = BitMaskCategory.hero
-        physicsBody!.dynamic = false
     }
     
     required init?(coder aDecoder: NSCoder) {
