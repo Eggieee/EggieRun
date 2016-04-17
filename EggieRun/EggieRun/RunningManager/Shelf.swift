@@ -9,7 +9,7 @@
 import SpriteKit
 
 class Shelf: SKNode {
-    static let BASELINE_HEIGHTS: CGFloat = 150
+    static let BASELINE_HEIGHTS: CGFloat = 350
     static let HEIGHT: CGFloat = 88
     
     private static let LEFT_IMAGE_NAME = "shelf-left"
@@ -33,7 +33,7 @@ class Shelf: SKNode {
         for imageName in imageNames {
             let node = SKSpriteNode(imageNamed: imageName)
             node.position.x = width + node.size.width / 2
-            node.position.y = Shelf.BASELINE_HEIGHTS + Shelf.HEIGHT - node.size.height / 2
+            node.position.y = Shelf.HEIGHT - node.size.height / 2
             width += node.size.width
             addChild(node)
         }
