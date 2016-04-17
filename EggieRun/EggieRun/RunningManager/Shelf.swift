@@ -33,14 +33,11 @@ class Shelf: SKNode {
         for imageName in imageNames {
             let texture = SKTexture(imageNamed: imageName)
             let node = SKSpriteNode(texture: texture)
+            
             node.position.x = width + node.size.width / 2
             node.position.y = Shelf.HEIGHT - node.size.height / 2
-            node.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: GlobalConstants.PHYSICS_BODY_ALPHA_THRESHOLD, size: texture.size())
-            node.physicsBody!.categoryBitMask = BitMaskCategory.platform
-            node.physicsBody!.contactTestBitMask = BitMaskCategory.hero
-            node.physicsBody!.collisionBitMask = BitMaskCategory.hero
-            node.physicsBody!.dynamic = false
-
+            node.physicsBody = constructPhysicsBodyFor(texture)
+            
             width += node.size.width
             addChild(node)
         }
@@ -48,5 +45,15 @@ class Shelf: SKNode {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func constructPhysicsBodyFor(texture: SKTexture) -> SKPhysicsBody {
+        let body = SKPhysicsBody(texture: texture, alphaThreshold: GlobalConstants.PHYSICS_BODY_ALPHA_THRESHOLD, size: texture.size())
+        
+        body.categoryBitMask = BitMaskCategory.platform
+        body.contactTestBitMask = BitMaskCategory.hero
+        body.collisionBitMask = BitMaskCategory.hero
+        body.dynamic = false
+        return body
     }
 }
