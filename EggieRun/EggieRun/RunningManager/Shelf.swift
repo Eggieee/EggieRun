@@ -9,7 +9,7 @@
 import SpriteKit
 
 class Shelf: SKNode {
-    static let BASELINE_HEIGHTS: CGFloat = 300
+    static let BASELINE_HEIGHTS: CGFloat = 150
     static let HEIGHT: CGFloat = 88
     
     private static let LEFT_IMAGE_NAME = "shelf-left"
@@ -17,8 +17,10 @@ class Shelf: SKNode {
     private static let RIGHT_IMAGE_NAMES = "shelf-right"
     
     var width: CGFloat = 0.0
+    let followingGapSize: CGFloat
     
     init(numOfMidPiece: Int, gapSize: CGFloat) {
+        followingGapSize = gapSize
         super.init()
         
         var imageNames = [Shelf.LEFT_IMAGE_NAME]
@@ -37,10 +39,10 @@ class Shelf: SKNode {
         }
         
         physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: width, height: Shelf.HEIGHT), center: CGPoint(x: width/2, y: Shelf.HEIGHT/2))
-        physicsBody?.categoryBitMask = BitMaskCategory.platform
-        physicsBody?.contactTestBitMask = BitMaskCategory.hero
-        physicsBody?.collisionBitMask = BitMaskCategory.hero
-        physicsBody?.dynamic = false
+        physicsBody!.categoryBitMask = BitMaskCategory.platform
+        physicsBody!.contactTestBitMask = BitMaskCategory.hero
+        physicsBody!.collisionBitMask = BitMaskCategory.hero
+        physicsBody!.dynamic = false
     }
     
     required init?(coder aDecoder: NSCoder) {

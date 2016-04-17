@@ -44,6 +44,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var eggie: Eggie!
     private var closetFactory: ClosetFactory!
+    private var shelfFactory: ShelfFactory!
     private var collectableFactory: CollectableFactory!
     private var obstacleFactory: ObstacleFactory!
     private var ingredientBar: IngredientBar!
@@ -53,6 +54,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var distanceLabel: SKLabelNode!
     private var distance = 0
     private var closets: [Closet]!
+    private var shelves: [Shelf]!
     private var collectables: [Collectable]!
     private var obstacles: [Obstacle]!
     private var lastUpdatedTime: CFTimeInterval!
@@ -125,6 +127,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             eggie.balance()
             flavourBarFollow()
             shiftClosets(movedDistance)
+            shiftShelf(movedDistance)
             shiftCollectables(movedDistance)
             shiftObstacles(movedDistance)
         }
@@ -214,6 +217,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         appendNewCloset(0)
     }
     
+    private func initializeShelf() {
+        shelfFactory = ShelfFactory()
+        shelves = [Shelf]()
+        appendNewShelf(UIScreen.mainScreen().bounds.width)
+    }
+    
     private func initialzieCollectable() {
         collectableFactory = CollectableFactory()
         collectables = [Collectable]()
@@ -266,6 +275,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initializeDistanceLabel()
         initializeObstacle()
         initializeCloset()
+        initializeShelf()
         initialzieCollectable()
         initializeEggie()
         initializeCollectableBars()
@@ -324,6 +334,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    private func shiftShelf(distance: Double) {
+        let rightMostShelf = shelves.last!
+        let rightMostShelfRightEnd = rightMostShelf.position.x + rightMostShelf.width + rightMostShelf.followingGapSize
+        
+        if rightMostShelfRightEnd < UIScreen.mainScreen().bounds.width {
+            appendNewShelf(rightMostShelfRightEnd)
+        }
+        
+        for shelf in shelves {
+            if shelf.position.x + shelf.width + shelf.followingGapSize < 0 {
+                shelves.removeFirst()
+                shelf.removeFromParent()
+            } else {
+                shelf.position.x -= CGFloat(distance)
+            }
+        }
+    }
+    
     private func shiftCollectables(distance: Double) {
         let rightMostCollectable = collectables.last!
         let rightMostCollectableRightEnd = rightMostCollectable.position.x + rightMostCollectable.frame.size.width / 2 + rightMostCollectable.followingGapSize
@@ -368,7 +396,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         while position < closet.width - CGFloat(GameScene.BUFFER_DISTANCE) {
             if Double(arc4random()) / Double(UINT32_MAX) <= GameScene.OBSTACLE_RATE {
                 let obstacle = obstacleFactory.nextObstacle()
-                obstacle.position.y = Closet.HEIGHT + obstacle.heightPadding
+                obstacle.position.y = Closet.BASELINE_HEIGHTS + Closet.HEIGHT + obstacle.heightPadding
                 obstacle.position.x = closet.position.x + position
                 obstacles.append(obstacle)
                 addChild(obstacle)
@@ -377,6 +405,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 position += CGFloat(GameScene.BUFFER_DISTANCE)
             }
         }
+    }
+    
+    private func appendNewShelf(position: CGFloat) {
+        let shelf = shelfFactory.nextPlatform()
+        shelf.position.x = position
+        shelf.position.y = Shelf.BASELINE_HEIGHTS
+        shelves.append(shelf)
+        addChild(shelf)
     }
     
     func animateMovingIngredient(ingredient: Ingredient, originalPosition: CGPoint) {
