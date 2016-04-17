@@ -19,9 +19,13 @@ class Eggie: SKSpriteNode {
     private static let ATLAS_ACTION_KEY = "atlas"
     private static let PHYSICS_BODY_TEXTURE_ID = 3
     
+    enum State {
+        case Standing, Running, Jumping, Dying
+    }
+    
     private var innerCurrentSpeed: Int
-    private var innerState: EggieState
-    private var actions: [EggieState: SKAction] = [EggieState: SKAction]()
+    private var innerState: State
+    private var actions: [State: SKAction] = [State: SKAction]()
     private var balancedXPosition: CGFloat
     
     init(startPosition: CGPoint) {
@@ -53,6 +57,7 @@ class Eggie: SKSpriteNode {
         physicsBody!.contactTestBitMask = BitMaskCategory.scene | BitMaskCategory.collectable | BitMaskCategory.platform | BitMaskCategory.obstacle
         physicsBody!.collisionBitMask = BitMaskCategory.platform | BitMaskCategory.scene | BitMaskCategory.obstacle
         physicsBody!.allowsRotation = false
+        physicsBody!.usesPreciseCollisionDetection = true
 
         position = startPosition
     }
@@ -61,7 +66,7 @@ class Eggie: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var state: EggieState {
+    var state: State {
         get {
             return innerState
         }
