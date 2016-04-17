@@ -38,10 +38,10 @@ class Closet: SKNode {
         }
         
         physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: width, height: Closet.HEIGHT), center: CGPoint(x: width/2, y: Closet.HEIGHT/2))
-        physicsBody?.categoryBitMask = BitMaskCategory.platform
-        physicsBody?.contactTestBitMask = BitMaskCategory.hero
-        physicsBody?.collisionBitMask = BitMaskCategory.hero
-        physicsBody?.dynamic = false
+        physicsBody!.categoryBitMask = BitMaskCategory.platform
+        physicsBody!.contactTestBitMask = BitMaskCategory.hero
+        physicsBody!.collisionBitMask = BitMaskCategory.hero
+        physicsBody!.dynamic = false
     }
 
     required init?(coder aDecoder: NSCoder) {
