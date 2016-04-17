@@ -9,7 +9,7 @@
 import SpriteKit
 
 class MultilineLabelNode: SKNode {
-    //props
+
     var labelWidth:Int {didSet {update()}}
     var labelHeight:Int = 0
     var text:String {didSet {update()}}
@@ -19,14 +19,13 @@ class MultilineLabelNode: SKNode {
     var fontColor:UIColor {didSet {update()}}
     var leading:Int {didSet {update()}}
     var alignment:SKLabelHorizontalAlignmentMode {didSet {update()}}
-    var dontUpdate = false
 
     //display objects
     var rect:SKShapeNode?
     var labels:[SKLabelNode] = []
     
-    init(text:String, labelWidth:Int, pos:CGPoint, fontName:String="ChalkboardSE-Regular",fontSize:CGFloat=10,fontColor:UIColor=UIColor.blackColor(),leading:Int=10, alignment:SKLabelHorizontalAlignmentMode = .Center)
-    {
+    init(text:String, labelWidth:Int, pos:CGPoint, fontName:String, fontSize:CGFloat, fontColor: UIColor, leading: Int, alignment:SKLabelHorizontalAlignmentMode) {
+        
         self.text = text
         self.labelWidth = labelWidth
         self.pos = pos
@@ -45,53 +44,49 @@ class MultilineLabelNode: SKNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //if you want to change properties without updating the text field,
-    //  set dontUpdate to false and call the update method manually.
+
     func update() {
-        if (dontUpdate) {return}
+
         if (labels.count>0) {
             for label in labels {
                 label.removeFromParent()
             }
             labels = []
         }
+        
         let separators = NSCharacterSet.whitespaceAndNewlineCharacterSet()
         let words = text.componentsSeparatedByCharactersInSet(separators)
         
         var finalLine = false
         var wordCount = -1
         var lineCount = 0
+        
         while (!finalLine) {
             lineCount += 1
             var lineLength = CGFloat(0)
             var lineString = ""
             var lineStringBeforeAddingWord = ""
             
-            // creation of the SKLabelNode itself
             let label = SKLabelNode(fontNamed: fontName)
             
-            // name each label node so you can animate it if u wish
-            label.name = "line\(lineCount)"
             label.horizontalAlignmentMode = alignment
             label.fontSize = fontSize
             label.fontColor = fontColor
             
-            while lineLength < CGFloat(labelWidth)
-            {
+            while lineLength < CGFloat(labelWidth) {
                 wordCount += 1
-                if wordCount > words.count-1
-                {
+                if wordCount > words.count-1 {
                     finalLine = true
                     break
                 }
-                else
-                {
+                else {
                     lineStringBeforeAddingWord = lineString
                     lineString = "\(lineString) \(words[wordCount])"
                     label.text = lineString
                     lineLength = label.frame.width
                 }
             }
+            
             if lineLength > 0 {
                 wordCount -= 1
                 if (!finalLine) {
