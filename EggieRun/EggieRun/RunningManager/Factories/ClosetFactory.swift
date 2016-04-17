@@ -8,25 +8,21 @@
 
 import SpriteKit
 
-class PlatformFactory {
+class ShelfFactory {
     private static let MAX_NUM_OF_MID_PIECE: UInt32 = 4
     
     private var isFirst = true
     
-    func nextPlatform() -> Platform {
+    func nextPlatform() -> Closet {
         let numOfMid: Int
-        let type: PlatformType
         
         if isFirst {
             numOfMid = 1
-            type = PlatformType(rawValue: 0)!
             isFirst = false
         } else {
-//            type = PlatformType(rawValue: Int(arc4random() % 2))!
-            type = .Shelf
-            numOfMid = Int(arc4random() % (PlatformFactory.MAX_NUM_OF_MID_PIECE + 1))
+            numOfMid = Int(arc4random() % (ShelfFactory.MAX_NUM_OF_MID_PIECE + 1))
         }
         
-        return Platform(type: type, numOfMidPiece: numOfMid)
+        return Closet(numOfMidPiece: numOfMid)
     }
 }

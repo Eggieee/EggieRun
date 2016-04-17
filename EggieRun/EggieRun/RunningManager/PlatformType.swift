@@ -11,22 +11,24 @@ import UIKit
 enum PlatformType: Int {
     case Closet = 0, Shelf
     
-    private static let CLOSET_BASELINE_HEIGHT: CGFloat = 0
-    private static let SHELF_BASELINE_HEIGHT: CGFloat = 300
-    
+    private static let LEFT_IMAGE_NAMES = ["closet-left", "shelf-left"]
+    private static let MIDDLE_IMAGE_NAMES = ["closet-middle", "shelf-middle"]
+    private static let RIGHT_IMAGE_NAMES = ["closet-right", "shelf-right"]
+    private static let BASELINE_HEIGHTS: [CGFloat] = [0, 300]
+
     var imageNameLeft: String {
-        return self == .Closet ? "closet-left" : "shelf-left"
+        return PlatformType.LEFT_IMAGE_NAMES[rawValue]
     }
     
     var imageNameMiddle: String {
-        return self == .Closet ? "closet-middle" : "shelf-middle"
+        return PlatformType.MIDDLE_IMAGE_NAMES[rawValue]
     }
     
     var imageNameRight: String {
-        return self == .Closet ? "closet-right" : "shelf-right"
+        return PlatformType.RIGHT_IMAGE_NAMES[rawValue]
     }
     
     var height: CGFloat {
-        return self == .Closet ? PlatformType.CLOSET_BASELINE_HEIGHT : PlatformType.SHELF_BASELINE_HEIGHT
+        return PlatformType.BASELINE_HEIGHTS[rawValue]
     }
 }
