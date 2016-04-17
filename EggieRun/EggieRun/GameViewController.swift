@@ -12,6 +12,7 @@ import SpriteKit
 class GameViewController: UIViewController {
     
     override func viewDidLoad() {
+        UIApplication.sharedApplication().idleTimerDisabled = true
         super.viewDidLoad()
         if let scene = MenuScene.singleton {
             let skView = self.view as! SKView
