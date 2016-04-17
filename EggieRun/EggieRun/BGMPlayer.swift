@@ -12,10 +12,10 @@ class BGMPlayer {
     static let singleton = BGMPlayer()
     
     enum Status {
-        case Menu
+        case Menu, Game, Dex
     }
     
-    private static let MUSIC_FILES: [Status: String] = [.Menu: "road-runner"]
+    private static let MUSIC_FILES: [Status: String] = [.Menu: "road-runner", .Game: "yadon-12", .Dex: "yadon-11"]
     private static let VOLUME = 1.0
     private static let FADE_OUT_TIME = 0.5
     private static let FADE_OUT_STEPS = 10.0
