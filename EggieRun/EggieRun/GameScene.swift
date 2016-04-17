@@ -51,7 +51,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var runningProgressBar: RunningProgressBar!
     private var gameState: GameState = .Ready
     private var distanceLabel: SKLabelNode!
-    private var distance = 0
+    private var currentDistance = 0
     private var closets: [Closet]!
     private var shelves: [Shelf]!
     private var collectables: [Collectable]!
@@ -226,7 +226,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         collectableFactory = CollectableFactory()
         collectables = [Collectable]()
         
-        let collectable = collectableFactory.nextColletable()
+        let collectable = collectableFactory.nextColletable(currentDistance)
         collectable.position.x = GameScene.FIRST_COLLECTABLE_POSITION_X
         collectable.position.y = Closet.HEIGHT + collectable.frame.size.height / 2 + GameScene.DISTANCE_PLATFORM_AND_COLLECTABLE
         collectables.append(collectable)
@@ -264,8 +264,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func updateDistance(movedDistance: Double) {
-        distance += Int(movedDistance)
-        distanceLabel.text = String(format: GameScene.DISTANCE_LABEL_TEXT, distance)
+        currentDistance += Int(movedDistance)
+        distanceLabel.text = String(format: GameScene.DISTANCE_LABEL_TEXT, currentDistance)
     }
     
     private func gameReady() {
@@ -287,7 +287,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addChild(particles)
         }
         
-        distance = 0
+        currentDistance = 0
         gameState = .Ready
     }
     
@@ -356,7 +356,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let rightMostCollectableRightEnd = rightMostCollectable.position.x + rightMostCollectable.frame.size.width / 2 + rightMostCollectable.followingGapSize
         
         if rightMostCollectableRightEnd < UIScreen.mainScreen().bounds.width {
-            let collectable = collectableFactory.nextColletable()
+            let collectable = collectableFactory.nextColletable(currentDistance)
             collectable.position.x = rightMostCollectableRightEnd + collectable.frame.size.width / 2
             collectable.position.y = Closet.HEIGHT + collectable.frame.size.height / 2 + GameScene.DISTANCE_PLATFORM_AND_COLLECTABLE
             collectables.append(collectable)
