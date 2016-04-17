@@ -154,7 +154,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
             let position = collectable.position
-            collectable.removeFromParent()
+            collectable.hidden = true
             
             self.runAction(GameScene.SE_COLLECT)
             
