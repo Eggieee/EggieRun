@@ -10,4 +10,5 @@ import UIKit
 
 struct GlobalConstants {
     static let fontName = "Chalkduster"
+    static let PHYSICS_BODY_ALPHA_THRESHOLD: Float = 0.9
 }

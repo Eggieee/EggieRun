@@ -10,7 +10,6 @@ import SpriteKit
 
 class Collectable: SKSpriteNode {
     private static let SIZE = CGSizeMake(80, 80)
-    private static let PHYSICS_BODY_ALPHA_THRESHOLD: Float = 0.9
     
     let type: CollectableType
     let ingredient: Ingredient?
@@ -42,7 +41,7 @@ class Collectable: SKSpriteNode {
     }
     
     private func initializePhysicsProperty() {
-        physicsBody = SKPhysicsBody(texture: texture!, alphaThreshold: Collectable.PHYSICS_BODY_ALPHA_THRESHOLD, size: size)
+        physicsBody = SKPhysicsBody(texture: texture!, alphaThreshold: GlobalConstants.PHYSICS_BODY_ALPHA_THRESHOLD, size: size)
         physicsBody?.categoryBitMask = BitMaskCategory.collectable
         physicsBody?.contactTestBitMask = BitMaskCategory.hero
         physicsBody?.dynamic = false

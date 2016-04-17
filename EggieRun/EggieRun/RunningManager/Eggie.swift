@@ -48,7 +48,7 @@ class Eggie: SKSpriteNode {
         
         runAction(actions[.Standing]!)
         
-        physicsBody = SKPhysicsBody(texture: runTextures[Eggie.PHYSICS_BODY_TEXTURE_ID], size: size)
+        physicsBody = SKPhysicsBody(texture: runTextures[Eggie.PHYSICS_BODY_TEXTURE_ID], alphaThreshold: GlobalConstants.PHYSICS_BODY_ALPHA_THRESHOLD, size: size)
         physicsBody!.categoryBitMask = BitMaskCategory.hero
         physicsBody!.contactTestBitMask = BitMaskCategory.scene | BitMaskCategory.collectable | BitMaskCategory.platform | BitMaskCategory.obstacle
         physicsBody!.collisionBitMask = BitMaskCategory.platform | BitMaskCategory.scene | BitMaskCategory.obstacle
