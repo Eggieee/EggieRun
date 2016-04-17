@@ -117,7 +117,7 @@ class DexScene: SKScene {
         }
     }
     
-    func createDetailNode() {
+    private func createDetailNode() {
         detailNode = DexDetailNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width)
         self.addChild(detailNode)
     }

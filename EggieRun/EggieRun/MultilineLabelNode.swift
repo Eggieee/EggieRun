@@ -44,7 +44,7 @@ class MultilineLabelNode: SKNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update() {
+    private func update() {
         if (labels.count > 0) {
             for label in labels {
                 label.removeFromParent()
