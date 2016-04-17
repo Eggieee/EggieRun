@@ -28,7 +28,7 @@ class DexDetailNode: SKSpriteNode {
             questionMarkNode.hidden = true
         } else {
             effectNode.filter = DexScene.UNACTIVATED_FILTER
-            dishDescriptionNode.text = "???"
+            dishDescriptionNode.text = dish.hintDescription
             dishNameNode.text = "???"
             questionMarkNode.hidden = false
         }
@@ -40,14 +40,14 @@ class DexDetailNode: SKSpriteNode {
         
         dishImageNode = SKSpriteNode(texture: nil)
         dishNameNode = SKLabelNode(text: "")
-        dishDescriptionNode = MultilineLabelNode(text: "", labelWidth: Int(WIDTH * 2/3) , pos: CGPoint(x: WIDTH / 2, y: HEIGHT / 4), fontName: "ChalkboardSE-Regular",fontSize:20,fontColor: UIColor.blackColor(),leading: 20, alignment:.Center, shouldShowBorder:false)
+        dishDescriptionNode = MultilineLabelNode(text: "", labelWidth: Int(WIDTH * 2/3) , pos: CGPoint(x: WIDTH / 2, y: HEIGHT / 4), fontName: "ChalkboardSE-Regular",fontSize:20,fontColor: UIColor.blackColor(),leading: 20, alignment:.Center)
         questionMarkNode = SKLabelNode(text: "?")
         
         effectNode = SKEffectNode()
         effectNode.shouldRasterize = true
         
         // background
-        super.init(texture: SKTexture(imageNamed: "detail-texture"), color: UIColor.brownColor(), size: CGSize(width: WIDTH, height: HEIGHT))
+        super.init(texture: SKTexture(imageNamed: "notebook"), color: UIColor.brownColor(), size: CGSize(width: WIDTH, height: HEIGHT))
         self.anchorPoint = CGPoint(x: 0, y: 0)
         self.position = CGPoint(x: sceneWidth * (1 - DexScene.DETAIL_WIDTH_RATIO), y: 0)
         

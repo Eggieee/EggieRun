@@ -41,7 +41,7 @@ class Collectable: SKSpriteNode {
     }
     
     private func initializePhysicsProperty() {
-        physicsBody = SKPhysicsBody(rectangleOfSize: size)
+        physicsBody = SKPhysicsBody(texture: texture!, alphaThreshold: GlobalConstants.PHYSICS_BODY_ALPHA_THRESHOLD, size: size)
         physicsBody?.categoryBitMask = BitMaskCategory.collectable
         physicsBody?.contactTestBitMask = BitMaskCategory.hero
         physicsBody?.dynamic = false

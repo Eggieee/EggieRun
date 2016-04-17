@@ -20,12 +20,12 @@ class MultilineLabelNode: SKNode {
     var leading:Int {didSet {update()}}
     var alignment:SKLabelHorizontalAlignmentMode {didSet {update()}}
     var dontUpdate = false
-    var shouldShowBorder:Bool = false {didSet {update()}}
+
     //display objects
     var rect:SKShapeNode?
     var labels:[SKLabelNode] = []
     
-    init(text:String, labelWidth:Int, pos:CGPoint, fontName:String="ChalkboardSE-Regular",fontSize:CGFloat=10,fontColor:UIColor=UIColor.blackColor(),leading:Int=10, alignment:SKLabelHorizontalAlignmentMode = .Center, shouldShowBorder:Bool = false)
+    init(text:String, labelWidth:Int, pos:CGPoint, fontName:String="ChalkboardSE-Regular",fontSize:CGFloat=10,fontColor:UIColor=UIColor.blackColor(),leading:Int=10, alignment:SKLabelHorizontalAlignmentMode = .Center)
     {
         self.text = text
         self.labelWidth = labelWidth
@@ -34,7 +34,6 @@ class MultilineLabelNode: SKNode {
         self.fontSize = fontSize
         self.fontColor = fontColor
         self.leading = leading
-        self.shouldShowBorder = shouldShowBorder
         self.alignment = alignment
         
         super.init()
@@ -70,6 +69,7 @@ class MultilineLabelNode: SKNode {
             
             // creation of the SKLabelNode itself
             let label = SKLabelNode(fontNamed: fontName)
+            
             // name each label node so you can animate it if u wish
             label.name = "line\(lineCount)"
             label.horizontalAlignmentMode = alignment
@@ -81,7 +81,6 @@ class MultilineLabelNode: SKNode {
                 wordCount += 1
                 if wordCount > words.count-1
                 {
-                    //label.text = "\(lineString) \(words[wordCount])"
                     finalLine = true
                     break
                 }
@@ -109,25 +108,9 @@ class MultilineLabelNode: SKNode {
                 label.position = CGPointMake( linePos.x , linePos.y )
                 self.addChild(label)
                 labels.append(label)
-                //println("was \(lineLength), now \(label.width)")
             }
-            
         }
         labelHeight = lineCount * leading
-        showBorder()
     }
-    func showBorder() {
-        if (!shouldShowBorder) {return}
-        if let rect = self.rect {
-            self.removeChildrenInArray([rect])
-        }
-        self.rect = SKShapeNode(rectOfSize: CGSize(width: labelWidth, height: labelHeight))
-        if let rect = self.rect {
-            rect.strokeColor = UIColor.whiteColor()
-            rect.lineWidth = 1
-            rect.position = CGPoint(x: pos.x, y: pos.y - (CGFloat(labelHeight) / 2.0))
-            self.addChild(rect)
-        }
-        
-    }
+ 
 }

@@ -17,6 +17,7 @@ class Eggie: SKSpriteNode {
     private static let ATLAS_COUNT = 5
     private static let ATLAS_TIME_PER_FRAME = Eggie.ATLAS_TIME / Double(Eggie.ATLAS_COUNT)
     private static let ATLAS_ACTION_KEY = "atlas"
+    private static let PHYSICS_BODY_TEXTURE_ID = 3
     
     private var innerCurrentSpeed: Int
     private var innerState: EggieState
@@ -47,7 +48,7 @@ class Eggie: SKSpriteNode {
         
         runAction(actions[.Standing]!)
         
-        physicsBody = SKPhysicsBody(rectangleOfSize: standingTexture.size())
+        physicsBody = SKPhysicsBody(texture: runTextures[Eggie.PHYSICS_BODY_TEXTURE_ID], alphaThreshold: GlobalConstants.PHYSICS_BODY_ALPHA_THRESHOLD, size: size)
         physicsBody!.categoryBitMask = BitMaskCategory.hero
         physicsBody!.contactTestBitMask = BitMaskCategory.scene | BitMaskCategory.collectable | BitMaskCategory.platform | BitMaskCategory.obstacle
         physicsBody!.collisionBitMask = BitMaskCategory.platform | BitMaskCategory.scene | BitMaskCategory.obstacle
@@ -95,25 +96,6 @@ class Eggie: SKSpriteNode {
         } else if position.x > balancedXPosition {
             position.x -= 1
         }
-    }
-    
-    var canJump: Bool {
-        if innerState != .Running {
-            return false
-        }
-        
-        let contactingObjects = physicsBody!.allContactedBodies() as [AnyObject]
-        for object in contactingObjects {
-            if object.categoryBitMask == BitMaskCategory.platform {
-                return true
-            } else if object.categoryBitMask == BitMaskCategory.obstacle {
-                return true
-            } else {
-                return false
-            }
-        }
-        
-        return false
     }
     
     func pauseAtlas() {

@@ -21,7 +21,7 @@ class Pan: Obstacle {
         left.scale(Pan.LEFT_WIDTH)
         left.position.x = left.size.width / 2
         left.position.y = left.size.height / 2
-        left.physicsBody = SKPhysicsBody(rectangleOfSize: left.size)
+        left.physicsBody = SKPhysicsBody(texture: left.texture!, alphaThreshold: GlobalConstants.PHYSICS_BODY_ALPHA_THRESHOLD, size: left.size)
         left.physicsBody!.categoryBitMask = BitMaskCategory.obstacle
         left.physicsBody!.contactTestBitMask = BitMaskCategory.hero
         left.physicsBody!.collisionBitMask = BitMaskCategory.hero | BitMaskCategory.obstacle
