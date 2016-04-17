@@ -10,34 +10,31 @@ import SpriteKit
 
 class Pan: Obstacle {
     private static let LID_HEIGHT: CGFloat = 80
+    private static let LEFT_WIDTH = Obstacle.WIDTH * 0.7
+    private static let RIGHT_WIDTH = Obstacle.WIDTH * 0.3
     
-    private var body: SKSpriteNode!
-    private var lid: SKSpriteNode?
+    private var left: SKSpriteNode
+    private var right: SKSpriteNode
     
     init() {
+        left = SKSpriteNode(imageNamed: "pan-left")
+        left.scale(Pan.LEFT_WIDTH)
+        left.position.x = left.size.width / 2
+        left.position.y = left.size.height / 2
+        left.physicsBody = SKPhysicsBody(rectangleOfSize: left.size)
+        left.physicsBody!.categoryBitMask = BitMaskCategory.obstacle
+        left.physicsBody!.contactTestBitMask = BitMaskCategory.hero
+        left.physicsBody!.collisionBitMask = BitMaskCategory.hero | BitMaskCategory.obstacle
+        left.physicsBody!.dynamic = false
+        
+        right = SKSpriteNode(imageNamed: "pan-right")
+        right.scale(Pan.RIGHT_WIDTH)
+        right.position.x = left.size.width + right.size.width / 2
+        right.position.y = right.size.height / 2
+        
         super.init(cooker: .Pan)
-        
-        body = SKSpriteNode(imageNamed: "pan")
-        body.scale(Obstacle.WIDTH)
-        body.position.x = body.size.width / 2
-        body.position.y = body.size.height / 2
-        body.physicsBody = SKPhysicsBody(rectangleOfSize: body.size)
-        body.physicsBody!.categoryBitMask = BitMaskCategory.obstacle
-        body.physicsBody!.contactTestBitMask = BitMaskCategory.hero
-        body.physicsBody!.collisionBitMask = BitMaskCategory.hero | BitMaskCategory.obstacle
-        body.physicsBody!.dynamic = false
-        addChild(body)
-        
-//        lid = SKSpriteNode(imageNamed: "pot-lid")
-//        lid.scale(Obstacle.WIDTH)
-//        lid!.position.x = lid!.size.width / 2
-//        lid!.position.y = lid!.size.height / 2 + Pot.LID_HEIGHT
-//        lid!.physicsBody = SKPhysicsBody(rectangleOfSize: lid!.size)
-//        lid!.physicsBody!.categoryBitMask = BitMaskCategory.obstacle
-//        lid!.physicsBody!.contactTestBitMask = BitMaskCategory.hero
-//        lid!.physicsBody!.collisionBitMask = BitMaskCategory.hero | BitMaskCategory.obstacle
-//        lid!.physicsBody!.dynamic = false
-//        addChild(lid!)
+        addChild(left)
+        addChild(right)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -45,7 +42,7 @@ class Pan: Obstacle {
     }
     
     override func isDeadly(vector: CGVector, point: CGPoint) -> Bool {
-        return false
+        return true
     }
     
     override func animateClose() {

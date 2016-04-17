@@ -349,6 +349,17 @@
 			path = CollectableManager;
 			sourceTree = "<group>";
 		};
+		CD0938251CC388E2008309CC /* Obstacles */ = {
+			isa = PBXGroup;
+			children = (
+				CD5FD5901CB9EA0300C0ACB0 /* Obstacle.swift */,
+				CD09381D1CC37631008309CC /* Pot.swift */,
+				CD0938211CC3811B008309CC /* Oven.swift */,
+				CD0938231CC383A4008309CC /* Pan.swift */,
+			);
+			name = Obstacles;
+			sourceTree = "<group>";
+		};
 		CDD1067A1CA867EE00959FFD /* Running Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,10 +370,7 @@
 				CDD106741CA8403700959FFD /* Collectable.swift */,
 				CDD106761CA84AF300959FFD /* CollectableType.swift */,
 				CDD106601C9DD15600959FFD /* Platform.swift */,
-				CD5FD5901CB9EA0300C0ACB0 /* Obstacle.swift */,
-				CD09381D1CC37631008309CC /* Pot.swift */,
-				CD0938211CC3811B008309CC /* Oven.swift */,
-				CD0938231CC383A4008309CC /* Pan.swift */,
+				CD0938251CC388E2008309CC /* Obstacles */,
 			);
 			name = "Running Manager";
 			path = RunningManager;

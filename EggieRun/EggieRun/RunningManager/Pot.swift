@@ -12,13 +12,10 @@ class Pot: Obstacle {
     private static let PADDING: CGFloat = -20
     private static let LID_HEIGHT: CGFloat = 80
     
-    private var body: SKSpriteNode!
-    private var lid: SKSpriteNode!
+    private var body: SKSpriteNode
+    private var lid: SKSpriteNode
 
     init() {
-        super.init(cooker: .Pot)
-        heightPadding = Pot.PADDING
-
         body = SKSpriteNode(imageNamed: "pot-body")
         body.scale(Obstacle.WIDTH)
         body.position.x = body.size.width / 2
@@ -28,18 +25,21 @@ class Pot: Obstacle {
         body.physicsBody!.contactTestBitMask = BitMaskCategory.hero
         body.physicsBody!.collisionBitMask = BitMaskCategory.hero | BitMaskCategory.obstacle
         body.physicsBody!.dynamic = false
-        addChild(body)
         
         lid = SKSpriteNode(imageNamed: "pot-lid")
         lid.scale(Obstacle.WIDTH)
-        lid!.position.x = lid!.size.width / 2
-        lid!.position.y = lid!.size.height / 2 + Pot.LID_HEIGHT
-        lid!.physicsBody = SKPhysicsBody(rectangleOfSize: lid!.size)
-        lid!.physicsBody!.categoryBitMask = BitMaskCategory.obstacle
-        lid!.physicsBody!.contactTestBitMask = BitMaskCategory.hero
-        lid!.physicsBody!.collisionBitMask = BitMaskCategory.hero | BitMaskCategory.obstacle
-        lid!.physicsBody!.dynamic = false
-        addChild(lid!)
+        lid.position.x = lid.size.width / 2
+        lid.position.y = lid.size.height / 2 + Pot.LID_HEIGHT
+        lid.physicsBody = SKPhysicsBody(rectangleOfSize: lid.size)
+        lid.physicsBody!.categoryBitMask = BitMaskCategory.obstacle
+        lid.physicsBody!.contactTestBitMask = BitMaskCategory.hero
+        lid.physicsBody!.collisionBitMask = BitMaskCategory.hero | BitMaskCategory.obstacle
+        lid.physicsBody!.dynamic = false
+        
+        super.init(cooker: .Pot)
+        heightPadding = Pot.PADDING
+        addChild(body)
+        addChild(lid)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -51,6 +51,6 @@ class Pot: Obstacle {
     }
     
     override func animateClose() {
-        lid!.physicsBody!.dynamic = true
+        lid.physicsBody!.dynamic = true
     }
 }

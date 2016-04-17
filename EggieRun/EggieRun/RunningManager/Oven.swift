@@ -11,12 +11,9 @@ import SpriteKit
 class Oven: Obstacle {
     private static let PADDING: CGFloat = -27
     
-    private var body: SKSpriteNode!
+    private var body: SKSpriteNode
     
     init() {
-        super.init(cooker: .Oven)
-        heightPadding = Oven.PADDING
-        
         body = SKSpriteNode(imageNamed: "oven-open")
         body.scale(Obstacle.WIDTH)
         body.position.x = body.size.width / 2
@@ -26,6 +23,9 @@ class Oven: Obstacle {
         body.physicsBody!.contactTestBitMask = BitMaskCategory.hero
         body.physicsBody!.collisionBitMask = BitMaskCategory.hero | BitMaskCategory.obstacle
         body.physicsBody!.dynamic = false
+        
+        super.init(cooker: .Oven)
+        heightPadding = Oven.PADDING
         addChild(body)
     }
     
