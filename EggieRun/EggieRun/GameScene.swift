@@ -362,7 +362,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func appendNewPlatform(position: CGFloat) {
         let pf = platformFactory.nextPlatform()
         pf.position.x = position
-        pf.position.y = 0
+        pf.position.y = pf.baselineHeight
         platforms.append(pf)
         addChild(pf)
         
