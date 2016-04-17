@@ -102,7 +102,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             if pauseButton.containsPoint(touchLocation) {
                 pause()
-            } else if eggie.canJump {
+            } else if eggie.state == .Running {
                 eggie.state = .Jumping
                 self.runAction(GameScene.SE_JUMP)
             }
@@ -142,9 +142,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == BitMaskCategory.hero | BitMaskCategory.scene {
             gameOver(.Drop)
         } else if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == BitMaskCategory.hero | BitMaskCategory.platform {
-            if eggie.state == .Jumping {
-                eggie.state = .Running
-            }
+            eggie.state = .Running
         } else if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == BitMaskCategory.hero | BitMaskCategory.collectable {
             let collectable: Collectable
             if contact.bodyA.categoryBitMask == BitMaskCategory.collectable {
@@ -153,19 +151,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 collectable = contact.bodyB.node as! Collectable
             }
             
-            collectable.hidden = true
+            let position = collectable.position
+            collectable.removeFromParent()
+            
+            self.runAction(GameScene.SE_COLLECT)
             
             if collectable.type == .Ingredient {
                 animateMovingIngredient(collectable.ingredient!, originalPosition: collectable.position)
-                //ingredientBar.addIngredient(collectable.ingredient!)
             } else {
                 flavourBar.addCondiment(collectable.condiment!)
             }
             
-            self.runAction(GameScene.SE_COLLECT)
-            
             if let particles = SKEmitterNode(fileNamed: "Collection.sks") {
-                particles.position = contact.contactPoint
+                particles.position = position
                 collectable.emitter = particles
                 addChild(particles)
             }

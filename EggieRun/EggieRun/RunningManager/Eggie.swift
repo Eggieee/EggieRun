@@ -97,25 +97,6 @@ class Eggie: SKSpriteNode {
         }
     }
     
-    var canJump: Bool {
-        if innerState != .Running {
-            return false
-        }
-        
-        let contactingObjects = physicsBody!.allContactedBodies() as [AnyObject]
-        for object in contactingObjects {
-            if object.categoryBitMask == BitMaskCategory.platform {
-                return true
-            } else if object.categoryBitMask == BitMaskCategory.obstacle {
-                return true
-            } else {
-                return false
-            }
-        }
-        
-        return false
-    }
-    
     func pauseAtlas() {
         if let action = actionForKey(Eggie.ATLAS_ACTION_KEY) {
             action.speed = 0
