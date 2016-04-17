@@ -48,10 +48,10 @@ class DexItemNode: SKNode {
         }
         
         if DishDataController.singleton.isDishNew(dish) {
-            let newLabelNode = SKLabelNode(text: "new!")
-            newLabelNode.color = UIColor.blackColor()
-            newLabelNode.zPosition = 100
-            addChild(newLabelNode)
+            let newNode = SKSpriteNode(imageNamed: "new-label")
+            newNode.position = CGPoint(x: size/3, y: size/3)
+            newNode.zPosition = 100
+            addChild(newNode)
         }
         
         // add dish image node
