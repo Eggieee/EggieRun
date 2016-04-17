@@ -28,7 +28,7 @@ class DexDetailNode: SKSpriteNode {
             questionMarkNode.hidden = true
         } else {
             effectNode.filter = DexScene.UNACTIVATED_FILTER
-            dishDescriptionNode.text = "???"
+            dishDescriptionNode.text = dish.hintDescription
             dishNameNode.text = "???"
             questionMarkNode.hidden = false
         }
