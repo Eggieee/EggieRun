@@ -13,7 +13,7 @@ class ConstructableEngine<C: Constructable> {
     private(set) var constructables = [C]()
     private let storage: ConstructableStorage<C>
     
-    init(dataUrl: NSURL, storageFileName: String, storageKey: String) {
+    init(dataUrl: NSURL, storageFileName: String) {
         NSLog("Initializing ConstructableEngine from dataUrl %@", dataUrl)
         
         let data = NSArray(contentsOfURL: dataUrl)!
@@ -22,10 +22,10 @@ class ConstructableEngine<C: Constructable> {
             constructables.append(C(data: itemData))
         }
         
-        storage = ConstructableStorage<C>(storageFileName: storageFileName, storageKey: storageKey)
+        storage = ConstructableStorage<C>(storageFileName: storageFileName)
     }
     
-    func getConstructResult(resources: [Int: Int]) -> C {
+    func getConstructResult(resources: [Int: Int]) -> (C, Bool) {
         let randomPool = RandomPool<C>()
         
         var forceAppearConstructablePriority = 0
@@ -49,14 +49,25 @@ class ConstructableEngine<C: Constructable> {
         } else {
             constructResult = randomPool.draw()
         }
+        
+        let newFlag = !storage.isActivated(constructResult!)
         if !storage.activate(constructResult!) {
             NSLog("ConstructableStorage save failed!")
         }
-        return constructResult!
+        
+        return (constructResult!, newFlag)
     }
     
     func isConstructableActivated(item: C) -> Bool {
         return storage.isActivated(item)
+    }
+    
+    func isConstructableNew(item: C) -> Bool {
+        return storage.hasNewFlag(item)
+    }
+    
+    func clearNewFlags() -> Bool {
+        return storage.clearNewFlag()
     }
     
     func clearActivated() -> Bool {

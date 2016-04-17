@@ -12,15 +12,17 @@ class ConstructableStorage<C: Constructable> {
     
     private let storagePath: AnyObject
     private let storageFileName: String
-    private let storageKey: String
     
-    private var activatedConstructableIds = Set<Int>()
+    private let ACTIVATION_KEY = "activation"
+    private let NEW_FLAG_KEY = "new_flag"
     
-    init(storageFileName: String, storageKey: String) {
+    private var activationSet = Set<Int>()
+    private var newFlagSet = Set<Int>()
+    
+    init(storageFileName: String) {
         NSLog("Initializing ConstructableStorage from file %@", storageFileName)
         
         self.storageFileName = storageFileName
-        self.storageKey = storageKey
         
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
         if paths.count > 0 {
@@ -39,32 +41,48 @@ class ConstructableStorage<C: Constructable> {
         let data = NSData(contentsOfFile: path())
         if data != nil {
             let archiver = NSKeyedUnarchiver(forReadingWithData: data!)
-            activatedConstructableIds = Set(archiver.decodeObjectForKey(storageKey) as! Array<Int>)
+            activationSet = Set((archiver.decodeObjectForKey(ACTIVATION_KEY) as? Array<Int>) ?? [])
+            newFlagSet = Set((archiver.decodeObjectForKey(NEW_FLAG_KEY) as? Array<Int>) ?? [])
             archiver.finishDecoding()
         }
-        NSLog("ConstructableStorage read finished, data: %@", activatedConstructableIds.debugDescription)
+        NSLog("ConstructableStorage read finished, data: %@", activationSet.debugDescription)
     }
     
     private func writeData() -> Bool {
         let data = NSMutableData()
         let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
-        archiver.encodeObject(Array(activatedConstructableIds), forKey: storageKey)
+        archiver.encodeObject(Array(activationSet), forKey: ACTIVATION_KEY)
+        archiver.encodeObject(Array(newFlagSet), forKey: NEW_FLAG_KEY)
         archiver.finishEncoding()
         
         return data.writeToFile(path(), atomically: true)
     }
     
     func isActivated(item: C) -> Bool {
-        return activatedConstructableIds.contains(item.id)
+        return activationSet.contains(item.id)
+    }
+    
+    func hasNewFlag(item: C) -> Bool {
+        return newFlagSet.contains(item.id)
     }
     
     func activate(item: C) -> Bool {
-        activatedConstructableIds.insert(item.id)
-        return writeData()
+        if isActivated(item) {
+            return true
+        } else {
+            activationSet.insert(item.id)
+            newFlagSet.insert(item.id)
+            return writeData()
+        }
     }
     
     func clearActivated() -> Bool {
-        activatedConstructableIds.removeAll()
+        activationSet.removeAll()
+        return writeData()
+    }
+    
+    func clearNewFlag() -> Bool {
+        newFlagSet.removeAll()
         return writeData()
     }
 }

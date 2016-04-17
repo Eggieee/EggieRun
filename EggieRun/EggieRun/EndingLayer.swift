@@ -17,7 +17,7 @@ class EndingLayer: SKSpriteNode {
     private var beam: SKSpriteNode!
     private var beamAction: SKAction
     
-    init(usedCooker: Cooker, generatedDish: Dish) {
+    init(usedCooker: Cooker, generatedDish: Dish, isNew: Bool) {
         let beamAtlas = SKTextureAtlas(named: "beam.atlas")
         let sortedBeamTextureNames = beamAtlas.textureNames.sort()
         let beamTextures = sortedBeamTextureNames.map({ beamAtlas.textureNamed($0) })

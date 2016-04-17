@@ -24,13 +24,13 @@ class DishDataController {
     
     init() {
         if let url = NSBundle.mainBundle().URLForResource("Dishes", withExtension: "plist") {
-            constructableEngine = ConstructableEngine<Dish>(dataUrl: url, storageFileName: DishDataController.STORAGE_FILE_NAME, storageKey: DishDataController.STORAGE_KEY)
+            constructableEngine = ConstructableEngine<Dish>(dataUrl: url, storageFileName: DishDataController.STORAGE_FILE_NAME)
         } else {
             fatalError()
         }
     }
     
-    func getResultDish(cooker: Cooker, condiments: [Condiment: Int], ingredients: [Ingredient]) -> Dish {
+    func getResultDish(cooker: Cooker, condiments: [Condiment: Int], ingredients: [Ingredient]) -> (Dish, Bool) {
         var resources = [Int: Int]()
         
         resources[cooker.rawValue] = 1
@@ -44,7 +44,7 @@ class DishDataController {
         }
         
         let result = constructableEngine.getConstructResult(resources)
-        NSLog("Constructed dish %@", result.name)
+        NSLog("Constructed dish %@", result.0.name)
         return result
     }
     
@@ -52,7 +52,15 @@ class DishDataController {
         return constructableEngine.isConstructableActivated(dish)
     }
     
+    func isDishNew(dish: Dish) -> Bool {
+        return constructableEngine.isConstructableNew(dish)
+    }
+    
     func clearActivatedDishes() -> Bool {
         return constructableEngine.clearActivated()
+    }
+    
+    func clearNewFlags() -> Bool {
+        return constructableEngine.clearNewFlags()
     }
 }

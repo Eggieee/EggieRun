@@ -66,7 +66,6 @@ class DexScene: SKScene {
         
         // back
         if buttonBack.containsPoint(touchLocation) {
-            gridNode.removeEmitter()
             let menuScene = MenuScene.singleton
             self.view?.presentScene(menuScene!, transition: MenuScene.BACK_TRANSITION)
         }
@@ -100,6 +99,11 @@ class DexScene: SKScene {
     func createDetailNode() {
         detailNode = DexDetailNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width)
         self.addChild(detailNode)
+    }
+    
+    override func willMoveFromView(view: SKView) {
+        gridNode.removeEmitter()
+        DishDataController.singleton.clearNewFlags()
     }
     
     override func update(currentTime: CFTimeInterval) {

@@ -295,9 +295,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         flavourBar.removeFromParent()
         
-        let dish = DishDataController.singleton.getResultDish(wayOfDie, condiments: flavourBar.condimentDictionary, ingredients: ingredientBar.ingredients)
+        let (dish, isNew) = DishDataController.singleton.getResultDish(wayOfDie, condiments: flavourBar.condimentDictionary, ingredients: ingredientBar.ingredients)
         
-        endingLayer = EndingLayer(usedCooker: wayOfDie, generatedDish: dish)
+        endingLayer = EndingLayer(usedCooker: wayOfDie, generatedDish: dish, isNew: isNew)
         endingLayer!.zPosition = GameScene.OVERLAY_Z_POSITION
         endingLayer!.position = CGPointMake(frame.midX, frame.midY)
         addChild(endingLayer!)

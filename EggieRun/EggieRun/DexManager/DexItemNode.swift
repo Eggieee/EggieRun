@@ -47,6 +47,13 @@ class DexItemNode: SKNode {
             activated = false
         }
         
+        if DishDataController.singleton.isDishNew(dish) {
+            let newLabelNode = SKLabelNode(text: "new!")
+            newLabelNode.color = UIColor.blackColor()
+            newLabelNode.zPosition = 100
+            addChild(newLabelNode)
+        }
+        
         // add dish image node
         let dishImageNode = SKSpriteNode(texture: dish.texture)
         dishImageNode.size = CGSize(width: size / DexItemNode.IMAGE_RATIO, height: size / DexItemNode.IMAGE_RATIO)
