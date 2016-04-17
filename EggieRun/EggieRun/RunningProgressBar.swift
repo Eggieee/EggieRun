@@ -11,15 +11,16 @@ import Foundation
 import SpriteKit
 
 class RunningProgressBar: SKSpriteNode {
-    private static let BAR_LENGTH: CGFloat = 800
     private static let BAR_HEIGHT: CGFloat = 10
     private static let MAX_DISTANCE = 100000
     
+    private var barLength: CGFloat
     private var distance = 0
     private var distanceBar: SKSpriteNode!
     
-    init() {
-        super.init(texture: nil, color: UIColor.grayColor(), size: CGSizeMake(RunningProgressBar.BAR_LENGTH, RunningProgressBar.BAR_HEIGHT))
+    init(length: CGFloat) {
+        barLength = length
+        super.init(texture: nil, color: UIColor.grayColor(), size: CGSizeMake(barLength, RunningProgressBar.BAR_HEIGHT))
         anchorPoint.x = 0
         anchorPoint.y = 1
         initializeBar()
@@ -38,7 +39,7 @@ class RunningProgressBar: SKSpriteNode {
     }
     
     private func getNewDistanceBarLength() -> CGFloat {
-        return RunningProgressBar.BAR_LENGTH * CGFloat(distance) / CGFloat(RunningProgressBar.MAX_DISTANCE)
+        return barLength * CGFloat(distance) / CGFloat(RunningProgressBar.MAX_DISTANCE)
     }
     
     required init?(coder aDecoder: NSCoder) {
