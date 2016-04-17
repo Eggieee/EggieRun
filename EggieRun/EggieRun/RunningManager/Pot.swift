@@ -30,7 +30,7 @@ class Pot: Obstacle {
         lid.scale(Obstacle.WIDTH)
         lid.position.x = lid.size.width / 2
         lid.position.y = lid.size.height / 2 + Pot.LID_HEIGHT
-        lid.physicsBody = SKPhysicsBody(texture: lid.texture!, size: lid.size)
+        lid.physicsBody = SKPhysicsBody(rectangleOfSize: lid.size)
         lid.physicsBody!.categoryBitMask = BitMaskCategory.obstacle
         lid.physicsBody!.contactTestBitMask = BitMaskCategory.hero
         lid.physicsBody!.collisionBitMask = BitMaskCategory.hero | BitMaskCategory.obstacle
