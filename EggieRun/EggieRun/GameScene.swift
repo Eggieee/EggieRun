@@ -394,6 +394,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func willMoveFromView(view: SKView) {
+        removeAllChildren()
         GameScene.instance = nil
     }
     

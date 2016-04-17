@@ -58,10 +58,6 @@ class DexGridNode: SKSpriteNode {
         selectedEmitterNode.hidden = false
     }
     
-    func removeEmitter() {
-        selectedEmitterNode.removeFromParent()
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

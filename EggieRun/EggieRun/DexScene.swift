@@ -116,7 +116,7 @@ class DexScene: SKScene {
     }
     
     override func willMoveFromView(view: SKView) {
-        gridNode.removeEmitter()
+        removeAllChildren()
         DishDataController.singleton.clearNewFlags()
     }
     
