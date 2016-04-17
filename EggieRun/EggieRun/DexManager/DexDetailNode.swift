@@ -40,7 +40,7 @@ class DexDetailNode: SKSpriteNode {
         
         dishImageNode = SKSpriteNode(texture: nil)
         dishNameNode = SKLabelNode(text: "")
-        dishDescriptionNode = MultilineLabelNode(text: "", labelWidth: Int(WIDTH * 2/3) , pos: CGPoint(x: WIDTH / 2, y: HEIGHT / 4), fontName: "ChalkboardSE-Regular",fontSize:20,fontColor: UIColor.blackColor(),leading: 20, alignment:.Center, shouldShowBorder:false)
+        dishDescriptionNode = MultilineLabelNode(text: "", labelWidth: Int(WIDTH * 2/3) , pos: CGPoint(x: WIDTH / 2, y: HEIGHT / 4), fontName: "ChalkboardSE-Regular",fontSize:20,fontColor: UIColor.blackColor(),leading: 20, alignment:.Center)
         questionMarkNode = SKLabelNode(text: "?")
         
         effectNode = SKEffectNode()
