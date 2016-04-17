@@ -11,13 +11,13 @@ import SpriteKit
 class ShelfFactory {
     private static let MAX_NUM_OF_MID_PIECE: UInt32 = 2
     private static let MAX_NUM_OF_GAP: UInt32 = 20
-    private static let MIM_NUM_OF_GAP: UInt32 = 1
+    private static let MIN_NUM_OF_GAP: UInt32 = 1
 
-    private static let UNIT_GAP_SIZE: CGFloat = 50
+    private static let UNIT_GAP_SIZE: CGFloat = 100
     
     func nextPlatform() -> Shelf {
-        let numOfMid = Int(arc4random() % (ShelfFactory.MAX_NUM_OF_MID_PIECE - ShelfFactory.MIM_NUM_OF_GAP + 1) + ShelfFactory.MIM_NUM_OF_GAP)
-        let numOfGap = CGFloat(arc4random() % (ShelfFactory.MAX_NUM_OF_GAP + 1))
+        let numOfMid = Int(arc4random() % (ShelfFactory.MAX_NUM_OF_MID_PIECE + 1))
+        let numOfGap = CGFloat(arc4random() % (ShelfFactory.MAX_NUM_OF_GAP - ShelfFactory.MIN_NUM_OF_GAP + 1) + ShelfFactory.MIN_NUM_OF_GAP)
 
         return Shelf(numOfMidPiece: numOfMid, gapSize: numOfGap * ShelfFactory.UNIT_GAP_SIZE)
     }
