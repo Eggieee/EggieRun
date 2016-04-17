@@ -30,7 +30,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let FLAVOUR_BAR_OFFSET: CGFloat = 100
     private static let LEFT_FRAME_OFFSET: CGFloat = 400
     private static let TOP_FRAME_OFFSET: CGFloat = 400
-    private static let GRAVITY = CGVectorMake(0, -20)
     private static let COLLECTABLE_SIZE = CGSizeMake(80, 80)
     private static let OVERLAY_Z_POSITION: CGFloat = 100
     
@@ -191,7 +190,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func initializePhysicsProperties() {
         physicsWorld.contactDelegate = self
-        physicsWorld.gravity = GameScene.GRAVITY
+        physicsWorld.gravity = GlobalConstants.GRAVITY
         
         physicsBody = SKPhysicsBody(edgeLoopFromRect: CGRect(x: frame.minX - GameScene.LEFT_FRAME_OFFSET, y: frame.minY, width: frame.width + GameScene.LEFT_FRAME_OFFSET, height: frame.height + GameScene.TOP_FRAME_OFFSET))
         physicsBody!.categoryBitMask = BitMaskCategory.scene
