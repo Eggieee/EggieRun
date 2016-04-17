@@ -15,15 +15,13 @@ class DexGridNode: SKSpriteNode {
     private var width: CGFloat
     private var height: CGFloat
 
-    var pageNumber: Int
     private(set) var dishNodes = [DexItemNode]()
     private var selectedEmitterNode: SKEmitterNode!
     
     
-    init(sceneHeight: CGFloat, sceneWidth: CGFloat, dishList:[Dish], pageNumber:Int) {
+    init(sceneHeight: CGFloat, sceneWidth: CGFloat, dishList:[Dish]) {
         width = DexScene.GRID_WIDTH_RATIO * sceneWidth
         height = sceneHeight - DexScene.TOP_BAR_HEIGHT
-        self.pageNumber = pageNumber
         
         super.init(texture: nil, color: UIColor.blackColor(), size: CGSize(width: width, height: height))
         self.position = CGPoint(x: 0, y: 0)
