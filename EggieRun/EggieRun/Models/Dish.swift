@@ -13,6 +13,7 @@ class Dish: Constructable {
     let id: Int
     let name: String
     let description: String
+    let hintDescription: String
     let titleImageNamed: String
     let rarity: Int
     let texture: SKTexture
@@ -22,6 +23,7 @@ class Dish: Constructable {
         self.id = data["id"] as! Int
         self.name = data["name"] as! String
         self.description = data["description"] as! String
+        self.hintDescription = data["hintDescription"] as! String
         self.rarity = data["rarity"] as! Int
         
         let imageNamed = data["imageNamed"] as! String

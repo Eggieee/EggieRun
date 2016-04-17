@@ -62,6 +62,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     override func didMoveToView(view: SKView) {
         GameScene.instance = self
+        BGMPlayer.singleton.moveToStatus(.Game)
         
         initializePhysicsProperties()
         gameReady()
