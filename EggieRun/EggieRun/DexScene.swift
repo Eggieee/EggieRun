@@ -37,6 +37,8 @@ class DexScene: SKScene {
 
     
     override func didMoveToView(view: SKView) {
+        BGMPlayer.singleton.moveToStatus(.Dex)
+        
         let titleLabel = SKLabelNode(fontNamed: DexScene.TITLE_FONT)
         titleLabel.text = DexScene.TITLE_TEXT
         titleLabel.fontSize = DexScene.TITLE_SIZE
