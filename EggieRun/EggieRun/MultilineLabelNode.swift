@@ -9,22 +9,22 @@
 import SpriteKit
 
 class MultilineLabelNode: SKNode {
-
-    var labelWidth:Int {didSet {update()}}
-    var labelHeight:Int = 0
-    var text:String {didSet {update()}}
-    var fontName:String {didSet {update()}}
-    var fontSize:CGFloat {didSet {update()}}
-    var pos:CGPoint {didSet {update()}}
-    var fontColor:UIColor {didSet {update()}}
-    var leading:Int {didSet {update()}}
-    var alignment:SKLabelHorizontalAlignmentMode {didSet {update()}}
-
-    //display objects
-    var rect:SKShapeNode?
-    var labels:[SKLabelNode] = []
     
-    init(text:String, labelWidth:Int, pos:CGPoint, fontName:String, fontSize:CGFloat, fontColor: UIColor, leading: Int, alignment:SKLabelHorizontalAlignmentMode) {
+    var labelWidth: Int { didSet { update() } }
+    var labelHeight: Int = 0
+    var text: String { didSet { update() } }
+    var fontName: String { didSet { update() } }
+    var fontSize: CGFloat { didSet { update() } }
+    var pos: CGPoint { didSet { update() } }
+    var fontColor: UIColor { didSet { update() } }
+    var leading: Int { didSet { update() } }
+    var alignment: SKLabelHorizontalAlignmentMode { didSet { update() } }
+    
+    // display objects
+    var rect: SKShapeNode?
+    var labels: [SKLabelNode] = []
+    
+    init(text: String, labelWidth: Int, pos: CGPoint, fontName: String, fontSize: CGFloat, fontColor: UIColor, leading: Int, alignment: SKLabelHorizontalAlignmentMode) {
         
         self.text = text
         self.labelWidth = labelWidth
@@ -44,10 +44,8 @@ class MultilineLabelNode: SKNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-
     func update() {
-
-        if (labels.count>0) {
+        if (labels.count > 0) {
             for label in labels {
                 label.removeFromParent()
             }
@@ -75,7 +73,7 @@ class MultilineLabelNode: SKNode {
             
             while lineLength < CGFloat(labelWidth) {
                 wordCount += 1
-                if wordCount > words.count-1 {
+                if wordCount > words.count - 1 {
                     finalLine = true
                     break
                 }
@@ -100,12 +98,11 @@ class MultilineLabelNode: SKNode {
                     linePos.x += CGFloat(labelWidth / 2)
                 }
                 linePos.y += CGFloat(-leading * lineCount)
-                label.position = CGPointMake( linePos.x , linePos.y )
+                label.position = CGPointMake(linePos.x, linePos.y)
                 self.addChild(label)
                 labels.append(label)
             }
         }
         labelHeight = lineCount * leading
     }
- 
 }
