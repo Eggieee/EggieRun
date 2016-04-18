@@ -11,6 +11,6 @@ import UIKit
 struct GlobalConstants {
     static let fontName = "Chalkduster"
     static let PHYSICS_BODY_ALPHA_THRESHOLD: Float = 0.9
-    static let EGGIE_JUMPING_ACCELERATION = CGVectorMake(0, 1500)
+    static let EGGIE_JUMPING_ACCELERATION = CGVectorMake(0, 1000)
     static let GRAVITY = CGVectorMake(0, -30)
 }
