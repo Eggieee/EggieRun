@@ -23,7 +23,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let DISTANCE_CLOSET_AND_COLLECTABLE: CGFloat = 200
     private static let DISTANCE_SHELF_AND_COLLECTABLE: CGFloat = 50
     private static let OBSTACLE_RATE = 0.2
-    private static let COLLECTABLE_RATE = 0.3
+    private static let COLLECTABLE_RATE = 0.2
     private static let BUFFER_DISTANCE = 400.0
     private static let COLLECTABLE_BUFFER_DISTANCE: CGFloat = 100
     private static let INGREDIENT_BAR_X_OFFSET: CGFloat = 15
