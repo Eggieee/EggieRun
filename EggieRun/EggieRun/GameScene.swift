@@ -553,7 +553,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case .IncreasePot:
             obstacleRate = GameScene.OBSTACLE_RATE_HIGH
         case .EndOyakodon:
-            print("oyakodon!")
+            gameOver(.DistanceForceDeath)
         }
     }
 }
