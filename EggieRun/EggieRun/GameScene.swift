@@ -34,6 +34,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let LEFT_FRAME_OFFSET: CGFloat = 400
     private static let TOP_FRAME_OFFSET: CGFloat = 800
     private static let COLLECTABLE_SIZE = CGSizeMake(80, 80)
+    private static let HUD_Z_POSITION: CGFloat = 50
     private static let OVERLAY_Z_POSITION: CGFloat = 100
     
     private static let SE_COLLECT = SKAction.playSoundFileNamed("collect-sound.mp3", waitForCompletion: false)
@@ -259,9 +260,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func initializeCollectableBars() {
         ingredientBar = IngredientBar()
         ingredientBar.position = CGPointMake(GameScene.INGREDIENT_BAR_X_OFFSET, self.frame.height-ingredientBar.frame.height/2 - GameScene.INGREDIENT_BAR_Y_OFFSET)
+        ingredientBar.zPosition = GameScene.HUD_Z_POSITION
         addChild(ingredientBar)
         
         flavourBar = FlavourBar()
+        flavourBar.zPosition = GameScene.HUD_Z_POSITION
         flavourBarFollow()
         addChild(flavourBar)
     }
