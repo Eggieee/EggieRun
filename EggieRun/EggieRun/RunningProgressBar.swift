@@ -68,6 +68,9 @@ class RunningProgressBar: SKSpriteNode {
     
     func activateCurrentMilestone() {
         nextMilestoneBubble.texture = nextMilestone.colouredTexture
+        if(nextIndex < milestones.count - 1) {
+            nextIndex += 1
+        }
     }
     
     private func getNewDistanceBarLength() -> CGFloat {

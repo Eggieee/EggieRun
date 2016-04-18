@@ -34,11 +34,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let LEFT_FRAME_OFFSET: CGFloat = 400
     private static let TOP_FRAME_OFFSET: CGFloat = 800
     private static let COLLECTABLE_SIZE = CGSizeMake(80, 80)
+    private static let HUD_Z_POSITION: CGFloat = 50
     private static let OVERLAY_Z_POSITION: CGFloat = 100
     
     private static let SE_COLLECT = SKAction.playSoundFileNamed("collect-sound.mp3", waitForCompletion: false)
     private static let SE_JUMP = SKAction.playSoundFileNamed("jump-sound.mp3", waitForCompletion: false)
-    private static let SE_OBSTACLES: [Cooker: SKAction] = [.Drop: "drop-sound.mp3", .Oven: "oven-sound.mp3", .Pot: "pot-sound.mp3"].map({ SKAction.playSoundFileNamed($0, waitForCompletion: false) })
+    private static let SE_OBSTACLES: [Cooker: SKAction] = [.Drop: "drop-sound.mp3", .Oven: "oven-sound.mp3", .Pot: "pot-sound.mp3", .Pan: "pan-sound.mp3"].map({ SKAction.playSoundFileNamed($0, waitForCompletion: false) })
     
     private enum GameState {
         case Ready, Playing, Over, Paused
@@ -69,7 +70,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             nextMilestone = milestones[nextMilestoneIndex]
         }
     }
-    private var nextMilestone: Milestone!
+    private var nextMilestone: Milestone?
+    private var isPotPresent = false
+    private var isShelfPresent = false
+    private var isOvenPresent = false
+    private var isPanPresent = false
+    private var isCookerIncreased = false
 
     override func didMoveToView(view: SKView) {
         GameScene.instance = self
@@ -259,9 +265,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func initializeCollectableBars() {
         ingredientBar = IngredientBar()
         ingredientBar.position = CGPointMake(GameScene.INGREDIENT_BAR_X_OFFSET, self.frame.height-ingredientBar.frame.height/2 - GameScene.INGREDIENT_BAR_Y_OFFSET)
+        ingredientBar.zPosition = GameScene.HUD_Z_POSITION
         addChild(ingredientBar)
         
         flavourBar = FlavourBar()
+        flavourBar.zPosition = GameScene.HUD_Z_POSITION
         flavourBarFollow()
         addChild(flavourBar)
     }
@@ -288,7 +296,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func updateDistance(movedDistance: Double) {
         currentDistance += Int(movedDistance)
-        if (currentDistance >= nextMilestone.requiredDistance) {
+        if (currentDistance >= nextMilestone!.requiredDistance) {
             activateCurrentMilestone()
         }
         distanceLabel.text = String(format: GameScene.DISTANCE_LABEL_TEXT, currentDistance)
@@ -497,6 +505,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if(nextMilestoneIndex < milestones.count - 1) {
             runningProgressBar.activateCurrentMilestone()
             nextMilestoneIndex += 1
+        }
+    }
+    
+    private func activateMilestoneEvent() {
+        switch nextMilestone! {
+        case .PresentPot:
+            isPotPresent = true
+        case .PresentShelf:
+            isShelfPresent = true
+        case .PresentOven:
+            isOvenPresent = true
+        case .ChallengeDarkness:
+            print("dark!")
+        case .PresentPan:
+            isPanPresent = true
+        case .ChallengeQuake:
+            print("earth quake!")
+        case .IncreasePot:
+            isCookerIncreased = true
+        case .EndOyakodon:
+            print("oyakodon!")
         }
     }
 }

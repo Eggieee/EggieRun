@@ -9,6 +9,8 @@
 import SpriteKit
 
 enum Ingredient: Int {
+    private static let DISTANCES_TURNING_POINT = [Milestone.PresentShelf, Milestone.ChallengeDarkness].map({ $0.rawValue })
+    
     case GreenOnion = 100, Tomato = 101, Cream = 102, Milk = 103, Rice = 104, Bread = 105, Bacon = 106, Strawberry = 107, Chocolate = 108, Surstromming = 109
     
     static let ALL_VALUES: [Ingredient] = [.GreenOnion, .Tomato, .Cream, .Milk, .Rice, .Bread, .Bacon, .Strawberry, .Chocolate, .Surstromming]
@@ -21,7 +23,14 @@ enum Ingredient: Int {
     static let rarityPools = rarityTable.map({ RandomPool(objects: $0) })
     
     static func next(distance: Int) -> Ingredient {
-        let randomPool = RandomPool(objects: rarityPools, weightages: [60, 200, 40, 1])
+        let randomPool: RandomPool<RandomPool<Ingredient>>!
+        if distance < Ingredient.DISTANCES_TURNING_POINT[0] {
+            randomPool = RandomPool(objects: [rarityPools[0], rarityPools[1]], weightages: [3, 10])
+        } else if distance < Ingredient.DISTANCES_TURNING_POINT[1] {
+            randomPool = RandomPool(objects: [rarityPools[0], rarityPools[1], rarityPools[2]], weightages: [3, 10, 2])
+        } else {
+            randomPool = RandomPool(objects: rarityPools, weightages: [60, 200, 40, 1])
+        }
         return randomPool.draw().draw()
     }
     
