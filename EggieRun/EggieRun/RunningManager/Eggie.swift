@@ -53,6 +53,7 @@ class Eggie: SKSpriteNode {
         runAction(actions[.Standing]!)
         
         physicsBody = SKPhysicsBody(texture: runTextures[Eggie.PHYSICS_BODY_TEXTURE_ID], alphaThreshold: GlobalConstants.PHYSICS_BODY_ALPHA_THRESHOLD, size: size)
+        physicsBody!.mass = GlobalConstants.EGGIE_MASS
         physicsBody!.categoryBitMask = BitMaskCategory.hero
         physicsBody!.contactTestBitMask = BitMaskCategory.scene | BitMaskCategory.collectable | BitMaskCategory.platform | BitMaskCategory.obstacle
         physicsBody!.collisionBitMask = BitMaskCategory.platform | BitMaskCategory.scene | BitMaskCategory.obstacle
@@ -86,7 +87,7 @@ class Eggie: SKSpriteNode {
             case .Running:
                 innerCurrentSpeed = Eggie.SPEED_RUNNING
             case .Jumping_1, .Jumping_2:
-                physicsBody!.velocity.dy += GlobalConstants.EGGIE_JUMPING_ACCELERATION.dy
+                physicsBody!.applyImpulse(GlobalConstants.EGGIE_JUMPING_ACCELERATION)
             }
         }
     }
@@ -96,11 +97,7 @@ class Eggie: SKSpriteNode {
     }
     
     func balance() {
-        if position.x < balancedXPosition {
-            position.x += 1
-        } else if position.x > balancedXPosition {
-            position.x -= 1
-        }
+        position.x = balancedXPosition
     }
     
     func pauseAtlas() {

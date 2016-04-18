@@ -166,7 +166,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     eggie.position.y = platform.position.y - platform.size.height / 2 - eggie.size.height / 2 - 20
                 }
             }
-            eggie.physicsBody?.velocity = CGVectorMake(0, 0)
             eggie.state = .Running
         } else if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == BitMaskCategory.hero | BitMaskCategory.collectable {
             let collectable: Collectable
