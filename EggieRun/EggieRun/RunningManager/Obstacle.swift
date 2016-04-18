@@ -9,7 +9,7 @@
 import SpriteKit
 
 class Obstacle: SKNode {
-    static let WIDTH = 200.0
+    static let WIDTH = 180.0
     static let ATLAS_TIME_PER_FRAME = 0.05
     
     let cookerType: Cooker!

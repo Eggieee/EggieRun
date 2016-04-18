@@ -34,7 +34,7 @@ class Oven: Obstacle {
     }
     
     override func isDeadly(vector: CGVector, point: CGPoint) -> Bool {
-        return vector.dx != 0
+        return abs(vector.dy) < 0.5
     }
     
     override func animateClose() {
