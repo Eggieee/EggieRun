@@ -52,7 +52,6 @@ class Dish: Constructable {
         self.standardCondiments = standardCondiments
         
         self.requiredIngredients = Set((data["requiredIngredients"] as! [Int]).map({ Ingredient(rawValue: $0)! }))
-        debugPrint(self.requiredIngredients)
         self.requiredCooker = Cooker(rawValue: data["requiredCooker"] as! Int)
         self.distanceMode = DistanceMode(rawValue: data["distanceMode"] as! Int)!
         
