@@ -66,6 +66,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var pauseButton: SKSpriteNode!
     private var pausedLayer: PausedLayer?
     private var milestones: [Milestone] = Milestone.ALL_VALUES
+    private var tutorialLayer: TutorialLayer!
     private var nextMilestoneIndex = 0 {
         didSet {
             nextMilestone = milestones[nextMilestoneIndex]
@@ -88,7 +89,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let touch = touches.first!
         
         if gameState == .Ready {
-            gameStart()
+            let touchLocation = touch.locationInNode(tutorialLayer!)
+            if tutorialLayer.nextPageNode.containsPoint(touchLocation) {
+                if tutorialLayer.currPage < TutorialLayer.tutorials.count - 1 {
+                    tutorialLayer.getNextTutorial()
+                }
+            } else if tutorialLayer.prevPageNode.containsPoint(touchLocation) {
+                if tutorialLayer.currPage > 0 {
+                    tutorialLayer.getPrevTutorial()
+                }
+            } else {
+                gameStart()
+                tutorialLayer.removeFromParent()
+            }
         } else if gameState == .Over && endingLayer != nil {
             let touchLocation = touch.locationInNode(endingLayer!)
             
@@ -294,6 +307,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         nextMilestoneIndex = 0
     }
     
+    private func initializeTutorial() {
+        tutorialLayer = TutorialLayer(frameWidth: self.frame.width, frameHeight: self.frame.height)
+        tutorialLayer.zPosition = GameScene.OVERLAY_Z_POSITION
+        addChild(tutorialLayer)
+    }
+    
     private func updateDistance(movedDistance: Double) {
         currentDistance += Int(movedDistance)
         if (currentDistance >= nextMilestone!.requiredDistance) {
@@ -301,6 +320,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         distanceLabel.text = String(format: GameScene.DISTANCE_LABEL_TEXT, currentDistance)
     }
+    
     
     private func gameReady() {
         removeAllChildren()
@@ -315,6 +335,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initializeRunningProgressBar()
         initializePauseButton()
         initializeMilestone()
+        initializeTutorial()
         
         currentDistance = 0
         gameState = .Ready
