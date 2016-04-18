@@ -63,6 +63,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var pauseButton: SKSpriteNode!
     private var pausedLayer: PausedLayer?
     private var milestones: [Milestone] = Milestone.ALL_VALUES
+    private var nextMilestoneIndex = 0
     private var nextMilestone: Milestone?
 
     override func didMoveToView(view: SKView) {

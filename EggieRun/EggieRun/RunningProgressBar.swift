@@ -19,17 +19,26 @@ class RunningProgressBar: SKSpriteNode {
     private var distance = 0
     private var distanceBar: SKSpriteNode!
     private let milestones: [Milestone]
-    private var nextMilestone: Milestone
+    private var milestoneBubbles = [SKSpriteNode]()
+    private var nextIndex = 0 {
+        didSet {
+            nextMilestone = milestones[nextIndex]
+            nextMilestoneBubble = milestoneBubbles[nextIndex]
+        }
+    }
+    private var nextMilestone: Milestone!
+    private var nextMilestoneBubble: SKSpriteNode!
     
     init(length: CGFloat, allMilestones: [Milestone]) {
         barLength = length
         milestones = allMilestones
-        nextMilestone = milestones[0]
         super.init(texture: nil, color: UIColor.grayColor(), size: CGSizeMake(barLength, RunningProgressBar.BAR_HEIGHT))
         anchorPoint.x = 0
         anchorPoint.y = 1
         initializeBar()
         initializeMilestones()
+        nextMilestone = milestones[nextIndex]
+        nextMilestoneBubble = milestoneBubbles[nextIndex]
     }
     
     private func initializeBar() {
@@ -40,11 +49,13 @@ class RunningProgressBar: SKSpriteNode {
     }
     
     private func initializeMilestones() {
+        milestoneBubbles = [SKSpriteNode]()
         for milestone in milestones {
             //let bubbleTexture = SKTexture(imageNamed: "mono-milestone-template")
             let milestoneBubble = SKSpriteNode(imageNamed: "mono-milestone-template")
             let xPosition = CGFloat(milestone.requiredDistance) / CGFloat(RunningProgressBar.MAX_DISTANCE) * barLength
             milestoneBubble.position = CGPointMake(xPosition, RunningProgressBar.BUBBLE_Y)
+            milestoneBubbles.append(milestoneBubble)
             addChild(milestoneBubble)
         }
     }
@@ -53,12 +64,15 @@ class RunningProgressBar: SKSpriteNode {
         distance += Int(movedDistance)
         distanceBar.size.width = getNewDistanceBarLength()
         if (distance >= nextMilestone.requiredDistance) {
-            
+            activateCurrentMilestone()
         }
     }
     
     private func activateCurrentMilestone() {
-        
+        nextMilestoneBubble.texture = nextMilestone.colouredTexture
+        if(nextIndex < milestones.count - 1) {
+            nextIndex += 1
+        }
     }
     
     private func getNewDistanceBarLength() -> CGFloat {
