@@ -24,7 +24,6 @@ class Dish: Constructable {
     let titleImageNamed: String
     let rarity: Int
     let texture: SKTexture
-//    let canConstructJsFunction: JSValue
     let standardWeight: Double
     let standardCondiments: [Condiment: Double]
     let requiredIngredients: Set<Ingredient>
@@ -54,12 +53,6 @@ class Dish: Constructable {
         self.requiredIngredients = Set((data["requiredIngredients"] as! [Int]).map({ Ingredient(rawValue: $0)! }))
         self.requiredCooker = Cooker(rawValue: data["requiredCooker"] as! Int)
         self.distanceMode = DistanceMode(rawValue: data["distanceMode"] as! Int)!
-        
-//        let jsFunction = "var canConstruct = function(cooker, cond, ingred) { " + (data["canConstruct"] as! String) + " };"
-//        let context = JSContext()
-//        context.evaluateScript(jsFunction)
-//        canConstructJsFunction = context.objectForKeyedSubscript("canConstruct")
-        
     }
     
     func canConstruct(resources: [Int: Int]) -> Int {
@@ -91,7 +84,6 @@ class Dish: Constructable {
     // <0: force appear, the less the number the higher the priority
     // =0: cannot appear
     // >0: randomly appear, the larger the number the higher the probability
-    // func sign in js: function(int cooker, [double] cond, [func] ingred) -> int
     func canConstruct(cooker: Cooker, condiments: [Condiment: Int], ingredients: [Ingredient]) -> Int {
         if self.requiredCooker != nil && cooker != self.requiredCooker {
             return 0
@@ -121,31 +113,6 @@ class Dish: Constructable {
         }
         
         return Int(distanceSupplement * Dish.PROB_PRECISION * self.standardWeight)
-
-//        var condimentsCount = [0, 0, 0]
-//        var totalCondiments = 0
-//        for condiment in condiments {
-//            condimentsCount[condiment.0.jsId] = condiment.1
-//            totalCondiments += condiment.1
-//        }
-//        
-//        var jsCondiments: AnyObject?
-//        if totalCondiments > 0 {
-//            var condimentsRatio = [Double]()
-//            for count in condimentsCount {
-//                condimentsRatio.append(Double(count) / Double(totalCondiments))
-//            }
-//            jsCondiments = condimentsRatio
-//        } else {
-//            jsCondiments = [0, 0, 0]
-//        }
-//        
-//        var jsIngredients = [String: Bool]()
-//        for ingredient in ingredients {
-//            jsIngredients[String(ingredient.rawValue)] = true
-//        }
-//        
-//        return Int(canConstructJsFunction.callWithArguments([cooker.rawValue, jsCondiments!, jsIngredients]).toInt32())
     }
     
     static private func standardizeCondiments(data: [Condiment: Int]) -> [Condiment: Double] {

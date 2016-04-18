@@ -15,8 +15,6 @@
 		<string>smashed-egg</string>
 		<key>rarity</key>
 		<integer>1</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==0)?-1:0;</string>
 		<key>standardWeight</key>
 		<integer>-1</integer>
 		<key>standardCondiments</key>
@@ -45,8 +43,6 @@
 		<string>black-boiled</string>
 		<key>rarity</key>
 		<integer>1</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==3)?1:0;</string>
 		<key>standardWeight</key>
 		<integer>10</integer>
 		<key>standardCondiments</key>
@@ -75,8 +71,6 @@
 		<string>black-baked</string>
 		<key>rarity</key>
 		<integer>1</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==2)?1:0;</string>
 		<key>standardWeight</key>
 		<integer>1</integer>
 		<key>standardCondiments</key>
@@ -105,8 +99,6 @@
 		<string>black-fried</string>
 		<key>rarity</key>
 		<integer>1</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==1)?1:0;</string>
 		<key>standardWeight</key>
 		<integer>1</integer>
 		<key>standardCondiments</key>
@@ -135,8 +127,6 @@
 		<string>plain-boiled-egg</string>
 		<key>rarity</key>
 		<integer>1</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==3 &amp;&amp; cond[0] == 0 &amp;&amp; cond[1] == 0 &amp;&amp; cond[2] == 0)?-2:0;</string>
 		<key>standardWeight</key>
 		<integer>-2</integer>
 		<key>standardCondiments</key>
@@ -165,8 +155,6 @@
 		<string>chinese-steamed-eggs</string>
 		<key>rarity</key>
 		<integer>2</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==3 &amp;&amp; cond[0]&gt;0 &amp;&amp; ingred[100])?10:0;</string>
 		<key>standardWeight</key>
 		<integer>10</integer>
 		<key>standardCondiments</key>
@@ -197,8 +185,6 @@
 		<string>guangdong-style-scrambled-egg</string>
 		<key>rarity</key>
 		<integer>2</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==3 &amp;&amp; cond[0]&gt;=0.3)?10:0;</string>
 		<key>standardWeight</key>
 		<integer>10</integer>
 		<key>standardCondiments</key>
@@ -227,8 +213,6 @@
 		<string>soy-tea-egg</string>
 		<key>rarity</key>
 		<integer>2</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==3 &amp;&amp; cond[0]&gt;=0.6)?10:0;</string>
 		<key>standardWeight</key>
 		<integer>10</integer>
 		<key>standardCondiments</key>
@@ -257,8 +241,6 @@
 		<string>steamed-egg-with-milk</string>
 		<key>rarity</key>
 		<integer>3</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==3 &amp;&amp; cond[1]&gt;=0.4 &amp;&amp; ingred[103])?10:0;</string>
 		<key>standardWeight</key>
 		<integer>10</integer>
 		<key>standardCondiments</key>
@@ -289,8 +271,6 @@
 		<string>souffle</string>
 		<key>rarity</key>
 		<integer>3</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==2 &amp;&amp; cond[0]&gt;=0.2 &amp;&amp; cond[1]&gt;=0.5 &amp;&amp; ingred[103])?10:0;</string>
 		<key>standardWeight</key>
 		<integer>10</integer>
 		<key>standardCondiments</key>
@@ -321,8 +301,6 @@
 		<string>strawberry-custard</string>
 		<key>rarity</key>
 		<integer>3</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==3 &amp;&amp; cond[1]&gt;=0.5 &amp;&amp; ingred[103] &amp;&amp; ingred[107])?10:0;</string>
 		<key>standardWeight</key>
 		<integer>10</integer>
 		<key>standardCondiments</key>
@@ -354,8 +332,6 @@
 		<string>strawberry-cake</string>
 		<key>rarity</key>
 		<integer>3</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==2 &amp;&amp; cond[1]&gt;=0.6 &amp;&amp; ingred[102] &amp;&amp; ingred[103] &amp;&amp; ingred[107])?40:0;</string>
 		<key>standardWeight</key>
 		<integer>40</integer>
 		<key>standardCondiments</key>
@@ -388,8 +364,6 @@
 		<string>chocolate-cake</string>
 		<key>rarity</key>
 		<integer>3</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==2 &amp;&amp; cond[1]&gt;=0.6 &amp;&amp; ingred[102] &amp;&amp; ingred[103] &amp;&amp; ingred[108])?50:0;</string>
 		<key>standardWeight</key>
 		<integer>50</integer>
 		<key>standardCondiments</key>
@@ -422,8 +396,6 @@
 		<string>fried-egg-bacon</string>
 		<key>rarity</key>
 		<integer>4</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==1 &amp;&amp; cond[0]&gt;=0.5 &amp;&amp; ingred[106])?10:0;</string>
 		<key>standardWeight</key>
 		<integer>10</integer>
 		<key>standardCondiments</key>
@@ -454,8 +426,6 @@
 		<string>scramble-egg-tomato</string>
 		<key>rarity</key>
 		<integer>4</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==1 &amp;&amp; cond[0]&gt;=0.5 &amp;&amp; ingred[101])?10:0;</string>
 		<key>standardWeight</key>
 		<integer>10</integer>
 		<key>standardCondiments</key>
@@ -486,8 +456,6 @@
 		<string>genki-omurice</string>
 		<key>rarity</key>
 		<integer>4</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==1 &amp;&amp; cond[0]&gt;=0.4 &amp;&amp; ingred[104])?10:0;</string>
 		<key>standardWeight</key>
 		<integer>10</integer>
 		<key>standardCondiments</key>
@@ -518,8 +486,6 @@
 		<string>egg-sandwich</string>
 		<key>rarity</key>
 		<integer>4</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==2 &amp;&amp; cond[0]&gt;=0.3 &amp;&amp; cond[2]&lt;=0.2 &amp;&amp; ingred[101] &amp;&amp; ingred[105] &amp;&amp; ingred[106])?10:0;</string>
 		<key>standardWeight</key>
 		<integer>10</integer>
 		<key>standardCondiments</key>
@@ -552,8 +518,6 @@
 		<string>egg-pancake</string>
 		<key>rarity</key>
 		<integer>4</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==1 &amp;&amp; cond[0]&gt;=0.5 &amp;&amp; ingred[100])?10:0;</string>
 		<key>standardWeight</key>
 		<integer>10</integer>
 		<key>standardCondiments</key>
@@ -584,8 +548,6 @@
 		<string>sichuan-style-fried-rice-with-egg</string>
 		<key>rarity</key>
 		<integer>4</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==1 &amp;&amp; cond[0]&gt;=0.4 &amp;&amp; cond[2]&gt;=0.3 &amp;&amp; ingred[100] &amp;&amp; ingred[104])?10:0;</string>
 		<key>standardWeight</key>
 		<integer>10</integer>
 		<key>standardCondiments</key>
@@ -617,8 +579,6 @@
 		<string>oyako-don</string>
 		<key>rarity</key>
 		<integer>5</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==-1)?-1:0;</string>
 		<key>standardWeight</key>
 		<integer>-1</integer>
 		<key>standardCondiments</key>
@@ -647,8 +607,6 @@
 		<string>surstromming-egg</string>
 		<key>rarity</key>
 		<integer>5</integer>
-		<key>canConstruct</key>
-		<string>return (cooker!=0 &amp;&amp; ingred[109])?-3:0;</string>
 		<key>standardWeight</key>
 		<integer>-3</integer>
 		<key>standardCondiments</key>
