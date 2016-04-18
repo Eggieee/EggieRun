@@ -19,7 +19,7 @@ class Eggie: SKSpriteNode {
     private static let PHYSICS_BODY_TEXTURE_ID = 3
     
     enum State {
-        case Standing, Running, Jumping, Dying
+        case Standing, Running, Jumping_1, Jumping_2, Dying
     }
     
     private var innerCurrentSpeed: Int
@@ -46,7 +46,8 @@ class Eggie: SKSpriteNode {
         
         actions[.Standing] = SKAction.setTexture(standingTexture)
         actions[.Running] = SKAction.repeatActionForever(SKAction.animateWithTextures(runTextures, timePerFrame: Eggie.ATLAS_TIME_PER_FRAME))
-        actions[.Jumping] = SKAction.repeatActionForever(SKAction.animateWithTextures(jumpTextures, timePerFrame: Eggie.ATLAS_TIME_PER_FRAME))
+        actions[.Jumping_1] = SKAction.repeatActionForever(SKAction.animateWithTextures(jumpTextures, timePerFrame: Eggie.ATLAS_TIME_PER_FRAME))
+        actions[.Jumping_2] = actions[.Jumping_1]
         actions[.Dying] = SKAction.setTexture(standingTexture)
         
         runAction(actions[.Standing]!)
@@ -84,8 +85,8 @@ class Eggie: SKSpriteNode {
                 innerCurrentSpeed = Eggie.SPEED_STATIC
             case .Running:
                 innerCurrentSpeed = Eggie.SPEED_RUNNING
-            case .Jumping:
-                physicsBody!.velocity = GlobalConstants.EGGIE_JUMPING_ACCELERATION
+            case .Jumping_1, .Jumping_2:
+                physicsBody!.velocity.dy += GlobalConstants.EGGIE_JUMPING_ACCELERATION.dy
             }
         }
     }
