@@ -70,7 +70,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             nextMilestone = milestones[nextMilestoneIndex]
         }
     }
-    private var nextMilestone: Milestone!
+    private var nextMilestone: Milestone?
+    private var isPotPresent = false
+    private var isShelfPresent = false
+    private var isOvenPresent = false
+    private var isPanPresent = false
+    private var isCookerIncreased = false
 
     override func didMoveToView(view: SKView) {
         GameScene.instance = self
@@ -291,7 +296,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func updateDistance(movedDistance: Double) {
         currentDistance += Int(movedDistance)
-        if (currentDistance >= nextMilestone.requiredDistance) {
+        if (currentDistance >= nextMilestone!.requiredDistance) {
             activateCurrentMilestone()
         }
         distanceLabel.text = String(format: GameScene.DISTANCE_LABEL_TEXT, currentDistance)
@@ -500,6 +505,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if(nextMilestoneIndex < milestones.count - 1) {
             runningProgressBar.activateCurrentMilestone()
             nextMilestoneIndex += 1
+        }
+    }
+    
+    private func activateMilestoneEvent() {
+        switch nextMilestone! {
+        case .PresentPot:
+            isPotPresent = true
+        case .PresentShelf:
+            isShelfPresent = true
+        case .PresentOven:
+            isOvenPresent = true
+        case .ChallengeDarkness:
+            print("dark!")
+        case .PresentPan:
+            isPanPresent = true
+        case .ChallengeQuake:
+            print("earth quake!")
+        case .IncreasePot:
+            isCookerIncreased = true
+        case .EndOyakodon:
+            print("oyakodon!")
         }
     }
 }
