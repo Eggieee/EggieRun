@@ -49,7 +49,7 @@ class BGMPlayer {
                     self.player?.prepareToPlay()
                     self.player?.play()
                 } catch {
-                    print("BGMPlayer Failed on " + url.debugDescription)
+//                    print("BGMPlayer Failed on " + url.debugDescription)
                 }
             }
         })

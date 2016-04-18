@@ -161,11 +161,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             if impulse.dx != 0 {
                 if impulse.dy > 0 {
-                    eggie.position.y = platform.position.y + platform.size.height / 2 + eggie.size.height / 2
+                    eggie.position.y = platform.position.y + platform.size.height / 2 + eggie.size.height / 2 + 20
                 } else {
-                    eggie.position.y = platform.position.y - platform.size.height / 2 - eggie.size.height / 2
+                    eggie.position.y = platform.position.y - platform.size.height / 2 - eggie.size.height / 2 - 20
                 }
             }
+            eggie.physicsBody?.velocity = CGVectorMake(0, 0)
             eggie.state = .Running
         } else if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == BitMaskCategory.hero | BitMaskCategory.collectable {
             let collectable: Collectable
