@@ -15,8 +15,20 @@
 		<string>smashed-egg</string>
 		<key>rarity</key>
 		<integer>1</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==0)?-1:0;</string>
+		<key>standardWeight</key>
+		<integer>-1</integer>
+		<key>standardCondiments</key>
+		<array>
+			<integer>0</integer>
+			<integer>0</integer>
+			<integer>0</integer>
+		</array>
+		<key>requiredIngredients</key>
+		<array/>
+		<key>requiredCooker</key>
+		<integer>0</integer>
+		<key>distanceMode</key>
+		<integer>1</integer>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -31,8 +43,20 @@
 		<string>black-boiled</string>
 		<key>rarity</key>
 		<integer>1</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==3)?1:0;</string>
+		<key>standardWeight</key>
+		<integer>10</integer>
+		<key>standardCondiments</key>
+		<array>
+			<integer>0</integer>
+			<integer>0</integer>
+			<integer>0</integer>
+		</array>
+		<key>requiredIngredients</key>
+		<array/>
+		<key>requiredCooker</key>
+		<integer>3</integer>
+		<key>distanceMode</key>
+		<integer>1</integer>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -47,8 +71,20 @@
 		<string>black-baked</string>
 		<key>rarity</key>
 		<integer>1</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==2)?1:0;</string>
+		<key>standardWeight</key>
+		<integer>1</integer>
+		<key>standardCondiments</key>
+		<array>
+			<integer>0</integer>
+			<integer>0</integer>
+			<integer>0</integer>
+		</array>
+		<key>requiredIngredients</key>
+		<array/>
+		<key>requiredCooker</key>
+		<integer>2</integer>
+		<key>distanceMode</key>
+		<integer>1</integer>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -63,8 +99,20 @@
 		<string>black-fried</string>
 		<key>rarity</key>
 		<integer>1</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==1)?1:0;</string>
+		<key>standardWeight</key>
+		<integer>1</integer>
+		<key>standardCondiments</key>
+		<array>
+			<integer>0</integer>
+			<integer>0</integer>
+			<integer>0</integer>
+		</array>
+		<key>requiredIngredients</key>
+		<array/>
+		<key>requiredCooker</key>
+		<integer>1</integer>
+		<key>distanceMode</key>
+		<integer>1</integer>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -79,8 +127,20 @@
 		<string>plain-boiled-egg</string>
 		<key>rarity</key>
 		<integer>1</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==3 &amp;&amp; cond[0] == 0 &amp;&amp; cond[1] == 0 &amp;&amp; cond[2] == 0)?-2:0;</string>
+		<key>standardWeight</key>
+		<integer>-2</integer>
+		<key>standardCondiments</key>
+		<array>
+			<integer>0</integer>
+			<integer>0</integer>
+			<integer>0</integer>
+		</array>
+		<key>requiredIngredients</key>
+		<array/>
+		<key>requiredCooker</key>
+		<integer>3</integer>
+		<key>distanceMode</key>
+		<integer>2</integer>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -95,8 +155,22 @@
 		<string>chinese-steamed-eggs</string>
 		<key>rarity</key>
 		<integer>2</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==3 &amp;&amp; cond[0]&gt;0 &amp;&amp; ingred[100])?10:0;</string>
+		<key>standardWeight</key>
+		<integer>10</integer>
+		<key>standardCondiments</key>
+		<array>
+			<real>0.5</real>
+			<real>0.3</real>
+			<real>0.2</real>
+		</array>
+		<key>requiredIngredients</key>
+		<array>
+			<integer>100</integer>
+		</array>
+		<key>requiredCooker</key>
+		<integer>3</integer>
+		<key>distanceMode</key>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -111,8 +185,20 @@
 		<string>guangdong-style-scrambled-egg</string>
 		<key>rarity</key>
 		<integer>2</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==3 &amp;&amp; cond[0]&gt;=0.3)?10:0;</string>
+		<key>standardWeight</key>
+		<integer>10</integer>
+		<key>standardCondiments</key>
+		<array>
+			<real>0.4</real>
+			<real>0.3</real>
+			<real>0.3</real>
+		</array>
+		<key>requiredIngredients</key>
+		<array/>
+		<key>requiredCooker</key>
+		<integer>3</integer>
+		<key>distanceMode</key>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -127,8 +213,20 @@
 		<string>soy-tea-egg</string>
 		<key>rarity</key>
 		<integer>2</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==3 &amp;&amp; cond[0]&gt;=0.6)?10:0;</string>
+		<key>standardWeight</key>
+		<integer>10</integer>
+		<key>standardCondiments</key>
+		<array>
+			<real>0.6</real>
+			<real>0.2</real>
+			<real>0.2</real>
+		</array>
+		<key>requiredIngredients</key>
+		<array/>
+		<key>requiredCooker</key>
+		<integer>3</integer>
+		<key>distanceMode</key>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -143,8 +241,22 @@
 		<string>steamed-egg-with-milk</string>
 		<key>rarity</key>
 		<integer>3</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==3 &amp;&amp; cond[1]&gt;=0.4 &amp;&amp; ingred[103])?10:0;</string>
+		<key>standardWeight</key>
+		<integer>10</integer>
+		<key>standardCondiments</key>
+		<array>
+			<real>0.4</real>
+			<real>0.4</real>
+			<real>0.2</real>
+		</array>
+		<key>requiredIngredients</key>
+		<array>
+			<integer>103</integer>
+		</array>
+		<key>requiredCooker</key>
+		<integer>3</integer>
+		<key>distanceMode</key>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -159,8 +271,22 @@
 		<string>souffle</string>
 		<key>rarity</key>
 		<integer>3</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==2 &amp;&amp; cond[0]&gt;=0.2 &amp;&amp; cond[1]&gt;=0.5 &amp;&amp; ingred[103])?10:0;</string>
+		<key>standardWeight</key>
+		<integer>10</integer>
+		<key>standardCondiments</key>
+		<array>
+			<real>0.2</real>
+			<real>0.6</real>
+			<real>0.2</real>
+		</array>
+		<key>requiredIngredients</key>
+		<array>
+			<integer>103</integer>
+		</array>
+		<key>requiredCooker</key>
+		<integer>2</integer>
+		<key>distanceMode</key>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -175,8 +301,23 @@
 		<string>strawberry-custard</string>
 		<key>rarity</key>
 		<integer>3</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==3 &amp;&amp; cond[1]&gt;=0.5 &amp;&amp; ingred[103] &amp;&amp; ingred[107])?10:0;</string>
+		<key>standardWeight</key>
+		<integer>10</integer>
+		<key>standardCondiments</key>
+		<array>
+			<real>0.3</real>
+			<real>0.5</real>
+			<real>0.2</real>
+		</array>
+		<key>requiredIngredients</key>
+		<array>
+			<integer>103</integer>
+			<integer>107</integer>
+		</array>
+		<key>requiredCooker</key>
+		<integer>3</integer>
+		<key>distanceMode</key>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -191,8 +332,24 @@
 		<string>strawberry-cake</string>
 		<key>rarity</key>
 		<integer>3</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==2 &amp;&amp; cond[1]&gt;=0.6 &amp;&amp; ingred[102] &amp;&amp; ingred[103] &amp;&amp; ingred[107])?40:0;</string>
+		<key>standardWeight</key>
+		<integer>40</integer>
+		<key>standardCondiments</key>
+		<array>
+			<real>0.2</real>
+			<real>0.7</real>
+			<real>0.1</real>
+		</array>
+		<key>requiredIngredients</key>
+		<array>
+			<integer>102</integer>
+			<integer>103</integer>
+			<integer>107</integer>
+		</array>
+		<key>requiredCooker</key>
+		<integer>2</integer>
+		<key>distanceMode</key>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -207,8 +364,24 @@
 		<string>chocolate-cake</string>
 		<key>rarity</key>
 		<integer>3</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==2 &amp;&amp; cond[1]&gt;=0.6 &amp;&amp; ingred[102] &amp;&amp; ingred[103] &amp;&amp; ingred[108])?50:0;</string>
+		<key>standardWeight</key>
+		<integer>50</integer>
+		<key>standardCondiments</key>
+		<array>
+			<real>0.2</real>
+			<real>0.7</real>
+			<real>0.1</real>
+		</array>
+		<key>requiredIngredients</key>
+		<array>
+			<integer>102</integer>
+			<integer>103</integer>
+			<integer>108</integer>
+		</array>
+		<key>requiredCooker</key>
+		<integer>2</integer>
+		<key>distanceMode</key>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -223,8 +396,22 @@
 		<string>fried-egg-bacon</string>
 		<key>rarity</key>
 		<integer>4</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==1 &amp;&amp; cond[0]&gt;=0.5 &amp;&amp; ingred[106])?10:0;</string>
+		<key>standardWeight</key>
+		<integer>10</integer>
+		<key>standardCondiments</key>
+		<array>
+			<real>0.6</real>
+			<real>0.2</real>
+			<real>0.2</real>
+		</array>
+		<key>requiredIngredients</key>
+		<array>
+			<integer>106</integer>
+		</array>
+		<key>requiredCooker</key>
+		<integer>1</integer>
+		<key>distanceMode</key>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -239,8 +426,22 @@
 		<string>scramble-egg-tomato</string>
 		<key>rarity</key>
 		<integer>4</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==1 &amp;&amp; cond[0]&gt;=0.5 &amp;&amp; ingred[101])?10:0;</string>
+		<key>standardWeight</key>
+		<integer>10</integer>
+		<key>standardCondiments</key>
+		<array>
+			<real>0.6</real>
+			<real>0.3</real>
+			<real>0.1</real>
+		</array>
+		<key>requiredIngredients</key>
+		<array>
+			<integer>101</integer>
+		</array>
+		<key>requiredCooker</key>
+		<integer>1</integer>
+		<key>distanceMode</key>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -255,8 +456,22 @@
 		<string>genki-omurice</string>
 		<key>rarity</key>
 		<integer>4</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==1 &amp;&amp; cond[0]&gt;=0.4 &amp;&amp; ingred[104])?10:0;</string>
+		<key>standardWeight</key>
+		<integer>10</integer>
+		<key>standardCondiments</key>
+		<array>
+			<real>0.5</real>
+			<real>0.3</real>
+			<real>0.2</real>
+		</array>
+		<key>requiredIngredients</key>
+		<array>
+			<integer>104</integer>
+		</array>
+		<key>requiredCooker</key>
+		<integer>1</integer>
+		<key>distanceMode</key>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -271,8 +486,24 @@
 		<string>egg-sandwich</string>
 		<key>rarity</key>
 		<integer>4</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==2 &amp;&amp; cond[0]&gt;=0.3 &amp;&amp; cond[2]&lt;=0.2 &amp;&amp; ingred[101] &amp;&amp; ingred[105] &amp;&amp; ingred[106])?10:0;</string>
+		<key>standardWeight</key>
+		<integer>10</integer>
+		<key>standardCondiments</key>
+		<array>
+			<real>0.5</real>
+			<real>0.3</real>
+			<real>0.2</real>
+		</array>
+		<key>requiredIngredients</key>
+		<array>
+			<integer>101</integer>
+			<integer>105</integer>
+			<integer>106</integer>
+		</array>
+		<key>requiredCooker</key>
+		<integer>2</integer>
+		<key>distanceMode</key>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -287,8 +518,22 @@
 		<string>egg-pancake</string>
 		<key>rarity</key>
 		<integer>4</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==1 &amp;&amp; cond[0]&gt;=0.5 &amp;&amp; ingred[100])?10:0;</string>
+		<key>standardWeight</key>
+		<integer>10</integer>
+		<key>standardCondiments</key>
+		<array>
+			<real>0.4</real>
+			<real>0.4</real>
+			<real>0.2</real>
+		</array>
+		<key>requiredIngredients</key>
+		<array>
+			<integer>100</integer>
+		</array>
+		<key>requiredCooker</key>
+		<integer>1</integer>
+		<key>distanceMode</key>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -303,8 +548,23 @@
 		<string>sichuan-style-fried-rice-with-egg</string>
 		<key>rarity</key>
 		<integer>4</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==1 &amp;&amp; cond[0]&gt;=0.4 &amp;&amp; cond[2]&gt;=0.3 &amp;&amp; ingred[100] &amp;&amp; ingred[104])?10:0;</string>
+		<key>standardWeight</key>
+		<integer>10</integer>
+		<key>standardCondiments</key>
+		<array>
+			<real>0.5</real>
+			<real>0.2</real>
+			<real>0.3</real>
+		</array>
+		<key>requiredIngredients</key>
+		<array>
+			<integer>100</integer>
+			<integer>104</integer>
+		</array>
+		<key>requiredCooker</key>
+		<integer>1</integer>
+		<key>distanceMode</key>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -319,8 +579,20 @@
 		<string>oyako-don</string>
 		<key>rarity</key>
 		<integer>5</integer>
-		<key>canConstruct</key>
-		<string>return (cooker==-1)?-1:0;</string>
+		<key>standardWeight</key>
+		<integer>-1</integer>
+		<key>standardCondiments</key>
+		<array>
+			<integer>0</integer>
+			<integer>0</integer>
+			<integer>0</integer>
+		</array>
+		<key>requiredIngredients</key>
+		<array/>
+		<key>requiredCooker</key>
+		<integer>-1</integer>
+		<key>distanceMode</key>
+		<integer>1</integer>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -335,8 +607,22 @@
 		<string>surstromming-egg</string>
 		<key>rarity</key>
 		<integer>5</integer>
-		<key>canConstruct</key>
-		<string>return (cooker!=0 &amp;&amp; ingred[109])?-3:0;</string>
+		<key>standardWeight</key>
+		<integer>-3</integer>
+		<key>standardCondiments</key>
+		<array>
+			<integer>0</integer>
+			<integer>0</integer>
+			<integer>0</integer>
+		</array>
+		<key>requiredIngredients</key>
+		<array>
+			<integer>109</integer>
+		</array>
+		<key>requiredCooker</key>
+		<integer>100</integer>
+		<key>distanceMode</key>
+		<integer>1</integer>
 	</dict>
 </array>
 </plist>
