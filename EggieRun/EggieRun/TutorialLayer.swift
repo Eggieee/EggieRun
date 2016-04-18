@@ -50,18 +50,13 @@ class TutorialLayer: SKNode {
     }
     
     func getNextTutorial() {
-        //if currPage < TutorialLayer.tutorials.count {
-            currPage += 1
-            tutorialNode.texture = SKTexture(imageNamed: TutorialLayer.tutorials[currPage])
-        //}
-        
+        currPage += 1
+        tutorialNode.texture = SKTexture(imageNamed: TutorialLayer.tutorials[currPage])
     }
     
     func getPrevTutorial() {
-        //if currPage > 0 {
-            currPage -= 1
-            tutorialNode.texture = SKTexture(imageNamed: TutorialLayer.tutorials[currPage])
-        //}
+        currPage -= 1
+        tutorialNode.texture = SKTexture(imageNamed: TutorialLayer.tutorials[currPage])
     }
     
     required init?(coder aDecoder: NSCoder) {
