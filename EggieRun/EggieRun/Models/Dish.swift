@@ -52,6 +52,7 @@ class Dish: Constructable {
         self.standardCondiments = standardCondiments
         
         self.requiredIngredients = Set((data["requiredIngredients"] as! [Int]).map({ Ingredient(rawValue: $0)! }))
+        debugPrint(self.requiredIngredients)
         self.requiredCooker = Cooker(rawValue: data["requiredCooker"] as! Int)
         self.distanceMode = DistanceMode(rawValue: data["distanceMode"] as! Int)!
         
@@ -113,14 +114,15 @@ class Dish: Constructable {
             distanceSupplement = Dish.distanceReduce(Dish.euclideanDistance(standardizedCondiments, withStandard: self.standardCondiments))
             break
         case .Same:
-            if standardizedCondiments == self.standardCondiments {
+            if Dish.euclideanDistance(standardizedCondiments, withStandard: self.standardCondiments) == 0 {
                 distanceSupplement = Dish.distanceReduce(0)
             } else {
-                return 0
+                distanceSupplement = 0
             }
         }
         
         return Int(distanceSupplement * Dish.PROB_PRECISION * self.standardWeight)
+
 //        var condimentsCount = [0, 0, 0]
 //        var totalCondiments = 0
 //        for condiment in condiments {
