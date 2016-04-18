@@ -21,6 +21,7 @@ class DexScene: SKScene {
     private static let NEXT_BUTTON_X = CGFloat(500)
     private static let PREV_BUTTON_X = CGFloat(100)
     private static let FLIP_BUTTON_Y = CGFloat(80)
+    private static let DEMO_NODE_SIZE = CGFloat(50)
 
     
     private static let DISH_FIRST_PAGE = Array(DishDataController.singleton.dishes[0..<12])
@@ -68,9 +69,9 @@ class DexScene: SKScene {
     }
     
     private func createNodeForDemo() {
-        activateAll = SKSpriteNode(color: UIColor.darkGrayColor(), size: CGSize(width: 40, height: 40))
+        activateAll = SKSpriteNode(color: UIColor.darkGrayColor(), size: CGSize(width: DexScene.DEMO_NODE_SIZE, height: DexScene.DEMO_NODE_SIZE))
         activateAll.position = CGPoint(x: self.frame.width - DexScene.TITLE_TOP_PADDING, y: self.frame.height - DexScene.TITLE_TOP_PADDING)
-        disableAll = SKSpriteNode(color: UIColor.darkGrayColor(), size: CGSize(width: 40, height: 40))
+        disableAll = SKSpriteNode(color: UIColor.darkGrayColor(), size: CGSize(width: DexScene.DEMO_NODE_SIZE, height: DexScene.DEMO_NODE_SIZE))
         disableAll.position = CGPoint(x: self.frame.width - DexScene.TITLE_TOP_PADDING, y: DexScene.TITLE_TOP_PADDING)
     }
     
