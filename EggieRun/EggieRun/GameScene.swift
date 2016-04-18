@@ -24,9 +24,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let DISTANCE_PLATFORM_AND_COLLECTABLE: CGFloat = 200
     private static let OBSTACLE_RATE = 0.2
     private static let BUFFER_DISTANCE = 400.0
-    private static let INGREDIENT_BAR_OFFSET: CGFloat = 15
+    private static let INGREDIENT_BAR_X_OFFSET: CGFloat = 15
+    private static let INGREDIENT_BAR_Y_OFFSET: CGFloat = 33
     private static let PROGRESS_BAR_X_OFFSET: CGFloat = 15
-    private static let PROGRESS_BAR_Y_OFFSET: CGFloat = 2
+    private static let PROGRESS_BAR_Y_OFFSET: CGFloat = 20
     private static let FLAVOUR_BAR_OFFSET: CGFloat = 100
     private static let LEFT_FRAME_OFFSET: CGFloat = 400
     private static let TOP_FRAME_OFFSET: CGFloat = 400
@@ -264,7 +265,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func initializeCollectableBars() {
         ingredientBar = IngredientBar()
-        ingredientBar.position = CGPointMake(GameScene.INGREDIENT_BAR_OFFSET, self.frame.height-ingredientBar.frame.height/2 - GameScene.INGREDIENT_BAR_OFFSET)
+        ingredientBar.position = CGPointMake(GameScene.INGREDIENT_BAR_X_OFFSET, self.frame.height-ingredientBar.frame.height/2 - GameScene.INGREDIENT_BAR_Y_OFFSET)
         addChild(ingredientBar)
         
         flavourBar = FlavourBar()
@@ -447,7 +448,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func animateMovingIngredient(ingredient: Ingredient, originalPosition: CGPoint) {
         let ingredientNode = SKSpriteNode(texture: ingredient.fineTexture, color: UIColor.clearColor(), size: GameScene.COLLECTABLE_SIZE)
         ingredientNode.position = originalPosition
-        let newPosition = CGPointMake(ingredientBar.getNextGridX(ingredient) + GameScene.INGREDIENT_BAR_OFFSET, ingredientBar.position.y)
+        let newPosition = CGPointMake(ingredientBar.getNextGridX(ingredient) + GameScene.INGREDIENT_BAR_X_OFFSET, ingredientBar.position.y)
         let moveAction = SKAction.moveTo(newPosition, duration: 0.5)
         let fadeOutAction = SKAction.fadeOutWithDuration(0.5)
         let actions = [moveAction, fadeOutAction]

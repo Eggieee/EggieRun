@@ -34,7 +34,7 @@ enum Milestone: Int {
         }
     }
     
-    private var imagedName: String {
+    private var imageNamed: String {
         switch self {
         case .PresentPot:
             return "present-pot-milestone"
@@ -55,7 +55,19 @@ enum Milestone: Int {
         }
     }
     
-    var texture: SKTexture {
-        return SKTexture(imageNamed: self.imagedName)
+    private var monochromeImageNamed: String {
+        return "mono-" + imageNamed
+    }
+    
+    private var colouredImageNamed: String {
+        return "colo-" + imageNamed
+    }
+    
+    var monochromeTexture: SKTexture {
+        return SKTexture(imageNamed: self.monochromeImageNamed)
+    }
+    
+    var colouredTexture: SKTexture {
+        return SKTexture(imageNamed: self.colouredImageNamed)
     }
 }
