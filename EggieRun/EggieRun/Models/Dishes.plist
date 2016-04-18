@@ -48,7 +48,7 @@
 		<key>canConstruct</key>
 		<string>return (cooker==3)?1:0;</string>
 		<key>standardWeight</key>
-		<integer>1</integer>
+		<integer>10</integer>
 		<key>standardCondiments</key>
 		<array>
 			<integer>0</integer>
