@@ -62,8 +62,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var pauseButton: SKSpriteNode!
     private var pausedLayer: PausedLayer?
     private var milestones: [Milestone] = Milestone.ALL_VALUES
-    private var nextMilestoneIndex = 0
-    private var nextMilestone: Milestone?
+    private var nextMilestoneIndex = 0 {
+        didSet {
+            nextMilestone = milestones[nextMilestoneIndex]
+        }
+    }
+    private var nextMilestone: Milestone!
 
     override func didMoveToView(view: SKView) {
         GameScene.instance = self
@@ -288,6 +292,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func updateDistance(movedDistance: Double) {
         currentDistance += Int(movedDistance)
+        if (currentDistance >= nextMilestone.requiredDistance) {
+            activateCurrentMilestone()
+        }
         distanceLabel.text = String(format: GameScene.DISTANCE_LABEL_TEXT, currentDistance)
     }
     
@@ -476,6 +483,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.gameState = .Playing
             self.physicsWorld.speed = 1
             eggie.unpauseAtlas()
+        }
+    }
+    
+    private func activateCurrentMilestone() {
+        if(nextMilestoneIndex < milestones.count - 1) {
+            runningProgressBar.activateCurrentMilestone()
+            nextMilestoneIndex += 1
         }
     }
 }
