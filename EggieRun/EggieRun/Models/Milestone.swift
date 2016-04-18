@@ -11,6 +11,8 @@ import SpriteKit
 enum Milestone: Int {
     case PresentPot = 0, PresentShelf = 1, PresentOven = 2, ChallengeDarkness = 3, PresentPan = 4, ChallengeQuake = 5, IncreasePot = 6, EndOyakodon = 7
     
+    static let ALL_VALUES: [Milestone] = [.PresentPot, .PresentShelf, .PresentOven, .ChallengeDarkness, .PresentPan, .ChallengeQuake, .IncreasePot, .EndOyakodon]
+    
     var requiredDistance: Int {
         switch self {
         case .PresentPot:

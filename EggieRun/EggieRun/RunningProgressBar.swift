@@ -17,9 +17,11 @@ class RunningProgressBar: SKSpriteNode {
     private var barLength: CGFloat
     private var distance = 0
     private var distanceBar: SKSpriteNode!
+    private let milestones: [Milestone]
     
-    init(length: CGFloat) {
+    init(length: CGFloat, allMilestones: [Milestone]) {
         barLength = length
+        milestones = allMilestones
         super.init(texture: nil, color: UIColor.grayColor(), size: CGSizeMake(barLength, RunningProgressBar.BAR_HEIGHT))
         anchorPoint.x = 0
         anchorPoint.y = 1
