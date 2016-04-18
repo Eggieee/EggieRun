@@ -22,7 +22,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let EGGIE_X_POSITION: CGFloat = 200
     private static let DISTANCE_CLOSET_AND_COLLECTABLE: CGFloat = 200
     private static let DISTANCE_SHELF_AND_COLLECTABLE: CGFloat = 50
-    private static let OBSTACLE_RATE = 0.2
+    private static let OBSTACLE_RATE_LOW = 0.2
+    private static let OBSTACLE_RATE_HIGH = 0.7
     private static let COLLECTABLE_RATE = 0.3
     private static let BUFFER_DISTANCE = 400.0
     private static let COLLECTABLE_BUFFER_DISTANCE: CGFloat = 200
@@ -72,6 +73,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     private var nextMilestone: Milestone?
     private var availableCookers = [Cooker]()
+    private var obstacleRate: Double!
     private var isCookerIncreased = false
 
     override func didMoveToView(view: SKView) {
@@ -234,6 +236,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func initializeObstacle() {
         availableCookers = [Cooker]()
+        obstacleRate = GameScene.OBSTACLE_RATE_LOW
         obstacleFactory = ObstacleFactory()
         obstacles = [Obstacle]()
     }
@@ -413,7 +416,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if !availableCookers.isEmpty {
             var position = CGFloat(GameScene.BUFFER_DISTANCE)
             while position < closet.width - CGFloat(GameScene.BUFFER_DISTANCE) {
-                if Double(arc4random()) / Double(UINT32_MAX) <= GameScene.OBSTACLE_RATE {
+                if Double(arc4random()) / Double(UINT32_MAX) <= obstacleRate {
                     let obstacle = obstacleFactory.nextObstacle(availableCookers)
                     obstacle.position.y = Closet.BASELINE_HEIGHTS + Closet.HEIGHT + obstacle.heightPadding
                     obstacle.position.x = closet.position.x + position
@@ -527,7 +530,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case .ChallengeQuake:
             print("earth quake!")
         case .IncreasePot:
-            isCookerIncreased = true
+            obstacleRate = GameScene.OBSTACLE_RATE_HIGH
         case .EndOyakodon:
             print("oyakodon!")
         }
