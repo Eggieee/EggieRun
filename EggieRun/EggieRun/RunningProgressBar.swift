@@ -12,7 +12,7 @@ import SpriteKit
 
 class RunningProgressBar: SKSpriteNode {
     private static let BAR_HEIGHT: CGFloat = 10
-    private static let MAX_DISTANCE = 100000
+    static let MAX_DISTANCE = 100000
     private static let BUBBLE_Y: CGFloat = 0.0
     
     private var barLength: CGFloat
@@ -63,16 +63,11 @@ class RunningProgressBar: SKSpriteNode {
     func updateDistance(movedDistance: Double) {
         distance += Int(movedDistance)
         distanceBar.size.width = getNewDistanceBarLength()
-        if (distance >= nextMilestone.requiredDistance) {
-            activateCurrentMilestone()
-        }
+        
     }
     
-    private func activateCurrentMilestone() {
+    func activateCurrentMilestone() {
         nextMilestoneBubble.texture = nextMilestone.colouredTexture
-        if(nextIndex < milestones.count - 1) {
-            nextIndex += 1
-        }
     }
     
     private func getNewDistanceBarLength() -> CGFloat {
