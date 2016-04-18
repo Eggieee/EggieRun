@@ -104,7 +104,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if pauseButton.containsPoint(touchLocation) {
                 pause()
             } else if eggie.state == .Running {
-                eggie.state = .Jumping
+                eggie.state = .Jumping_1
+                self.runAction(GameScene.SE_JUMP)
+            } else if eggie.state == .Jumping_1 {
+                eggie.state = .Jumping_2
                 self.runAction(GameScene.SE_JUMP)
             }
         }
