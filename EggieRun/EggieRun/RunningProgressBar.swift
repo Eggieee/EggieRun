@@ -52,6 +52,13 @@ class RunningProgressBar: SKSpriteNode {
     func updateDistance(movedDistance: Double) {
         distance += Int(movedDistance)
         distanceBar.size.width = getNewDistanceBarLength()
+        if (distance >= nextMilestone.requiredDistance) {
+            
+        }
+    }
+    
+    private func activateCurrentMilestone() {
+        
     }
     
     private func getNewDistanceBarLength() -> CGFloat {
