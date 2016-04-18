@@ -351,6 +351,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         eggie.state = .Dying
         gameState = .Over
         
+        if let action = GameScene.SE_OBSTACLES[wayOfDie] {
+            self.runAction(action)
+        }
+        
         flavourBar.removeFromParent()
         
         let (dish, isNew) = DishDataController.singleton.getResultDish(wayOfDie, condiments: flavourBar.condimentDictionary, ingredients: ingredientBar.ingredients)
@@ -359,10 +363,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         endingLayer!.zPosition = GameScene.OVERLAY_Z_POSITION
         endingLayer!.position = CGPointMake(frame.midX, frame.midY)
         addChild(endingLayer!)
-        
-        if let action = GameScene.SE_OBSTACLES[wayOfDie] {
-            self.runAction(action)
-        }
     }
     
     private func shiftClosets(distance: Double) {
