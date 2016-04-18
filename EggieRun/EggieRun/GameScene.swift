@@ -71,10 +71,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     private var nextMilestone: Milestone?
-    private var isPotPresent = false
+    private var availableCookers = [Cooker]()
     private var isShelfPresent = false
-    private var isOvenPresent = false
-    private var isPanPresent = false
     private var isCookerIncreased = false
 
     override func didMoveToView(view: SKView) {
@@ -409,31 +407,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         closets.append(closet)
         addChild(closet)
         
-        var position = CGFloat(GameScene.BUFFER_DISTANCE)
-        while position < closet.width - CGFloat(GameScene.BUFFER_DISTANCE) {
-            if Double(arc4random()) / Double(UINT32_MAX) <= GameScene.OBSTACLE_RATE {
-                let obstacle = obstacleFactory.nextObstacle()
-                obstacle.position.y = Closet.BASELINE_HEIGHTS + Closet.HEIGHT + obstacle.heightPadding
-                obstacle.position.x = closet.position.x + position
-                obstacles.append(obstacle)
-                addChild(obstacle)
-                position += CGFloat(Obstacle.WIDTH + GameScene.BUFFER_DISTANCE)
-            } else {
-                position += CGFloat(GameScene.BUFFER_DISTANCE)
+        if !availableCookers.isEmpty {
+            var position = CGFloat(GameScene.BUFFER_DISTANCE)
+            while position < closet.width - CGFloat(GameScene.BUFFER_DISTANCE) {
+                if Double(arc4random()) / Double(UINT32_MAX) <= GameScene.OBSTACLE_RATE {
+                    let obstacle = obstacleFactory.nextObstacle(availableCookers)
+                    obstacle.position.y = Closet.BASELINE_HEIGHTS + Closet.HEIGHT + obstacle.heightPadding
+                    obstacle.position.x = closet.position.x + position
+                    obstacles.append(obstacle)
+                    addChild(obstacle)
+                    position += CGFloat(Obstacle.WIDTH + GameScene.BUFFER_DISTANCE)
+                } else {
+                    position += CGFloat(GameScene.BUFFER_DISTANCE)
+                }
             }
         }
-        
-        position = GameScene.COLLECTABLE_BUFFER_DISTANCE
-        while position < closet.width - GameScene.COLLECTABLE_BUFFER_DISTANCE {
+
+        var collectablePostiom = GameScene.COLLECTABLE_BUFFER_DISTANCE
+        while collectablePostiom < closet.width - GameScene.COLLECTABLE_BUFFER_DISTANCE {
             if Double(arc4random()) / Double(UINT32_MAX) <= GameScene.COLLECTABLE_RATE {
                 let collectable = collectableFactory.nextColletable(currentDistance)
                 collectable.position.y = Closet.BASELINE_HEIGHTS + Closet.HEIGHT + Collectable.SIZE.height / 2 + GameScene.DISTANCE_CLOSET_AND_COLLECTABLE
-                collectable.position.x = closet.position.x + position
+                collectable.position.x = closet.position.x + collectablePostiom
                 collectables.insert(collectable)
                 addChild(collectable)
-                position += Collectable.SIZE.width + GameScene.COLLECTABLE_BUFFER_DISTANCE
+                collectablePostiom += Collectable.SIZE.width + GameScene.COLLECTABLE_BUFFER_DISTANCE
             } else {
-                position += GameScene.COLLECTABLE_BUFFER_DISTANCE
+                collectablePostiom += GameScene.COLLECTABLE_BUFFER_DISTANCE
             }
         }
     }
@@ -504,6 +504,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func activateCurrentMilestone() {
         if(nextMilestoneIndex < milestones.count - 1) {
             runningProgressBar.activateCurrentMilestone()
+            activateMilestoneEvent()
             nextMilestoneIndex += 1
         }
     }
@@ -511,15 +512,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func activateMilestoneEvent() {
         switch nextMilestone! {
         case .PresentPot:
-            isPotPresent = true
+            availableCookers.append(.Pot)
         case .PresentShelf:
             isShelfPresent = true
         case .PresentOven:
-            isOvenPresent = true
+            availableCookers.append(.Oven)
         case .ChallengeDarkness:
             print("dark!")
         case .PresentPan:
-            isPanPresent = true
+            availableCookers.append(.Pan)
         case .ChallengeQuake:
             print("earth quake!")
         case .IncreasePot:

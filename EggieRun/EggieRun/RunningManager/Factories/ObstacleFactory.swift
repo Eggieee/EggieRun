@@ -9,10 +9,9 @@
 import UIKit
 
 class ObstacleFactory {
-    private static let COOKER_TYPE_COUNT = 3
-
-    func nextObstacle() -> Obstacle {
-        let type = Cooker(rawValue: Int(arc4random()) % ObstacleFactory.COOKER_TYPE_COUNT + 1)!
+    func nextObstacle(availableCookers: [Cooker]) -> Obstacle {
+        let type = availableCookers[Int(arc4random()) % availableCookers.count]
+        
         switch type {
         case .Pot:
             return Pot()
