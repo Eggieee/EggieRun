@@ -13,24 +13,13 @@ enum Milestone: Int {
     
     static let ALL_VALUES: [Milestone] = [.PresentPot, .PresentShelf, .PresentOven, .ChallengeDarkness, .PresentPan, .ChallengeQuake, .IncreasePot, .EndOyakodon]
     
+    private static let DISTANCES = [10000, 20000, 30000, 40000, 50000, 65000, 85000, 100000]
+    
     var requiredDistance: Int {
-        switch self {
-        case .PresentPot:
-            return 10000
-        case .PresentShelf:
-            return 20000
-        case .PresentOven:
-            return 30000
-        case .ChallengeDarkness:
-            return 40000
-        case .PresentPan:
-            return 50000
-        case .ChallengeQuake:
-            return 65000
-        case .IncreasePot:
-            return 85000
-        case .EndOyakodon:
-            return 100000
+        if GlobalConstants.DEV_EASY_MODE {
+            return Milestone.DISTANCES[rawValue] / 10
+        } else {
+            return Milestone.DISTANCES[rawValue]
         }
     }
     

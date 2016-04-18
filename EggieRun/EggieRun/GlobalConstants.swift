@@ -15,4 +15,6 @@ struct GlobalConstants {
     static let EGGIE_JUMPING_ACCELERATION = CGVectorMake(0, 1000)
     static let GRAVITY = CGVectorMake(0, -20)
     static let IS_DEMO = true
+    
+    static let DEV_EASY_MODE = true
 }
