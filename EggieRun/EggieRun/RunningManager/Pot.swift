@@ -11,6 +11,7 @@ import SpriteKit
 class Pot: Obstacle {
     private static let PADDING: CGFloat = -20
     private static let LID_HEIGHT: CGFloat = 80
+    private static let NUM_FRAME: Double = 2
     
     private var body: SKSpriteNode
     private var lid: SKSpriteNode
@@ -51,6 +52,7 @@ class Pot: Obstacle {
     }
     
     override func animateClose() {
-        lid.physicsBody!.dynamic = true
+        lid.runAction(SKAction.moveBy(CGVectorMake(0, body.size.height - Pot.LID_HEIGHT), duration: Obstacle.ATLAS_TIME_PER_FRAME * Pot.NUM_FRAME)
+)
     }
 }
