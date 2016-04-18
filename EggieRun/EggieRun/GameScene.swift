@@ -255,7 +255,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func initializeRunningProgressBar() {
         let barLength = frame.width - 2 * GameScene.PROGRESS_BAR_X_OFFSET
-        runningProgressBar = RunningProgressBar(length: barLength, milestones: milestones)
+        runningProgressBar = RunningProgressBar(length: barLength, allMilestones: milestones)
         runningProgressBar.position = CGPointMake(GameScene.PROGRESS_BAR_X_OFFSET, self.frame.height - GameScene.PROGRESS_BAR_Y_OFFSET)
         addChild(runningProgressBar)
     }
