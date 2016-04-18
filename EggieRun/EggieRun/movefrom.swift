@@ -56,7 +56,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var currentDistance = 0
     private var closets: [Closet]!
     private var shelves: [Shelf]!
-    private var collectables: [Collectable]!
+    private var collectables: Set<Collectable>!
     private var obstacles: [Obstacle]!
     private var lastUpdatedTime: CFTimeInterval!
     private var endingLayer: EndingLayer?
@@ -243,7 +243,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func initialzieCollectable() {
         collectableFactory = CollectableFactory()
-        collectables = [Collectable]()
+        collectables = Set<Collectable>()
     }
     
     private func initializeEggie() {
@@ -368,7 +368,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for collectable in collectables {
             if collectable.position.x + collectable.size.width / 2 < 0 {
                 collectable.removeFromParent()
-                collectables.removeFirst()
+                collectables.remove(collectable)
             } else {
                 collectable.position.x -= CGFloat(distance)
             }
@@ -413,7 +413,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let collectable = collectableFactory.nextColletable(0)
                 collectable.position.y = Closet.BASELINE_HEIGHTS + Closet.HEIGHT + Collectable.SIZE.height / 2 + GameScene.DISTANCE_PLATFORM_AND_COLLECTABLE
                 collectable.position.x = closet.position.x + position
-                collectables.append(collectable)
+                collectables.insert(collectable)
                 addChild(collectable)
                 position += Collectable.SIZE.width + GameScene.COLLECTABLE_BUFFER_DISTANCE
             } else {
@@ -435,7 +435,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let collectable = collectableFactory.nextColletable(0)
                 collectable.position.y = Shelf.BASELINE_HEIGHTS + Shelf.HEIGHT + Collectable.SIZE.height / 2 + GameScene.DISTANCE_PLATFORM_AND_COLLECTABLE
                 collectable.position.x = shelf.position.x + position
-                collectables.append(collectable)
+                collectables.insert(collectable)
                 addChild(collectable)
                 position += Collectable.SIZE.width + GameScene.COLLECTABLE_BUFFER_DISTANCE
             } else {
