@@ -9,7 +9,7 @@
 import SpriteKit
 
 enum Ingredient: Int {
-    private static let DISTANCES_TURNING_POINT = [Milestone.PresentShelf, Milestone.ChallengeDarkness].map({ $0.rawValue })
+    private static let DISTANCES_TURNING_POINT = [Milestone.PresentShelf, Milestone.ChallengeDarkness].map({ $0.requiredDistance })
     
     case GreenOnion = 100, Tomato = 101, Cream = 102, Milk = 103, Rice = 104, Bread = 105, Bacon = 106, Strawberry = 107, Chocolate = 108, Surstromming = 109
     

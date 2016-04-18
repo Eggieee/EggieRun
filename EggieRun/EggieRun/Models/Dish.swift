@@ -10,6 +10,13 @@ import JavaScriptCore
 import SpriteKit
 
 class Dish: Constructable {
+    
+    enum DistanceMode: Int {
+        case Euclidean = 0, Ignore = 1, Same = 2
+    }
+    
+    private static let PROB_PRECISION: Double = 20000
+    
     let id: Int
     let name: String
     let description: String
@@ -17,7 +24,11 @@ class Dish: Constructable {
     let titleImageNamed: String
     let rarity: Int
     let texture: SKTexture
-    let canConstructJsFunction: JSValue
+    let standardWeight: Double
+    let standardCondiments: [Condiment: Double]
+    let requiredIngredients: Set<Ingredient>
+    let requiredCooker: Cooker?
+    let distanceMode: DistanceMode
     
     required init(data: NSDictionary) {
         self.id = data["id"] as! Int
@@ -30,10 +41,18 @@ class Dish: Constructable {
         titleImageNamed = imageNamed + "-title"
         texture = SKTexture(imageNamed: imageNamed)
         
-        let jsFunction = "var canConstruct = function(cooker, cond, ingred) { " + (data["canConstruct"] as! String) + " };"
-        let context = JSContext()
-        context.evaluateScript(jsFunction)
-        canConstructJsFunction = context.objectForKeyedSubscript("canConstruct")
+        self.standardWeight = data["standardWeight"] as! Double
+        
+        let standardCondimentsData = data["standardCondiments"] as! [Double]
+        var standardCondiments = [Condiment: Double]()
+        for condiment in Condiment.ALL_VALUES {
+            standardCondiments[condiment] = standardCondimentsData[condiment.jsId]
+        }
+        self.standardCondiments = standardCondiments
+        
+        self.requiredIngredients = Set((data["requiredIngredients"] as! [Int]).map({ Ingredient(rawValue: $0)! }))
+        self.requiredCooker = Cooker(rawValue: data["requiredCooker"] as! Int)
+        self.distanceMode = DistanceMode(rawValue: data["distanceMode"] as! Int)!
     }
     
     func canConstruct(resources: [Int: Int]) -> Int {
@@ -65,31 +84,60 @@ class Dish: Constructable {
     // <0: force appear, the less the number the higher the priority
     // =0: cannot appear
     // >0: randomly appear, the larger the number the higher the probability
-    // func sign in js: function(int cooker, [double] cond, [func] ingred) -> int
     func canConstruct(cooker: Cooker, condiments: [Condiment: Int], ingredients: [Ingredient]) -> Int {
-        var condimentsCount = [0, 0, 0]
-        var totalCondiments = 0
-        for condiment in condiments {
-            condimentsCount[condiment.0.jsId] = condiment.1
-            totalCondiments += condiment.1
+        if self.requiredCooker != nil && cooker != self.requiredCooker {
+            return 0
         }
         
-        var jsCondiments: AnyObject?
-        if totalCondiments > 0 {
-            var condimentsRatio = [Double]()
-            for count in condimentsCount {
-                condimentsRatio.append(Double(count) / Double(totalCondiments))
+        for ingredient in self.requiredIngredients {
+            if !ingredients.contains(ingredient) {
+                return 0
             }
-            jsCondiments = condimentsRatio
+        }
+        
+        var distanceSupplement: Double = 0
+        let standardizedCondiments = Dish.standardizeCondiments(condiments)
+        switch self.distanceMode {
+        case .Ignore:
+            distanceSupplement = Dish.distanceReduce(0)
+            break
+        case .Euclidean:
+            distanceSupplement = Dish.distanceReduce(Dish.euclideanDistance(standardizedCondiments, withStandard: self.standardCondiments))
+            break
+        case .Same:
+            if Dish.euclideanDistance(standardizedCondiments, withStandard: self.standardCondiments) == 0 {
+                distanceSupplement = Dish.distanceReduce(0)
+            } else {
+                distanceSupplement = 0
+            }
+        }
+        
+        return Int(distanceSupplement * Dish.PROB_PRECISION * self.standardWeight)
+    }
+    
+    static private func standardizeCondiments(data: [Condiment: Int]) -> [Condiment: Double] {
+        var total = 0
+        for condiment in Condiment.ALL_VALUES {
+            total += data[condiment] ?? 0
+        }
+        if total == 0 {
+            return [Condiment: Double]()
         } else {
-            jsCondiments = [0, 0, 0]
+            return data.map({ Double($0) / Double(total) })
         }
+    }
+    
+    static private func euclideanDistance(data: [Condiment: Double], withStandard: [Condiment: Double]) -> Double {
+        var distance: Double = 0
         
-        var jsIngredients = [String: Bool]()
-        for ingredient in ingredients {
-            jsIngredients[String(ingredient.rawValue)] = true
+        for condiment in Condiment.ALL_VALUES {
+            let difference = data[condiment] ?? 0 - withStandard[condiment]!
+            distance += difference * difference
         }
-        
-        return Int(canConstructJsFunction.callWithArguments([cooker.rawValue, jsCondiments!, jsIngredients]).toInt32())
+        return sqrt(distance)
+    }
+    
+    static private func distanceReduce(distance: Double) -> Double {
+        return 1.0/(4.0 * distance + 1)
     }
 }

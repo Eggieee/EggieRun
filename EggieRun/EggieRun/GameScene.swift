@@ -291,7 +291,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func initializeMilestone() {
-        nextMilestone = milestones[0]
+        nextMilestoneIndex = 0
     }
     
     private func updateDistance(movedDistance: Double) {
