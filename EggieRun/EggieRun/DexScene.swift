@@ -38,6 +38,7 @@ class DexScene: SKScene {
     private var nextPageNode: SKSpriteNode!
     private var prevPageNode: SKSpriteNode!
     private var activateAll: SKSpriteNode!
+    private var disableAll: SKSpriteNode!
 
     
     override func didMoveToView(view: SKView) {
@@ -69,7 +70,8 @@ class DexScene: SKScene {
     private func createNodeForDemo() {
         activateAll = SKSpriteNode(color: UIColor.darkGrayColor(), size: CGSize(width: 40, height: 40))
         activateAll.position = CGPoint(x: self.frame.width - DexScene.TITLE_TOP_PADDING, y: self.frame.height - DexScene.TITLE_TOP_PADDING)
-        
+        disableAll = SKSpriteNode(color: UIColor.darkGrayColor(), size: CGSize(width: 40, height: 40))
+        disableAll.position = CGPoint(x: self.frame.width - DexScene.TITLE_TOP_PADDING, y: DexScene.TITLE_TOP_PADDING)
     }
     
     
@@ -146,8 +148,10 @@ class DexScene: SKScene {
         // click on activate all
         if activateAll.containsPoint(touchLocation) {
             DishDataController.singleton.forceActivateAllDishes()
-            gridNode.removeFromParent()
-            gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width, dishList: DexScene.DISH_FIRST_PAGE)
+        }
+        
+        if disableAll.containsPoint(touchLocation) {
+            DishDataController.singleton.clearActivatedDishes()
         }
     }
     
