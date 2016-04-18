@@ -177,6 +177,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             let position = collectable.position
             collectable.hidden = true
+            collectable.physicsBody?.categoryBitMask = 0
+            collectable.physicsBody?.contactTestBitMask = 0
             
             self.runAction(GameScene.SE_COLLECT)
             
