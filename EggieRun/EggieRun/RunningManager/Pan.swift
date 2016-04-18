@@ -30,7 +30,7 @@ class Pan: Obstacle {
         right = SKSpriteNode(imageNamed: "pan-right")
         right.scale(Pan.RIGHT_WIDTH)
         right.position.x = left.size.width + right.size.width / 2
-        right.position.y = right.size.height / 2
+        right.position.y = right.size.height / 2 + 2
         
         super.init(cooker: .Pan)
         addChild(left)
