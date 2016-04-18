@@ -9,7 +9,7 @@
 import SpriteKit
 
 class Collectable: SKSpriteNode {
-    private static let SIZE = CGSizeMake(80, 80)
+    static let SIZE = CGSizeMake(80, 80)
     
     let type: CollectableType
     let ingredient: Ingredient?

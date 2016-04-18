@@ -37,7 +37,8 @@ class DexScene: SKScene {
     private var detailNode: DexDetailNode!
     private var nextPageNode: SKSpriteNode!
     private var prevPageNode: SKSpriteNode!
-
+    private var activateAll: SKSpriteNode!
+    private var disableAll: SKSpriteNode!
 
     
     override func didMoveToView(view: SKView) {
@@ -58,7 +59,24 @@ class DexScene: SKScene {
         self.addChild(gridNode)
         
         createDetailNode()
+        createFlipPageNode()
+        createSpecialEffect()
         
+        if GlobalConstants.IS_DEMO {
+            createNodeForDemo()
+        }
+    }
+    
+    private func createNodeForDemo() {
+        activateAll = SKSpriteNode(color: UIColor.darkGrayColor(), size: CGSize(width: 40, height: 40))
+        activateAll.position = CGPoint(x: self.frame.width - DexScene.TITLE_TOP_PADDING, y: self.frame.height - DexScene.TITLE_TOP_PADDING)
+        disableAll = SKSpriteNode(color: UIColor.darkGrayColor(), size: CGSize(width: 40, height: 40))
+        disableAll.position = CGPoint(x: self.frame.width - DexScene.TITLE_TOP_PADDING, y: DexScene.TITLE_TOP_PADDING)
+    }
+    
+    
+    // create next and previous flipping page buttons
+    private func createFlipPageNode() {
         nextPageNode = SKSpriteNode(imageNamed: "arrow-right")
         nextPageNode.position = CGPoint(x: DexScene.NEXT_BUTTON_X, y: DexScene.FLIP_BUTTON_Y)
         nextPageNode.zPosition = 2
@@ -71,7 +89,16 @@ class DexScene: SKScene {
         prevPageNode.size = CGSize(width: DexScene.FLIP_BUTTON_WIDTH, height: DexScene.FLIP_BUTTON_HEIGHT)
         prevPageNode.alpha = 0.5
         addChild(prevPageNode)
-        
+    }
+    
+    // generate right side eggDex details
+    private func createDetailNode() {
+        detailNode = DexDetailNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width)
+        self.addChild(detailNode)
+    }
+    
+    // create special snowing effect
+    private func createSpecialEffect() {
         if let particles = SKEmitterNode(fileNamed: "Snow.sks") {
             particles.position = CGPointMake(self.frame.midX, self.frame.maxY)
             particles.particlePositionRange.dx = self.frame.width
@@ -79,11 +106,13 @@ class DexScene: SKScene {
         }
     }
     
+    
+    // recognise touch behaviour on screen
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch = touches.first!
         let touchLocation = touch.locationInNode(self)
         
-        // back
+        // back to menu
         if buttonBack.containsPoint(touchLocation) {
             let menuScene = MenuScene.singleton
             self.view?.presentScene(menuScene!, transition: MenuScene.BACK_TRANSITION)
@@ -97,7 +126,7 @@ class DexScene: SKScene {
             nextPageNode.alpha = 0.5
             prevPageNode.alpha = 1
         }
-    
+        
         if prevPageNode.containsPoint(touchLocation) {
             gridNode.removeFromParent()
             gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width, dishList: DexScene.DISH_FIRST_PAGE)
@@ -105,8 +134,8 @@ class DexScene: SKScene {
             nextPageNode.alpha = 1
             prevPageNode.alpha = 0.5
         }
-    
-        // dishes
+        
+        // click on dishes
         let touchLocationInGrid = touch.locationInNode(gridNode)
         for dishNode in gridNode.dishNodes {
             if dishNode.containsPoint(touchLocationInGrid) {
@@ -115,11 +144,15 @@ class DexScene: SKScene {
                 break
             }
         }
-    }
-    
-    private func createDetailNode() {
-        detailNode = DexDetailNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width)
-        self.addChild(detailNode)
+        
+        // click on activate all
+        if activateAll.containsPoint(touchLocation) {
+            DishDataController.singleton.forceActivateAllDishes()
+        }
+        
+        if disableAll.containsPoint(touchLocation) {
+            DishDataController.singleton.clearActivatedDishes()
+        }
     }
     
     override func willMoveFromView(view: SKView) {

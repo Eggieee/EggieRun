@@ -66,6 +66,10 @@ class ConstructableEngine<C: Constructable> {
         return storage.hasNewFlag(item)
     }
     
+    func forceActivateConstructable(item: C) -> Bool {
+        return storage.activate(item)
+    }
+    
     func clearNewFlags() -> Bool {
         return storage.clearNewFlag()
     }
