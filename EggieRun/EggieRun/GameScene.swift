@@ -426,7 +426,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         position = GameScene.COLLECTABLE_BUFFER_DISTANCE
         while position < closet.width - GameScene.COLLECTABLE_BUFFER_DISTANCE {
             if Double(arc4random()) / Double(UINT32_MAX) <= GameScene.COLLECTABLE_RATE {
-                let collectable = collectableFactory.nextColletable(0)
+                let collectable = collectableFactory.nextColletable(currentDistance)
                 collectable.position.y = Closet.BASELINE_HEIGHTS + Closet.HEIGHT + Collectable.SIZE.height / 2 + GameScene.DISTANCE_CLOSET_AND_COLLECTABLE
                 collectable.position.x = closet.position.x + position
                 collectables.insert(collectable)
@@ -448,7 +448,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var position = GameScene.COLLECTABLE_BUFFER_DISTANCE
         while position < shelf.width - GameScene.COLLECTABLE_BUFFER_DISTANCE {
             if Double(arc4random()) / Double(UINT32_MAX) <= GameScene.COLLECTABLE_RATE {
-                let collectable = collectableFactory.nextColletable(0)
+                let collectable = collectableFactory.nextColletable(currentDistance)
                 collectable.position.y = Shelf.BASELINE_HEIGHTS + Shelf.HEIGHT + Collectable.SIZE.height / 2 + GameScene.DISTANCE_SHELF_AND_COLLECTABLE
                 collectable.position.x = shelf.position.x + position
                 collectables.insert(collectable)
