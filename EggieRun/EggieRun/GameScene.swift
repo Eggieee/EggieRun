@@ -147,6 +147,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == BitMaskCategory.hero | BitMaskCategory.scene {
             gameOver(.Drop)
         } else if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == BitMaskCategory.hero | BitMaskCategory.platform {
+            let impulse: CGVector
+            let platform: SKSpriteNode
+            if contact.bodyA.categoryBitMask == BitMaskCategory.platform {
+                impulse = contact.contactNormal
+                platform = contact.bodyA.node as! SKSpriteNode
+            } else {
+                impulse = CGVectorMake(-1 * contact.contactNormal.dx, -1 * contact.contactNormal.dy)
+                platform = contact.bodyB.node as! SKSpriteNode
+            }
+            
+            if impulse.dx != 0 {
+                if impulse.dy > 0 {
+                    eggie.position.y = platform.position.y + platform.size.height / 2 + eggie.size.height / 2
+                } else {
+                    eggie.position.y = platform.position.y - platform.size.height / 2 - eggie.size.height / 2
+                }
+            }
             eggie.state = .Running
         } else if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == BitMaskCategory.hero | BitMaskCategory.collectable {
             let collectable: Collectable
