@@ -63,4 +63,10 @@ class DishDataController {
     func clearNewFlags() -> Bool {
         return constructableEngine.clearNewFlags()
     }
+    
+    func forceActivateAllDishes() {
+        for dish in dishes {
+            constructableEngine.forceActivateConstructable(dish)
+        }
+    }
 }
