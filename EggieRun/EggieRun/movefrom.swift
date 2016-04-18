@@ -20,7 +20,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let DISTANCE_LABEL_TEXT = "Distance: %dm"
     private static let HEADER_FONT_SIZE: CGFloat = 30
     private static let EGGIE_X_POSITION: CGFloat = 200
-    private static let DISTANCE_PLATFORM_AND_COLLECTABLE: CGFloat = 200
+    private static let DISTANCE_CLOSET_AND_COLLECTABLE: CGFloat = 200
+    private static let DISTANCE_SHELF_AND_COLLECTABLE: CGFloat = 50
     private static let OBSTACLE_RATE = 0.2
     private static let COLLECTABLE_RATE = 0.3
     private static let BUFFER_DISTANCE = 400.0
@@ -411,7 +412,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         while position < closet.width {
             if Double(arc4random()) / Double(UINT32_MAX) <= GameScene.COLLECTABLE_RATE {
                 let collectable = collectableFactory.nextColletable(0)
-                collectable.position.y = Closet.BASELINE_HEIGHTS + Closet.HEIGHT + Collectable.SIZE.height / 2 + GameScene.DISTANCE_PLATFORM_AND_COLLECTABLE
+                collectable.position.y = Closet.BASELINE_HEIGHTS + Closet.HEIGHT + Collectable.SIZE.height / 2 + GameScene.DISTANCE_CLOSET_AND_COLLECTABLE
                 collectable.position.x = closet.position.x + position
                 collectables.insert(collectable)
                 addChild(collectable)
@@ -433,7 +434,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         while position < shelf.width {
             if Double(arc4random()) / Double(UINT32_MAX) <= GameScene.COLLECTABLE_RATE {
                 let collectable = collectableFactory.nextColletable(0)
-                collectable.position.y = Shelf.BASELINE_HEIGHTS + Shelf.HEIGHT + Collectable.SIZE.height / 2 + GameScene.DISTANCE_PLATFORM_AND_COLLECTABLE
+                collectable.position.y = Shelf.BASELINE_HEIGHTS + Shelf.HEIGHT + Collectable.SIZE.height / 2 + GameScene.DISTANCE_SHELF_AND_COLLECTABLE
                 collectable.position.x = shelf.position.x + position
                 collectables.insert(collectable)
                 addChild(collectable)
