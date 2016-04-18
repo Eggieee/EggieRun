@@ -30,21 +30,28 @@ class Closet: SKNode {
         imageNames.append(Closet.RIGHT_IMAGE_NAMES)
         
         for imageName in imageNames {
-            let node = SKSpriteNode(imageNamed: imageName)
+            let texture = SKTexture(imageNamed: imageName)
+            let node = SKSpriteNode(texture: texture)
+            
             node.position.x = width + node.size.width / 2
             node.position.y = node.size.height / 2
+            node.physicsBody = constructPhysicsBodyFor(texture)
             width += node.size.width
             addChild(node)
         }
-        
-        physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: width, height: Closet.HEIGHT), center: CGPoint(x: width/2, y: Closet.HEIGHT/2))
-        physicsBody!.categoryBitMask = BitMaskCategory.platform
-        physicsBody!.contactTestBitMask = BitMaskCategory.hero
-        physicsBody!.collisionBitMask = BitMaskCategory.hero
-        physicsBody!.dynamic = false
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func constructPhysicsBodyFor(texture: SKTexture) -> SKPhysicsBody {
+        let body = SKPhysicsBody(texture: texture, alphaThreshold: GlobalConstants.PHYSICS_BODY_ALPHA_THRESHOLD, size: texture.size())
+        
+        body.categoryBitMask = BitMaskCategory.platform
+        body.contactTestBitMask = BitMaskCategory.hero
+        body.collisionBitMask = BitMaskCategory.hero
+        body.dynamic = false
+        return body
     }
 }
