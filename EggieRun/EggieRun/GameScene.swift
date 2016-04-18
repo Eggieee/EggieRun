@@ -228,7 +228,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let collectable = collectableFactory.nextColletable(currentDistance)
         collectable.position.x = GameScene.FIRST_COLLECTABLE_POSITION_X
-        collectable.position.y = Closet.HEIGHT + collectable.frame.size.height / 2 + GameScene.DISTANCE_PLATFORM_AND_COLLECTABLE
+        collectable.position.y = Closet.BASELINE_HEIGHTS + Closet.HEIGHT + collectable.frame.size.height / 2 + GameScene.DISTANCE_PLATFORM_AND_COLLECTABLE
         collectables.append(collectable)
         addChild(collectable)
     }
@@ -359,7 +359,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if rightMostCollectableRightEnd < UIScreen.mainScreen().bounds.width {
             let collectable = collectableFactory.nextColletable(currentDistance)
             collectable.position.x = rightMostCollectableRightEnd + collectable.frame.size.width / 2
-            collectable.position.y = Closet.HEIGHT + collectable.frame.size.height / 2 + GameScene.DISTANCE_PLATFORM_AND_COLLECTABLE
+            collectable.position.y = Closet.BASELINE_HEIGHTS + Closet.HEIGHT + collectable.frame.size.height / 2 + GameScene.DISTANCE_PLATFORM_AND_COLLECTABLE
             collectables.append(collectable)
             addChild(collectable)
         }
