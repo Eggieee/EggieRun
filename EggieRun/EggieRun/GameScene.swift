@@ -74,7 +74,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var tutorialLayer: TutorialLayer!
     private var nextMilestoneIndex = 0 {
         didSet {
-            nextMilestone = milestones[nextMilestoneIndex]
+            if nextMilestoneIndex < milestones.count {
+                nextMilestone = milestones[nextMilestoneIndex]
+            } else {
+                nextMilestone = nil
+            }
         }
     }
     private var nextMilestone: Milestone?
@@ -534,11 +538,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func activateCurrentMilestone() {
-        if(nextMilestoneIndex < milestones.count - 1) {
-            runningProgressBar.activateCurrentMilestone()
-            activateMilestoneEvent()
-            nextMilestoneIndex += 1
-        }
+        runningProgressBar.activateCurrentMilestone()
+        activateMilestoneEvent()
+        nextMilestoneIndex += 1
     }
     
     private func challengeDarkness() {
