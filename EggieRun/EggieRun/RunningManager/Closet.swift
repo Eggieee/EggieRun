@@ -10,7 +10,7 @@ import SpriteKit
 
 class Closet: SKNode {
     static let GAP_SIZE: CGFloat = 300
-    static let BASELINE_HEIGHTS: CGFloat = -100
+    static let BASELINE_HEIGHTS: CGFloat = -200
     static let HEIGHT: CGFloat = 274
 
     private static let LEFT_IMAGE_NAME = "closet-left"

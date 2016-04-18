@@ -9,7 +9,7 @@
 import SpriteKit
 
 class Shelf: SKNode {
-    static let BASELINE_HEIGHTS: CGFloat = 600
+    static let BASELINE_HEIGHTS: CGFloat = 400
     static let HEIGHT: CGFloat = 88
     
     private static let LEFT_IMAGE_NAME = "shelf-left"
