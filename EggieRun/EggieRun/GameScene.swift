@@ -23,9 +23,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let DISTANCE_CLOSET_AND_COLLECTABLE: CGFloat = 200
     private static let DISTANCE_SHELF_AND_COLLECTABLE: CGFloat = 50
     private static let OBSTACLE_RATE = 0.2
-    private static let COLLECTABLE_RATE = 0.2
+    private static let COLLECTABLE_RATE = 0.3
     private static let BUFFER_DISTANCE = 400.0
-    private static let COLLECTABLE_BUFFER_DISTANCE: CGFloat = 100
+    private static let COLLECTABLE_BUFFER_DISTANCE: CGFloat = 200
     private static let INGREDIENT_BAR_X_OFFSET: CGFloat = 15
     private static let INGREDIENT_BAR_Y_OFFSET: CGFloat = 33
     private static let PROGRESS_BAR_X_OFFSET: CGFloat = 15
@@ -38,7 +38,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private static let SE_COLLECT = SKAction.playSoundFileNamed("collect-sound.mp3", waitForCompletion: false)
     private static let SE_JUMP = SKAction.playSoundFileNamed("jump-sound.mp3", waitForCompletion: false)
-    private static let SE_OBSTACLES: [Cooker: SKAction] = [.Drop: "drop-sound.mp3", .Oven: "oven-sound.mp3", .Pot: "pot-sound.mp3"].map({ SKAction.playSoundFileNamed($0, waitForCompletion: false) })
+    private static let SE_OBSTACLES: [Cooker: SKAction] = [.Drop: "drop-sound.mp3", .Oven: "oven-sound.mp3", .Pot: "pot-sound.mp3", .Pan: "pan-sound.mp3"].map({ SKAction.playSoundFileNamed($0, waitForCompletion: false) })
     
     private enum GameState {
         case Ready, Playing, Over, Paused
@@ -420,8 +420,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
-        position = 0
-        while position < closet.width {
+        position = GameScene.COLLECTABLE_BUFFER_DISTANCE
+        while position < closet.width - GameScene.COLLECTABLE_BUFFER_DISTANCE {
             if Double(arc4random()) / Double(UINT32_MAX) <= GameScene.COLLECTABLE_RATE {
                 let collectable = collectableFactory.nextColletable(0)
                 collectable.position.y = Closet.BASELINE_HEIGHTS + Closet.HEIGHT + Collectable.SIZE.height / 2 + GameScene.DISTANCE_CLOSET_AND_COLLECTABLE
@@ -442,8 +442,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         shelves.append(shelf)
         addChild(shelf)
         
-        var position: CGFloat = 0
-        while position < shelf.width {
+        var position = GameScene.COLLECTABLE_BUFFER_DISTANCE
+        while position < shelf.width - GameScene.COLLECTABLE_BUFFER_DISTANCE {
             if Double(arc4random()) / Double(UINT32_MAX) <= GameScene.COLLECTABLE_RATE {
                 let collectable = collectableFactory.nextColletable(0)
                 collectable.position.y = Shelf.BASELINE_HEIGHTS + Shelf.HEIGHT + Collectable.SIZE.height / 2 + GameScene.DISTANCE_SHELF_AND_COLLECTABLE
