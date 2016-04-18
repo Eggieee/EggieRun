@@ -39,6 +39,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let OVERLAY_Z_POSITION: CGFloat = 100
     private static let CHALLENGE_DARKNESS_TIME = 0.25
     private static let CHALLENGE_DARKNESS_REPEAT = 3
+    private static let CHALLENGE_EARTHQUAKE_TIME = 0.07
+    private static let CHALLENGE_EARTHQUAKE_RANGE: UInt32 = 150
+    private static let CHALLENGE_EARTHQUAKE_REPEAT = 8
     
     private static let SE_COLLECT = SKAction.playSoundFileNamed("collect-sound.mp3", waitForCompletion: false)
     private static let SE_JUMP = SKAction.playSoundFileNamed("jump-sound.mp3", waitForCompletion: false)
@@ -558,6 +561,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         })
     }
     
+    private func challengeEarthquake() {
+        var actions: [SKAction] = []
+        for _ in 0 ..< GameScene.CHALLENGE_EARTHQUAKE_REPEAT {
+            let dx = CGFloat(arc4random() % GameScene.CHALLENGE_EARTHQUAKE_RANGE)
+            let dy = CGFloat(arc4random() % GameScene.CHALLENGE_EARTHQUAKE_RANGE)
+            actions.append(SKAction.moveByX(dx, y: dy, duration: GameScene.CHALLENGE_EARTHQUAKE_TIME))
+            actions.append(SKAction.moveByX(-dx, y: -dy, duration: GameScene.CHALLENGE_EARTHQUAKE_TIME))
+        }
+        let sequenceAction = SKAction.sequence(actions)
+        
+        for closet in closets {
+            closet.runAction(sequenceAction)
+        }
+        for shelf in shelves {
+            shelf.runAction(sequenceAction)
+        }
+        for obstacle in obstacles {
+            obstacle.runAction(sequenceAction)
+        }
+        for collectable in collectables {
+            collectable.runAction(sequenceAction)
+        }
+    }
+    
     private func activateMilestoneEvent() {
         switch nextMilestone! {
         case .PresentPot:
@@ -571,7 +598,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case .PresentPan:
             availableCookers.append(.Pan)
         case .ChallengeQuake:
-            print("earth quake!")
+            challengeEarthquake()
         case .IncreasePot:
             obstacleRate = GameScene.OBSTACLE_RATE_HIGH
         case .EndOyakodon:
