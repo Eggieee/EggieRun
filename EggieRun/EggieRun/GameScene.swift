@@ -72,7 +72,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     private var nextMilestone: Milestone?
     private var availableCookers = [Cooker]()
-    private var isShelfPresent = false
     private var isCookerIncreased = false
 
     override func didMoveToView(view: SKView) {
@@ -142,8 +141,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             runningProgressBar.updateDistance(movedDistance)
             eggie.balance()
             flavourBarFollow()
-            shiftClosets(movedDistance)
             shiftShelf(movedDistance)
+            shiftClosets(movedDistance)
             shiftCollectables(movedDistance)
             shiftObstacles(movedDistance)
         }
@@ -234,6 +233,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func initializeObstacle() {
+        availableCookers = [Cooker]()
         obstacleFactory = ObstacleFactory()
         obstacles = [Obstacle]()
     }
@@ -247,7 +247,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func initializeShelf() {
         shelfFactory = ShelfFactory()
         shelves = [Shelf]()
-        appendNewShelf(UIScreen.mainScreen().bounds.width)
     }
     
     private func initialzieCollectable() {
@@ -361,6 +360,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func shiftShelf(distance: Double) {
+        if shelves.isEmpty {
+            return
+        }
+        
         let rightMostShelf = shelves.last!
         let rightMostShelfRightEnd = rightMostShelf.position.x + rightMostShelf.width + rightMostShelf.followingGapSize
         
@@ -514,7 +517,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case .PresentPot:
             availableCookers.append(.Pot)
         case .PresentShelf:
-            isShelfPresent = true
+            appendNewShelf(UIScreen.mainScreen().bounds.width)
         case .PresentOven:
             availableCookers.append(.Oven)
         case .ChallengeDarkness:
