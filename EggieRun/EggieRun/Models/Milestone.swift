@@ -9,5 +9,51 @@
 import SpriteKit
 
 enum Milestone: Int {
-    case PresentPot = 0, PresentShelf = 1, PresentOven = 2, ChallengeDarkness = 3, PresentPan = 4, ChallengeQuake = 5, IncreasePot = 6, EndOyakodon = 7 
+    case PresentPot = 0, PresentShelf = 1, PresentOven = 2, ChallengeDarkness = 3, PresentPan = 4, ChallengeQuake = 5, IncreasePot = 6, EndOyakodon = 7
+    
+    var requiredDistance: Int {
+        switch self {
+        case .PresentPot:
+            return 10000
+        case .PresentShelf:
+            return 20000
+        case .PresentOven:
+            return 30000
+        case .ChallengeDarkness:
+            return 40000
+        case .PresentPan:
+            return 50000
+        case .ChallengeQuake:
+            return 65000
+        case .IncreasePot:
+            return 85000
+        case .EndOyakodon:
+            return 100000
+        }
+    }
+    
+    private var imagedName: String {
+        switch self {
+        case .PresentPot:
+            return "present-pot-milestone"
+        case .PresentShelf:
+            return "present-shelf-milestone"
+        case .PresentOven:
+            return "present-oven-milestone"
+        case .ChallengeDarkness:
+            return "challenge-darkness-milestone"
+        case .PresentPan:
+            return "present-pan-milestone"
+        case .ChallengeQuake:
+            return "challenge-quake-milestone"
+        case .IncreasePot:
+            return "increase-pot-milestone"
+        case .EndOyakodon:
+            return "end-oyakodon-milestone"
+        }
+    }
+    
+    var texture: SKTexture {
+        return SKTexture(imageNamed: self.imagedName)
+    }
 }
