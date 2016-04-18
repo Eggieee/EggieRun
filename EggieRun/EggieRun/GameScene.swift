@@ -60,6 +60,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var endingLayer: EndingLayer?
     private var pauseButton: SKSpriteNode!
     private var pausedLayer: PausedLayer?
+    private var milestones: [Milestone] = Milestone.ALL_VALUES
+    private var nextMilestone: Milestone?
 
     override func didMoveToView(view: SKView) {
         GameScene.instance = self
@@ -253,7 +255,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func initializeRunningProgressBar() {
         let barLength = frame.width - 2 * GameScene.PROGRESS_BAR_X_OFFSET
-        runningProgressBar = RunningProgressBar(length: barLength)
+        runningProgressBar = RunningProgressBar(length: barLength, milestones: milestones)
         runningProgressBar.position = CGPointMake(GameScene.PROGRESS_BAR_X_OFFSET, self.frame.height - GameScene.PROGRESS_BAR_Y_OFFSET)
         addChild(runningProgressBar)
     }
@@ -265,6 +267,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseButton.position = CGPointMake(scene!.frame.maxX - GameScene.PAUSE_BUTTON_RIGHT_OFFSET, scene!.frame.maxY - GameScene.PAUSE_BUTTON_TOP_OFFSET)
         pauseButton.hidden = true
         addChild(pauseButton)
+    }
+    
+    private func initializeMilestone() {
+        nextMilestone = milestones[0]
     }
     
     private func updateDistance(movedDistance: Double) {
@@ -284,6 +290,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initializeCollectableBars()
         initializeRunningProgressBar()
         initializePauseButton()
+        initializeMilestone()
         
         if let particles = SKEmitterNode(fileNamed: "Snow.sks") {
             particles.position = CGPointMake(self.frame.midX, self.frame.maxY)
