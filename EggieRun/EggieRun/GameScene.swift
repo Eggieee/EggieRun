@@ -37,6 +37,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let COLLECTABLE_SIZE = CGSizeMake(80, 80)
     private static let HUD_Z_POSITION: CGFloat = 50
     private static let OVERLAY_Z_POSITION: CGFloat = 100
+    private static let CHALLENGE_DARKNESS_TIME = 0.25
+    private static let CHALLENGE_DARKNESS_REPEAT = 3
     
     private static let SE_COLLECT = SKAction.playSoundFileNamed("collect-sound.mp3", waitForCompletion: false)
     private static let SE_JUMP = SKAction.playSoundFileNamed("jump-sound.mp3", waitForCompletion: false)
@@ -536,6 +538,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    private func challengeDarkness() {
+        let darkOverlay = SKSpriteNode(color: UIColor.blackColor(), size: size)
+        darkOverlay.alpha = 0
+        darkOverlay.position = CGPointMake(frame.midX, frame.midY)
+        darkOverlay.zPosition = GameScene.OVERLAY_Z_POSITION
+        addChild(darkOverlay)
+        
+        let fadeInAction = SKAction.fadeInWithDuration(GameScene.CHALLENGE_DARKNESS_TIME)
+        let fadeOutAction = SKAction.fadeOutWithDuration(GameScene.CHALLENGE_DARKNESS_TIME)
+        
+        var actions: [SKAction] = []
+        for _ in 0 ..< GameScene.CHALLENGE_DARKNESS_REPEAT {
+            actions.appendContentsOf([fadeInAction, fadeOutAction])
+        }
+        
+        darkOverlay.runAction(SKAction.sequence(actions), completion: {
+            darkOverlay.removeFromParent()
+        })
+    }
+    
     private func activateMilestoneEvent() {
         switch nextMilestone! {
         case .PresentPot:
@@ -545,7 +567,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case .PresentOven:
             availableCookers.append(.Oven)
         case .ChallengeDarkness:
-            print("dark!")
+            challengeDarkness()
         case .PresentPan:
             availableCookers.append(.Pan)
         case .ChallengeQuake:
