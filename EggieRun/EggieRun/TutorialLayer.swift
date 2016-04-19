@@ -7,12 +7,14 @@
 //
 
 import SpriteKit
-
+import UIKit
 
 class TutorialLayer: SKNode {
     static let tutorials = ["tut1","tut2","tut3","tut4"]
     static private let TUTORIAL_WIDTH = CGFloat(600)
     static private let TUTORIAL_HEIGHT = CGFloat(450)
+    
+    static private let FILTER = CIFilter(name: "CIBlendWithMask", withInputParameters: ["inputMaskImage": CIImage(image: UIImage(named: "tutorial-mask")!)!])
     
     private static let FLIP_BUTTON_WIDTH = CGFloat(60)
     private static let FLIP_BUTTON_HEIGHT = CGFloat(60)
@@ -38,7 +40,11 @@ class TutorialLayer: SKNode {
         
         tutorialNode.position = CGPoint(x: midX, y: midY)
         tutorialNode.size = CGSize(width: TutorialLayer.TUTORIAL_WIDTH, height: TutorialLayer.TUTORIAL_HEIGHT)
-        addChild(tutorialNode)
+        let effectNode = SKEffectNode()
+        effectNode.shouldRasterize = true
+        effectNode.filter = TutorialLayer.FILTER
+        effectNode.addChild(tutorialNode)
+        addChild(effectNode)
         
         nextPageNode.position = CGPoint(x: midX + TutorialLayer.TUTORIAL_WIDTH/2 +  TutorialLayer.FLIP_BUTTON_WIDTH/2 , y: midY)
         nextPageNode.size = CGSize(width: TutorialLayer.FLIP_BUTTON_WIDTH, height: TutorialLayer.FLIP_BUTTON_HEIGHT)

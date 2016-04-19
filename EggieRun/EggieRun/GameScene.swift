@@ -376,7 +376,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func updateDistance(movedDistance: Double) {
         currentDistance += Int(movedDistance)
-        if (currentDistance >= nextMilestone!.requiredDistance) {
+        if nextMilestone != nil && currentDistance >= nextMilestone!.requiredDistance {
             activateCurrentMilestone()
         }
         distanceLabel.text = String(format: GameScene.DISTANCE_LABEL_TEXT, currentDistance)
