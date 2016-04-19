@@ -79,7 +79,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var collectables: Set<Collectable>!
     private var obstacles: [Obstacle]!
     private var lastUpdatedTime: CFTimeInterval!
-    private var endingLayer: EndingLayer?
+    private var normalEndLayer: NormalEndLayer?
     private var pauseButton: SKSpriteNode!
     private var helpButton: SKSpriteNode!
     private var pausedLayer: PausedLayer?
@@ -137,14 +137,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             } else {
                 gameStart()
             }
-        } else if gameState == .Over && endingLayer != nil {
-            let touchLocation = touch.locationInNode(endingLayer!)
+        } else if gameState == .Over && normalEndLayer != nil {
+            let touchLocation = touch.locationInNode(normalEndLayer!)
             
-            if endingLayer!.eggdexButton.containsPoint(touchLocation) {
+            if normalEndLayer!.eggdexButton.containsPoint(touchLocation) {
                 let dexScene = DexScene(size: self.size)
                 let transition = SKTransition.flipHorizontalWithDuration(0.5)
                 self.view?.presentScene(dexScene, transition: transition)
-            } else if endingLayer!.playButton.containsPoint(touchLocation) {
+            } else if normalEndLayer!.playButton.containsPoint(touchLocation) {
                 gameReady()
             }
         } else if gameState == .Paused && pausedLayer != nil {
@@ -424,10 +424,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let (dish, isNew) = DishDataController.singleton.getResultDish(wayOfDie, condiments: flavourBar.condimentDictionary, ingredients: ingredientBar.ingredients)
         
-        endingLayer = EndingLayer(usedCooker: wayOfDie, generatedDish: dish, isNew: isNew)
-        endingLayer!.zPosition = GameScene.OVERLAY_Z_POSITION
-        endingLayer!.position = CGPointMake(frame.midX, frame.midY)
-        addChild(endingLayer!)
+        normalEndLayer = NormalEndLayer(usedCooker: wayOfDie, generatedDish: dish, isNew: isNew)
+        normalEndLayer!.zPosition = GameScene.OVERLAY_Z_POSITION
+        normalEndLayer!.position = CGPointMake(frame.midX, frame.midY)
+        addChild(normalEndLayer!)
     }
     
     private func shiftClosets(distance: Double) {
