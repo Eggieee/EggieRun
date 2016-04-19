@@ -42,6 +42,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let COLLECTABLE_SIZE = CGSizeMake(80, 80)
     private static let HUD_Z_POSITION: CGFloat = 50
     private static let OVERLAY_Z_POSITION: CGFloat = 100
+    private static let TUTORIAL_Z_POSITION: CGFloat = 150
     private static let PREGENERATED_LENGTH = UIScreen.mainScreen().bounds.width * 2
     
     private static let CHALLENGE_ROLL_MIN_DISTANCE: UInt32 = 1000
@@ -78,12 +79,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var collectables: Set<Collectable>!
     private var obstacles: [Obstacle]!
     private var lastUpdatedTime: CFTimeInterval!
-    private var endingLayer: EndingLayer?
+    private var normalEndLayer: NormalEndLayer?
     private var pauseButton: SKSpriteNode!
     private var helpButton: SKSpriteNode!
     private var pausedLayer: PausedLayer?
     private var milestones: [Milestone] = Milestone.ALL_VALUES
     private var tutorialLayer: TutorialLayer?
+    private var tutorialBackground: SKSpriteNode?
     private var nextMilestoneIndex = 0 {
         didSet {
             if nextMilestoneIndex < milestones.count {
@@ -115,9 +117,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if gameState == .Ready {
             let touchLocation = touch.locationInNode(self)
-            if helpButton.containsPoint(touchLocation) {
-                initializeTutorial()
-            } else if tutorialLayer != nil {
+            if tutorialLayer != nil {
                 let touchLocation = touch.locationInNode(tutorialLayer!)
                 if tutorialLayer!.nextPageNode.containsPoint(touchLocation) {
                     if tutorialLayer!.currPage < TutorialLayer.tutorials.count - 1 {
@@ -129,19 +129,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }
                 } else if !tutorialLayer!.tutorialNode.containsPoint(touchLocation) {
                     tutorialLayer!.removeFromParent()
+                    tutorialBackground!.removeFromParent()
                     tutorialLayer = nil
                 }
+            } else if helpButton.containsPoint(touchLocation)  {
+                initializeTutorial()
             } else {
                 gameStart()
             }
-        } else if gameState == .Over && endingLayer != nil {
-            let touchLocation = touch.locationInNode(endingLayer!)
+        } else if gameState == .Over && normalEndLayer != nil {
+            let touchLocation = touch.locationInNode(normalEndLayer!)
             
-            if endingLayer!.eggdexButton.containsPoint(touchLocation) {
+            if normalEndLayer!.eggdexButton.containsPoint(touchLocation) {
                 let dexScene = DexScene(size: self.size)
                 let transition = SKTransition.flipHorizontalWithDuration(0.5)
                 self.view?.presentScene(dexScene, transition: transition)
-            } else if endingLayer!.playButton.containsPoint(touchLocation) {
+            } else if normalEndLayer!.playButton.containsPoint(touchLocation) {
                 gameReady()
             }
         } else if gameState == .Paused && pausedLayer != nil {
@@ -360,8 +363,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func initializeTutorial() {
         tutorialLayer = TutorialLayer(frameWidth: self.frame.width, frameHeight: self.frame.height)
-        tutorialLayer!.zPosition = GameScene.OVERLAY_Z_POSITION
+        tutorialLayer!.zPosition = GameScene.TUTORIAL_Z_POSITION
         addChild(tutorialLayer!)
+        
+        tutorialBackground = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: self.frame.width, height: self.frame.height))
+        tutorialBackground!.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
+        tutorialBackground!.zPosition = GameScene.OVERLAY_Z_POSITION
+        tutorialBackground!.alpha = 0.5
+        addChild(tutorialBackground!)
     }
     
     private func updateDistance(movedDistance: Double) {
@@ -415,10 +424,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let (dish, isNew) = DishDataController.singleton.getResultDish(wayOfDie, condiments: flavourBar.condimentDictionary, ingredients: ingredientBar.ingredients)
         
-        endingLayer = EndingLayer(usedCooker: wayOfDie, generatedDish: dish, isNew: isNew)
-        endingLayer!.zPosition = GameScene.OVERLAY_Z_POSITION
-        endingLayer!.position = CGPointMake(frame.midX, frame.midY)
-        addChild(endingLayer!)
+        normalEndLayer = NormalEndLayer(usedCooker: wayOfDie, generatedDish: dish, isNew: isNew)
+        normalEndLayer!.zPosition = GameScene.OVERLAY_Z_POSITION
+        normalEndLayer!.position = CGPointMake(frame.midX, frame.midY)
+        addChild(normalEndLayer!)
     }
     
     private func shiftClosets(distance: Double) {
