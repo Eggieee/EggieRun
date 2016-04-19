@@ -37,6 +37,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let COLLECTABLE_SIZE = CGSizeMake(80, 80)
     private static let HUD_Z_POSITION: CGFloat = 50
     private static let OVERLAY_Z_POSITION: CGFloat = 100
+    private static let PREGENERATED_LENGTH = UIScreen.mainScreen().bounds.width * 2
     
     private static let SE_COLLECT = SKAction.playSoundFileNamed("collect-sound.mp3", waitForCompletion: false)
     private static let SE_JUMP = SKAction.playSoundFileNamed("jump-sound.mp3", waitForCompletion: false)
@@ -348,7 +349,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let rightMostCloset = closets.last!
         let rightMostClosetRightEnd = rightMostCloset.position.x + rightMostCloset.width + Closet.GAP_SIZE
         
-        if rightMostClosetRightEnd < UIScreen.mainScreen().bounds.width {
+        if rightMostClosetRightEnd < GameScene.PREGENERATED_LENGTH {
             appendNewCloset(rightMostClosetRightEnd)
         }
         
@@ -370,7 +371,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let rightMostShelf = shelves.last!
         let rightMostShelfRightEnd = rightMostShelf.position.x + rightMostShelf.width + rightMostShelf.followingGapSize
         
-        if rightMostShelfRightEnd < UIScreen.mainScreen().bounds.width {
+        if rightMostShelfRightEnd < GameScene.PREGENERATED_LENGTH {
             appendNewShelf(rightMostShelfRightEnd)
         }
         
