@@ -10,9 +10,9 @@ import SpriteKit
 
 
 class TutorialLayer: SKNode {
-    static let tutorials = ["t1","t2"]
+    static let tutorials = ["tut1","tut2","tut3","tut4"]
     static private let TUTORIAL_WIDTH = CGFloat(600)
-    static private let TUTORIAL_HEIGHT = CGFloat(300)
+    static private let TUTORIAL_HEIGHT = CGFloat(450)
     
     private static let FLIP_BUTTON_WIDTH = CGFloat(60)
     private static let FLIP_BUTTON_HEIGHT = CGFloat(60)
