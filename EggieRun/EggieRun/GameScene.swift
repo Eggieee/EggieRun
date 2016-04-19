@@ -41,6 +41,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let TOP_FRAME_OFFSET: CGFloat = 800
     private static let COLLECTABLE_SIZE = CGSizeMake(80, 80)
     private static let HUD_Z_POSITION: CGFloat = 50
+    private static let TRUE_END_LAYER_Z_POSITION: CGFloat = 75
     private static let OVERLAY_Z_POSITION: CGFloat = 100
     private static let TUTORIAL_Z_POSITION: CGFloat = 150
     private static let PREGENERATED_LENGTH = UIScreen.mainScreen().bounds.width * 2
@@ -375,7 +376,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func updateDistance(movedDistance: Double) {
         currentDistance += Int(movedDistance)
-        if (currentDistance >= nextMilestone!.requiredDistance) {
+        if nextMilestone != nil && currentDistance >= nextMilestone!.requiredDistance {
             activateCurrentMilestone()
         }
         distanceLabel.text = String(format: GameScene.DISTANCE_LABEL_TEXT, currentDistance)
@@ -673,6 +674,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    private func endOyakodon() {
+        let endLayer = TrueEndLayer(frame: frame)
+        endLayer.zPosition = GameScene.TRUE_END_LAYER_Z_POSITION
+        endLayer.position = CGPointMake(0, 0)
+        addChild(endLayer)
+        endLayer.animate()
+        
+        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "endDistanceForceDeath", userInfo: nil, repeats: false)
+    }
+    
+    func endDistanceForceDeath() {
+        gameOver(.DistanceForceDeath)
+    }
+    
     private func activateMilestoneEvent() {
         switch nextMilestone! {
         case .PresentPot:
@@ -690,7 +705,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case .IncreasePot:
             obstacleRate = GameScene.OBSTACLE_RATE_HIGH
         case .EndOyakodon:
-            gameOver(.DistanceForceDeath)
+            endOyakodon()
         }
     }
 }
