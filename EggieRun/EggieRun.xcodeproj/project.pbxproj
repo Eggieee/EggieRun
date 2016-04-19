@@ -271,39 +271,25 @@
 		6CA7272D1C9BE60600CBD165 /* EggieRun */ = {
 			isa = PBXGroup;
 			children = (
-				6C890C7C1CBEBA230049CE4C /* Particles */,
-				CD5FD5941CBAF7A600C0ACB0 /* oven-close.atlas */,
-				93B9CEA61CB7A10600E340F0 /* beam.atlas */,
-				CDD106721CA1CFD300959FFD /* run.atlas */,
-				93B45D051CA159A8002A75AA /* jump.atlas */,
-				CD09406B1C9CEEC200CF4905 /* GlobalConstants.swift */,
 				6CA7272E1C9BE60700CBD165 /* AppDelegate.swift */,
-				CDD1066E1CA1B80D00959FFD /* Assets.xcassets */,
+				6CA727341C9BE60700CBD165 /* GameViewController.swift */,
 				6C1C64A31C9C49410091AE8B /* MenuScene.sks */,
 				6C1C64A11C9C47390091AE8B /* MenuScene.swift */,
-				93D89A801CAD65490090CC58 /* Collectable Manager */,
-				CDD1067A1CA867EE00959FFD /* Running Manager */,
-				6CA727321C9BE60700CBD165 /* GameScene.swift */,
-				93C864101CC2607600C15E55 /* RunningProgressBar.swift */,
-				6CD4D8741CC2668200727275 /* PausedLayer.swift */,
-				CD09382E1CC634ED008309CC /* TrueEndLayer.swift */,
-				93B9CEA41CB7605000E340F0 /* NormalEndLayer.swift */,
-				0B6919451CC5119F00046BE9 /* TutorialLayer.swift */,
-				0B8DC3E71CA05D9C0055382D /* SKScene+Background.swift */,
-				CD09381F1CC37D44008309CC /* SKSpriteNode+Scale.swift */,
-				6C8F14001CBB0CAE008D5678 /* Dictionary+Map.swift */,
-				6C5CDD4B1C9DBEEF005BB83C /* DexScene.swift */,
-				0BD61A8D1CC27BA400A8E0EA /* MultilineLabelNode.swift */,
-				0B0A12081CB79889008BD52A /* DexManager */,
-				6CA727341C9BE60700CBD165 /* GameViewController.swift */,
+				CD09406B1C9CEEC200CF4905 /* GlobalConstants.swift */,
+				6C890C901CBFCDFC0049CE4C /* BGMPlayer.swift */,
+				CD0938301CC6950B008309CC /* Game */,
+				CD0938321CC69599008309CC /* Éggdex */,
 				6CFF05391CB79EF7006A0DB8 /* ConstructableEngine */,
 				6CE99C771CA05747006F960B /* Models */,
-				6CA727361C9BE60700CBD165 /* Main.storyboard */,
-				6CA7273B1C9BE60700CBD165 /* LaunchScreen.storyboard */,
-				6CA7273E1C9BE60700CBD165 /* Info.plist */,
-				6C890C901CBFCDFC0049CE4C /* BGMPlayer.swift */,
+				CD0938311CC69566008309CC /* Extensions */,
 				6C81BC951CC21C7E0059BA8C /* SEs */,
 				6C890C8D1CBFCD9B0049CE4C /* BackgroundMusics */,
+				6C890C7C1CBEBA230049CE4C /* Particles */,
+				CD0938331CC69648008309CC /* Atlas */,
+				CDD1066E1CA1B80D00959FFD /* Assets.xcassets */,
+				6CA727361C9BE60700CBD165 /* Main.storyboard */,
+				6CA7273E1C9BE60700CBD165 /* Info.plist */,
+				6CA7273B1C9BE60700CBD165 /* LaunchScreen.storyboard */,
 			);
 			path = EggieRun;
 			sourceTree = "<group>";
@@ -372,6 +358,52 @@
 				CD0938231CC383A4008309CC /* Pan.swift */,
 			);
 			name = Obstacles;
+			sourceTree = "<group>";
+		};
+		CD0938301CC6950B008309CC /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				CDD1067A1CA867EE00959FFD /* Running Manager */,
+				93D89A801CAD65490090CC58 /* Collectable Manager */,
+				6CA727321C9BE60700CBD165 /* GameScene.swift */,
+				93C864101CC2607600C15E55 /* RunningProgressBar.swift */,
+				6CD4D8741CC2668200727275 /* PausedLayer.swift */,
+				CD09382E1CC634ED008309CC /* TrueEndLayer.swift */,
+				93B9CEA41CB7605000E340F0 /* NormalEndLayer.swift */,
+				0B6919451CC5119F00046BE9 /* TutorialLayer.swift */,
+			);
+			name = Game;
+			sourceTree = "<group>";
+		};
+		CD0938311CC69566008309CC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0B8DC3E71CA05D9C0055382D /* SKScene+Background.swift */,
+				CD09381F1CC37D44008309CC /* SKSpriteNode+Scale.swift */,
+				6C8F14001CBB0CAE008D5678 /* Dictionary+Map.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		CD0938321CC69599008309CC /* Éggdex */ = {
+			isa = PBXGroup;
+			children = (
+				6C5CDD4B1C9DBEEF005BB83C /* DexScene.swift */,
+				0BD61A8D1CC27BA400A8E0EA /* MultilineLabelNode.swift */,
+				0B0A12081CB79889008BD52A /* DexManager */,
+			);
+			name = "Éggdex";
+			sourceTree = "<group>";
+		};
+		CD0938331CC69648008309CC /* Atlas */ = {
+			isa = PBXGroup;
+			children = (
+				CD5FD5941CBAF7A600C0ACB0 /* oven-close.atlas */,
+				93B9CEA61CB7A10600E340F0 /* beam.atlas */,
+				CDD106721CA1CFD300959FFD /* run.atlas */,
+				93B45D051CA159A8002A75AA /* jump.atlas */,
+			);
+			name = Atlas;
 			sourceTree = "<group>";
 		};
 		CDD1067A1CA867EE00959FFD /* Running Manager */ = {
