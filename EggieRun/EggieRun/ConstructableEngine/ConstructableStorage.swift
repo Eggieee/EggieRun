@@ -16,7 +16,7 @@ class ConstructableStorage<C: Constructable> {
     private let ACTIVATION_KEY = "activation"
     private let NEW_FLAG_KEY = "new_flag"
     
-    private var activationSet = Set<Int>()
+    private(set) var activationSet = Set<Int>()
     private var newFlagSet = Set<Int>()
     
     init(storageFileName: String) {

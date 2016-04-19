@@ -15,13 +15,14 @@ class DexScene: SKScene {
     private static let TITLE_SIZE = CGFloat(40)
     private static let TITLE_TOP_PADDING = CGFloat(20)
     
-    private static let BACK_BUTTON_SIZE = CGFloat(80)
     private static let FLIP_BUTTON_WIDTH = CGFloat(90)
     private static let FLIP_BUTTON_HEIGHT = CGFloat(60)
     private static let NEXT_BUTTON_X = CGFloat(500)
     private static let PREV_BUTTON_X = CGFloat(100)
     private static let FLIP_BUTTON_Y = CGFloat(80)
     private static let DEMO_NODE_SIZE = CGFloat(50)
+    private static let BACK_BUTTON_SIZE = CGFloat(80)
+    
 
     
     private static let DISH_FIRST_PAGE = Array(DishDataController.singleton.dishes[0..<12])

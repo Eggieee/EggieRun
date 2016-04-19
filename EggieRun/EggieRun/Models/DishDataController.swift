@@ -21,6 +21,9 @@ class DishDataController {
     var dishes: [Dish] {
         return constructableEngine.constructables
     }
+    var activatedDishes: [Dish] {
+        return constructableEngine.activatedConstructables
+    }
     
     init() {
         if let url = NSBundle.mainBundle().URLForResource("Dishes", withExtension: "plist") {

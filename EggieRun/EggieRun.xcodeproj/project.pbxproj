@@ -10,6 +10,7 @@
 		0B0A12071CB79867008BD52A /* DexItemNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0A12061CB79867008BD52A /* DexItemNode.swift */; };
 		0B0A120A1CB798CA008BD52A /* DexDetailNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0A12091CB798CA008BD52A /* DexDetailNode.swift */; };
 		0B0A120C1CB79DC9008BD52A /* DexGridNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0A120B1CB79DC9008BD52A /* DexGridNode.swift */; };
+		0B6919461CC5119F00046BE9 /* TutorialLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6919451CC5119F00046BE9 /* TutorialLayer.swift */; };
 		0B8DC3E81CA05D9C0055382D /* SKScene+Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8DC3E71CA05D9C0055382D /* SKScene+Background.swift */; };
 		0BD61A8E1CC27BA400A8E0EA /* MultilineLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD61A8D1CC27BA400A8E0EA /* MultilineLabelNode.swift */; };
 		6C04AE681CA86C1E00AA6423 /* DishDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C04AE671CA86C1E00AA6423 /* DishDataController.swift */; };
@@ -100,6 +101,7 @@
 		0B0A12061CB79867008BD52A /* DexItemNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DexItemNode.swift; sourceTree = "<group>"; };
 		0B0A12091CB798CA008BD52A /* DexDetailNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DexDetailNode.swift; sourceTree = "<group>"; };
 		0B0A120B1CB79DC9008BD52A /* DexGridNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DexGridNode.swift; sourceTree = "<group>"; };
+		0B6919451CC5119F00046BE9 /* TutorialLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialLayer.swift; sourceTree = "<group>"; };
 		0B8DC3E71CA05D9C0055382D /* SKScene+Background.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKScene+Background.swift"; sourceTree = "<group>"; };
 		0BD61A8D1CC27BA400A8E0EA /* MultilineLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultilineLabelNode.swift; sourceTree = "<group>"; };
 		6C04AE671CA86C1E00AA6423 /* DishDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishDataController.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				6C8F14001CBB0CAE008D5678 /* Dictionary+Map.swift */,
 				6C5CDD4B1C9DBEEF005BB83C /* DexScene.swift */,
 				0BD61A8D1CC27BA400A8E0EA /* MultilineLabelNode.swift */,
+				0B6919451CC5119F00046BE9 /* TutorialLayer.swift */,
 				0B0A12081CB79889008BD52A /* DexManager */,
 				6CA727341C9BE60700CBD165 /* GameViewController.swift */,
 				6CFF05391CB79EF7006A0DB8 /* ConstructableEngine */,
@@ -578,6 +581,7 @@
 				93D89A841CAD65BD0090CC58 /* FlavourBar.swift in Sources */,
 				0B0A120C1CB79DC9008BD52A /* DexGridNode.swift in Sources */,
 				6C04AE681CA86C1E00AA6423 /* DishDataController.swift in Sources */,
+				0B6919461CC5119F00046BE9 /* TutorialLayer.swift in Sources */,
 				CDD1066D1CA1B18800959FFD /* Eggie.swift in Sources */,
 				93C864111CC2607600C15E55 /* RunningProgressBar.swift in Sources */,
 				CDD106751CA8403700959FFD /* Collectable.swift in Sources */,

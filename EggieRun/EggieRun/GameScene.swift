@@ -38,6 +38,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let HUD_Z_POSITION: CGFloat = 50
     private static let OVERLAY_Z_POSITION: CGFloat = 100
     private static let PREGENERATED_LENGTH = UIScreen.mainScreen().bounds.width * 2
+    private static let CHALLENGE_DARKNESS_TIME = 0.25
+    private static let CHALLENGE_DARKNESS_REPEAT = 3
+    private static let CHALLENGE_EARTHQUAKE_TIME = 0.07
+    private static let CHALLENGE_EARTHQUAKE_RANGE: UInt32 = 150
+    private static let CHALLENGE_EARTHQUAKE_REPEAT = 8
     
     private static let SE_COLLECT = SKAction.playSoundFileNamed("collect-sound.mp3", waitForCompletion: false)
     private static let SE_JUMP = SKAction.playSoundFileNamed("jump-sound.mp3", waitForCompletion: false)
@@ -67,9 +72,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var pauseButton: SKSpriteNode!
     private var pausedLayer: PausedLayer?
     private var milestones: [Milestone] = Milestone.ALL_VALUES
+    private var tutorialLayer: TutorialLayer?
     private var nextMilestoneIndex = 0 {
         didSet {
-            nextMilestone = milestones[nextMilestoneIndex]
+            if nextMilestoneIndex < milestones.count {
+                nextMilestone = milestones[nextMilestoneIndex]
+            } else {
+                nextMilestone = nil
+            }
         }
     }
     private var nextMilestone: Milestone?
@@ -89,7 +99,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let touch = touches.first!
         
         if gameState == .Ready {
-            gameStart()
+            if tutorialLayer != nil {
+                let touchLocation = touch.locationInNode(tutorialLayer!)
+                if tutorialLayer!.nextPageNode.containsPoint(touchLocation) {
+                    if tutorialLayer!.currPage < TutorialLayer.tutorials.count - 1 {
+                        tutorialLayer!.getNextTutorial()
+                    }
+                } else if tutorialLayer!.prevPageNode.containsPoint(touchLocation) {
+                    if tutorialLayer!.currPage > 0 {
+                        tutorialLayer!.getPrevTutorial()
+                    }
+                } else if !tutorialLayer!.tutorialNode.containsPoint(touchLocation) {
+                    tutorialLayer!.removeFromParent()
+                    tutorialLayer = nil
+                }
+            } else {
+                gameStart()
+            }
         } else if gameState == .Over && endingLayer != nil {
             let touchLocation = touch.locationInNode(endingLayer!)
             
@@ -295,6 +321,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         nextMilestoneIndex = 0
     }
     
+    private func initializeTutorial() {
+        tutorialLayer = TutorialLayer(frameWidth: self.frame.width, frameHeight: self.frame.height)
+        tutorialLayer!.zPosition = GameScene.OVERLAY_Z_POSITION
+        addChild(tutorialLayer!)
+    }
+    
     private func updateDistance(movedDistance: Double) {
         currentDistance += Int(movedDistance)
         if (currentDistance >= nextMilestone!.requiredDistance) {
@@ -302,6 +334,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         distanceLabel.text = String(format: GameScene.DISTANCE_LABEL_TEXT, currentDistance)
     }
+    
     
     private func gameReady() {
         removeAllChildren()
@@ -317,6 +350,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initializePauseButton()
         initializeMilestone()
         
+        if DishDataController.singleton.activatedDishes.isEmpty {
+            initializeTutorial()
+        }
+        
         currentDistance = 0
         gameState = .Ready
     }
@@ -331,6 +368,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         eggie.state = .Dying
         gameState = .Over
         
+        if let action = GameScene.SE_OBSTACLES[wayOfDie] {
+            self.runAction(action)
+        }
+        
         flavourBar.removeFromParent()
         
         let (dish, isNew) = DishDataController.singleton.getResultDish(wayOfDie, condiments: flavourBar.condimentDictionary, ingredients: ingredientBar.ingredients)
@@ -339,10 +380,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         endingLayer!.zPosition = GameScene.OVERLAY_Z_POSITION
         endingLayer!.position = CGPointMake(frame.midX, frame.midY)
         addChild(endingLayer!)
-        
-        if let action = GameScene.SE_OBSTACLES[wayOfDie] {
-            self.runAction(action)
-        }
     }
     
     private func shiftClosets(distance: Double) {
@@ -509,10 +546,52 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func activateCurrentMilestone() {
-        if(nextMilestoneIndex < milestones.count - 1) {
-            runningProgressBar.activateCurrentMilestone()
-            activateMilestoneEvent()
-            nextMilestoneIndex += 1
+        runningProgressBar.activateCurrentMilestone()
+        activateMilestoneEvent()
+        nextMilestoneIndex += 1
+    }
+    
+    private func challengeDarkness() {
+        let darkOverlay = SKSpriteNode(color: UIColor.blackColor(), size: size)
+        darkOverlay.alpha = 0
+        darkOverlay.position = CGPointMake(frame.midX, frame.midY)
+        darkOverlay.zPosition = GameScene.OVERLAY_Z_POSITION
+        addChild(darkOverlay)
+        
+        let fadeInAction = SKAction.fadeInWithDuration(GameScene.CHALLENGE_DARKNESS_TIME)
+        let fadeOutAction = SKAction.fadeOutWithDuration(GameScene.CHALLENGE_DARKNESS_TIME)
+        
+        var actions: [SKAction] = []
+        for _ in 0 ..< GameScene.CHALLENGE_DARKNESS_REPEAT {
+            actions.appendContentsOf([fadeInAction, fadeOutAction])
+        }
+        
+        darkOverlay.runAction(SKAction.sequence(actions), completion: {
+            darkOverlay.removeFromParent()
+        })
+    }
+    
+    private func challengeEarthquake() {
+        var actions: [SKAction] = []
+        for _ in 0 ..< GameScene.CHALLENGE_EARTHQUAKE_REPEAT {
+            let dx = CGFloat(arc4random() % GameScene.CHALLENGE_EARTHQUAKE_RANGE)
+            let dy = CGFloat(arc4random() % GameScene.CHALLENGE_EARTHQUAKE_RANGE)
+            actions.append(SKAction.moveByX(dx, y: dy, duration: GameScene.CHALLENGE_EARTHQUAKE_TIME))
+            actions.append(SKAction.moveByX(-dx, y: -dy, duration: GameScene.CHALLENGE_EARTHQUAKE_TIME))
+        }
+        let sequenceAction = SKAction.sequence(actions)
+        
+        for closet in closets {
+            closet.runAction(sequenceAction)
+        }
+        for shelf in shelves {
+            shelf.runAction(sequenceAction)
+        }
+        for obstacle in obstacles {
+            obstacle.runAction(sequenceAction)
+        }
+        for collectable in collectables {
+            collectable.runAction(sequenceAction)
         }
     }
     
@@ -525,15 +604,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case .PresentOven:
             availableCookers.append(.Oven)
         case .ChallengeDarkness:
-            print("dark!")
+            challengeDarkness()
         case .PresentPan:
             availableCookers.append(.Pan)
         case .ChallengeQuake:
-            print("earth quake!")
+            challengeEarthquake()
         case .IncreasePot:
             obstacleRate = GameScene.OBSTACLE_RATE_HIGH
         case .EndOyakodon:
-            print("oyakodon!")
+            gameOver(.DistanceForceDeath)
         }
     }
 }

@@ -17,7 +17,9 @@ class RunningProgressBar: SKSpriteNode {
     
     private var barLength: CGFloat
     private var distance = 0
+    private var progressBar: SKCropNode!
     private var distanceBar: SKSpriteNode!
+    private var backgroundBar: SKSpriteNode!
     private let milestones: [Milestone]
     private var milestoneBubbles = [SKSpriteNode]()
     private var nextIndex = 0 {
@@ -32,9 +34,12 @@ class RunningProgressBar: SKSpriteNode {
     init(length: CGFloat, allMilestones: [Milestone]) {
         barLength = length
         milestones = allMilestones
-        super.init(texture: nil, color: UIColor.grayColor(), size: CGSizeMake(barLength, RunningProgressBar.BAR_HEIGHT))
+        //super.init()
+        //super.init(texture: nil, color: UIColor.lightGrayColor(), size: CGSizeMake(barLength, RunningProgressBar.BAR_HEIGHT))
+        super.init(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(barLength, RunningProgressBar.BAR_HEIGHT))
         anchorPoint.x = 0
         anchorPoint.y = 1
+        //maskNode = SKSpriteNode(imageNamed: "progress-bar-mask")
         initializeBar()
         initializeMilestones()
         nextMilestone = milestones[nextIndex]
@@ -42,10 +47,20 @@ class RunningProgressBar: SKSpriteNode {
     }
     
     private func initializeBar() {
+        /*
         distanceBar = SKSpriteNode(color: UIColor.whiteColor(), size: CGSizeMake(getNewDistanceBarLength(), RunningProgressBar.BAR_HEIGHT))
         distanceBar.anchorPoint.x = 0
         distanceBar.anchorPoint.y = 1
-        addChild(distanceBar)
+*/
+        progressBar = SKCropNode()
+        progressBar.maskNode = SKSpriteNode(imageNamed: "progress-bar-mask")
+        distanceBar = SKSpriteNode(color: UIColor.whiteColor(), size: CGSizeMake(getNewDistanceBarLength(), RunningProgressBar.BAR_HEIGHT))
+        progressBar.addChild(distanceBar)
+        backgroundBar = SKSpriteNode(texture: nil, color: UIColor.lightGrayColor(), size: CGSizeMake(barLength, RunningProgressBar.BAR_HEIGHT))
+        distanceBar.anchorPoint = CGPointMake(0, 1)
+        backgroundBar.anchorPoint = CGPointMake(0, 1)
+        addChild(progressBar)
+        addChild(backgroundBar)
     }
     
     private func initializeMilestones() {
