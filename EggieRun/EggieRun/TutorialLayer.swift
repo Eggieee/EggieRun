@@ -20,7 +20,7 @@ class TutorialLayer: SKNode {
     private let midX: CGFloat
     private let midY: CGFloat
     
-    private var tutorialNode: SKSpriteNode
+    var tutorialNode: SKSpriteNode
     let nextPageNode: SKSpriteNode
     let prevPageNode: SKSpriteNode
     var currPage: Int
