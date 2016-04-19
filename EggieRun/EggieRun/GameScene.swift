@@ -404,18 +404,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         currentDistance = 0
         gameState = .Ready
-        
-        let a = TrueEndLayer(frame: frame)
-        a.zPosition = GameScene.TRUE_END_LAYER_Z_POSITION
-        a.position = CGPointMake(0, 0)
-        addChild(a)
-        a.animate()
-        
-        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "test", userInfo: nil, repeats: false)
-    }
-    
-    func test() {
-        gameOver(.DistanceForceDeath)
     }
     
     private func gameStart() {
@@ -686,8 +674,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    private func addDarknessOverlay() {
- 
+    private func endOyakodon() {
+        let endLayer = TrueEndLayer(frame: frame)
+        endLayer.zPosition = GameScene.TRUE_END_LAYER_Z_POSITION
+        endLayer.position = CGPointMake(0, 0)
+        addChild(endLayer)
+        endLayer.animate()
+        
+        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "endDistanceForceDeath", userInfo: nil, repeats: false)
+    }
+    
+    func endDistanceForceDeath() {
+        gameOver(.DistanceForceDeath)
     }
     
     private func activateMilestoneEvent() {
@@ -707,7 +705,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case .IncreasePot:
             obstacleRate = GameScene.OBSTACLE_RATE_HIGH
         case .EndOyakodon:
-            gameOver(.DistanceForceDeath)
+            endOyakodon()
         }
     }
 }
