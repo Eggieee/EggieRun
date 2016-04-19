@@ -13,8 +13,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // Constants
     private static let BACKGROUND_IMAGE_NAME = "default-background"
-    private static let PAUSE_BUTTON_IMAGE_NAME = "button-pause"
-    private static let PAUSE_BUTTON_SIZE = CGSizeMake(100, 100)
+    private static let HELP_BUTTON_IMAGE_NAME = "help"
+    private static let HELP_BUTTON_SIZE = CGSizeMake(80, 80)
+    private static let HELP_BUTTON_TOP_OFFSET: CGFloat = 50
+    private static let HELP_BUTTON_RIGHT_OFFSET: CGFloat = 150
+    
+    private static let PAUSE_BUTTON_IMAGE_NAME = "pause"
+    private static let PAUSE_BUTTON_SIZE = CGSizeMake(80, 80)
     private static let PAUSE_BUTTON_TOP_OFFSET: CGFloat = 50
     private static let PAUSE_BUTTON_RIGHT_OFFSET: CGFloat = 50
     private static let DISTANCE_LABEL_TEXT = "Distance: %dm"
@@ -69,6 +74,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var lastUpdatedTime: CFTimeInterval!
     private var endingLayer: EndingLayer?
     private var pauseButton: SKSpriteNode!
+    private var helpButton: SKSpriteNode!
     private var pausedLayer: PausedLayer?
     private var milestones: [Milestone] = Milestone.ALL_VALUES
     private var tutorialLayer: TutorialLayer?
@@ -316,6 +322,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(pauseButton)
     }
     
+    private func initializeHelpButton() {
+        helpButton = SKSpriteNode(imageNamed: GameScene.HELP_BUTTON_IMAGE_NAME)
+        helpButton.size = GameScene.HELP_BUTTON_SIZE
+        helpButton.anchorPoint = CGPointMake(1, 1)
+        helpButton.position = CGPointMake(scene!.frame.maxX - GameScene.HELP_BUTTON_RIGHT_OFFSET, scene!.frame.maxY - GameScene.HELP_BUTTON_TOP_OFFSET)
+        helpButton.hidden = true
+        addChild(helpButton)
+    }
+    
     private func initializeMilestone() {
         nextMilestoneIndex = 0
     }
@@ -347,6 +362,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initializeCollectableBars()
         initializeRunningProgressBar()
         initializePauseButton()
+        initializeHelpButton()
         initializeMilestone()
         
         if DishDataController.singleton.activatedDishes.isEmpty {
@@ -359,6 +375,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func gameStart() {
         pauseButton.hidden = false
+        helpButton.hidden = false
         eggie.state = .Running
         gameState = .Playing
     }
