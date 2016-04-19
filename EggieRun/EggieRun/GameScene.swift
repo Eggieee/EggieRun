@@ -33,9 +33,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let BUFFER_DISTANCE = 400.0
     private static let COLLECTABLE_BUFFER_DISTANCE: CGFloat = 200
     private static let INGREDIENT_BAR_X_OFFSET: CGFloat = 18
-    private static let INGREDIENT_BAR_Y_OFFSET: CGFloat = 38
+    private static let INGREDIENT_BAR_Y_OFFSET: CGFloat = 45
     private static let PROGRESS_BAR_X_OFFSET: CGFloat = 18
-    private static let PROGRESS_BAR_Y_OFFSET: CGFloat = 23
+    private static let PROGRESS_BAR_Y_OFFSET: CGFloat = 26
     private static let FLAVOUR_BAR_OFFSET: CGFloat = 100
     private static let LEFT_FRAME_OFFSET: CGFloat = 400
     private static let TOP_FRAME_OFFSET: CGFloat = 800
