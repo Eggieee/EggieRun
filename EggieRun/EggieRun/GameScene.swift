@@ -13,8 +13,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // Constants
     private static let BACKGROUND_IMAGE_NAME = "default-background"
-    private static let PAUSE_BUTTON_IMAGE_NAME = "button-pause"
-    private static let PAUSE_BUTTON_SIZE = CGSizeMake(100, 100)
+    private static let HELP_BUTTON_IMAGE_NAME = "help"
+    private static let HELP_BUTTON_SIZE = CGSizeMake(80, 80)
+    private static let HELP_BUTTON_TOP_OFFSET: CGFloat = 50
+    private static let HELP_BUTTON_RIGHT_OFFSET: CGFloat = 50
+    
+    private static let PAUSE_BUTTON_IMAGE_NAME = "pause"
+    private static let PAUSE_BUTTON_SIZE = CGSizeMake(80, 80)
     private static let PAUSE_BUTTON_TOP_OFFSET: CGFloat = 50
     private static let PAUSE_BUTTON_RIGHT_OFFSET: CGFloat = 50
     private static let DISTANCE_LABEL_TEXT = "Distance: %dm"
@@ -38,11 +43,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let HUD_Z_POSITION: CGFloat = 50
     private static let OVERLAY_Z_POSITION: CGFloat = 100
     private static let PREGENERATED_LENGTH = UIScreen.mainScreen().bounds.width * 2
+    
+    private static let CHALLENGE_ROLL_MIN_DISTANCE: UInt32 = 1000
+    private static let CHALLENGE_ROLL_MAX_DISTANCE: UInt32 = 10000
     private static let CHALLENGE_DARKNESS_TIME = 0.25
     private static let CHALLENGE_DARKNESS_REPEAT = 3
+    private static let CHALLENGE_DARKNESS_ACTION_KEY = "challenge-darkness"
     private static let CHALLENGE_EARTHQUAKE_TIME = 0.07
     private static let CHALLENGE_EARTHQUAKE_RANGE: UInt32 = 150
     private static let CHALLENGE_EARTHQUAKE_REPEAT = 8
+    private static let CHALLENGE_EARTHQUAKE_ACTION_KEY = "challenge-earthquake"
     
     private static let SE_COLLECT = SKAction.playSoundFileNamed("collect-sound.mp3", waitForCompletion: false)
     private static let SE_JUMP = SKAction.playSoundFileNamed("jump-sound.mp3", waitForCompletion: false)
@@ -70,6 +80,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var lastUpdatedTime: CFTimeInterval!
     private var endingLayer: EndingLayer?
     private var pauseButton: SKSpriteNode!
+    private var helpButton: SKSpriteNode!
     private var pausedLayer: PausedLayer?
     private var milestones: [Milestone] = Milestone.ALL_VALUES
     private var tutorialLayer: TutorialLayer?
@@ -86,6 +97,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var availableCookers = [Cooker]()
     private var obstacleRate: Double!
     private var isCookerIncreased = false
+    private var nextDarknessChallengeDistance = 0
+    private var nextEarthquakeChallengeDistance = 0
+    private var darknessOverlay: SKSpriteNode?
+    private var earthquakeNodes = [SKNode]()
 
     override func didMoveToView(view: SKView) {
         GameScene.instance = self
@@ -99,7 +114,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let touch = touches.first!
         
         if gameState == .Ready {
-            if tutorialLayer != nil {
+            let touchLocation = touch.locationInNode(self)
+            if helpButton.containsPoint(touchLocation) {
+                initializeTutorial()
+            } else if tutorialLayer != nil {
                 let touchLocation = touch.locationInNode(tutorialLayer!)
                 if tutorialLayer!.nextPageNode.containsPoint(touchLocation) {
                     if tutorialLayer!.currPage < TutorialLayer.tutorials.count - 1 {
@@ -174,6 +192,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             shiftClosets(movedDistance)
             shiftCollectables(movedDistance)
             shiftObstacles(movedDistance)
+            
+            if nextDarknessChallengeDistance > 0 && currentDistance > nextDarknessChallengeDistance {
+                challengeDarkness()
+                nextDarknessChallengeDistance = getNextChallengeDistance(currentDistance)
+            }
+            
+            if nextEarthquakeChallengeDistance > 0 && currentDistance > nextEarthquakeChallengeDistance {
+                challengeEarthquake()
+                nextEarthquakeChallengeDistance = getNextChallengeDistance(currentDistance)
+            }
         }
     }
     
@@ -317,6 +345,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(pauseButton)
     }
     
+    private func initializeHelpButton() {
+        helpButton = SKSpriteNode(imageNamed: GameScene.HELP_BUTTON_IMAGE_NAME)
+        helpButton.size = GameScene.HELP_BUTTON_SIZE
+        helpButton.anchorPoint = CGPointMake(1, 1)
+        helpButton.position = CGPointMake(scene!.frame.maxX - GameScene.HELP_BUTTON_RIGHT_OFFSET, scene!.frame.maxY - GameScene.HELP_BUTTON_TOP_OFFSET)
+        helpButton.hidden = false
+        addChild(helpButton)
+    }
+    
     private func initializeMilestone() {
         nextMilestoneIndex = 0
     }
@@ -348,6 +385,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initializeCollectableBars()
         initializeRunningProgressBar()
         initializePauseButton()
+        initializeHelpButton()
         initializeMilestone()
         
         if DishDataController.singleton.activatedDishes.isEmpty {
@@ -360,6 +398,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func gameStart() {
         pauseButton.hidden = false
+        helpButton.hidden = true
         eggie.state = .Running
         gameState = .Playing
     }
@@ -528,6 +567,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.physicsWorld.speed = 0
             self.gameState = .Paused
             eggie.pauseAtlas()
+            if darknessOverlay != nil {
+                if let action = darknessOverlay?.actionForKey(GameScene.CHALLENGE_DARKNESS_ACTION_KEY) {
+                    action.speed = 0
+                }
+            }
+            for node in earthquakeNodes {
+                if let action = node.actionForKey(GameScene.CHALLENGE_EARTHQUAKE_ACTION_KEY) {
+                    action.speed = 0
+                }
+            }
             pausedLayer = PausedLayer(frameSize: frame.size)
             pausedLayer!.zPosition = GameScene.OVERLAY_Z_POSITION
             pausedLayer!.position = CGPointMake(frame.midX, frame.midY)
@@ -542,6 +591,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.gameState = .Playing
             self.physicsWorld.speed = 1
             eggie.unpauseAtlas()
+            if darknessOverlay != nil {
+                if let action = darknessOverlay?.actionForKey(GameScene.CHALLENGE_DARKNESS_ACTION_KEY) {
+                    action.speed = 1
+                }
+            }
+            for node in earthquakeNodes {
+                if let action = node.actionForKey(GameScene.CHALLENGE_EARTHQUAKE_ACTION_KEY) {
+                    action.speed = 1
+                }
+            }
         }
     }
     
@@ -551,12 +610,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         nextMilestoneIndex += 1
     }
     
+    private func getNextChallengeDistance(currentDistance: Int) -> Int {
+        let delta = arc4random() % (GameScene.CHALLENGE_ROLL_MAX_DISTANCE - GameScene.CHALLENGE_ROLL_MIN_DISTANCE) + GameScene.CHALLENGE_ROLL_MIN_DISTANCE
+        return currentDistance + Int(delta)
+    }
+    
     private func challengeDarkness() {
-        let darkOverlay = SKSpriteNode(color: UIColor.blackColor(), size: size)
-        darkOverlay.alpha = 0
-        darkOverlay.position = CGPointMake(frame.midX, frame.midY)
-        darkOverlay.zPosition = GameScene.OVERLAY_Z_POSITION
-        addChild(darkOverlay)
+        darknessOverlay = SKSpriteNode(color: UIColor.blackColor(), size: size)
+        darknessOverlay!.alpha = 0
+        darknessOverlay!.position = CGPointMake(frame.midX, frame.midY)
+        darknessOverlay!.zPosition = GameScene.OVERLAY_Z_POSITION - 1
+        addChild(darknessOverlay!)
         
         let fadeInAction = SKAction.fadeInWithDuration(GameScene.CHALLENGE_DARKNESS_TIME)
         let fadeOutAction = SKAction.fadeOutWithDuration(GameScene.CHALLENGE_DARKNESS_TIME)
@@ -565,13 +629,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for _ in 0 ..< GameScene.CHALLENGE_DARKNESS_REPEAT {
             actions.appendContentsOf([fadeInAction, fadeOutAction])
         }
+        actions.append(SKAction.removeFromParent())
         
-        darkOverlay.runAction(SKAction.sequence(actions), completion: {
-            darkOverlay.removeFromParent()
-        })
+        darknessOverlay!.runAction(SKAction.sequence(actions), withKey: GameScene.CHALLENGE_DARKNESS_ACTION_KEY)
     }
     
     private func challengeEarthquake() {
+        earthquakeNodes.removeAll()
+        
         var actions: [SKAction] = []
         for _ in 0 ..< GameScene.CHALLENGE_EARTHQUAKE_REPEAT {
             let dx = CGFloat(arc4random() % GameScene.CHALLENGE_EARTHQUAKE_RANGE)
@@ -582,16 +647,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let sequenceAction = SKAction.sequence(actions)
         
         for closet in closets {
-            closet.runAction(sequenceAction)
+            earthquakeNodes.append(closet)
         }
         for shelf in shelves {
-            shelf.runAction(sequenceAction)
+            earthquakeNodes.append(shelf)
         }
         for obstacle in obstacles {
-            obstacle.runAction(sequenceAction)
+            earthquakeNodes.append(obstacle)
         }
         for collectable in collectables {
-            collectable.runAction(sequenceAction)
+            earthquakeNodes.append(collectable)
+        }
+        
+        for node in earthquakeNodes {
+            node.runAction(sequenceAction, withKey: GameScene.CHALLENGE_EARTHQUAKE_ACTION_KEY)
         }
     }
     
@@ -604,11 +673,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case .PresentOven:
             availableCookers.append(.Oven)
         case .ChallengeDarkness:
-            challengeDarkness()
+            nextDarknessChallengeDistance = currentDistance
         case .PresentPan:
             availableCookers.append(.Pan)
         case .ChallengeQuake:
-            challengeEarthquake()
+            nextEarthquakeChallengeDistance = currentDistance
         case .IncreasePot:
             obstacleRate = GameScene.OBSTACLE_RATE_HIGH
         case .EndOyakodon:
