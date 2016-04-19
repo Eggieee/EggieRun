@@ -41,6 +41,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let TOP_FRAME_OFFSET: CGFloat = 800
     private static let COLLECTABLE_SIZE = CGSizeMake(80, 80)
     private static let HUD_Z_POSITION: CGFloat = 50
+    private static let TRUE_END_LAYER_Z_POSITION: CGFloat = 75
     private static let OVERLAY_Z_POSITION: CGFloat = 100
     private static let PREGENERATED_LENGTH = UIScreen.mainScreen().bounds.width * 2
     
@@ -394,6 +395,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         currentDistance = 0
         gameState = .Ready
+        
+        let a = TrueEndLayer(frame: frame)
+        a.zPosition = GameScene.TRUE_END_LAYER_Z_POSITION
+        a.position = CGPointMake(0, 0)
+        addChild(a)
+        a.animate()
+        
+        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "test", userInfo: nil, repeats: false)
+    }
+    
+    func test() {
+        gameOver(.DistanceForceDeath)
     }
     
     private func gameStart() {
@@ -662,6 +675,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for node in earthquakeNodes {
             node.runAction(sequenceAction, withKey: GameScene.CHALLENGE_EARTHQUAKE_ACTION_KEY)
         }
+    }
+    
+    private func addDarknessOverlay() {
+ 
     }
     
     private func activateMilestoneEvent() {
