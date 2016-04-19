@@ -43,6 +43,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let HUD_Z_POSITION: CGFloat = 50
     private static let OVERLAY_Z_POSITION: CGFloat = 100
     private static let PREGENERATED_LENGTH = UIScreen.mainScreen().bounds.width * 2
+    
+    private static let CHALLENGE_ROLL_MIN_DISTANCE: UInt32 = 1000
+    private static let CHALLENGE_ROLL_MAX_DISTANCE: UInt32 = 10000
     private static let CHALLENGE_DARKNESS_TIME = 0.25
     private static let CHALLENGE_DARKNESS_REPEAT = 3
     private static let CHALLENGE_EARTHQUAKE_TIME = 0.07
@@ -92,6 +95,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var availableCookers = [Cooker]()
     private var obstacleRate: Double!
     private var isCookerIncreased = false
+    private var nextDarknessChallengeDistance = 0
+    private var nextEarthquakeChallengeDistance = 0
 
     override func didMoveToView(view: SKView) {
         GameScene.instance = self
@@ -183,6 +188,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             shiftClosets(movedDistance)
             shiftCollectables(movedDistance)
             shiftObstacles(movedDistance)
+            
+            if nextDarknessChallengeDistance > 0 && currentDistance > nextDarknessChallengeDistance {
+                challengeDarkness()
+                nextDarknessChallengeDistance = getNextChallengeDistance(currentDistance)
+            }
+            
+            if nextEarthquakeChallengeDistance > 0 && currentDistance > nextEarthquakeChallengeDistance {
+                challengeEarthquake()
+                nextEarthquakeChallengeDistance = getNextChallengeDistance(currentDistance)
+            }
         }
     }
     
@@ -571,6 +586,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         nextMilestoneIndex += 1
     }
     
+    private func getNextChallengeDistance(currentDistance: Int) -> Int {
+        let delta = arc4random() % (GameScene.CHALLENGE_ROLL_MAX_DISTANCE - GameScene.CHALLENGE_ROLL_MIN_DISTANCE) + GameScene.CHALLENGE_ROLL_MIN_DISTANCE
+        return currentDistance + Int(delta)
+    }
+    
     private func challengeDarkness() {
         let darkOverlay = SKSpriteNode(color: UIColor.blackColor(), size: size)
         darkOverlay.alpha = 0
@@ -624,11 +644,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case .PresentOven:
             availableCookers.append(.Oven)
         case .ChallengeDarkness:
-            challengeDarkness()
+            nextDarknessChallengeDistance = currentDistance
         case .PresentPan:
             availableCookers.append(.Pan)
         case .ChallengeQuake:
-            challengeEarthquake()
+            nextEarthquakeChallengeDistance = currentDistance
         case .IncreasePot:
             obstacleRate = GameScene.OBSTACLE_RATE_HIGH
         case .EndOyakodon:
