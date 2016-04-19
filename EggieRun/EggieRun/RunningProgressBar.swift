@@ -13,7 +13,7 @@ import SpriteKit
 class RunningProgressBar: SKSpriteNode {
     private static let BAR_HEIGHT: CGFloat = 10
     static let MAX_DISTANCE = 100000
-    private static let BUBBLE_Y: CGFloat = 0.0
+    private static let BUBBLE_Y: CGFloat = 6.0
     private static let BACKGROUND_COLOUR = UIColor(red: 224/255.0, green: 224/255.0, blue: 224/255.0, alpha: 1)
     
     private var barLength: CGFloat
@@ -84,7 +84,7 @@ class RunningProgressBar: SKSpriteNode {
         milestoneBubbles = [SKSpriteNode]()
         for milestone in milestones {
             //let bubbleTexture = SKTexture(imageNamed: "mono-milestone-template")
-            let milestoneBubble = SKSpriteNode(imageNamed: "mono-milestone-template")
+            let milestoneBubble = SKSpriteNode(texture: milestone.monochromeTexture)
             let xPosition = CGFloat(milestone.requiredDistance) / CGFloat(RunningProgressBar.MAX_DISTANCE) * barLength
             milestoneBubble.position = CGPointMake(xPosition, RunningProgressBar.BUBBLE_Y)
             milestoneBubble.zPosition = 2
