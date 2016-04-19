@@ -13,7 +13,8 @@ class DexScene: SKScene {
     private static let TITLE_TEXT = "Éggdex"
     private static let TITLE_FONT = "Chalkduster"
     private static let TITLE_SIZE = CGFloat(40)
-    private static let TITLE_TOP_PADDING = CGFloat(20)
+    private static let TITLE_TOP_PADDING = CGFloat(15)
+    private static let TITLE_HEIGHT = CGFloat(80)
     
     private static let FLIP_BUTTON_WIDTH = CGFloat(90)
     private static let FLIP_BUTTON_HEIGHT = CGFloat(60)
@@ -21,7 +22,9 @@ class DexScene: SKScene {
     private static let PREV_BUTTON_X = CGFloat(100)
     private static let FLIP_BUTTON_Y = CGFloat(80)
     private static let DEMO_NODE_SIZE = CGFloat(50)
-    private static let BACK_BUTTON_SIZE = CGFloat(80)
+    private static let BACK_BUTTON_WIDTH = CGFloat(80)
+    private static let BACK_BUTTON_HEIGHT = CGFloat(60)
+    
     
 
     
@@ -46,19 +49,31 @@ class DexScene: SKScene {
     override func didMoveToView(view: SKView) {
         BGMPlayer.singleton.moveToStatus(.Dex)
         
+        let titleColor = UIColor(red: 185/255.0, green: 161/255.0, blue: 249/255.0, alpha: 1)
+        let titleNode = SKSpriteNode(color: titleColor, size: CGSize(width: self.frame.width, height: DexScene.TITLE_HEIGHT))
+        titleNode.position = CGPoint(x: self.frame.width/2, y: self.frame.height - DexScene.TITLE_HEIGHT/2)
+        titleNode.zPosition = 1
+        titleNode.alpha = 0.6
+        addChild(titleNode)
+        
         let titleLabel = SKLabelNode(fontNamed: DexScene.TITLE_FONT)
         titleLabel.text = DexScene.TITLE_TEXT
         titleLabel.fontSize = DexScene.TITLE_SIZE
         titleLabel.position = CGPoint(x: CGRectGetMidX(self.frame), y: self.frame.height - DexScene.TITLE_SIZE - DexScene.TITLE_TOP_PADDING)
-        self.addChild(titleLabel)
+        titleLabel.zPosition = 2
+        addChild(titleLabel)
         
         buttonBack = SKSpriteNode(imageNamed: "button-return")
-        buttonBack.size = CGSize(width: DexScene.BACK_BUTTON_SIZE, height: DexScene.BACK_BUTTON_SIZE)
-        buttonBack.position = CGPoint(x: DexScene.BACK_BUTTON_SIZE, y: self.frame.height - DexScene.BACK_BUTTON_SIZE / 2)
-        self.addChild(buttonBack)
+        buttonBack.size = CGSize(width: DexScene.BACK_BUTTON_WIDTH, height: DexScene.BACK_BUTTON_HEIGHT)
+        buttonBack.position = CGPoint(x: DexScene.BACK_BUTTON_WIDTH, y: self.frame.height - DexScene.BACK_BUTTON_HEIGHT/2 - DexScene.TITLE_TOP_PADDING)
+        buttonBack.zPosition = 2
+        addChild(buttonBack)
+        
+        changeBackground("eggdex-background")
+        
         
         gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width, dishList: DexScene.DISH_FIRST_PAGE)
-        self.addChild(gridNode)
+        addChild(gridNode)
         
         createDetailNode()
         createFlipPageNode()
@@ -70,9 +85,9 @@ class DexScene: SKScene {
     }
     
     private func createNodeForDemo() {
-        activateAll = SKSpriteNode(color: UIColor.darkGrayColor(), size: CGSize(width: DexScene.DEMO_NODE_SIZE, height: DexScene.DEMO_NODE_SIZE))
+        activateAll = SKSpriteNode(color: UIColor.clearColor(), size: CGSize(width: DexScene.DEMO_NODE_SIZE, height: DexScene.DEMO_NODE_SIZE))
         activateAll.position = CGPoint(x: self.frame.width - DexScene.TITLE_TOP_PADDING, y: self.frame.height - DexScene.TITLE_TOP_PADDING)
-        disableAll = SKSpriteNode(color: UIColor.darkGrayColor(), size: CGSize(width: DexScene.DEMO_NODE_SIZE, height: DexScene.DEMO_NODE_SIZE))
+        disableAll = SKSpriteNode(color: UIColor.clearColor(), size: CGSize(width: DexScene.DEMO_NODE_SIZE, height: DexScene.DEMO_NODE_SIZE))
         disableAll.position = CGPoint(x: self.frame.width - DexScene.TITLE_TOP_PADDING, y: DexScene.TITLE_TOP_PADDING)
     }
     
@@ -104,6 +119,7 @@ class DexScene: SKScene {
         if let particles = SKEmitterNode(fileNamed: "Snow.sks") {
             particles.position = CGPointMake(self.frame.midX, self.frame.maxY)
             particles.particlePositionRange.dx = self.frame.width
+            particles.zPosition = 10
             addChild(particles)
         }
     }
