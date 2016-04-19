@@ -16,7 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let HELP_BUTTON_IMAGE_NAME = "help"
     private static let HELP_BUTTON_SIZE = CGSizeMake(80, 80)
     private static let HELP_BUTTON_TOP_OFFSET: CGFloat = 50
-    private static let HELP_BUTTON_RIGHT_OFFSET: CGFloat = 150
+    private static let HELP_BUTTON_RIGHT_OFFSET: CGFloat = 50
     
     private static let PAUSE_BUTTON_IMAGE_NAME = "pause"
     private static let PAUSE_BUTTON_SIZE = CGSizeMake(80, 80)
@@ -105,7 +105,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let touch = touches.first!
         
         if gameState == .Ready {
-            if tutorialLayer != nil {
+            let touchLocation = touch.locationInNode(self)
+            if helpButton.containsPoint(touchLocation) {
+                initializeTutorial()
+            } else if tutorialLayer != nil {
                 let touchLocation = touch.locationInNode(tutorialLayer!)
                 if tutorialLayer!.nextPageNode.containsPoint(touchLocation) {
                     if tutorialLayer!.currPage < TutorialLayer.tutorials.count - 1 {
@@ -328,7 +331,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         helpButton.size = GameScene.HELP_BUTTON_SIZE
         helpButton.anchorPoint = CGPointMake(1, 1)
         helpButton.position = CGPointMake(scene!.frame.maxX - GameScene.HELP_BUTTON_RIGHT_OFFSET, scene!.frame.maxY - GameScene.HELP_BUTTON_TOP_OFFSET)
-        helpButton.hidden = true
+        helpButton.hidden = false
         addChild(helpButton)
     }
     
@@ -376,7 +379,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func gameStart() {
         pauseButton.hidden = false
-        helpButton.hidden = false
+        helpButton.hidden = true
         eggie.state = .Running
         gameState = .Playing
     }
