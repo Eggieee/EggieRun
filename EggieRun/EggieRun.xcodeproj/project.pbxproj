@@ -39,7 +39,6 @@
 		6CA727381C9BE60700CBD165 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CA727361C9BE60700CBD165 /* Main.storyboard */; };
 		6CA7273D1C9BE60700CBD165 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CA7273B1C9BE60700CBD165 /* LaunchScreen.storyboard */; };
 		6CA727481C9BE60700CBD165 /* EggieRunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA727471C9BE60700CBD165 /* EggieRunTests.swift */; };
-		6CA727531C9BE60700CBD165 /* EggieRunUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA727521C9BE60700CBD165 /* EggieRunUITests.swift */; };
 		6CB67C501CC4DA000051C105 /* pan-sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6CB67C4F1CC4DA000051C105 /* pan-sound.mp3 */; };
 		6CB67C521CC4DB090051C105 /* drop-sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6CB67C511CC4DB090051C105 /* drop-sound.mp3 */; };
 		6CC20FA21CA6D10E00B8CE30 /* RandomPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC20FA11CA6D10E00B8CE30 /* RandomPool.swift */; };
@@ -92,13 +91,6 @@
 			remoteGlobalIDString = 6CA7272A1C9BE60600CBD165;
 			remoteInfo = EggieRun;
 		};
-		6CA7274F1C9BE60700CBD165 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6CA727231C9BE60600CBD165 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6CA7272A1C9BE60600CBD165;
-			remoteInfo = EggieRun;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -138,9 +130,6 @@
 		6CA727431C9BE60700CBD165 /* EggieRunTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EggieRunTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CA727471C9BE60700CBD165 /* EggieRunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EggieRunTests.swift; sourceTree = "<group>"; };
 		6CA727491C9BE60700CBD165 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6CA7274E1C9BE60700CBD165 /* EggieRunUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EggieRunUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		6CA727521C9BE60700CBD165 /* EggieRunUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EggieRunUITests.swift; sourceTree = "<group>"; };
-		6CA727541C9BE60700CBD165 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6CB67C4F1CC4DA000051C105 /* pan-sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "pan-sound.mp3"; sourceTree = "<group>"; };
 		6CB67C511CC4DB090051C105 /* drop-sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "drop-sound.mp3"; sourceTree = "<group>"; };
 		6CC20FA11CA6D10E00B8CE30 /* RandomPool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomPool.swift; sourceTree = "<group>"; };
@@ -193,13 +182,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		6CA727401C9BE60700CBD165 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6CA7274B1C9BE60700CBD165 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -270,7 +252,6 @@
 			children = (
 				6CA7272D1C9BE60600CBD165 /* EggieRun */,
 				6CA727461C9BE60700CBD165 /* EggieRunTests */,
-				6CA727511C9BE60700CBD165 /* EggieRunUITests */,
 				6CA7272C1C9BE60600CBD165 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -280,7 +261,6 @@
 			children = (
 				6CA7272B1C9BE60600CBD165 /* EggieRun.app */,
 				6CA727431C9BE60700CBD165 /* EggieRunTests.xctest */,
-				6CA7274E1C9BE60700CBD165 /* EggieRunUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -319,15 +299,6 @@
 				6CA727491C9BE60700CBD165 /* Info.plist */,
 			);
 			path = EggieRunTests;
-			sourceTree = "<group>";
-		};
-		6CA727511C9BE60700CBD165 /* EggieRunUITests */ = {
-			isa = PBXGroup;
-			children = (
-				6CA727521C9BE60700CBD165 /* EggieRunUITests.swift */,
-				6CA727541C9BE60700CBD165 /* Info.plist */,
-			);
-			path = EggieRunUITests;
 			sourceTree = "<group>";
 		};
 		6CE99C771CA05747006F960B /* Models */ = {
@@ -488,24 +459,6 @@
 			productReference = 6CA727431C9BE60700CBD165 /* EggieRunTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		6CA7274D1C9BE60700CBD165 /* EggieRunUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6CA7275D1C9BE60700CBD165 /* Build configuration list for PBXNativeTarget "EggieRunUITests" */;
-			buildPhases = (
-				6CA7274A1C9BE60700CBD165 /* Sources */,
-				6CA7274B1C9BE60700CBD165 /* Frameworks */,
-				6CA7274C1C9BE60700CBD165 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				6CA727501C9BE60700CBD165 /* PBXTargetDependency */,
-			);
-			name = EggieRunUITests;
-			productName = EggieRunUITests;
-			productReference = 6CA7274E1C9BE60700CBD165 /* EggieRunUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -525,11 +478,6 @@
 						DevelopmentTeam = MW3CFV3PNJ;
 						TestTargetID = 6CA7272A1C9BE60600CBD165;
 					};
-					6CA7274D1C9BE60700CBD165 = {
-						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 3DR8Z46989;
-						TestTargetID = 6CA7272A1C9BE60600CBD165;
-					};
 				};
 			};
 			buildConfigurationList = 6CA727261C9BE60600CBD165 /* Build configuration list for PBXProject "EggieRun" */;
@@ -547,7 +495,6 @@
 			targets = (
 				6CA7272A1C9BE60600CBD165 /* EggieRun */,
 				6CA727421C9BE60700CBD165 /* EggieRunTests */,
-				6CA7274D1C9BE60700CBD165 /* EggieRunUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -587,13 +534,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C48A9211CC6A112002DFAB8 /* TestConstructables.plist in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6CA7274C1C9BE60700CBD165 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,14 +605,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6CA7274A1C9BE60700CBD165 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6CA727531C9BE60700CBD165 /* EggieRunUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -680,11 +612,6 @@
 			isa = PBXTargetDependency;
 			target = 6CA7272A1C9BE60600CBD165 /* EggieRun */;
 			targetProxy = 6CA727441C9BE60700CBD165 /* PBXContainerItemProxy */;
-		};
-		6CA727501C9BE60700CBD165 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6CA7272A1C9BE60600CBD165 /* EggieRun */;
-			targetProxy = 6CA7274F1C9BE60700CBD165 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -848,37 +775,6 @@
 			};
 			name = Release;
 		};
-		6CA7275E1C9BE60700CBD165 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				INFOPLIST_FILE = EggieRunUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.eggieee.EggieRunUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_TARGET_NAME = EggieRun;
-				USES_XCTRUNNER = YES;
-			};
-			name = Debug;
-		};
-		6CA7275F1C9BE60700CBD165 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = EggieRunUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.eggieee.EggieRunUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_TARGET_NAME = EggieRun;
-				USES_XCTRUNNER = YES;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -905,15 +801,6 @@
 			buildConfigurations = (
 				6CA7275B1C9BE60700CBD165 /* Debug */,
 				6CA7275C1C9BE60700CBD165 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6CA7275D1C9BE60700CBD165 /* Build configuration list for PBXNativeTarget "EggieRunUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6CA7275E1C9BE60700CBD165 /* Debug */,
-				6CA7275F1C9BE60700CBD165 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

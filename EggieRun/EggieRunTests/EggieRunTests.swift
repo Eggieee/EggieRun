@@ -35,11 +35,4 @@ class EggieRunTests: XCTestCase {
 //        XCTAssertEqual(DishDataController.singleton.getResultDish(.Pot, condiments: [.Sugar: 1], ingredients: []).0.id, -4)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
 }
