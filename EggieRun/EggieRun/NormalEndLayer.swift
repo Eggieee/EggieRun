@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class EndingLayer: SKSpriteNode {
+class NormalEndLayer: SKSpriteNode {
     private var dish: Dish
     private var background: SKSpriteNode!
     private var bar: SKSpriteNode!

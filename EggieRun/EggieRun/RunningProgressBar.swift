@@ -13,10 +13,12 @@ import SpriteKit
 class RunningProgressBar: SKSpriteNode {
     private static let BAR_HEIGHT: CGFloat = 10
     static let MAX_DISTANCE = 100000
-    private static let BUBBLE_Y: CGFloat = 0.0
+    private static let BUBBLE_Y: CGFloat = 6.0
+    private static let BACKGROUND_COLOUR = UIColor(red: 224/255.0, green: 224/255.0, blue: 224/255.0, alpha: 1)
     
     private var barLength: CGFloat
     private var distance = 0
+    private var barBorder: SKSpriteNode!
     private var progressBar: SKCropNode!
     private var distanceBar: SKSpriteNode!
     private var backgroundBar: SKSpriteNode!
@@ -52,24 +54,40 @@ class RunningProgressBar: SKSpriteNode {
         distanceBar.anchorPoint.x = 0
         distanceBar.anchorPoint.y = 1
 */
+        barBorder = SKSpriteNode(imageNamed: "progress-bar-border")
+        barBorder.anchorPoint = CGPointMake(0, 1)
+        barBorder.size.width = barLength
+        barBorder.position.y = 2.5
+        barBorder.zPosition = 1
+        addChild(barBorder)
+        
         progressBar = SKCropNode()
-        progressBar.maskNode = SKSpriteNode(imageNamed: "progress-bar-mask")
+        progressBar.zPosition = 1
+        let maskNode = SKSpriteNode(imageNamed: "progress-bar-mask")
+        maskNode.anchorPoint = CGPointMake(0, 1)
+        maskNode.size.width = barLength
+        progressBar.maskNode = maskNode
         distanceBar = SKSpriteNode(color: UIColor.whiteColor(), size: CGSizeMake(getNewDistanceBarLength(), RunningProgressBar.BAR_HEIGHT))
-        progressBar.addChild(distanceBar)
-        backgroundBar = SKSpriteNode(texture: nil, color: UIColor.lightGrayColor(), size: CGSizeMake(barLength, RunningProgressBar.BAR_HEIGHT))
+        distanceBar.zPosition = 0
+        
+        backgroundBar = SKSpriteNode(texture: nil, color: RunningProgressBar.BACKGROUND_COLOUR, size: CGSizeMake(barLength, RunningProgressBar.BAR_HEIGHT))
+        backgroundBar.zPosition = 0
+        
         distanceBar.anchorPoint = CGPointMake(0, 1)
         backgroundBar.anchorPoint = CGPointMake(0, 1)
         addChild(progressBar)
-        addChild(backgroundBar)
+        progressBar.addChild(backgroundBar)
+        progressBar.addChild(distanceBar)
     }
     
     private func initializeMilestones() {
         milestoneBubbles = [SKSpriteNode]()
         for milestone in milestones {
             //let bubbleTexture = SKTexture(imageNamed: "mono-milestone-template")
-            let milestoneBubble = SKSpriteNode(imageNamed: "mono-milestone-template")
+            let milestoneBubble = SKSpriteNode(texture: milestone.monochromeTexture)
             let xPosition = CGFloat(milestone.requiredDistance) / CGFloat(RunningProgressBar.MAX_DISTANCE) * barLength
             milestoneBubble.position = CGPointMake(xPosition, RunningProgressBar.BUBBLE_Y)
+            milestoneBubble.zPosition = 2
             milestoneBubbles.append(milestoneBubble)
             addChild(milestoneBubble)
         }
