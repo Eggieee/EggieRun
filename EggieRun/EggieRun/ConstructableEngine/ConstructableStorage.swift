@@ -78,6 +78,7 @@ class ConstructableStorage<C: Constructable> {
     
     func clearActivated() -> Bool {
         activationSet.removeAll()
+        newFlagSet.removeAll()
         return writeData()
     }
     

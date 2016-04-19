@@ -18,6 +18,9 @@ class ConstructableEngine<C: Constructable> {
         return storage.activationSet.map({ constructableIdsMap[$0]! })
     }
     
+    // dataUrl should point to a plist file which is a Array.
+    // Each element in the array should be a Dictionary which will be used to
+    // initialize a Constructable
     init(dataUrl: NSURL, storageFileName: String) {
         NSLog("Initializing ConstructableEngine from dataUrl %@", dataUrl)
         
@@ -31,7 +34,7 @@ class ConstructableEngine<C: Constructable> {
         storage = ConstructableStorage<C>(storageFileName: storageFileName)
     }
     
-    
+    // The tuple returned is (ConstructableResult: C, isFirstTime: Bool)
     func getConstructResult(resources: [Int: Int]) -> (C, Bool) {
         let randomPool = RandomPool<C>()
         
