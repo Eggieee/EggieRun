@@ -73,7 +73,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var flavourBar: FlavourBar!
     private var runningProgressBar: RunningProgressBar!
     private var gameState: GameState = .Ready
-    private var distanceLabel: SKLabelNode!
     private var currentDistance = 0
     private var closets: [Closet]!
     private var shelves: [Shelf]!
@@ -285,14 +284,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsBody!.contactTestBitMask = BitMaskCategory.hero
     }
     
-    private func initializeDistanceLabel() {
-        distanceLabel = SKLabelNode(fontNamed: GlobalConstants.fontName)
-        distanceLabel.fontSize = GameScene.HEADER_FONT_SIZE
-        distanceLabel.text = String(format: GameScene.DISTANCE_LABEL_TEXT, 0)
-        distanceLabel.position = CGPoint(x: CGRectGetWidth(distanceLabel.frame), y: CGRectGetHeight(frame) - CGRectGetHeight(distanceLabel.frame))
-        addChild(distanceLabel)
-    }
-    
     private func initializeObstacle() {
         availableCookers = [Cooker]()
         obstacleRate = GameScene.OBSTACLE_RATE_LOW
@@ -379,14 +370,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if nextMilestone != nil && currentDistance >= nextMilestone!.requiredDistance {
             activateCurrentMilestone()
         }
-        distanceLabel.text = String(format: GameScene.DISTANCE_LABEL_TEXT, currentDistance)
     }
     
     
     private func gameReady() {
         removeAllChildren()
         changeBackground(GameScene.BACKGROUND_IMAGE_NAME)
-        initializeDistanceLabel()
         initializeObstacle()
         initialzieCollectable()
         initializeCloset()
