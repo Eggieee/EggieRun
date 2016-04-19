@@ -672,7 +672,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(endLayer)
         endLayer.animate()
         
-        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(GameScene.endDistanceForceDeath), userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "endDistanceForceDeath", userInfo: nil, repeats: false)
     }
     
     func endDistanceForceDeath() {
