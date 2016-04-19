@@ -348,7 +348,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         initializeRunningProgressBar()
         initializePauseButton()
         initializeMilestone()
-        initializeTutorial()
+        
+        if DishDataController.singleton.activatedDishes.isEmpty {
+            initializeTutorial()
+        }
         
         currentDistance = 0
         gameState = .Ready

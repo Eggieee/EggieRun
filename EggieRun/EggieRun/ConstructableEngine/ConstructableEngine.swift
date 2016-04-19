@@ -11,19 +11,26 @@ import Foundation
 class ConstructableEngine<C: Constructable> {
     
     private(set) var constructables = [C]()
+    private var constructableIdsMap = [Int: C]()
     private let storage: ConstructableStorage<C>
+    
+    var activatedConstructables: [C] {
+        return storage.activationSet.map({ constructableIdsMap[$0]! })
+    }
     
     init(dataUrl: NSURL, storageFileName: String) {
         NSLog("Initializing ConstructableEngine from dataUrl %@", dataUrl)
         
         let data = NSArray(contentsOfURL: dataUrl)!
         for element in data {
-            let itemData = element as! NSDictionary
-            constructables.append(C(data: itemData))
+            let constructable = C(data: element as! NSDictionary)
+            constructables.append(constructable)
+            constructableIdsMap[constructable.id] = constructable
         }
         
         storage = ConstructableStorage<C>(storageFileName: storageFileName)
     }
+    
     
     func getConstructResult(resources: [Int: Int]) -> (C, Bool) {
         let randomPool = RandomPool<C>()
