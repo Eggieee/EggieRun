@@ -16,11 +16,7 @@ enum Milestone: Int {
     private static let DISTANCES = [10000, 20000, 30000, 40000, 50000, 65000, 85000, 100000]
     
     var requiredDistance: Int {
-        if GlobalConstants.DEV_EASY_MODE {
-            return Milestone.DISTANCES[rawValue] / 10
-        } else {
-            return Milestone.DISTANCES[rawValue]
-        }
+        return Milestone.DISTANCES[rawValue] / GlobalConstants.DEV_DISTANCE_DIVISOR
     }
     
     private var imageNamed: String {

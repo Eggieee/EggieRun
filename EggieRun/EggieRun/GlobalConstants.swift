@@ -17,5 +17,5 @@ struct GlobalConstants {
     static let GRAVITY = CGVectorMake(0, -20)
     static let IS_DEMO = true
     
-    static let DEV_EASY_MODE = false
+    static let DEV_DISTANCE_DIVISOR = 2
 }
