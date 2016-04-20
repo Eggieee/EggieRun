@@ -14,7 +14,7 @@ class FlavourBar: SKSpriteNode {
     private static let RED_COLOUR = UIColor(red: 254.0/255, green: 89.0/255, blue: 77.0/255, alpha: 1)
     
     private static let BAR_LENGTH = CGFloat(100)
-    private static let BAR_HEIGHT = CGFloat(20)
+    private static let BAR_HEIGHT = CGFloat(15)
     
     private var sugarBar: SKSpriteNode!
     private var saltBar: SKSpriteNode!
