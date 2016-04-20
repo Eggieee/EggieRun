@@ -11,6 +11,7 @@ import SpriteKit
 class DexGridNode: SKSpriteNode {
     static private let ITEMS_PER_ROW = 4
     static private let PADDING = CGFloat(20)
+    static private let EMITTER_NODE_Z_POSITION = CGFloat(3)
     
     private var width: CGFloat
     private var height: CGFloat
@@ -47,7 +48,7 @@ class DexGridNode: SKSpriteNode {
         selectedEmitterNode.particlePositionRange.dx = itemSize
         selectedEmitterNode.particlePosition.y = -itemSize / 2
         selectedEmitterNode.hidden = true
-        selectedEmitterNode.zPosition = 3
+        selectedEmitterNode.zPosition = DexGridNode.EMITTER_NODE_Z_POSITION
         addChild(selectedEmitterNode)
     }
     
