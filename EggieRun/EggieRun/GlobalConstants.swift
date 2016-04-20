@@ -12,7 +12,7 @@ struct GlobalConstants {
     static let fontName = "Chalkduster"
     static let PHYSICS_BODY_ALPHA_THRESHOLD: Float = 0.9
     static let EGGIE_MASS: CGFloat = 1
-    static let EGGIE_MAX_SPEED = GlobalConstants.EGGIE_JUMPING_ACCELERATION.dy * 2
+    static let EGGIE_MAX_Y_SPEED = EGGIE_JUMPING_ACCELERATION.dy * 2
     static let EGGIE_JUMPING_ACCELERATION = CGVectorMake(0, 1000)
     static let GRAVITY = CGVectorMake(0, -20)
     static let IS_DEMO = true

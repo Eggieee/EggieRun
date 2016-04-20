@@ -87,7 +87,7 @@ class Eggie: SKSpriteNode {
             case .Running:
                 innerCurrentSpeed = Eggie.SPEED_RUNNING
             case .Jumping_1, .Jumping_2:
-                physicsBody!.velocity.dy = min(physicsBody!.velocity.dy + GlobalConstants.EGGIE_JUMPING_ACCELERATION.dy, GlobalConstants.EGGIE_MAX_SPEED)
+                physicsBody!.velocity.dy = min(physicsBody!.velocity.dy + GlobalConstants.EGGIE_JUMPING_ACCELERATION.dy, GlobalConstants.EGGIE_MAX_Y_SPEED)
             }
         }
     }
