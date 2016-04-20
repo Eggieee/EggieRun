@@ -7,3 +7,6 @@ In the gaming section, there will be an Eggie racing down along the kitchen tabl
 
 ## Éggdex
 In the Éggdex section, all possible dishes will be listed down here. Details about newly activated dishes could be viewed by clicking on it. For unknown dishes that user haven’t encountered in the game, there will also be hint description for user to restart a game with targets. The game is going to be supported by SpriteKit.
+
+## Tutorial
+More details and visual demo can be viewed on tutorial section by clicking ’help’ button on the top right corner before game start.
