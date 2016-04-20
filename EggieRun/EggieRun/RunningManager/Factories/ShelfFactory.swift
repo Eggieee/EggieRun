@@ -6,6 +6,10 @@
 //  Copyright © 2016 Eggieee. All rights reserved.
 //
 
+// Class: ShelfFactory
+// Description: a class computing the next shelf’s position and length based
+// on certain formula.
+
 import SpriteKit
 
 class ShelfFactory {

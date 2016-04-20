@@ -6,6 +6,10 @@
 //  Copyright © 2016 Eggieee. All rights reserved.
 //
 
+// Class: CollectableFactory
+// Description: a class computing next ingredients or condiments to generate
+// based on certain formula and current distance of running.
+
 import UIKit
 
 class CollectableFactory {

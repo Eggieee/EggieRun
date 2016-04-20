@@ -6,6 +6,10 @@
 //  Copyright © 2016 Eggieee. All rights reserved.
 //
 
+// Class: ClosetFactory
+// Description: a class computing the next closet’s position and length based 
+// on certain formula.
+
 import SpriteKit
 
 class ClosetFactory {

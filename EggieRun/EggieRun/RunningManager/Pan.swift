@@ -6,6 +6,11 @@
 //  Copyright © 2016 Eggieee. All rights reserved.
 //
 
+// Class: Pan
+// Description: a subclass of Obstacle. Eggie has to jump over it 
+// to avoid death. If Eggie is killed by a Pan, a dish will be generated 
+// by frying Eggie.
+
 import SpriteKit
 
 class Pan: Obstacle {

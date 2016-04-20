@@ -6,6 +6,12 @@
 //  Copyright © 2016 Eggieee. All rights reserved.
 //
 
+// Class: Platform
+// Description: SKSpriteNode representing closet or shelf on which the Eggie
+// can run. Closets are located at the bottom of the screen and its length 
+// varies from 400 to 3600. Shelves are located at the middle of the screen 
+// and its length varies from 210 to 1620.
+
 import SpriteKit
 
 class Platform: SKNode {

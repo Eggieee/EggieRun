@@ -6,6 +6,13 @@
 //  Copyright © 2016 Eggieee. All rights reserved.
 //
 
+// Class: Obstacle
+// Description: the superclass of all obstacles(Pot, Oven and Pan), which 
+// are all SKSpriteNode appearing on closets or shelves. It specifies all 
+// methods that an obstacle should have. It should never be instantiated, 
+// just used to keep polymorphism. We are not making it a protocol since it 
+// needs to inherit from SKNode.
+
 import SpriteKit
 
 class Obstacle: SKNode {

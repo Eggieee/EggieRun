@@ -6,6 +6,10 @@
 //  Copyright © 2016 Eggieee. All rights reserved.
 //
 
+// Class: TrueEndLayer
+// Description: the layer to be displayed when the Eggie reached to the end of the road and is
+// cooked to Oyakodon. It animates the process of Eggie evolving into Chickie.
+
 import SpriteKit
 
 class TrueEndLayer: SKNode {

@@ -6,6 +6,11 @@
 //  Copyright © 2016 Eggieee. All rights reserved.
 //
 
+// Class: Eggie
+// Description: a SKSpriteNode representing the hero of the game who runs and 
+// jumps on the platforms, collects ingredients and condiments, as well as dies 
+// to make dishes.
+
 import SpriteKit
 
 class Eggie: SKSpriteNode {
