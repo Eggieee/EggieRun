@@ -31,6 +31,10 @@ class DexScene: SKScene {
     private static let NORMAL_ALPHA = CGFloat(1)
     private static let SPECIAL_ALPHA = CGFloat(0.5)
     
+    private static let TITLE_RED = CGFloat(185/255.0)
+    private static let TITLE_GREEN = CGFloat(161/255.0)
+    private static let TITLE_BLUE = CGFloat(249/255.0)
+    
     
     private static let DISH_FIRST_PAGE = Array(DishDataController.singleton.dishes[0..<12])
     private static let DISH_SECOND_PAGE = Array(DishDataController.singleton.dishes[12..<21])
@@ -53,7 +57,7 @@ class DexScene: SKScene {
     override func didMoveToView(view: SKView) {
         BGMPlayer.singleton.moveToStatus(.Dex)
         
-        let titleColor = UIColor(red: 185/255.0, green: 161/255.0, blue: 249/255.0, alpha: 1)
+        let titleColor = UIColor(red: DexScene.TITLE_RED, green: DexScene.TITLE_GREEN, blue: DexScene.TITLE_BLUE, alpha: DexScene.NORMAL_ALPHA)
         let titleNode = SKSpriteNode(color: titleColor, size: CGSize(width: self.frame.width, height: DexScene.TITLE_HEIGHT))
         titleNode.position = CGPoint(x: self.frame.width/2, y: self.frame.height - DexScene.TITLE_HEIGHT/2)
         titleNode.zPosition = DexScene.TITLE_NODE_Z_POSITION
@@ -88,6 +92,7 @@ class DexScene: SKScene {
         }
     }
     
+    // create disable and activate all dishes node for demostration
     private func createNodeForDemo() {
         activateAll = SKSpriteNode(color: UIColor.clearColor(), size: CGSize(width: DexScene.DEMO_NODE_SIZE, height: DexScene.DEMO_NODE_SIZE))
         activateAll.position = CGPoint(x: self.frame.width - DexScene.TITLE_TOP_PADDING, y: self.frame.height - DexScene.TITLE_TOP_PADDING)
@@ -157,7 +162,7 @@ class DexScene: SKScene {
             prevPageNode.alpha = DexScene.SPECIAL_ALPHA
         }
         
-        // click on dishes
+        // click on individual dishes
         let touchLocationInGrid = touch.locationInNode(gridNode)
         for dishNode in gridNode.dishNodes {
             if dishNode.containsPoint(touchLocationInGrid) {
@@ -167,11 +172,12 @@ class DexScene: SKScene {
             }
         }
         
-        // click on activate all
+        // click on activate all button
         if activateAll.containsPoint(touchLocation) {
             DishDataController.singleton.forceActivateAllDishes()
         }
         
+        // click on disable all button
         if disableAll.containsPoint(touchLocation) {
             DishDataController.singleton.clearActivatedDishes()
         }

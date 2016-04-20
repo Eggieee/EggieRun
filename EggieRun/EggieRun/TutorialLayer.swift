@@ -13,6 +13,8 @@ class TutorialLayer: SKNode {
     static let tutorials = ["tut1","tut2","tut3","tut4"]
     static private let TUTORIAL_WIDTH = CGFloat(600)
     static private let TUTORIAL_HEIGHT = CGFloat(450)
+    static private let NORMAL_ALPHA = CGFloat(1)
+    static private let SPECIAL_ALPHA = CGFloat(0.5)
     
     static private let FILTER = CIFilter(name: "CIBlendWithMask", withInputParameters: ["inputMaskImage": CIImage(image: UIImage(named: "tutorial-mask")!)!])
     
@@ -52,27 +54,29 @@ class TutorialLayer: SKNode {
         
         prevPageNode.position = CGPoint(x: midX - TutorialLayer.TUTORIAL_WIDTH/2 -  TutorialLayer.FLIP_BUTTON_WIDTH/2, y: midY)
         prevPageNode.size = CGSize(width: TutorialLayer.FLIP_BUTTON_WIDTH, height: TutorialLayer.FLIP_BUTTON_HEIGHT)
-        prevPageNode.alpha = 0.5
+        prevPageNode.alpha = TutorialLayer.SPECIAL_ALPHA
         addChild(prevPageNode)
     }
     
+    // // generate the next tutorial page
     func getNextTutorial() {
         if currPage < TutorialLayer.tutorials.count - 1 {
             currPage += 1
             tutorialNode.texture = SKTexture(imageNamed: TutorialLayer.tutorials[currPage])
-            prevPageNode.alpha = 1
+            prevPageNode.alpha = TutorialLayer.NORMAL_ALPHA
         } else {
-            nextPageNode.alpha = 0.5
+            nextPageNode.alpha = TutorialLayer.SPECIAL_ALPHA
         }
     }
     
+    // generate the previous tutorial page
     func getPrevTutorial() {
         if currPage > 0 {
             currPage -= 1
             tutorialNode.texture = SKTexture(imageNamed: TutorialLayer.tutorials[currPage])
-            nextPageNode.alpha = 1
+            nextPageNode.alpha = TutorialLayer.NORMAL_ALPHA
         } else {
-            prevPageNode.alpha = 0.5
+            prevPageNode.alpha = TutorialLayer.SPECIAL_ALPHA
         }
     }
     

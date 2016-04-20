@@ -17,6 +17,7 @@ class DexDetailNode: SKSpriteNode {
     private static let MINOR_OFFSET = CGFloat(20)
     private static let DISH_NAME_FONTSIZE = CGFloat(25)
     private static let DISH_DESCRIPTION_FONTSIZE = CGFloat(20)
+    private static let DISH_DESCRIPTION_LEADING = 20
     
     private let WIDTH : CGFloat
     private let HEIGHT: CGFloat
@@ -47,7 +48,7 @@ class DexDetailNode: SKSpriteNode {
         
         dishImageNode = SKSpriteNode(texture: nil)
         dishNameNode = SKLabelNode(text: "")
-        dishDescriptionNode = MultilineLabelNode(text: "", labelWidth: Int(WIDTH * DexDetailNode.WIDTH_RATIO) , pos: CGPoint(x: WIDTH / 2 + DexDetailNode.MINOR_OFFSET, y: HEIGHT / 3 - DexDetailNode.MINOR_OFFSET), fontName: "BradleyHandITCTT-Bold",fontSize: DexDetailNode.DISH_DESCRIPTION_FONTSIZE,fontColor: UIColor.blackColor(),leading: 20, alignment:.Center)
+        dishDescriptionNode = MultilineLabelNode(text: "", labelWidth: Int(WIDTH * DexDetailNode.WIDTH_RATIO) , pos: CGPoint(x: WIDTH / 2 + DexDetailNode.MINOR_OFFSET, y: HEIGHT / 3 - DexDetailNode.MINOR_OFFSET), fontName: "BradleyHandITCTT-Bold",fontSize: DexDetailNode.DISH_DESCRIPTION_FONTSIZE,fontColor: UIColor.blackColor(),leading: DexDetailNode.DISH_DESCRIPTION_LEADING, alignment:.Center)
         questionMarkNode = SKLabelNode(text: "?")
         
         effectNode = SKEffectNode()
