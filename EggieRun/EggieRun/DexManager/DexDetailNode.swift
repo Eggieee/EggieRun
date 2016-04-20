@@ -40,7 +40,7 @@ class DexDetailNode: SKSpriteNode {
         
         dishImageNode = SKSpriteNode(texture: nil)
         dishNameNode = SKLabelNode(text: "")
-        dishDescriptionNode = MultilineLabelNode(text: "", labelWidth: Int(WIDTH * 2/3) , pos: CGPoint(x: WIDTH / 2, y: HEIGHT / 3.5), fontName: "ChalkboardSE-Regular",fontSize:20,fontColor: UIColor.blackColor(),leading: 20, alignment:.Center)
+        dishDescriptionNode = MultilineLabelNode(text: "", labelWidth: Int(WIDTH * 2/3) , pos: CGPoint(x: WIDTH / 2, y: HEIGHT / 3.5), fontName: "BradleyHandITCTT-Bold",fontSize:20,fontColor: UIColor.blackColor(),leading: 20, alignment:.Center)
         questionMarkNode = SKLabelNode(text: "?")
         
         effectNode = SKEffectNode()
@@ -54,9 +54,9 @@ class DexDetailNode: SKSpriteNode {
         dishImageNode.position = CGPoint(x: WIDTH / 2, y: 7 * sceneHeight / 12)
         dishImageNode.size = CGSize(width: 2 * WIDTH / 3, height: 2 * WIDTH / 3)
         
-        dishNameNode.position = CGPoint(x: WIDTH / 2, y: HEIGHT / 3)
-        dishNameNode.fontSize = 30
-        dishNameNode.fontName = "BradleyHandITCTT-Bold"
+        dishNameNode.position = CGPoint(x: WIDTH / 2 + 10, y: HEIGHT / 3)
+        dishNameNode.fontSize = 25
+        dishNameNode.fontName = "Chalkduster"
         dishNameNode.fontColor = UIColor.brownColor()
         
         questionMarkNode.color = UIColor.whiteColor()
