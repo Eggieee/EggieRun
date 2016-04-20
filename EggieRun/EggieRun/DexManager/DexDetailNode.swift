@@ -56,7 +56,7 @@ class DexDetailNode: SKSpriteNode {
         
         dishNameNode.position = CGPoint(x: WIDTH / 2 + 10, y: HEIGHT / 3)
         dishNameNode.fontSize = 25
-        dishNameNode.fontName = "Chalkduster"
+        dishNameNode.fontName = GlobalConstants.fontName
         dishNameNode.fontColor = UIColor.brownColor()
         
         questionMarkNode.color = UIColor.whiteColor()
