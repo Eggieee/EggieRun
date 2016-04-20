@@ -11,6 +11,7 @@ import SpriteKit
 class Obstacle: SKNode {
     static let WIDTH = 180.0
     static let ATLAS_TIME_PER_FRAME = 0.05
+    static let ERROR_MESSAGE = "The class Obstacle should not be instantiated"
     
     let cookerType: Cooker!
     var isPassed = false
@@ -27,10 +28,10 @@ class Obstacle: SKNode {
     }
     
     func isDeadly(vector: CGVector, point: CGPoint) -> Bool {
-        fatalError()
+        fatalError(Obstacle.ERROR_MESSAGE)
     }
     
     func animateClose() {
-        fatalError()
+        fatalError(Obstacle.ERROR_MESSAGE)
     }
 }

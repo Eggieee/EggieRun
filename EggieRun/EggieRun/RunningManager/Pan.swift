@@ -9,16 +9,18 @@
 import SpriteKit
 
 class Pan: Obstacle {
+    private static let IMAGE_NAME_LEFT = "pan-left"
+    private static let IMAGE_NAME_RIGHT = "pan-right"
     private static let LID_HEIGHT: CGFloat = 80
-    private static let LEFT_WIDTH = Obstacle.WIDTH * 0.7
-    private static let RIGHT_WIDTH = Obstacle.WIDTH * 0.3
+    private static let WIDTH_LEFT = Obstacle.WIDTH * 0.7
+    private static let WIDTH_RIGHT = Obstacle.WIDTH * 0.3
     
     private var left: SKSpriteNode
     private var right: SKSpriteNode
     
     init() {
-        left = SKSpriteNode(imageNamed: "pan-left")
-        left.scale(Pan.LEFT_WIDTH)
+        left = SKSpriteNode(imageNamed: Pan.IMAGE_NAME_LEFT)
+        left.scale(Pan.WIDTH_LEFT)
         left.position.x = left.size.width / 2
         left.position.y = left.size.height / 2
         left.physicsBody = SKPhysicsBody(texture: left.texture!, alphaThreshold: GlobalConstants.PHYSICS_BODY_ALPHA_THRESHOLD, size: left.size)
@@ -27,8 +29,8 @@ class Pan: Obstacle {
         left.physicsBody!.collisionBitMask = BitMaskCategory.hero | BitMaskCategory.obstacle
         left.physicsBody!.dynamic = false
         
-        right = SKSpriteNode(imageNamed: "pan-right")
-        right.scale(Pan.RIGHT_WIDTH)
+        right = SKSpriteNode(imageNamed: Pan.IMAGE_NAME_RIGHT)
+        right.scale(Pan.WIDTH_RIGHT)
         right.position.x = left.size.width + right.size.width / 2
         right.position.y = right.size.height / 2 + 2
         
