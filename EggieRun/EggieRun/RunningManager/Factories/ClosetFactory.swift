@@ -13,7 +13,7 @@ class ClosetFactory {
     
     private var isFirst = true
     
-    func nextPlatform() -> Closet {
+    func nextPlatform() -> Platform {
         let numOfMid: Int
         
         if isFirst {
@@ -23,6 +23,6 @@ class ClosetFactory {
             numOfMid = Int(arc4random() % (ClosetFactory.MAX_NUM_OF_MID_PIECE + 1))
         }
         
-        return Closet(numOfMidPiece: numOfMid)
+        return Platform.makeCloset(numOfMid)
     }
 }
