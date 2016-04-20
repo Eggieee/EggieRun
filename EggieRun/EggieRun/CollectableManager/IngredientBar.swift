@@ -17,12 +17,12 @@ class IngredientBar: SKSpriteNode {
     var ingredients = [Ingredient]()
     private var ingredientGrids = [IngredientGrid]()
     private var emptyGrids = [IngredientGrid]()
-    var firstEmptyIndex: Int {
+    private var firstEmptyIndex: Int {
         get {
             return ingredients.count
         }
     }
-    var isFull: Bool {
+    private var isFull: Bool {
         get {
             return (ingredients.count >= IngredientBar.MAX_GRID_NUMBER)
         }
@@ -34,14 +34,8 @@ class IngredientBar: SKSpriteNode {
         initializeEmptyGrids()
     }
     
-    func initializeEmptyGrids() {
-        for i in 0..<IngredientBar.MAX_GRID_NUMBER {
-            let newEmptyGrid = IngredientGrid(ingredientType: nil)
-            let position = CGPointMake(CGFloat(i) * IngredientBar.X_DISTANCE + IngredientBar.X_OFFSET, 0)
-            newEmptyGrid.position = position
-            addChild(newEmptyGrid)
-            emptyGrids.append(newEmptyGrid)
-        }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func addIngredient(newIngredient: Ingredient) {
@@ -59,16 +53,26 @@ class IngredientBar: SKSpriteNode {
         updateArray(newIngredient, newGrid: newGrid, index: index)
     }
     
-    func updateEmptyGrids() {
-        emptyGrids[0].removeFromParent()
-        emptyGrids.removeFirst()
-    }
-    
     func getNextGridX(newIngredient: Ingredient) -> CGFloat {
         return CGFloat(min(firstEmptyIndex - (ingredients.contains(newIngredient) ? 1 : 0), 4)) * IngredientBar.X_DISTANCE + IngredientBar.X_OFFSET
     }
     
-    func updateBarLayout(newGrid: IngredientGrid, index: Int) {
+    private func initializeEmptyGrids() {
+        for i in 0..<IngredientBar.MAX_GRID_NUMBER {
+            let newEmptyGrid = IngredientGrid(ingredientType: nil)
+            let position = CGPointMake(CGFloat(i) * IngredientBar.X_DISTANCE + IngredientBar.X_OFFSET, 0)
+            newEmptyGrid.position = position
+            addChild(newEmptyGrid)
+            emptyGrids.append(newEmptyGrid)
+        }
+    }
+    
+    private func updateEmptyGrids() {
+        emptyGrids[0].removeFromParent()
+        emptyGrids.removeFirst()
+    }
+    
+    private func updateBarLayout(newGrid: IngredientGrid, index: Int) {
         let isDuplicate = (index != IngredientBar.IS_NOT_CONTAINED_INDEX)
         if (isDuplicate) {
             animateMovingGridByOne(index)
@@ -78,7 +82,7 @@ class IngredientBar: SKSpriteNode {
         animateAddingNewGrid(newGrid, isDuplicate: isDuplicate)
     }
     
-    func animateMovingGridByOne(startIndex: Int) {
+    private func animateMovingGridByOne(startIndex: Int) {
         for i in startIndex..<ingredients.count {
             let grid = ingredientGrids[i]
             // moving animation goes here
@@ -89,20 +93,19 @@ class IngredientBar: SKSpriteNode {
                 })
             } else {
                 let movingAction = SKAction.moveByX(-IngredientBar.X_DISTANCE, y: 0, duration: 0.5)
-                //grid.position.x -= IngredientBar.X_DISTANCE
                 grid.runAction(movingAction)
             }
         }
     }
     
-    func animateAddingNewGrid(newGrid: IngredientGrid, isDuplicate: Bool) {
+    private func animateAddingNewGrid(newGrid: IngredientGrid, isDuplicate: Bool) {
         let nextIndex = (isFull || isDuplicate) ? firstEmptyIndex-1 : firstEmptyIndex
         let position = CGPointMake(CGFloat(nextIndex) * IngredientBar.X_DISTANCE + IngredientBar.X_OFFSET, 0)
         newGrid.position = position
         addChild(newGrid)
     }
     
-    func updateArray(newIngredient: Ingredient, newGrid: IngredientGrid, index: Int) {
+    private func updateArray(newIngredient: Ingredient, newGrid: IngredientGrid, index: Int) {
         if (index != IngredientBar.IS_NOT_CONTAINED_INDEX) {
             moveGridByOne(index)
         } else if (isFull) {
@@ -112,12 +115,8 @@ class IngredientBar: SKSpriteNode {
         ingredientGrids.append(newGrid)
     }
     
-    func moveGridByOne(startIndex: Int) {
+    private func moveGridByOne(startIndex: Int) {
         ingredients.removeAtIndex(startIndex)
         ingredientGrids.removeAtIndex(startIndex)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

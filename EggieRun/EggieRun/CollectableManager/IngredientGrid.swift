@@ -13,9 +13,8 @@ class IngredientGrid: SKSpriteNode {
     private static let IMGSIZE = CGSizeMake(75, 75)
     private static let GRID_IMG_NAME = "ingredient-grid"
     
-    let ingredient: Ingredient?
-    var ingredientNode: SKSpriteNode? = nil
-    //let texture = SKTexture(imageNamed: ingredient!.flatImageNamed)
+    private let ingredient: Ingredient?
+    private var ingredientNode: SKSpriteNode? = nil
     
     init(ingredientType: Ingredient?) {
         ingredient = ingredientType
@@ -24,14 +23,14 @@ class IngredientGrid: SKSpriteNode {
         initializeIngredientNode()
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private func initializeIngredientNode() {
         ingredientNode = SKSpriteNode(texture: ingredient?.flatTexture, color: UIColor.clearColor(), size: IngredientGrid.IMGSIZE)
         ingredientNode!.position = CGPointMake(0, 0)
         ingredientNode!.zPosition = zPosition + 1
         addChild(ingredientNode!)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
