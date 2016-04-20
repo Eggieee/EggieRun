@@ -20,6 +20,7 @@ class TrueEndLayer: SKNode {
     private static let HIGHLIGHT_FILTER = CIFilter(name: "CIColorControls", withInputParameters: ["inputBrightness": 1])
     private static let ATLAS_TIME_PER_FRAME = 0.25
     private static let CHANGE_TIME = Double(CHANGE_REPEAT) * 2 * TrueEndLayer.ATLAS_TIME_PER_FRAME
+    private static let WAITING_TIME = 1.0
     private static let NAME_EGGIE = "eggie"
     private static let NAME_CHICKIE_SHADE = "chickie_shade"
     private static let NAME_CHICKIE = "chickie"
@@ -81,13 +82,16 @@ class TrueEndLayer: SKNode {
         let chickieAction = SKAction.sequence(chickieActionsArray)
         let eggieActions = SKAction.runAction(SKAction.runAction(eggieAction, onChildWithName: TrueEndLayer.NAME_EGGIE), onChildWithName: TrueEndLayer.NAME_FILTER)
         let chickieActions = SKAction.runAction(SKAction.runAction(chickieAction, onChildWithName: TrueEndLayer.NAME_CHICKIE_SHADE), onChildWithName: TrueEndLayer.NAME_FILTER)
-        let waitAction = SKAction.waitForDuration(TrueEndLayer.CHANGE_TIME)
+        let waitChangeAction = SKAction.waitForDuration(TrueEndLayer.CHANGE_TIME)
         let eggieFadeOutChangingAction = SKAction.runAction(SKAction.runAction(SKAction.removeFromParent(), onChildWithName: TrueEndLayer.NAME_EGGIE), onChildWithName: TrueEndLayer.NAME_FILTER)
         let waitChickieFadeInAction = SKAction.waitForDuration(TrueEndLayer.FADE_TIME)
         let chickieAppearAction = SKAction.runAction(SKAction.fadeInWithDuration(TrueEndLayer.FADE_TIME), onChildWithName: TrueEndLayer.NAME_CHICKIE)
         let layAction = SKAction.runAction(SKAction.setTexture(TrueEndLayer.TEXTURE_LAY), onChildWithName: TrueEndLayer.NAME_CHICKIE)
+        let clearFilterAction = SKAction.runAction(SKAction.removeFromParent(), onChildWithName: TrueEndLayer.NAME_FILTER)
+        let clearAction = SKAction.runAction(SKAction.removeFromParent(), onChildWithName: TrueEndLayer.NAME_CHICKIE)
+        let waitAction = SKAction.waitForDuration(TrueEndLayer.WAITING_TIME)
         
-        action = SKAction.sequence([fadeInAction, SKAction.group([eggieActions, chickieActions]), waitAction, eggieFadeOutChangingAction, waitChickieFadeInAction, chickieAppearAction, waitAction, layAction, waitAction])
+        action = SKAction.sequence([fadeInAction, SKAction.group([eggieActions, chickieActions]), waitChangeAction, eggieFadeOutChangingAction, waitChickieFadeInAction, chickieAppearAction, waitAction, layAction, waitAction, SKAction.group([clearFilterAction, clearAction])])
     }
     
     func animate(completion: Void -> Void) {

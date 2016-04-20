@@ -15,6 +15,12 @@ class RunningProgressBar: SKSpriteNode {
     static let MAX_DISTANCE = Milestone.ALL_VALUES.last!.requiredDistance
     private static let BUBBLE_Y: CGFloat = 6.0
     private static let BACKGROUND_COLOUR = UIColor(red: 224/255.0, green: 224/255.0, blue: 224/255.0, alpha: 1)
+    private static let MILESTONE_APPROACHING_DISTANCE = 2000
+    private static let MILESTONE_APPROACHING_DURATION = 0.25
+    private static let MILESTONE_APPROACHING_ACTION_KEY = "approaching"
+    private static let MILESTONE_APPROACHING_ENLARGE = SKAction.scaleTo(2, duration: RunningProgressBar.MILESTONE_APPROACHING_DURATION)
+    private static let MILESTONE_APPROACHING_SHRINK = SKAction.scaleTo(1, duration: RunningProgressBar.MILESTONE_APPROACHING_DURATION)
+    private static let MILESTONE_APPROACHING_ACTIONS = SKAction.sequence([MILESTONE_APPROACHING_ENLARGE, MILESTONE_APPROACHING_SHRINK])
     
     private var barLength: CGFloat
     private var distance = 0
@@ -96,7 +102,9 @@ class RunningProgressBar: SKSpriteNode {
     func updateDistance(movedDistance: Double) {
         distance += Int(movedDistance)
         distanceBar.size.width = getNewDistanceBarLength()
-        
+        if distance > nextMilestone.requiredDistance - RunningProgressBar.MILESTONE_APPROACHING_DISTANCE && nextMilestoneBubble.actionForKey(RunningProgressBar.MILESTONE_APPROACHING_ACTION_KEY) == nil {
+            nextMilestoneBubble.runAction(RunningProgressBar.MILESTONE_APPROACHING_ACTIONS, withKey: RunningProgressBar.MILESTONE_APPROACHING_ACTION_KEY)
+        }
     }
     
     func activateCurrentMilestone() {

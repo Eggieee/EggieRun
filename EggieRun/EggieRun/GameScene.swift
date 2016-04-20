@@ -110,6 +110,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         initializePhysicsProperties()
         gameReady()
+        endOyakodon()
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
