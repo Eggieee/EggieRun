@@ -38,7 +38,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let PROGRESS_BAR_Y_OFFSET: CGFloat = 26
     private static let FLAVOUR_BAR_OFFSET: CGFloat = 100
     private static let LEFT_FRAME_OFFSET: CGFloat = 400
-    private static let TOP_FRAME_OFFSET: CGFloat = 800
+    private static let TOP_FRAME_OFFSET: CGFloat = 10000
     private static let COLLECTABLE_SIZE = CGSizeMake(80, 80)
     private static let HUD_Z_POSITION: CGFloat = 50
     private static let TRUE_END_LAYER_Z_POSITION: CGFloat = 75
