@@ -393,6 +393,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         currentDistance = 0
         gameState = .Ready
+        endOyakodon()
     }
     
     private func gameStart() {
@@ -672,7 +673,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(endLayer)
         endLayer.animate()
         
-        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "endDistanceForceDeath", userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "endDistanceForceDeath", userInfo: nil, repeats: false)
     }
     
     func endDistanceForceDeath() {
