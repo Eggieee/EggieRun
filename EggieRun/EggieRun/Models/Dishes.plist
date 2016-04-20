@@ -34,7 +34,7 @@
 		<key>id</key>
 		<integer>-4</integer>
 		<key>name</key>
-		<string>Unspeakable Style Boiled Egg</string>
+		<string>Unspeakable Boiled Egg</string>
 		<key>description</key>
 		<string>A boiled egg that cannot describe.</string>
 		<key>hintDescription</key>
@@ -62,7 +62,7 @@
 		<key>id</key>
 		<integer>-3</integer>
 		<key>name</key>
-		<string>Nameless Style Baked Egg</string>
+		<string>Nameless Baked Egg</string>
 		<key>description</key>
 		<string>A baked egg that cannot describe.</string>
 		<key>hintDescription</key>
@@ -90,7 +90,7 @@
 		<key>id</key>
 		<integer>-2</integer>
 		<key>name</key>
-		<string>Amorphous Style Fried Egg</string>
+		<string>Amorphous Fried Egg</string>
 		<key>description</key>
 		<string>A fried egg that cannot describe.</string>
 		<key>hintDescription</key>

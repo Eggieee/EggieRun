@@ -15,6 +15,8 @@ class DexItemNode: SKNode {
     static private let QMARK_Z = CGFloat(3)
     static private let QMARK_FONTSIZE = CGFloat(40)
     static private let NEW_LABEL_Z_POSITION = CGFloat(5)
+    static private let NEW_LABEL_WIDTH = CGFloat(40)
+    static private let NEW_LABEL_HEIGHT = CGFloat(17)
     
     let dish: Dish
     private(set) var activated = true
@@ -50,6 +52,7 @@ class DexItemNode: SKNode {
         
         if DishDataController.singleton.isDishNew(dish) {
             let newNode = SKSpriteNode(imageNamed: "new-label")
+            newNode.size = CGSize(width: DexItemNode.NEW_LABEL_WIDTH, height: DexItemNode.NEW_LABEL_HEIGHT)
             newNode.position = CGPoint(x: size/3, y: size/3)
             newNode.zPosition = DexItemNode.NEW_LABEL_Z_POSITION
             addChild(newNode)
