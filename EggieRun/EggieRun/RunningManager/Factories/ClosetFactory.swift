@@ -13,7 +13,7 @@ class ClosetFactory {
     
     private var isFirst = true
     
-    func nextPlatform() -> Platform {
+    func next() -> Platform {
         let numOfMid: Int
         
         if isFirst {

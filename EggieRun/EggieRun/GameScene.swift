@@ -479,7 +479,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func appendNewCloset(position: CGFloat) {
-        let closet = closetFactory.nextPlatform()
+        let closet = closetFactory.next()
         closet.position.x = position
         closet.position.y = closet.baselineHeight
         closets.append(closet)
@@ -489,7 +489,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             var position = CGFloat(GameScene.BUFFER_DISTANCE)
             while position < closet.width - CGFloat(GameScene.BUFFER_DISTANCE) {
                 if Double(arc4random()) / Double(UINT32_MAX) <= obstacleRate {
-                    let obstacle = obstacleFactory.nextObstacle(availableCookers)
+                    let obstacle = obstacleFactory.next(availableCookers)
                     obstacle.position.y = closet.baselineHeight + closet.height + obstacle.heightPadding
                     obstacle.position.x = closet.position.x + position
                     obstacles.append(obstacle)
@@ -504,7 +504,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var collectablePostiom = GameScene.COLLECTABLE_BUFFER_DISTANCE
         while collectablePostiom < closet.width - GameScene.COLLECTABLE_BUFFER_DISTANCE {
             if Double(arc4random()) / Double(UINT32_MAX) <= GameScene.COLLECTABLE_RATE {
-                let collectable = collectableFactory.nextColletable(currentDistance)
+                let collectable = collectableFactory.next(currentDistance)
                 collectable.position.y = closet.baselineHeight + closet.height + Collectable.SIZE.height / 2 + GameScene.DISTANCE_CLOSET_AND_COLLECTABLE
                 collectable.position.x = closet.position.x + collectablePostiom
                 collectables.insert(collectable)
@@ -517,7 +517,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func appendNewShelf(position: CGFloat) {
-        let shelf = shelfFactory.nextPlatform()
+        let shelf = shelfFactory.next()
         shelf.position.x = position
         shelf.position.y = shelf.baselineHeight
         shelves.append(shelf)
@@ -526,7 +526,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var position = GameScene.COLLECTABLE_BUFFER_DISTANCE
         while position < shelf.width - GameScene.COLLECTABLE_BUFFER_DISTANCE {
             if Double(arc4random()) / Double(UINT32_MAX) <= GameScene.COLLECTABLE_RATE {
-                let collectable = collectableFactory.nextColletable(currentDistance)
+                let collectable = collectableFactory.next(currentDistance)
                 collectable.position.y = shelf.baselineHeight + shelf.height + Collectable.SIZE.height / 2 + GameScene.DISTANCE_SHELF_AND_COLLECTABLE
                 collectable.position.x = shelf.position.x + position
                 collectables.insert(collectable)

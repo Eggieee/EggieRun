@@ -14,7 +14,7 @@ class CollectableFactory {
     private static let RATIO_INGREDIENT = 5
     private static let RATIO_CONDIMENT = 1
     
-    func nextColletable(currentDistance: Int) -> Collectable {
+    func next(currentDistance: Int) -> Collectable {
         let random = Int(arc4random()) % (CollectableFactory.RATIO_INGREDIENT + CollectableFactory.RATIO_CONDIMENT)
         let numOfGap = CGFloat(arc4random() % CollectableFactory.MAX_NUM_OF_GAP + 1)
         let gapSize = numOfGap * CollectableFactory.UNIT_GAP_SIZE

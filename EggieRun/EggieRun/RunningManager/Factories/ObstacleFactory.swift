@@ -9,7 +9,7 @@
 import UIKit
 
 class ObstacleFactory {
-    func nextObstacle(availableCookers: [Cooker]) -> Obstacle {
+    func next(availableCookers: [Cooker]) -> Obstacle {
         let type = availableCookers[Int(arc4random()) % availableCookers.count]
         
         switch type {
