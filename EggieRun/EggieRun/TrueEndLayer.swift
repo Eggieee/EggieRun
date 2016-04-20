@@ -87,11 +87,11 @@ class TrueEndLayer: SKNode {
         let chickieAppearAction = SKAction.runAction(SKAction.fadeInWithDuration(TrueEndLayer.FADE_TIME), onChildWithName: TrueEndLayer.NAME_CHICKIE)
         let layAction = SKAction.runAction(SKAction.setTexture(TrueEndLayer.TEXTURE_LAY), onChildWithName: TrueEndLayer.NAME_CHICKIE)
         
-        action = SKAction.sequence([fadeInAction, SKAction.group([eggieActions, chickieActions]), waitAction, eggieFadeOutChangingAction, waitChickieFadeInAction, chickieAppearAction, waitAction, layAction])
+        action = SKAction.sequence([fadeInAction, SKAction.group([eggieActions, chickieActions]), waitAction, eggieFadeOutChangingAction, waitChickieFadeInAction, chickieAppearAction, waitAction, layAction, waitAction])
     }
     
-    func animate() {
-        runAction(action)
+    func animate(completion: Void -> Void) {
+        runAction(action, completion: completion)
     }
     
     required init?(coder aDecoder: NSCoder) {
