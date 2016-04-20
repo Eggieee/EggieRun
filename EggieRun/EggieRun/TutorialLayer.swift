@@ -52,17 +52,28 @@ class TutorialLayer: SKNode {
         
         prevPageNode.position = CGPoint(x: midX - TutorialLayer.TUTORIAL_WIDTH/2 -  TutorialLayer.FLIP_BUTTON_WIDTH/2, y: midY)
         prevPageNode.size = CGSize(width: TutorialLayer.FLIP_BUTTON_WIDTH, height: TutorialLayer.FLIP_BUTTON_HEIGHT)
+        prevPageNode.alpha = 0.5
         addChild(prevPageNode)
     }
     
     func getNextTutorial() {
-        currPage += 1
-        tutorialNode.texture = SKTexture(imageNamed: TutorialLayer.tutorials[currPage])
+        if currPage < TutorialLayer.tutorials.count - 1 {
+            currPage += 1
+            tutorialNode.texture = SKTexture(imageNamed: TutorialLayer.tutorials[currPage])
+            prevPageNode.alpha = 1
+        } else {
+            nextPageNode.alpha = 0.5
+        }
     }
     
     func getPrevTutorial() {
-        currPage -= 1
-        tutorialNode.texture = SKTexture(imageNamed: TutorialLayer.tutorials[currPage])
+        if currPage > 0 {
+            currPage -= 1
+            tutorialNode.texture = SKTexture(imageNamed: TutorialLayer.tutorials[currPage])
+            nextPageNode.alpha = 1
+        } else {
+            prevPageNode.alpha = 0.5
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -120,13 +120,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if tutorialLayer != nil {
                 let touchLocation = touch.locationInNode(tutorialLayer!)
                 if tutorialLayer!.nextPageNode.containsPoint(touchLocation) {
-                    if tutorialLayer!.currPage < TutorialLayer.tutorials.count - 1 {
-                        tutorialLayer!.getNextTutorial()
-                    }
+                    tutorialLayer!.getNextTutorial()
                 } else if tutorialLayer!.prevPageNode.containsPoint(touchLocation) {
-                    if tutorialLayer!.currPage > 0 {
-                        tutorialLayer!.getPrevTutorial()
-                    }
+                    tutorialLayer!.getPrevTutorial()
                 } else if !tutorialLayer!.tutorialNode.containsPoint(touchLocation) {
                     tutorialLayer!.removeFromParent()
                     tutorialBackground!.removeFromParent()
