@@ -61,7 +61,7 @@ class FlavourBar: SKSpriteNode {
         updateBar()
     }
     
-    func getSingleFlavourPercentage(condiment: Condiment) -> Float {
+    private func getSingleFlavourPercentage(condiment: Condiment) -> Float {
         switch condiment {
         case .Salt:
             return salt/condimentCount
@@ -72,7 +72,7 @@ class FlavourBar: SKSpriteNode {
         }
     }
     
-    func getSingleFlavourLength(condiment: Condiment) -> CGFloat {
+    private func getSingleFlavourLength(condiment: Condiment) -> CGFloat {
         switch condiment {
         case .Salt:
             return CGFloat(getSingleFlavourPercentage(Condiment.Salt)) * FlavourBar.BAR_LENGTH
@@ -83,7 +83,7 @@ class FlavourBar: SKSpriteNode {
         }
     }
     
-    func getSingleBarX(condiment: Condiment) -> CGFloat {
+    private func getSingleBarX(condiment: Condiment) -> CGFloat {
         switch condiment {
         case .Salt:
             return getSingleFlavourLength(Condiment.Salt)/2 - FlavourBar.BAR_LENGTH/2
@@ -106,10 +106,8 @@ class FlavourBar: SKSpriteNode {
     private func updateBar() {
         saltBar.position.x = getSingleBarX(Condiment.Salt)
         saltBar.size.width = getSingleFlavourLength(Condiment.Salt)
-        
         sugarBar.position.x = getSingleBarX(Condiment.Sugar)
         sugarBar.size.width = getSingleFlavourLength(Condiment.Sugar)
-        
         chiliBar.position.x = getSingleBarX(Condiment.Chili)
         chiliBar.size.width = getSingleFlavourLength(Condiment.Chili)
     }
