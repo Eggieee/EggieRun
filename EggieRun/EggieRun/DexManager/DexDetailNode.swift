@@ -10,6 +10,13 @@ import SpriteKit
 
 class DexDetailNode: SKSpriteNode {
     private static let QMARK_FONTSIZE = CGFloat(100)
+    private static let WIDTH_RATIO = CGFloat(2/3.0)
+    private static let HEIGHT_RATIO = CGFloat(7/12.0)
+    private static let OVERLAY_Z_POSITION = CGFloat(1)
+    private static let QUESTION_Z_POSITION = CGFloat(2)
+    private static let MINOR_OFFSET = CGFloat(10)
+    private static let DISH_NAME_FONTSIZE = CGFloat(25)
+    private static let DISH_DESCRIPTION_FONTSIZE = CGFloat(20)
     
     private let WIDTH : CGFloat
     private let HEIGHT: CGFloat
@@ -40,7 +47,7 @@ class DexDetailNode: SKSpriteNode {
         
         dishImageNode = SKSpriteNode(texture: nil)
         dishNameNode = SKLabelNode(text: "")
-        dishDescriptionNode = MultilineLabelNode(text: "", labelWidth: Int(WIDTH * 2/3) , pos: CGPoint(x: WIDTH / 2, y: HEIGHT / 3.5), fontName: "ChalkboardSE-Regular",fontSize:20,fontColor: UIColor.blackColor(),leading: 20, alignment:.Center)
+        dishDescriptionNode = MultilineLabelNode(text: "", labelWidth: Int(WIDTH * DexDetailNode.WIDTH_RATIO) , pos: CGPoint(x: WIDTH / 2, y: HEIGHT / 3.5), fontName: "BradleyHandITCTT-Bold",fontSize: DexDetailNode.DISH_DESCRIPTION_FONTSIZE,fontColor: UIColor.blackColor(),leading: 20, alignment:.Center)
         questionMarkNode = SKLabelNode(text: "?")
         
         effectNode = SKEffectNode()
@@ -51,24 +58,24 @@ class DexDetailNode: SKSpriteNode {
         self.anchorPoint = CGPoint(x: 0, y: 0)
         self.position = CGPoint(x: sceneWidth * (1 - DexScene.DETAIL_WIDTH_RATIO), y: 0)
         
-        dishImageNode.position = CGPoint(x: WIDTH / 2, y: 7 * sceneHeight / 12)
-        dishImageNode.size = CGSize(width: 2 * WIDTH / 3, height: 2 * WIDTH / 3)
+        dishImageNode.position = CGPoint(x: WIDTH / 2, y: sceneHeight * DexDetailNode.HEIGHT_RATIO)
+        dishImageNode.size = CGSize(width: WIDTH * DexDetailNode.WIDTH_RATIO, height: WIDTH * DexDetailNode.WIDTH_RATIO)
         
-        dishNameNode.position = CGPoint(x: WIDTH / 2, y: HEIGHT / 3)
-        dishNameNode.fontSize = 30
-        dishNameNode.fontName = "BradleyHandITCTT-Bold"
+        dishNameNode.position = CGPoint(x: WIDTH / 2 + DexDetailNode.MINOR_OFFSET, y: HEIGHT / 3 + DexDetailNode.MINOR_OFFSET)
+        dishNameNode.fontSize = DexDetailNode.DISH_NAME_FONTSIZE
+        dishNameNode.fontName = GlobalConstants.fontName
         dishNameNode.fontColor = UIColor.brownColor()
         
         questionMarkNode.color = UIColor.whiteColor()
         questionMarkNode.position = dishImageNode.position
         questionMarkNode.fontSize = DexDetailNode.QMARK_FONTSIZE
         questionMarkNode.verticalAlignmentMode = .Center
-        questionMarkNode.zPosition = 2
+        questionMarkNode.zPosition = DexDetailNode.QUESTION_Z_POSITION
         questionMarkNode.hidden = true
         
-        effectNode.zPosition = 1
-        dishDescriptionNode.zPosition = 1
-        dishNameNode.zPosition = 1
+        effectNode.zPosition = DexDetailNode.OVERLAY_Z_POSITION
+        dishDescriptionNode.zPosition = DexDetailNode.OVERLAY_Z_POSITION
+        dishNameNode.zPosition = DexDetailNode.OVERLAY_Z_POSITION
         
         effectNode.addChild(dishImageNode)
         addChild(effectNode)

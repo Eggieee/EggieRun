@@ -110,6 +110,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         initializePhysicsProperties()
         gameReady()
+        endOyakodon()
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -670,13 +671,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         endLayer.zPosition = GameScene.TRUE_END_LAYER_Z_POSITION
         endLayer.position = CGPointMake(0, 0)
         addChild(endLayer)
-        endLayer.animate()
-        
-        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "endDistanceForceDeath", userInfo: nil, repeats: false)
-    }
-    
-    func endDistanceForceDeath() {
-        gameOver(.DistanceForceDeath)
+        endLayer.animate({ self.gameOver(.DistanceForceDeath) })
     }
     
     private func activateMilestoneEvent() {
