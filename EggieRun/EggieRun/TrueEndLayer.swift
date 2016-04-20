@@ -25,7 +25,8 @@ class TrueEndLayer: SKNode {
     private static let NAME_CHICKIE = "chickie"
     private static let NAME_FILTER = "filter"
     private static let TEXTURE_EGGIE = SKTexture(imageNamed: "stand")
-    private static let TEXTURE_CHICKIE = SKTexture(imageNamed: "oven-open")
+    private static let TEXTURE_CHICKIE = SKTexture(imageNamed: "chickie-1")
+    private static let TEXTURE_LAY = SKTexture(imageNamed: "chickie-2")
     private static let ENLARGE_ACTION = SKAction.resizeToWidth(250, height: 250, duration: TrueEndLayer.ATLAS_TIME_PER_FRAME)
     private static let SHRINK_ACTION = SKAction.resizeToWidth(50, height: 50, duration: TrueEndLayer.ATLAS_TIME_PER_FRAME)
 
@@ -84,8 +85,9 @@ class TrueEndLayer: SKNode {
         let eggieFadeOutChangingAction = SKAction.runAction(SKAction.runAction(SKAction.removeFromParent(), onChildWithName: TrueEndLayer.NAME_EGGIE), onChildWithName: TrueEndLayer.NAME_FILTER)
         let waitChickieFadeInAction = SKAction.waitForDuration(TrueEndLayer.FADE_TIME)
         let chickieAppearAction = SKAction.runAction(SKAction.fadeInWithDuration(TrueEndLayer.FADE_TIME), onChildWithName: TrueEndLayer.NAME_CHICKIE)
-
-        action = SKAction.sequence([fadeInAction, SKAction.group([eggieActions, chickieActions]), waitAction, eggieFadeOutChangingAction, waitChickieFadeInAction, chickieAppearAction])
+        let layAction = SKAction.runAction(SKAction.setTexture(TrueEndLayer.TEXTURE_LAY), onChildWithName: TrueEndLayer.NAME_CHICKIE)
+        
+        action = SKAction.sequence([fadeInAction, SKAction.group([eggieActions, chickieActions]), waitAction, eggieFadeOutChangingAction, waitChickieFadeInAction, chickieAppearAction, waitAction, layAction])
     }
     
     func animate() {
