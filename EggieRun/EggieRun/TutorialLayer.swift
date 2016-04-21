@@ -9,6 +9,9 @@
 import SpriteKit
 import UIKit
 
+// Clas: TutorialLayer
+// Description: A layer that shows tutorials about how to play the game before the game start. It will be displayed on the first time when user enter this game. Otherwise, it will only be shown when the help button is clicked.
+
 class TutorialLayer: SKNode {
     static let tutorials = ["tut1","tut2","tut3","tut4"]
     static private let TUTORIAL_WIDTH = CGFloat(600)

@@ -7,6 +7,8 @@
 //
 
 import SpriteKit
+// Class: SKSpriteNode
+// Description: A class that display the details of activated or unactivated dishes on the right half of the scene.
 
 class DexDetailNode: SKSpriteNode {
     private static let QMARK_FONTSIZE = CGFloat(100)

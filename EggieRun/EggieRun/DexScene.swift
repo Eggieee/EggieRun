@@ -8,6 +8,9 @@
 
 import SpriteKit
 
+// Class: DexScene
+// Description: The SKScene to be displayed for the eggDex album. It manages all the nodes in this scene. It is the center of the EggDex
+
 class DexScene: SKScene {
     
     private static let TITLE_TEXT = "Éggdex"

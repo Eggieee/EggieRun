@@ -8,6 +8,9 @@
 
 import SpriteKit
 
+// Class: DexItemNode
+// Description: A class for individual dishes shown on the DexGridNode.
+
 class DexItemNode: SKNode {
     static private let IMAGE_RATIO = CGFloat(1.5)
     static private let BACKGROUND_Z = CGFloat(1)

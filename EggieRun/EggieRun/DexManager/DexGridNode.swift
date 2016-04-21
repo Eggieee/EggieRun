@@ -8,6 +8,9 @@
 
 import SpriteKit
 
+// Class: DexGridNode
+// Description: A class on the left side of the Scene that displays all dishes. It manages all DexItemNode.
+
 class DexGridNode: SKSpriteNode {
     static private let ITEMS_PER_ROW = 4
     static private let HORIZONTAL_PADDING = CGFloat(20)

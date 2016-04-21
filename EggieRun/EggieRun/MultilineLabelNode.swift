@@ -8,6 +8,10 @@
 
 import SpriteKit
 
+// Class: MultilineLabelNode
+// Description: A class that inherits from SKNode that implement multi line features of SKLabelNode.
+
+
 class MultilineLabelNode: SKNode {
     
     var labelWidth: Int { didSet { update() } }
