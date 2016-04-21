@@ -18,9 +18,9 @@ enum Ingredient: Int {
     static private let FLAT_TEXTURES: [Ingredient: SKTexture] = Dictionary(ALL_VALUES.map({ ($0, SKTexture(imageNamed: $0.flatImageNamed)) }))
     static private let FINE_TEXTURES: [Ingredient: SKTexture] = Dictionary(ALL_VALUES.map({ ($0, SKTexture(imageNamed: $0.fineImageNamed)) }))
     
-    static let rarityTable: [[Ingredient]] = [[.Milk], [.GreenOnion, .Tomato, .Cream, .Rice, .Bacon, .Strawberry], [.Bread, .Chocolate], [.Surstromming]]
+    static private let rarityTable: [[Ingredient]] = [[.Milk], [.GreenOnion, .Tomato, .Cream, .Rice, .Bacon, .Strawberry], [.Bread, .Chocolate], [.Surstromming]]
     
-    static let rarityPools = rarityTable.map({ RandomPool(objects: $0) })
+    static private let rarityPools = rarityTable.map({ RandomPool(objects: $0) })
     
     static func next(distance: Int) -> Ingredient {
         let randomPool: RandomPool<RandomPool<Ingredient>>!

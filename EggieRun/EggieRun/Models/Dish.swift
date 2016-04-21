@@ -46,7 +46,7 @@ class Dish: Constructable {
         let standardCondimentsData = data["standardCondiments"] as! [Double]
         var standardCondiments = [Condiment: Double]()
         for condiment in Condiment.ALL_VALUES {
-            standardCondiments[condiment] = standardCondimentsData[condiment.jsId]
+            standardCondiments[condiment] = standardCondimentsData[condiment.zeroIndex]
         }
         self.standardCondiments = standardCondiments
         

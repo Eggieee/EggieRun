@@ -15,7 +15,7 @@ enum Condiment: Int {
     
     static private let TEXTURES: [Condiment: SKTexture] = Dictionary(ALL_VALUES.map({ ($0, SKTexture(imageNamed: $0.imageNamed)) }))
     
-    static let randomPool = RandomPool<Condiment>(objects: [.Salt, .Sugar, .Chili], weightages: [5, 4, 1])
+    static private let randomPool = RandomPool<Condiment>(objects: [.Salt, .Sugar, .Chili], weightages: [5, 4, 1])
     
     static func next() -> Condiment {
         return randomPool.draw()
@@ -36,7 +36,7 @@ enum Condiment: Int {
         return Condiment.TEXTURES[self]!
     }
     
-    var jsId: Int {
+    var zeroIndex: Int {
         return self.rawValue - 10
     }
 }
