@@ -47,6 +47,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let LEFT_FRAME_OFFSET: CGFloat = 400
     private static let TOP_FRAME_OFFSET: CGFloat = 10000
     
+    private static let INGREDIENT_BAR_ANIMATION_TIME = 0.5
+    
     // zPositions
     private static let HUD_Z_POSITION: CGFloat = 50
     private static let TRUE_END_LAYER_Z_POSITION: CGFloat = 75
@@ -81,7 +83,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var ingredientBar: IngredientBar!
     private var flavourBar: FlavourBar!
     private var runningProgressBar: RunningProgressBar!
-    private var gameState: GameState = .Ready
+    private var gameState: GameState!
     private var currentDistance = 0
     private var closets: [Platform]!
     private var shelves: [Platform]!
@@ -156,9 +158,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let touchLocation = touch.locationInNode(normalEndLayer!)
             
             if normalEndLayer!.eggdexButton.containsPoint(touchLocation) {
-                let dexScene = DexScene(size: self.size)
+                let dexScene = DexScene(size: size)
                 let transition = SKTransition.flipHorizontalWithDuration(0.5)
-                self.view?.presentScene(dexScene, transition: transition)
+                view?.presentScene(dexScene, transition: transition)
             } else if normalEndLayer!.playButton.containsPoint(touchLocation) {
                 gameReady()
             }
@@ -169,7 +171,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 unpause()
             } else if pausedLayer!.backToMenuButton.containsPoint(touchLocation) {
                 let menuScene = MenuScene.singleton
-                self.view?.presentScene(menuScene!, transition: MenuScene.BACK_TRANSITION)
+                view?.presentScene(menuScene!, transition: MenuScene.BACK_TRANSITION)
             }
         }
     }
@@ -183,10 +185,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 pause()
             } else if eggie.state == .Running {
                 eggie.state = .Jumping_1
-                self.runAction(GameScene.SE_JUMP)
+                runAction(GameScene.SE_JUMP)
             } else if eggie.state == .Jumping_1 {
                 eggie.state = .Jumping_2
-                self.runAction(GameScene.SE_JUMP)
+                runAction(GameScene.SE_JUMP)
             }
         }
     }
@@ -259,7 +261,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             collectable.physicsBody?.categoryBitMask = 0
             collectable.physicsBody?.contactTestBitMask = 0
             
-            self.runAction(GameScene.SE_COLLECT)
+            runAction(GameScene.SE_COLLECT)
             
             if collectable.type == .Ingredient {
                 animateMovingIngredient(collectable.ingredient!, originalPosition: collectable.position)
@@ -332,7 +334,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func initializeCollectableBars() {
         ingredientBar = IngredientBar()
-        ingredientBar.position = CGPointMake(GameScene.INGREDIENT_BAR_X_OFFSET, self.frame.height-ingredientBar.frame.height/2 - GameScene.INGREDIENT_BAR_Y_OFFSET)
+        ingredientBar.position = CGPointMake(GameScene.INGREDIENT_BAR_X_OFFSET, frame.height-ingredientBar.frame.height/2 - GameScene.INGREDIENT_BAR_Y_OFFSET)
         ingredientBar.zPosition = GameScene.HUD_Z_POSITION
         addChild(ingredientBar)
         
@@ -345,7 +347,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func initializeRunningProgressBar() {
         let barLength = frame.width - 2 * GameScene.PROGRESS_BAR_X_OFFSET
         runningProgressBar = RunningProgressBar(length: barLength, allMilestones: milestones)
-        runningProgressBar.position = CGPointMake(GameScene.PROGRESS_BAR_X_OFFSET, self.frame.height - GameScene.PROGRESS_BAR_Y_OFFSET)
+        runningProgressBar.position = CGPointMake(GameScene.PROGRESS_BAR_X_OFFSET, frame.height - GameScene.PROGRESS_BAR_Y_OFFSET)
         addChild(runningProgressBar)
     }
 
@@ -372,12 +374,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func initializeTutorial() {
-        tutorialLayer = TutorialLayer(frameWidth: self.frame.width, frameHeight: self.frame.height)
+        tutorialLayer = TutorialLayer(frameWidth: frame.width, frameHeight: frame.height)
         tutorialLayer!.zPosition = GameScene.TUTORIAL_Z_POSITION
         addChild(tutorialLayer!)
         
-        tutorialBackground = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: self.frame.width, height: self.frame.height))
-        tutorialBackground!.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
+        tutorialBackground = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: frame.width, height: frame.height))
+        tutorialBackground!.position = CGPoint(x: frame.width/2, y: frame.height/2)
         tutorialBackground!.zPosition = GameScene.OVERLAY_Z_POSITION
         tutorialBackground!.alpha = 0.5
         addChild(tutorialBackground!)
@@ -419,7 +421,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameState = .Over
         
         if let action = GameScene.SE_OBSTACLES[wayOfDie] {
-            self.runAction(action)
+            runAction(action)
         }
         
         flavourBar.removeFromParent()
@@ -565,14 +567,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let ingredientNode = SKSpriteNode(texture: ingredient.fineTexture, color: UIColor.clearColor(), size: GameScene.COLLECTABLE_SIZE)
         ingredientNode.position = originalPosition
         let newPosition = CGPointMake(ingredientBar.getNextGridX(ingredient) + GameScene.INGREDIENT_BAR_X_OFFSET, ingredientBar.position.y)
-        let moveAction = SKAction.moveTo(newPosition, duration: 0.5)
-        let fadeOutAction = SKAction.fadeOutWithDuration(0.5)
+        let moveAction = SKAction.moveTo(newPosition, duration: GameScene.INGREDIENT_BAR_ANIMATION_TIME)
+        let fadeOutAction = SKAction.fadeOutWithDuration(GameScene.INGREDIENT_BAR_ANIMATION_TIME)
         let actions = [moveAction, fadeOutAction]
         let actionGroup = SKAction.group(actions)
         addChild(ingredientNode)
-        ingredientNode.runAction(actionGroup, completion: { () -> Void in
-            self.ingredientBar.addIngredient(ingredient)
-        })
+        ingredientNode.runAction(actionGroup, completion: { self.ingredientBar.addIngredient(ingredient) })
     }
     
     private func activateCurrentMilestone() {
@@ -661,9 +661,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // ==================== Pause Logic ====================
     
     func pause() {
-        if self.gameState == .Playing {
-            self.physicsWorld.speed = 0
-            self.gameState = .Paused
+        if gameState == .Playing {
+            physicsWorld.speed = 0
+            gameState = .Paused
             eggie.pauseAtlas()
             if darknessOverlay != nil {
                 if let action = darknessOverlay?.actionForKey(GameScene.CHALLENGE_DARKNESS_ACTION_KEY) {
@@ -683,11 +683,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func unpause() {
-        if self.gameState == .Paused {
+        if gameState == .Paused {
             pausedLayer!.removeFromParent()
-            self.lastUpdatedTime = nil
-            self.gameState = .Playing
-            self.physicsWorld.speed = 1
+            lastUpdatedTime = nil
+            gameState = .Playing
+            physicsWorld.speed = 1
             eggie.unpauseAtlas()
             if darknessOverlay != nil {
                 if let action = darknessOverlay?.actionForKey(GameScene.CHALLENGE_DARKNESS_ACTION_KEY) {
