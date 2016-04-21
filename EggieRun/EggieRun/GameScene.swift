@@ -11,7 +11,7 @@ import SpriteKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     static var instance: GameScene?
     
-    // Constants
+    // UI Components
     private static let BACKGROUND_IMAGE_NAME = "default-background"
     private static let HELP_BUTTON_IMAGE_NAME = "help"
     private static let HELP_BUTTON_SIZE = CGSizeMake(80, 80)
@@ -21,29 +21,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let PAUSE_BUTTON_SIZE = CGSizeMake(80, 80)
     private static let PAUSE_BUTTON_TOP_OFFSET: CGFloat = 50
     private static let PAUSE_BUTTON_RIGHT_OFFSET: CGFloat = 50
-    private static let HEADER_FONT_SIZE: CGFloat = 30
+    
     private static let EGGIE_X_POSITION: CGFloat = 200
+    private static let COLLECTABLE_SIZE = CGSizeMake(80, 80)
+    
+    // Constants for Level Generation
     private static let DISTANCE_CLOSET_AND_COLLECTABLE: CGFloat = 200
     private static let DISTANCE_SHELF_AND_COLLECTABLE: CGFloat = 50
     private static let OBSTACLE_RATE_LOW = 0.2
     private static let OBSTACLE_RATE_HIGH = 0.7
     private static let COLLECTABLE_RATE = 0.3
+    
+    private static let PREGENERATED_LENGTH = UIScreen.mainScreen().bounds.width * 2
+    
     private static let OBSTACLE_BUFFER_DISTANCE = 400.0
     private static let COLLECTABLE_BUFFER_DISTANCE: CGFloat = 200
+    
+    // HUD Positioning
     private static let INGREDIENT_BAR_X_OFFSET: CGFloat = 18
     private static let INGREDIENT_BAR_Y_OFFSET: CGFloat = 45
     private static let PROGRESS_BAR_X_OFFSET: CGFloat = 18
     private static let PROGRESS_BAR_Y_OFFSET: CGFloat = 26
     private static let FLAVOUR_BAR_OFFSET: CGFloat = 100
+    
     private static let LEFT_FRAME_OFFSET: CGFloat = 400
     private static let TOP_FRAME_OFFSET: CGFloat = 10000
-    private static let COLLECTABLE_SIZE = CGSizeMake(80, 80)
+    
+    // zPositions
     private static let HUD_Z_POSITION: CGFloat = 50
     private static let TRUE_END_LAYER_Z_POSITION: CGFloat = 75
     private static let OVERLAY_Z_POSITION: CGFloat = 100
     private static let TUTORIAL_Z_POSITION: CGFloat = 150
-    private static let PREGENERATED_LENGTH = UIScreen.mainScreen().bounds.width * 2
     
+    // Constants for Challenges
     private static let CHALLENGE_ROLL_MIN_DISTANCE: UInt32 = 1000
     private static let CHALLENGE_ROLL_MAX_DISTANCE: UInt32 = 10000
     private static let CHALLENGE_DARKNESS_TIME = 0.25
@@ -54,6 +64,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private static let CHALLENGE_EARTHQUAKE_REPEAT = 8
     private static let CHALLENGE_EARTHQUAKE_ACTION_KEY = "challenge-earthquake"
     
+    // SEs
     private static let SE_COLLECT = SKAction.playSoundFileNamed("collect-sound.mp3", waitForCompletion: false)
     private static let SE_JUMP = SKAction.playSoundFileNamed("jump-sound.mp3", waitForCompletion: false)
     private static let SE_OBSTACLES: [Cooker: SKAction] = [.Drop: "drop-sound.mp3", .Oven: "oven-sound.mp3", .Pot: "pot-sound.mp3", .Pan: "pan-sound.mp3"].map({ SKAction.playSoundFileNamed($0, waitForCompletion: false) })
