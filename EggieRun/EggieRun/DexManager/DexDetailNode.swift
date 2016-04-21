@@ -18,6 +18,7 @@ class DexDetailNode: SKSpriteNode {
     private static let DISH_NAME_FONTSIZE = CGFloat(25)
     private static let DISH_DESCRIPTION_FONTSIZE = CGFloat(20)
     private static let DISH_DESCRIPTION_LEADING = 20
+    private static let NAME_FONT = "Chalkduster"
     
     private let WIDTH : CGFloat
     private let HEIGHT: CGFloat
@@ -64,7 +65,7 @@ class DexDetailNode: SKSpriteNode {
         
         dishNameNode.position = CGPoint(x: WIDTH / 2 + DexDetailNode.MINOR_OFFSET, y: HEIGHT / 3 + DexDetailNode.MINOR_OFFSET)
         dishNameNode.fontSize = DexDetailNode.DISH_NAME_FONTSIZE
-        dishNameNode.fontName = GlobalConstants.fontName
+        dishNameNode.fontName = DexDetailNode.NAME_FONT
         dishNameNode.fontColor = UIColor.brownColor()
         
         questionMarkNode.color = UIColor.whiteColor()

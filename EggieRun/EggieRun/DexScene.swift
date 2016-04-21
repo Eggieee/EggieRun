@@ -39,6 +39,8 @@ class DexScene: SKScene {
     private static let DISH_FIRST_PAGE = Array(DishDataController.singleton.dishes[0..<12])
     private static let DISH_SECOND_PAGE = Array(DishDataController.singleton.dishes[12..<21])
     
+    private static let TITLE_FONT = "Chalkduster"
+    
     static let TOP_BAR_HEIGHT = CGFloat(80)
     static let GRID_WIDTH_RATIO = CGFloat(4.0 / 7)
     static let DETAIL_WIDTH_RATIO = CGFloat(3.0 / 7)
@@ -64,7 +66,7 @@ class DexScene: SKScene {
         titleNode.alpha = DexScene.SPECIAL_ALPHA
         addChild(titleNode)
         
-        let titleLabel = SKLabelNode(fontNamed: GlobalConstants.fontName)
+        let titleLabel = SKLabelNode(fontNamed: DexScene.TITLE_FONT)
         titleLabel.text = DexScene.TITLE_TEXT
         titleLabel.fontSize = DexScene.TITLE_SIZE
         titleLabel.position = CGPoint(x: CGRectGetMidX(self.frame), y: self.frame.height - DexScene.TITLE_SIZE - DexScene.TITLE_TOP_PADDING)
