@@ -10,7 +10,8 @@ import SpriteKit
 
 class DexGridNode: SKSpriteNode {
     static private let ITEMS_PER_ROW = 4
-    static private let PADDING = CGFloat(20)
+    static private let HORIZONTAL_PADDING = CGFloat(20)
+    static private let VERTICAL_PADDING = CGFloat(60)
     static private let EMITTER_NODE_Z_POSITION = CGFloat(3)
     
     private var width: CGFloat
@@ -28,14 +29,14 @@ class DexGridNode: SKSpriteNode {
         self.position = CGPoint(x: 0, y: 0)
         self.anchorPoint = CGPoint(x: 0, y: 0)
         
-        let itemSize = (width - DexGridNode.PADDING * CGFloat(DexGridNode.ITEMS_PER_ROW + 1)) / CGFloat(DexGridNode.ITEMS_PER_ROW)
+        let itemSize = (width - DexGridNode.HORIZONTAL_PADDING * CGFloat(DexGridNode.ITEMS_PER_ROW + 1)) / CGFloat(DexGridNode.ITEMS_PER_ROW)
         
         for i in 0 ..< dishList.count {
             let row = i / DexGridNode.ITEMS_PER_ROW
             let col = i % DexGridNode.ITEMS_PER_ROW
             
-            let x = CGFloat(col + 1) * DexGridNode.PADDING + (CGFloat(col) + 0.5) * itemSize
-            let y = height - (CGFloat(row + 1) * DexGridNode.PADDING * 3 + (CGFloat(row) + 0.5) * itemSize)
+            let x = CGFloat(col + 1) * DexGridNode.HORIZONTAL_PADDING + (CGFloat(col) + 0.5) * itemSize
+            let y = height - (CGFloat(row + 1) * DexGridNode.VERTICAL_PADDING + (CGFloat(row) + 0.5) * itemSize)
             
             let item = DexItemNode(dish: dishList[i], xPosition: x, yPosition: y, size: itemSize)
             
