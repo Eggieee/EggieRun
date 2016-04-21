@@ -28,13 +28,10 @@ class DexScene: SKScene {
     private static let OVERLAY_Z_POSITION = CGFloat(2)
     private static let SPECIAL_EFFECT_Z_POSITION = CGFloat(5)
     
-    private static let NORMAL_ALPHA = CGFloat(1)
-    private static let SPECIAL_ALPHA = CGFloat(0.5)
+    private static let BUTTON_ENABLED_ALPHA = CGFloat(1)
+    private static let BUTTON_DISABLED_ALPHA = CGFloat(0.5)
     
-    private static let TITLE_RED = CGFloat(185/255.0)
-    private static let TITLE_GREEN = CGFloat(161/255.0)
-    private static let TITLE_BLUE = CGFloat(249/255.0)
-    
+    private static let TITLE_COLOR = UIColor(red: CGFloat(185/255.0), green: CGFloat(161/255.0), blue: CGFloat(249/255.0), alpha: 0.5)
     
     private static let DISH_FIRST_PAGE = Array(DishDataController.singleton.dishes[0..<12])
     private static let DISH_SECOND_PAGE = Array(DishDataController.singleton.dishes[12..<21])
@@ -59,12 +56,10 @@ class DexScene: SKScene {
     override func didMoveToView(view: SKView) {
         BGMPlayer.singleton.moveToStatus(.Dex)
         
-        let titleColor = UIColor(red: DexScene.TITLE_RED, green: DexScene.TITLE_GREEN, blue: DexScene.TITLE_BLUE, alpha: DexScene.NORMAL_ALPHA)
-        let titleNode = SKSpriteNode(color: titleColor, size: CGSize(width: self.frame.width, height: DexScene.TITLE_HEIGHT))
-        titleNode.position = CGPoint(x: self.frame.width/2, y: self.frame.height - DexScene.TITLE_HEIGHT/2)
-        titleNode.zPosition = DexScene.TITLE_NODE_Z_POSITION
-        titleNode.alpha = DexScene.SPECIAL_ALPHA
-        addChild(titleNode)
+        let topBarNode = SKSpriteNode(color: DexScene.TITLE_COLOR, size: CGSize(width: self.frame.width, height: DexScene.TITLE_HEIGHT))
+        topBarNode.position = CGPoint(x: self.frame.width/2, y: self.frame.height - DexScene.TITLE_HEIGHT/2)
+        topBarNode.zPosition = DexScene.TITLE_NODE_Z_POSITION
+        addChild(topBarNode)
         
         let titleLabel = SKLabelNode(fontNamed: DexScene.TITLE_FONT)
         titleLabel.text = DexScene.TITLE_TEXT
@@ -80,7 +75,6 @@ class DexScene: SKScene {
         addChild(buttonBack)
         
         changeBackground("eggdex-background")
-        
         
         gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width, dishList: DexScene.DISH_FIRST_PAGE)
         addChild(gridNode)
@@ -115,7 +109,7 @@ class DexScene: SKScene {
         prevPageNode.position = CGPoint(x: DexScene.PREV_BUTTON_X, y: DexScene.FLIP_BUTTON_Y)
         prevPageNode.zPosition = DexScene.OVERLAY_Z_POSITION
         prevPageNode.size = CGSize(width: DexScene.FLIP_BUTTON_WIDTH, height: DexScene.FLIP_BUTTON_HEIGHT)
-        prevPageNode.alpha = DexScene.SPECIAL_ALPHA
+        prevPageNode.alpha = DexScene.BUTTON_DISABLED_ALPHA
         addChild(prevPageNode)
     }
     
@@ -152,16 +146,16 @@ class DexScene: SKScene {
             gridNode.removeFromParent()
             gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width, dishList: DexScene.DISH_SECOND_PAGE)
             self.addChild(gridNode)
-            nextPageNode.alpha = DexScene.SPECIAL_ALPHA
-            prevPageNode.alpha = DexScene.NORMAL_ALPHA
+            nextPageNode.alpha = DexScene.BUTTON_DISABLED_ALPHA
+            prevPageNode.alpha = DexScene.BUTTON_ENABLED_ALPHA
         }
         
         if prevPageNode.containsPoint(touchLocation) {
             gridNode.removeFromParent()
             gridNode = DexGridNode(sceneHeight: self.frame.height, sceneWidth: self.frame.width, dishList: DexScene.DISH_FIRST_PAGE)
             self.addChild(gridNode)
-            nextPageNode.alpha = DexScene.NORMAL_ALPHA
-            prevPageNode.alpha = DexScene.SPECIAL_ALPHA
+            nextPageNode.alpha = DexScene.BUTTON_ENABLED_ALPHA
+            prevPageNode.alpha = DexScene.BUTTON_DISABLED_ALPHA
         }
         
         // click on individual dishes
