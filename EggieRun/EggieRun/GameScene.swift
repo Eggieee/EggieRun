@@ -389,7 +389,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         currentDistance = 0
         gameState = .Ready
-        endOyakodon()
     }
     
     private func gameStart() {
