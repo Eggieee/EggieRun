@@ -6,8 +6,6 @@
 //  Copyright © 2016 Eggieee. All rights reserved.
 //
 
-import Foundation
-
 import SpriteKit
 
 class RunningProgressBar: SKSpriteNode {
@@ -18,9 +16,7 @@ class RunningProgressBar: SKSpriteNode {
     private static let MILESTONE_APPROACHING_DISTANCE = 2000
     private static let MILESTONE_APPROACHING_DURATION = 0.25
     private static let MILESTONE_APPROACHING_ACTION_KEY = "approaching"
-    private static let MILESTONE_APPROACHING_ENLARGE = SKAction.scaleTo(2, duration: RunningProgressBar.MILESTONE_APPROACHING_DURATION)
-    private static let MILESTONE_APPROACHING_SHRINK = SKAction.scaleTo(1, duration: RunningProgressBar.MILESTONE_APPROACHING_DURATION)
-    private static let MILESTONE_APPROACHING_ACTIONS = SKAction.sequence([MILESTONE_APPROACHING_ENLARGE, MILESTONE_APPROACHING_SHRINK])
+    private static let MILESTONE_APPROACHING_ACTIONS = SKAction.sequence([2, 1].map({ SKAction.scaleTo($0, duration: RunningProgressBar.MILESTONE_APPROACHING_DURATION) }))
     
     private var barLength: CGFloat
     private var distance = 0
