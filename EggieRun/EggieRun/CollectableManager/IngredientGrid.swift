@@ -6,6 +6,10 @@
 //  Copyright © 2016年 Eggieee. All rights reserved.
 //
 
+// Class: IngredientGrid
+// Description: a grid in the ingredient bar consisting
+// of a grid background and an ingredient node
+
 import SpriteKit
 
 class IngredientGrid: SKSpriteNode {

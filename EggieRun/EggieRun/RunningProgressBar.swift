@@ -6,6 +6,11 @@
 //  Copyright © 2016 Eggieee. All rights reserved.
 //
 
+// Class: RunningProgressBar
+// Description: a progress bar showing where the eggie has been through.
+// It also displays a couple of milestones on it. The milestones will
+// turn colourful when the eggie has reached it.
+
 import SpriteKit
 
 class RunningProgressBar: SKSpriteNode {

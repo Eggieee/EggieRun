@@ -6,6 +6,12 @@
 //  Copyright © 2016年 Eggieee. All rights reserved.
 //
 
+// Class: FlavourBar
+// Description: a bar with colours blue, yellow and red
+// representing the current state of condiments collected
+// where blue stands for salt, yellow stands for sugar
+// and red stands for chili
+
 import SpriteKit
 
 class FlavourBar: SKSpriteNode {

@@ -6,6 +6,13 @@
 //  Copyright © 2016年 Eggieee. All rights reserved.
 //
 
+// Class: IngredientBar
+// Description: a bar of grids showing the current ingredients
+// collected with a maximum size of 5. Once exceeds, the first
+// grid will be removed and all the other grids will move forward
+// in order to add in the new grid at the last of the bar.
+// Repeating ingredients will be move to the last.
+
 import SpriteKit
 
 class IngredientBar: SKSpriteNode {
@@ -85,7 +92,7 @@ class IngredientBar: SKSpriteNode {
     private func animateMovingGridByOne(startIndex: Int) {
         for i in startIndex..<ingredients.count {
             let grid = ingredientGrids[i]
-            // moving animation goes here
+            // moving animation
             if (i==startIndex) {
                 let fadingOut = SKAction.fadeOutWithDuration(0.5)
                 grid.runAction(fadingOut, completion: { () -> Void in
