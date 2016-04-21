@@ -6,6 +6,10 @@
 //  Copyright © 2016 Eggieee. All rights reserved.
 //
 
+// Class: ClosetFactory
+// Description: a class computing the next closet’s position and length based 
+// on certain formula.
+
 import SpriteKit
 
 class ClosetFactory {
@@ -13,7 +17,7 @@ class ClosetFactory {
     
     private var isFirst = true
     
-    func nextPlatform() -> Closet {
+    func next() -> Platform {
         let numOfMid: Int
         
         if isFirst {
@@ -23,6 +27,6 @@ class ClosetFactory {
             numOfMid = Int(arc4random() % (ClosetFactory.MAX_NUM_OF_MID_PIECE + 1))
         }
         
-        return Closet(numOfMidPiece: numOfMid)
+        return Platform.makeCloset(numOfMid)
     }
 }

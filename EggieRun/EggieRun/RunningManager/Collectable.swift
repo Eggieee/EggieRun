@@ -6,6 +6,10 @@
 //  Copyright © 2016 Eggieee. All rights reserved.
 //
 
+// Class: Collectable
+// Description: SKSpriteNode representing the ingredients and condiments 
+// appearing above closets or shelves.
+
 import SpriteKit
 
 class Collectable: SKSpriteNode {

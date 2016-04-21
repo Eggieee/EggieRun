@@ -6,6 +6,11 @@
 //  Copyright © 2016 Eggieee. All rights reserved.
 //
 
+// Class: Eggie
+// Description: a SKSpriteNode representing the hero of the game who runs and 
+// jumps on the platforms, collects ingredients and condiments, as well as dies 
+// to make dishes.
+
 import SpriteKit
 
 class Eggie: SKSpriteNode {
@@ -87,7 +92,7 @@ class Eggie: SKSpriteNode {
             case .Running:
                 innerCurrentSpeed = Eggie.SPEED_RUNNING
             case .Jumping_1, .Jumping_2:
-                physicsBody!.velocity.dy = min(physicsBody!.velocity.dy + GlobalConstants.EGGIE_JUMPING_ACCELERATION.dy, GlobalConstants.EGGIE_MAX_SPEED)
+                physicsBody!.velocity.dy = min(physicsBody!.velocity.dy + GlobalConstants.EGGIE_JUMPING_ACCELERATION.dy, GlobalConstants.EGGIE_MAX_Y_SPEED)
             }
         }
     }
