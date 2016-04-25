@@ -18,8 +18,8 @@ class ShelfFactory {
     private static let UNIT_GAP_SIZE: CGFloat = 300
     
     func next() -> Platform {
-        let numOfMid = Int(arc4random() % (ShelfFactory.MAX_NUM_OF_MID_PIECE + 1))
-        let numOfGap = CGFloat(arc4random() % ShelfFactory.MAX_NUM_OF_GAP + 1)
+        let numOfMid = Int(arc4random_uniform(ShelfFactory.MAX_NUM_OF_MID_PIECE + 1))
+        let numOfGap = CGFloat(arc4random_uniform(ShelfFactory.MAX_NUM_OF_GAP + 1))
 
         return Platform.makeShelf(numOfMid, gapSize: numOfGap * ShelfFactory.UNIT_GAP_SIZE)
     }

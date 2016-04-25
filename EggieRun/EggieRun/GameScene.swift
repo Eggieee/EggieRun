@@ -582,7 +582,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func getNextChallengeDistance(currentDistance: Int) -> Int {
-        let delta = arc4random() % (GameScene.CHALLENGE_ROLL_MAX_DISTANCE - GameScene.CHALLENGE_ROLL_MIN_DISTANCE) + GameScene.CHALLENGE_ROLL_MIN_DISTANCE
+        let delta = arc4random_uniform(GameScene.CHALLENGE_ROLL_MAX_DISTANCE - GameScene.CHALLENGE_ROLL_MIN_DISTANCE) + GameScene.CHALLENGE_ROLL_MIN_DISTANCE
         return currentDistance + Int(delta)
     }
     
@@ -633,8 +633,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         var actions: [SKAction] = []
         for _ in 0 ..< GameScene.CHALLENGE_EARTHQUAKE_REPEAT {
-            let dx = CGFloat(arc4random() % GameScene.CHALLENGE_EARTHQUAKE_RANGE)
-            let dy = CGFloat(arc4random() % GameScene.CHALLENGE_EARTHQUAKE_RANGE)
+            let dx = CGFloat(arc4random_uniform(GameScene.CHALLENGE_EARTHQUAKE_RANGE))
+            let dy = CGFloat(arc4random_uniform(GameScene.CHALLENGE_EARTHQUAKE_RANGE))
             actions.append(SKAction.moveByX(dx, y: dy, duration: GameScene.CHALLENGE_EARTHQUAKE_TIME))
             actions.append(SKAction.moveByX(-dx, y: -dy, duration: GameScene.CHALLENGE_EARTHQUAKE_TIME))
         }

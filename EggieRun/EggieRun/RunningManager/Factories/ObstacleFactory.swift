@@ -14,7 +14,7 @@ import UIKit
 
 class ObstacleFactory {
     func next(availableCookers: [Cooker]) -> Obstacle {
-        let type = availableCookers[Int(arc4random()) % availableCookers.count]
+        let type = availableCookers[Int(arc4random_uniform(UInt32(availableCookers.count)))]
         
         switch type {
         case .Pot:

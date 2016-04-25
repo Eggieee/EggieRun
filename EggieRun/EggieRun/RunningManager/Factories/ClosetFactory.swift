@@ -24,7 +24,7 @@ class ClosetFactory {
             numOfMid = 1
             isFirst = false
         } else {
-            numOfMid = Int(arc4random() % (ClosetFactory.MAX_NUM_OF_MID_PIECE + 1))
+            numOfMid = Int(arc4random_uniform(ClosetFactory.MAX_NUM_OF_MID_PIECE + 1))
         }
         
         return Platform.makeCloset(numOfMid)
